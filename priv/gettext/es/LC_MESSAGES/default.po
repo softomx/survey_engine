@@ -1,0 +1,57 @@
+## "msgid"s in this file come from POT (.pot) files.
+###
+### Do not add, change, or remove "msgid"s manually here as
+### they're tied to the ones in the corresponding POT file
+### (with the same domain).
+###
+### Use "mix gettext.extract --merge" or "mix gettext.merge"
+### to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "agency type"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:35
+#, elixir-autogen, elixir-format
+msgid "billing currency"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:56
+#, elixir-autogen, elixir-format
+msgid "city"
+msgstr ""
+
+#: lib/survey_engine_web/components/core_components.ex:133
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:11
+#, elixir-autogen, elixir-format
+msgid "company name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "country"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "legal name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "rfc"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "town"
+msgstr ""

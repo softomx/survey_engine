@@ -1,0 +1,57 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "agency type"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:35
+#, elixir-autogen, elixir-format
+msgid "billing currency"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:56
+#, elixir-autogen, elixir-format
+msgid "city"
+msgstr ""
+
+#: lib/survey_engine_web/components/core_components.ex:133
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:11
+#, elixir-autogen, elixir-format
+msgid "company name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "country"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "legal name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "rfc"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "town"
+msgstr ""
