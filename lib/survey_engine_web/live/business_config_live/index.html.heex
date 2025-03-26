@@ -1,0 +1,66 @@
+<.container class="py-16">
+  <.page_header title="Listing Business configs">
+    <.button
+      link_type="live_patch"
+      label="New Business config"
+      to={~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/new"}
+    />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.BusinessConfigLive.FormComponent}
+        id={@business_config.id || :new}
+        action={@live_action}
+        business_config={@business_config}
+        business_model_id={@business_model_id}
+        form_groups={@form_groups}
+        return_to={current_index_path(@business_model_id, @index_params)}
+      />
+    </.modal>
+  <% end %>
+
+  <.data_table :if={@index_params} meta={@meta} items={@business_configs}>
+    <:if_empty>No business_configs found</:if_empty>
+    <:col field={:order} sortable />
+    <:col field={:required} sortable />
+    <:col field={:form_group_id} sortable />
+    <:col field={:previous_lead_form_finished} sortable />
+    <:col :let={business_config} label="Actions" align_right>
+      <.button
+        color="primary"
+        variant="outline"
+        size="xs"
+        link_type="live_redirect"
+        label="Show"
+        to={
+          ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}"
+        }
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={
+          ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}/edit"
+        }
+      />
+
+      <.button
+        color="danger"
+        variant="outline"
+        link_type="a"
+        to="#"
+        size="xs"
+        label="Delete"
+        phx-click="delete"
+        phx-value-id={business_config.id}
+        data-confirm="Are you sure?"
+      />
+    </:col>
+  </.data_table>
+</.container>

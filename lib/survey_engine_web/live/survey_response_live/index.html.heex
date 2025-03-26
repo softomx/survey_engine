@@ -1,0 +1,55 @@
+<.container class="py-16">
+  <.page_header title="Listing Survey responses">
+    <.button link_type="live_patch" label="New Survey response" to={~p"/survey_responses/new"} />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.SurveyResponseLive.FormComponent}
+        id={@survey_response.id || :new}
+        action={@live_action}
+        survey_response={@survey_response}
+        return_to={current_index_path(@index_params)}
+      />
+    </.modal>
+  <% end %>
+
+  <.data_table :if={@index_params} meta={@meta} items={@survey_responses}>
+    <:if_empty>No survey_responses found</:if_empty>
+    <:col field={:date} sortable />
+    <:col field={:state} sortable />
+    <:col field={:data} sortable />
+    <:col label="Actions" :let={survey_response} align_right>
+      <.button
+        color="primary"
+        variant="outline"
+        size="xs"
+        link_type="live_redirect"
+        label="Show"
+        to={~p"/survey_responses/#{survey_response}"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={~p"/survey_responses/#{survey_response}/edit"}
+      />
+
+      <.button
+        color="danger"
+        variant="outline"
+        link_type="a"
+        to="#"
+        size="xs"
+        label="Delete"
+        phx-click="delete"
+        phx-value-id={survey_response.id}
+        data-confirm="Are you sure?"
+      />
+    </:col>
+  </.data_table>
+</.container>

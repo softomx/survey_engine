@@ -1,0 +1,51 @@
+<.header>
+  Listing Currencies
+  <:actions>
+    <.link patch={~p"/admin/catalogs/currencies/new"}>
+      <.button>New Currency</.button>
+    </.link>
+  </:actions>
+</.header>
+<.data_table :if={@index_params} meta={@meta} items={@currencies}>
+  <:if_empty>No se encontraron monedas</:if_empty>
+  <:col field={:name} sortable />
+  <:col field={:slug} sortable />
+
+  <:col :let={currency} label="Actions" align_right>
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Editar"
+      to={~p"/admin/catalogs/currencies/#{currency}/edit"}
+    />
+
+    <.button
+      color="danger"
+      variant="outline"
+      link_type="a"
+      to="#"
+      size="xs"
+      label="eliminar"
+      phx-click="delete"
+      phx-value-id={currency.id}
+      data-confirm="Are you sure?"
+    />
+  </:col>
+</.data_table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="currency-modal"
+  on_cancel={JS.patch(~p"/admin/catalogs/currencies")}
+>
+  <.live_component
+    module={SurveyEngineWeb.CurrencyLive.FormComponent}
+    id={@currency.id || :new}
+    title={@page_title}
+    action={@live_action}
+    currency={@currency}
+    patch={~p"/admin/catalogs/currencies"}
+  />
+</.modal>

@@ -1,0 +1,51 @@
+<.header>
+  Listing Agency types
+  <:actions>
+    <.link patch={~p"/admin/companies/new"}>
+      <.button>New Agency type</.button>
+    </.link>
+  </:actions>
+</.header>
+<.data_table :if={@index_params} meta={@meta} items={@companies}>
+  <:if_empty>No se encontraron monedas</:if_empty>
+  <:col field={:agency_name} sortable />
+  <:col field={:legal_name} sortable />
+  <:col field={:rfc} sortable />
+  <:col field={:status} sortable />
+  <:col field={:business_model_id} sortable />
+  <:col field={:inserted_at} sortable />
+
+  <:col :let={company} label="Actions" align_right>
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Editar"
+      to={~p"/admin/companies/#{company}/edit"}
+    />
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Clasificar"
+      to={~p"/admin/companies/#{company}/assign"}
+    />
+  </:col>
+</.data_table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="company-modal"
+  on_cancel={JS.patch(~p"/admin/companies")}
+>
+  <.live_component
+    module={SurveyEngineWeb.AgencyTypeLive.FormComponent}
+    id={@company.id || :new}
+    title={@page_title}
+    action={@live_action}
+    company={@company}
+    patch={~p"/admin/companies"}
+  />
+</.modal>

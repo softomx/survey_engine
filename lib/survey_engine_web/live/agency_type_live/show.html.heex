@@ -1,0 +1,27 @@
+<.header>
+  Agency type {@agency_type.id}
+  <:subtitle>This is a agency_type record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/agency_types/#{@agency_type}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit agency_type</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@agency_type.name}</:item>
+  <:item title="Active">{@agency_type.active}</:item>
+</.list>
+
+<.back navigate={~p"/agency_types"}>Back to agency_types</.back>
+
+<.modal :if={@live_action == :edit} id="agency_type-modal" show on_cancel={JS.patch(~p"/agency_types/#{@agency_type}")}>
+  <.live_component
+    module={SurveyEngineWeb.AgencyTypeLive.FormComponent}
+    id={@agency_type.id}
+    title={@page_title}
+    action={@live_action}
+    agency_type={@agency_type}
+    patch={~p"/agency_types/#{@agency_type}"}
+  />
+</.modal>

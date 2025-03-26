@@ -1,0 +1,11 @@
+<.container class="py-16">
+  <.page_header title="Listing Notifications"></.page_header>
+
+  <.live_component
+    module={SurveyEngineWeb.NotificationLive.FormComponent}
+    id={@notification.id || :new}
+    action={@live_action}
+    notification={@notification}
+    return_to={current_index_path(%{})}
+  />
+</.container>

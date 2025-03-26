@@ -1,0 +1,41 @@
+<.container class="py-16">
+  <.page_header title="Listing Form groups">
+    <.button link_type="live_patch" label="New Form group" to={~p"/admin/form_groups/new"} />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.FormGroupLive.FormComponent}
+        id={@form_group.id || :new}
+        action={@live_action}
+        form_group={@form_group}
+        return_to={current_index_path(@index_params)}
+      />
+    </.modal>
+  <% end %>
+
+  <.data_table :if={@index_params} meta={@meta} items={@form_groups}>
+    <:if_empty>No form_groups found</:if_empty>
+    <:col field={:name} sortable />
+    <:col :let={form_group} label="Actions" align_right>
+      <.button
+        color="primary"
+        variant="outline"
+        size="xs"
+        link_type="live_redirect"
+        label="variables"
+        to={~p"/admin/form_groups/#{form_group}/leads_forms"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={~p"/admin/form_groups/#{form_group}/edit"}
+      />
+    </:col>
+  </.data_table>
+</.container>

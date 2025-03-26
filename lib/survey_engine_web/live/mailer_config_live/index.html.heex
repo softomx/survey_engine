@@ -1,0 +1,35 @@
+<.header>
+  Listing Site configurations
+  <:actions>
+    <.link patch={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs/new"}>
+      <.button>New Site configuration</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.data_table :if={@index_params} meta={@meta} items={@mailer_configs}>
+  <:if_empty>No se encontraron sitios</:if_empty>
+  <:col field={:name} sortable />
+
+  <:col :let={mailer_config} label="Actions" align_right>
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Editar"
+      to={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs/#{mailer_config}/edit"}
+    />
+  </:col>
+</.data_table>
+
+<.modal :if={@live_action in [:new, :edit]}>
+  <.live_component
+    module={SurveyEngineWeb.MailerConfigLive.FormComponent}
+    id={@mailer_config.id || :new}
+    title={@page_title}
+    action={@live_action}
+    mailer_config={@mailer_config}
+    patch={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs"}
+  />
+</.modal>

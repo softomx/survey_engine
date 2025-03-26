@@ -1,0 +1,46 @@
+<.container class="py-16">
+  <.page_header title="Listing Business models">
+    <.button
+      link_type="live_patch"
+      label="New Business model"
+      to={~p"/admin/catalogs/business_models/new"}
+    />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.BusinessModelLive.FormComponent}
+        id={@business_model.id || :new}
+        action={@live_action}
+        business_model={@business_model}
+        return_to={current_index_path(@index_params)}
+      />
+    </.modal>
+  <% end %>
+
+  <.data_table :if={@index_params} meta={@meta} items={@business_models}>
+    <:if_empty>No business_models found</:if_empty>
+    <:col field={:name} sortable />
+    <:col field={:slug} sortable />
+    <:col :let={business_model} label="Actions" align_right>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={~p"/admin/catalogs/business_models/#{business_model}/edit"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="configuraciones"
+        to={~p"/admin/catalogs/business_models/#{business_model}/business_configs"}
+      />
+    </:col>
+  </.data_table>
+</.container>

@@ -1,0 +1,32 @@
+<div>
+  <.form
+    for={@form}
+    id="business_config-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <.input type="hidden" field={@form[:business_model_id]} value={@business_model_id} />
+    <.field type="number" field={@form[:order]} />
+    <.combo_box
+      field={@form[:previous_lead_form_finished]}
+      type="select"
+      multiple
+      label="Formularios previos"
+      placeholder="Selecciona los formularios de los que depende"
+      options={@depend_lead_forms}
+    />
+    <.field type="checkbox" field={@form[:required]} />
+    <.combo_box
+      field={@form[:form_group_id]}
+      type="select"
+      label="Formulario"
+      placeholder="Seleciona un formulario"
+      options={@form_groups}
+    />
+
+    <div class="flex justify-end">
+      <.button type="submit" phx-disable-with="Saving..." label="Save" />
+    </div>
+  </.form>
+</div>

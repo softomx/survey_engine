@@ -1,0 +1,46 @@
+<.header>
+  Listing Agency types
+  <:actions>
+    <.link patch={~p"/admin/catalogs/agency_types/new"}>
+      <.button>New Agency type</.button>
+    </.link>
+  </:actions>
+</.header>
+<.data_table :if={@index_params} meta={@meta} items={@agency_types}>
+  <:if_empty>No se encontraron monedas</:if_empty>
+  <:col field={:name} sortable />
+
+  <:col :let={agency_type} label="Actions" align_right>
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Editar"
+      to={~p"/admin/catalogs/agency_types/#{agency_type}/edit"}
+    />
+    <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="description"
+      to={~p"/admin/catalogs/agency_types/#{agency_type}/translations/description"}
+    />
+  </:col>
+</.data_table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="agency_type-modal"
+  on_cancel={JS.patch(~p"/admin/catalogs/agency_types")}
+>
+  <.live_component
+    module={SurveyEngineWeb.AgencyTypeLive.FormComponent}
+    id={@agency_type.id || :new}
+    title={@page_title}
+    action={@live_action}
+    agency_type={@agency_type}
+    patch={~p"/admin/catalogs/agency_types"}
+  />
+</.modal>

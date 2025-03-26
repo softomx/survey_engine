@@ -1,0 +1,61 @@
+<.container class="py-16">
+  <.page_header title="Listing Notifications">
+    <.button link_type="live_patch" label="New Notification" to={~p"/admin/notifications/new"} />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.NotificationLive.FormComponent}
+        id={@notification.id || :new}
+        action={@live_action}
+        notification={@notification}
+        return_to={current_index_path(@index_params)}
+      />
+    </.modal>
+  <% end %>
+
+  <.data_table :if={@index_params} meta={@meta} items={@notifications}>
+    <:if_empty>No notifications found</:if_empty>
+    <:col field={:action} sortable />
+    <:col field={:to} sortable />
+
+    <:col :let={notification} label="Actions" align_right>
+      <.button
+        color="primary"
+        variant="outline"
+        size="xs"
+        link_type="live_redirect"
+        label="Show"
+        to={~p"/admin/notifications/#{notification}"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={~p"/admin/notifications/#{notification}/edit"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Subject"
+        to={~p"/admin/catalogs/notifications/#{notification}/translations/subject"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="contenido"
+        to={~p"/admin/catalogs/notifications/#{notification}/translations/content"}
+      />
+    </:col>
+  </.data_table>
+</.container>

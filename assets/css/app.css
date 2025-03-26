@@ -1,0 +1,10 @@
+@import "tailwindcss/base";
+@import "../../deps/petal_components/assets/default.css";
+@import "../../deps/petal_framework/assets/css/combo-box.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+
+
+/* This file is for your main application CSS */

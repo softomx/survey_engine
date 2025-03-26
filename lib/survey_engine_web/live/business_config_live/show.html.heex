@@ -1,0 +1,60 @@
+<.container class="py-16">
+  <.page_header title="Show Business config">
+    <.button
+      link_type="live_patch"
+      label="Edit Business config"
+      to={~p"/business_configs/#{@business_config}/show/edit"}
+    />
+
+    <.button
+      link_type="live_redirect"
+      label="Back"
+      to={~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs"}
+    />
+  </.page_header>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.BusinessConfigLive.FormComponent}
+        id={@business_config.id || :new}
+        action={@live_action}
+        business_config={@business_config}
+        return_to={
+          ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{@business_config}"
+        }
+      />
+    </.modal>
+  <% end %>
+
+  <div class="max-w-lg">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          Order
+        </div>
+        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          {@business_config.order}
+        </div>
+      </div>
+
+      <div class="sm:col-span-1">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          Required
+        </div>
+        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          {@business_config.required}
+        </div>
+      </div>
+
+      <div class="sm:col-span-1">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          Previous lead form finished
+        </div>
+        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          {@business_config.previous_lead_form_finished}
+        </div>
+      </div>
+    </div>
+  </div>
+</.container>

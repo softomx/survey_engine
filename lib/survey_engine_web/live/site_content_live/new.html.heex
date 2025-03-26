@@ -1,0 +1,13 @@
+<div>
+  <.live_component
+    module={SurveyEngineWeb.TranslationLive.FormComponent}
+    id={@translation.id || :new}
+    title={@page_title}
+    action={@live_action}
+    translation={@translation}
+    type={@type}
+    resource_id={@resource_id}
+    behaviour={@behaviour}
+    patch={~p"/admin/content/#{@behaviour}"}
+  />
+</div>

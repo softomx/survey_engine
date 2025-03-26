@@ -1,0 +1,22 @@
+<.header>
+  Translation {@translation.id}
+  <:actions>
+    <.link
+      patch={
+        ~p"/admin/catalogs/#{@type}/#{@resource_id}/translations/#{@behaviour}/#{@translation}/edit"
+      }
+      phx-click={JS.push_focus()}
+    >
+      <.button>Edit translation</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Type">{@translation.type}</:item>
+  <:item title="Description">{@translation.description}</:item>
+</.list>
+
+<.back navigate={~p"/admin/catalogs/#{@type}/#{@resource_id}/translations/#{@behaviour}"}>
+  Back to translations
+</.back>

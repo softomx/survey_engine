@@ -1,0 +1,37 @@
+<.stacked_layout current_page={@current_page} main_menu_items={[]} user_menu_items={[]}>
+  <.flash_group flash={@flash} />
+  <.container class="mt-4 w-full">
+    {@inner_content}
+  </.container>
+  <:top_right>
+    <.dropdown js_lib="live_view_js">
+      <:trigger_element>
+        <div class="inline-flex items-center justify-center w-full align-middle focus:outline-none">
+          <span class="uppercase">{@locale}</span>
+          <.icon
+            name="hero-chevron-down"
+            class="w-4 h-4 ml-1 -mr-1 text-gray-400 dark:text-gray-100"
+          />
+        </div>
+      </:trigger_element>
+      <.dropdown_menu_item
+        :if={@locale != "es"}
+        label="ES"
+        link_type="a"
+        to={"#{@current_page}?locale=es"}
+      />
+      <.dropdown_menu_item
+        :if={@locale != "en"}
+        label="EN"
+        link_type="a"
+        to={"#{@current_page}?locale=en"}
+      />
+    </.dropdown>
+  </:top_right>
+  <:logo>
+    <img
+      class="h-8"
+      src="https://res.cloudinary.com/wickedsites/image/upload/v1635752721/petal/logo_rh2ras.png"
+    />
+  </:logo>
+</.stacked_layout>
