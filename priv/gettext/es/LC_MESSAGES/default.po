@@ -55,3 +55,43 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "town"
 msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "Don't have an account?"
+msgstr "¿No tienes una cuenta?"
+
+#: lib/survey_engine_web/live/user_login_live.ex:34
+#, elixir-autogen, elixir-format
+msgid "Goals"
+msgstr "Metas"
+
+#: lib/survey_engine_web/live/user_login_live.ex:20
+#, elixir-autogen, elixir-format
+msgid "Email"
+msgstr "Correo electronico"
+
+#: lib/survey_engine_web/live/user_login_live.ex:31
+#, elixir-autogen, elixir-format
+msgid "Forgot your password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+#: lib/survey_engine_web/live/user_login_live.ex:29
+#, elixir-autogen, elixir-format
+msgid "Keep me logged in"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:38
+#, elixir-autogen, elixir-format
+msgid "Log in"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:24
+#, elixir-autogen, elixir-format
+msgid "Password"
+msgstr "Contraseña"
+
+#: lib/survey_engine_web/live/user_login_live.ex:13
+#, elixir-autogen, elixir-format
+msgid "Sign up"
+msgstr "Registrate"

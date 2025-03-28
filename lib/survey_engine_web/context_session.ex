@@ -24,7 +24,7 @@ defmodule SurveyEngineWeb.ContextSession do
        locale =
          session["locale"] || locale_from_params(params) || Gettext.get_locale()
 
-       Gettext.put_locale(SurveyEngine.Gettext, locale)
+       Gettext.put_locale(SurveyEngineWeb.Gettext, locale)
        locale
      end)}
   end

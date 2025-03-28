@@ -44,6 +44,29 @@ defmodule SurveyEngine.Translations do
     end)
   end
 
+  def get_transalation_by_language_or_default(resource_id, type, behaviour, language) do
+    translations =
+      list_translations(%{filter: %{resource_id: resource_id, type: type, behaviour: behaviour}})
+
+    translations
+    |> Enum.find(fn t -> t.language == language end)
+    |> case do
+      nil ->
+        translations
+        |> List.first()
+        |> case do
+          nil ->
+            {:error, "translation not found"}
+
+          translation ->
+            {:ok, translation}
+        end
+
+      translation ->
+        {:ok, translation}
+    end
+  end
+
   @doc """
   Gets a single translation.
 

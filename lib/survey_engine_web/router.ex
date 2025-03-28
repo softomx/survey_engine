@@ -58,7 +58,9 @@ defmodule SurveyEngineWeb.Router do
     live_session :redirect_if_user_is_authenticated,
       on_mount: [
         {SurveyEngineWeb.UserAuth, :redirect_if_user_is_authenticated},
-        {ContextSession, :current_page}
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :current_page},
+        {ContextSession, :set_locale}
       ],
       layout: {SurveyEngineWeb.Layouts, :login} do
       live "/", UserLoginLive, :new
@@ -66,6 +68,9 @@ defmodule SurveyEngineWeb.Router do
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
+      live "/users/log_in/policies", UserLoginLive, :policies
+      live "/users/log_in/goals", UserLoginLive, :goals
+      live "/users/log_in/scopes", UserLoginLive, :scopes
     end
 
     post "/users/log_in", UserSessionController, :create
