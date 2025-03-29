@@ -22,6 +22,15 @@ defmodule SurveyEngineWeb.Router do
     plug SurveyEngineWeb.Plugs.Locale, "es"
   end
 
+  pipeline :iframe do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {SurveyEngineWeb.Layouts, :root}
+    plug :protect_from_forgery
+    plug SurveyEngineWeb.Plugs.AllowIframe
+  end
+
   scope "/", SurveyEngineWeb do
     pipe_through :browser
   end
@@ -239,6 +248,21 @@ defmodule SurveyEngineWeb.Router do
       layout: {SurveyEngineWeb.Layouts, :login} do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+    end
+  end
+
+  scope "/embed", SurveyEngineWeb do
+    pipe_through [:iframe, :locale]
+
+    live_session :iframe,
+      on_mount: [
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :current_page},
+        {ContextSession, :set_locale}
+      ],
+      layout: {SurveyEngineWeb.Layouts, :iframe} do
+      live "/users/register/form/:locale", EmbedLive.UserRegisterForm, :index
+      live "/users/register/form/:locale/agencies_info", EmbedLive.UserRegisterForm, :modal_show
     end
   end
 end

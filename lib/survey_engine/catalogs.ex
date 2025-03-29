@@ -117,6 +117,30 @@ defmodule SurveyEngine.Catalogs do
     Repo.all(AgencyType)
   end
 
+  def list_agency_types_with_preload do
+    Repo.all(AgencyType) |> Repo.preload([:descriptions])
+  end
+
+  def list_agency_types(args) do
+    args
+    |> Enum.reduce(AgencyType, fn
+      {:filter, filter}, query ->
+        query |> agency_types_filter_with(filter)
+    end)
+    |> Repo.all()
+  end
+
+  def agency_types_filter_with(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {:name, name}, query ->
+        from q in query, where: q.name == ^name
+
+      {:active, active}, query ->
+        from q in query, where: q.active == ^active
+    end)
+  end
+
   @doc """
   Gets a single agency_type.
 

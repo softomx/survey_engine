@@ -59,6 +59,15 @@ defmodule SurveyEngineWeb do
     end
   end
 
+  def live_iframe_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {SurveyEngineWeb.Layouts, :iframe}
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent

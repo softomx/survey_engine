@@ -1,0 +1,32 @@
+<div>
+  <.header>
+    {@title}
+    <:subtitle>
+      {get_text_with_locale(@language, gettext("Description of the agencies availables"))}
+    </:subtitle>
+  </.header>
+  <div class="pt-2"></div>
+  <div class="w-full h-0.5 bg-gray-200"></div>
+  <div>
+    <%= for agency <- @list_agencies do %>
+      <div class="space-y-3 py-3 px-2">
+        <div class=" font-bold text-center">
+          <p>{agency.name}</p>
+        </div>
+
+        <%= if agency.translation != nil do %>
+          <div class="opacity-60 text-sm">
+            <p>{agency.translation.description}</p>
+          </div>
+        <% else %>
+          <div class="opacity-60 text-sm text-center">
+            <p>{get_text_with_locale(@language, gettext("No description available"))}</p>
+          </div>
+        <% end %>
+        <div class="pt-2"></div>
+        <div class="w-full h-0.5 bg-gray-200"></div>
+        <div class="pt-3"></div>
+      </div>
+    <% end %>
+  </div>
+</div>
