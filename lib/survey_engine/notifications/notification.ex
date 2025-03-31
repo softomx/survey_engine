@@ -7,15 +7,6 @@ defmodule SurveyEngine.Notifications.Notification do
 
     embeds_many :to, SurveyEngine.Notifications.NotificationTo
 
-    # eliminar
-    field :from, :string
-    # eliminar
-    field :from_name, :string
-    # eliminar
-    field :subject, :string
-    # eliminar
-    field :content, :string
-
     has_many :contents, SurveyEngine.Translations.Translation,
       foreign_key: :resource_id,
       where: [type: "notifications", behaviour: "content"]
@@ -30,7 +21,7 @@ defmodule SurveyEngine.Notifications.Notification do
   @doc false
   def changeset(notification, attrs) do
     notification
-    |> cast(attrs, [:action, :from, :from_name])
+    |> cast(attrs, [:action])
     |> validate_required([:action])
     |> cast_embed(:to)
   end

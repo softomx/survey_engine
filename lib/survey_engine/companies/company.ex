@@ -3,7 +3,6 @@ defmodule SurveyEngine.Companies.Company do
   import Ecto.Changeset
 
   schema "companies" do
-    field :date, :string
     field :language, :string
     field :agency_name, :string
     field :rfc, :string
@@ -23,10 +22,8 @@ defmodule SurveyEngine.Companies.Company do
   def changeset(company, attrs) do
     company
     |> cast(attrs, [
-      :date,
       :language,
       :agency_name,
-      :rfc,
       :legal_name,
       :country,
       :town,
@@ -37,7 +34,6 @@ defmodule SurveyEngine.Companies.Company do
       :business_model_id
     ])
     |> validate_required([
-      :date,
       :language,
       :legal_name,
       :country,

@@ -8,6 +8,7 @@ defmodule SurveyEngine.Repo.Migrations.CreateTranslations do
       add :resource_id, :id
       add :language, :string
       add :content_type, :string
+      add :behaviour, :string
       timestamps(type: :utc_datetime)
     end
   end

@@ -4,7 +4,7 @@ defmodule SurveyEngine.LeadsForms.FormGroup do
 
   schema "form_groups" do
     field :name, :string
-
+    has_many :variables, SurveyEngine.LeadsForms.LeadsForm
     timestamps(type: :utc_datetime)
   end
 

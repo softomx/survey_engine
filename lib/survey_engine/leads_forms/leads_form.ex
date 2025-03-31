@@ -4,7 +4,7 @@ defmodule SurveyEngine.LeadsForms.LeadsForm do
 
   schema "leads_forms" do
     field :active, :boolean, default: false
-    # field :name, :string #delete
+
     field :language, :string
     field :external_id, :string
     field :behaviour, :string, default: "affiliate_register"
