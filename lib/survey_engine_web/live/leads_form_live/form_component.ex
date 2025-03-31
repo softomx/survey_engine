@@ -9,7 +9,6 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage leads_form records in your database.</:subtitle>
       </.header>
 
       <.form
@@ -20,21 +19,21 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:form_group_id]} type="hidden" value={@form_group_id} />
-        <.field field={@form[:name]} type="text" label="Name" />
+
         <.field
           field={@form[:language]}
           type="select"
-          label="Language"
+          label="Lenguaje"
           options={[{"Español", "es"}, {"Ingles", "en"}]}
         />
         <.field
           field={@form[:provider]}
           type="select"
           label="Proveedor"
-          options={[{"Formbricks", "formbricks"}, {"HeyForm", "heyform"}]}
+          options={[{"Formbricks", "formbricks"}]}
         />
-        <.field field={@form[:external_id]} type="text" label="External" />
-        <.field field={@form[:active]} type="checkbox" label="Active" />
+        <.field field={@form[:external_id]} type="text" label="ID External" />
+        <.field field={@form[:active]} type="switch" label="Activo" />
 
         <.button phx-disable-with="Saving...">Guardar</.button>
       </.form>

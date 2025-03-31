@@ -22,14 +22,14 @@
   <.data_table :if={@index_params} meta={@meta} items={@business_models}>
     <:if_empty>No business_models found</:if_empty>
     <:col field={:name} sortable />
-    <:col field={:slug} sortable />
+
     <:col :let={business_model} label="Actions" align_right>
       <.button
         color="white"
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label="Editar"
         to={~p"/admin/catalogs/business_models/#{business_model}/edit"}
       />
 

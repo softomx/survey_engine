@@ -15,6 +15,6 @@ defmodule SurveyEngine.BusinessModels.BusinessModel do
   def changeset(business_model, attrs) do
     business_model
     |> cast(attrs, [:name, :slug])
-    |> validate_required([:name, :slug])
+    |> validate_required([:name])
   end
 end

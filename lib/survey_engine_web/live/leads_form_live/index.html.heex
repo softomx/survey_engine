@@ -1,24 +1,24 @@
 <.container>
   <.header>
-    Listing Leads forms
+    Listado de variables
     <:actions>
       <.link patch={~p"/admin/form_groups/#{@form_group_id}/leads_forms/new"}>
-        <.button>New Leads form</.button>
+        <.button>Nueva variable</.button>
       </.link>
     </:actions>
   </.header>
   <.data_table :if={@index_params} meta={@meta} items={@leads_forms}>
-    <:if_empty>No survey_responses found</:if_empty>
-    <:col field={:name} sortable />
-    <:col field={:language} sortable />
-    <:col field={:external_id} sortable />
-    <:col :let={lead_form} label="Actions" align_right>
+    <:if_empty>No se encontraronvariables para el formulario</:if_empty>
+
+    <:col field={:language} sortable class="uppercase" label="Lenguage" filterable={[:ilike]} />
+    <:col field={:external_id} sortable filterable={[:ilike]} lable="Id externo" />
+    <:col :let={lead_form} label="Acciones" align_right>
       <.button
         color="white"
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label="Editar"
         to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}/edit"}
       />
     </:col>

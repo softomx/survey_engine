@@ -10,6 +10,10 @@ defmodule SurveyEngine.Mailer.MailerManager do
     # end
   end
 
+  def get_mailer_configuration_by_site!(site_config_id) do
+    Repo.get_by(MailerConfiguration, site_configuration_id: site_config_id)
+  end
+
   defp get_specific_mailer_configuration(id) do
     MailerConfiguration
     |> SurveyEngine.Repo.get(id)

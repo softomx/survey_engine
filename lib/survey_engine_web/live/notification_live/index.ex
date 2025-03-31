@@ -49,22 +49,8 @@ defmodule SurveyEngineWeb.NotificationLive.Index do
   end
 
   @impl true
-  def handle_event("update_filters", params, socket) do
-    query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
-    {:noreply, push_patch(socket, to: ~p"/admin/notifications?#{query_params}")}
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    notification = Notifications.get_notification!(id)
-    {:ok, _} = Notifications.delete_notification(notification)
-
-    socket =
-      socket
-      |> assign_notifications(socket.assigns.index_params)
-      |> put_flash(:info, "Notification deleted")
-
-    {:noreply, socket}
+  def handle_event("update_filters", %{"filters" => filter_params}, socket) do
+    {:noreply, push_patch(socket, to: ~p"/admin/notifications?#{filter_params}")}
   end
 
   @impl true

@@ -27,19 +27,19 @@ defmodule SurveyEngineWeb.FormGroupLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Form group")
+    |> assign(:page_title, "Editar Formulario")
     |> assign(:form_group, LeadsForms.get_form_group!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Form group")
+    |> assign(:page_title, "Nuevo formulario")
     |> assign(:form_group, %FormGroup{})
   end
 
   defp apply_action(socket, :index, params) do
     socket
-    |> assign(:page_title, "Listing Form groups")
+    |> assign(:page_title, "Listado de formularios")
     |> assign_form_groups(params)
     |> assign(index_params: params)
   end
@@ -49,22 +49,8 @@ defmodule SurveyEngineWeb.FormGroupLive.Index do
   end
 
   @impl true
-  def handle_event("update_filters", params, socket) do
-    query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
-    {:noreply, push_patch(socket, to: ~p"/admin/form_groups?#{query_params}")}
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    form_group = LeadsForms.get_form_group!(id)
-    {:ok, _} = LeadsForms.delete_form_group(form_group)
-
-    socket =
-      socket
-      |> assign_form_groups(socket.assigns.index_params)
-      |> put_flash(:info, "Form group deleted")
-
-    {:noreply, socket}
+  def handle_event("update_filters", %{"filters" => filter_params}, socket) do
+    {:noreply, push_patch(socket, to: ~p"/admin/form_groups?#{filter_params}")}
   end
 
   @impl true

@@ -42,6 +42,9 @@ defmodule SurveyEngine.LeadsForms do
 
       {:form_group_id, form_group_id}, query ->
         from q in query, where: q.form_group_id == ^form_group_id
+
+      {:ids, ids}, query ->
+        from q in query, where: q.id in ^ids
     end)
   end
 
@@ -166,6 +169,23 @@ defmodule SurveyEngine.LeadsForms do
   """
   def list_form_groups do
     Repo.all(FormGroup)
+  end
+
+  def list_form_groups(args) do
+    args
+    |> Enum.reduce(FormGroup, fn
+      {:filter, filter}, query ->
+        query |> filter_form_groups(filter)
+    end)
+    |> Repo.all()
+  end
+
+  def filter_form_groups(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {:ids, ids}, query ->
+        from q in query, where: q.id in ^ids
+    end)
   end
 
   @doc """

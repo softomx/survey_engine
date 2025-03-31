@@ -23,17 +23,23 @@
 
   <.data_table :if={@index_params} meta={@meta} items={@business_configs}>
     <:if_empty>No business_configs found</:if_empty>
-    <:col field={:order} sortable />
-    <:col field={:required} sortable />
-    <:col field={:form_group_id} sortable />
-    <:col field={:previous_lead_form_finished} sortable />
+    <:col field={:order} sortable label="orden" />
+    <:col field={:required} sortable label="Requerido" />
+    <:col :let={business_config} field={:form_group} sortable label="Formulario">
+      {business_config.form_group.name}
+    </:col>
+    <:col :let={business_config} field={:previous_lead_form_finished} label="Dependencia">
+      <p :for={{form, index} <- business_config.depend_forms |> Enum.with_index(1)}>
+        {index}. {form.name}
+      </p>
+    </:col>
     <:col :let={business_config} label="Actions" align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="Show"
+        label="Ver"
         to={
           ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}"
         }
@@ -44,7 +50,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label="Editar"
         to={
           ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}/edit"
         }
@@ -56,7 +62,7 @@
         link_type="a"
         to="#"
         size="xs"
-        label="Delete"
+        label="Eliminar"
         phx-click="delete"
         phx-value-id={business_config.id}
         data-confirm="Are you sure?"

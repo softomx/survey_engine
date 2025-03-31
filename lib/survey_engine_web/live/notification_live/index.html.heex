@@ -1,6 +1,6 @@
 <.container class="py-16">
-  <.page_header title="Listing Notifications">
-    <.button link_type="live_patch" label="New Notification" to={~p"/admin/notifications/new"} />
+  <.page_header title="Configuracion de notificaciones">
+    <.button link_type="live_patch" label="Nueva notificacion" to={~p"/admin/notifications/new"} />
   </.page_header>
 
   <%= if @live_action in [:new, :edit] do %>
@@ -16,17 +16,17 @@
   <% end %>
 
   <.data_table :if={@index_params} meta={@meta} items={@notifications}>
-    <:if_empty>No notifications found</:if_empty>
-    <:col field={:action} sortable />
+    <:if_empty>No hay notificaciones configuradas</:if_empty>
+    <:col field={:action} sortable filterable={[:ilike]} label="Motivo" />
     <:col field={:to} sortable />
 
-    <:col :let={notification} label="Actions" align_right>
+    <:col :let={notification} label="Acciones" align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="Show"
+        label="Ver"
         to={~p"/admin/notifications/#{notification}"}
       />
 
@@ -35,7 +35,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label="Editar"
         to={~p"/admin/notifications/#{notification}/edit"}
       />
 
@@ -44,7 +44,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Subject"
+        label="Asunto"
         to={~p"/admin/catalogs/notifications/#{notification}/translations/subject"}
       />
 
@@ -53,7 +53,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="contenido"
+        label="Contenido"
         to={~p"/admin/catalogs/notifications/#{notification}/translations/content"}
       />
     </:col>

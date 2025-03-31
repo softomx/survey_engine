@@ -1,6 +1,6 @@
 <.container class="py-16">
-  <.page_header title="Listing Form groups">
-    <.button link_type="live_patch" label="New Form group" to={~p"/admin/form_groups/new"} />
+  <.page_header title="Listado de formularios">
+    <.button link_type="live_patch" label="Nuevo formulario" to={~p"/admin/form_groups/new"} />
   </.page_header>
 
   <%= if @live_action in [:new, :edit] do %>
@@ -16,9 +16,9 @@
   <% end %>
 
   <.data_table :if={@index_params} meta={@meta} items={@form_groups}>
-    <:if_empty>No form_groups found</:if_empty>
-    <:col field={:name} sortable />
-    <:col :let={form_group} label="Actions" align_right>
+    <:if_empty>No se encontraron Formularios</:if_empty>
+    <:col field={:name} sortable label="Nombre" filterable={[:ilike]} />
+    <:col :let={form_group} label="Acciones" align_right>
       <.button
         color="primary"
         variant="outline"
@@ -33,7 +33,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label="Editar"
         to={~p"/admin/form_groups/#{form_group}/edit"}
       />
     </:col>

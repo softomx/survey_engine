@@ -1,27 +1,76 @@
 <.header>
-  Listing Site configurations
-  <:actions>
-    <.link patch={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs/new"}>
-      <.button>New Site configuration</.button>
-    </.link>
-  </:actions>
+  <:actions></:actions>
 </.header>
+<.card>
+  <.card_content heading="Configuracion de correo">
+    <div class="justify-end flex m-0 ">
+      <.link :if={is_nil(@mailer_config)} patch={~p"/admin/mailer_configs/new"}>
+        <.button>Crear configuracion</.button>
+      </.link>
+      <.link
+        :if={@mailer_config && @live_action != :new}
+        patch={~p"/admin/mailer_configs/#{@mailer_config}/edit"}
+      >
+        <.button>editar</.button>
+      </.link>
+    </div>
+    <div :if={@mailer_config && @live_action != :new}>
+      <div class="mt-6 border-t border-gray-100">
+        <dl class="divide-y divide-gray-100">
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@mailer_config.name}
+            </dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Remitente Nombre</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@mailer_config.email_name}
+            </dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Remitente correo electronico</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@mailer_config.email_from}
+            </dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Adaptador</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@mailer_config.adapter}
+            </dd>
+          </div>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">API key</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@mailer_config.configuration.api_key}
+            </dd>
+          </div>
+        </dl>
+      </div>
 
-<.data_table :if={@index_params} meta={@meta} items={@mailer_configs}>
-  <:if_empty>No se encontraron sitios</:if_empty>
-  <:col field={:name} sortable />
-
-  <:col :let={mailer_config} label="Actions" align_right>
-    <.button
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label="Editar"
-      to={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs/#{mailer_config}/edit"}
-    />
-  </:col>
-</.data_table>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Secret</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.configuration.secret}
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Region</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.configuration.region}
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Dominio</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.configuration.domain}
+        </dd>
+      </div>
+    </div>
+  </.card_content>
+</.card>
 
 <.modal :if={@live_action in [:new, :edit]}>
   <.live_component
@@ -30,6 +79,7 @@
     title={@page_title}
     action={@live_action}
     mailer_config={@mailer_config}
-    patch={~p"/admin/site_configurations/#{@site_config_id}/mailer_configs"}
+    site_config_id={@site_config_id}
+    patch={~p"/admin/mailer_config"}
   />
 </.modal>

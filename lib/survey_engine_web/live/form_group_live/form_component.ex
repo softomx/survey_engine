@@ -32,7 +32,7 @@ defmodule SurveyEngineWeb.FormGroupLive.FormComponent do
       {:ok, _form_group} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Form group updated successfully")
+         |> put_flash(:info, "Formulario actualizado correctamente")
          |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +45,7 @@ defmodule SurveyEngineWeb.FormGroupLive.FormComponent do
       {:ok, _form_group} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Form group created successfully")
+         |> put_flash(:info, "Formulariocreado correctamente")
          |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

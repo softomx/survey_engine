@@ -9,7 +9,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
   @data_table_opts [
     default_limit: 10,
     default_order: %{
-      order_by: [:id, :inserted_at],
+      order_by: [:order, :inserted_at],
       order_directions: [:asc, :asc]
     },
     sortable: [:id, :inserted_at, :order, :required, :previous_lead_form_finished],
@@ -90,6 +90,29 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
       })
 
     {business_configs, meta} = DataTable.search(starting_query, params, @data_table_opts)
+
+    business_configs =
+      business_configs |> BusinessModels.preload_assocs(:form_group) |> find_depend_forms()
+
     assign(socket, business_configs: business_configs, meta: meta)
+  end
+
+  defp find_depend_forms([]), do: []
+
+  defp find_depend_forms(business_configs) do
+    ids =
+      business_configs
+      |> Enum.reduce([], fn i, acc -> acc ++ (i.previous_lead_form_finished || []) end)
+      |> Enum.uniq()
+
+    listado = LeadsForms.list_form_groups(%{filter: %{ids: ids}})
+
+    business_configs
+    |> Enum.map(fn bc ->
+      depend_forms = listado |> Enum.filter(&(&1.id in bc.previous_lead_form_finished))
+
+      bc
+      |> Map.put(:depend_forms, depend_forms)
+    end)
   end
 end

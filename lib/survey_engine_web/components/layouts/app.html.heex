@@ -23,10 +23,21 @@
       title: "Admin",
       menu_items: [
         %{
+          name: ~p"/admin/companies",
+          label: "Empresas",
+          path: ~p"/admin/companies",
+          icon: "hero-building-office-2"
+        }
+      ]
+    },
+    %{
+      title: "Cuestionarios",
+      menu_items: [
+        %{
           name: ~p"/admin/form_groups",
           label: "Formularios",
           path: ~p"/admin/form_groups",
-          icon: "hero-building-library"
+          icon: "hero-question-mark-circle"
         },
         %{
           name: ~p"/admin/catalogs/business_models",
@@ -35,45 +46,15 @@
           icon: "hero-user"
         },
         %{
-          name: ~p"/admin/companies",
-          label: "Empresas",
-          path: ~p"/admin/companies",
-          icon: "hero-user"
-        },
-        %{
           name: ~p"/admin/notifications",
-          label: "Notificaciones",
+          label: "Configuracion de Notificaciones",
           path: ~p"/admin/notifications",
-          icon: "hero-user"
-        },
-        %{
-          name: ~p"/admin/mailer_config",
-          label: "Configuracion Correo",
-          path: ~p"/admin/mailer_config",
-          icon: "hero-envelope"
-        },
-        %{
-          name: ~p"/admin/content/goals",
-          label: "Objetivos",
-          path: ~p"/admin/content/goals",
-          icon: "hero-user"
-        },
-        %{
-          name: ~p"/admin/content/scopes",
-          label: "Alcances",
-          path: ~p"/admin/content/scopes",
-          icon: "hero-user"
-        },
-        %{
-          name: ~p"/admin/content/policies",
-          label: "Politicas",
-          path: ~p"/admin/content/policies",
-          icon: "hero-user"
+          icon: "hero-bell-alert"
         },
         %{
           name: :catalogs,
           label: "Catalogos",
-          icon: "hero-user",
+          icon: "hero-rectangle-stack",
           menu_items: [
             %{
               name: ~p"/admin/catalogs/currencies",
@@ -94,12 +75,41 @@
               icon: "hero-user"
             }
           ]
-        },
+        }
+      ]
+    },
+    %{
+      title: "Sitio",
+      menu_items: [
         %{
           name: ~p"/admin/site_configurations",
           label: "Sitios",
           path: ~p"/admin/site_configurations",
-          icon: "hero-user"
+          icon: "hero-globe-alt"
+        },
+        %{
+          name: ~p"/admin/content/scopes",
+          label: "Alcances",
+          path: ~p"/admin/content/scopes",
+          icon: "hero-document-arrow-up"
+        },
+        %{
+          name: ~p"/admin/content/policies",
+          label: "Politicas",
+          path: ~p"/admin/content/policies",
+          icon: "hero-document-text"
+        },
+        %{
+          name: ~p"/admin/content/goals",
+          label: "Objetivos",
+          path: ~p"/admin/content/goals",
+          icon: "hero-document-check"
+        },
+        %{
+          name: ~p"/admin/mailer_config",
+          label: "Configuracion Correo",
+          path: ~p"/admin/mailer_config",
+          icon: "hero-envelope"
         }
       ]
     }

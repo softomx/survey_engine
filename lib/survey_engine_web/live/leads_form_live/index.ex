@@ -13,12 +13,20 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
       order_directions: [:asc, :asc]
     },
     sortable: [:id, :inserted_at, :date, :state, :data],
-    filterable: [:id, :inserted_at, :date, :state, :data]
+    filterable: [:id, :inserted_at, :language, :external_id]
   ]
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
      assign(socket, :index_params, nil) |> assign(:meta, %Meta{}) |> assign(:leads_forms, [])}
+  end
+
+  @impl true
+  def handle_event("update_filters", %{"filters" => filter_params}, socket) do
+    {:noreply,
+     push_patch(socket,
+       to: ~p"/admin/form_groups/#{socket.assigns.form_group_id}/leads_forms?#{filter_params}"
+     )}
   end
 
   @impl true
@@ -28,14 +36,14 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id, "form_group_id" => form_group_id}) do
     socket
-    |> assign(:page_title, "Edit Leads form")
+    |> assign(:page_title, "Editar Formulario")
     |> assign(:leads_form, LeadsForms.get_leads_form!(id))
     |> assign(:form_group_id, form_group_id)
   end
 
   defp apply_action(socket, :new, %{"form_group_id" => form_group_id} = params) do
     socket
-    |> assign(:page_title, "New Leads form")
+    |> assign(:page_title, "Nuevo formulario")
     |> assign(:leads_form, %LeadsForm{})
     |> assign(index_params: params)
     |> assign(:form_group_id, form_group_id)
@@ -52,14 +60,6 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
   @impl true
   def handle_info({SurveyEngineWeb.LeadsFormLive.FormComponent, {:saved, leads_form}}, socket) do
     {:noreply, stream_insert(socket, :leads_forms, leads_form)}
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    leads_form = LeadsForms.get_leads_form!(id)
-    {:ok, _} = LeadsForms.delete_leads_form(leads_form)
-
-    {:noreply, stream_delete(socket, :leads_forms, leads_form)}
   end
 
   defp assign_survey_responses(socket, %{"form_group_id" => form_group_id} = params) do

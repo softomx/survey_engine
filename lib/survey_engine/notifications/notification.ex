@@ -7,9 +7,13 @@ defmodule SurveyEngine.Notifications.Notification do
 
     embeds_many :to, SurveyEngine.Notifications.NotificationTo
 
+    # eliminar
     field :from, :string
+    # eliminar
     field :from_name, :string
+    # eliminar
     field :subject, :string
+    # eliminar
     field :content, :string
 
     has_many :contents, SurveyEngine.Translations.Translation,
@@ -28,7 +32,6 @@ defmodule SurveyEngine.Notifications.Notification do
     notification
     |> cast(attrs, [:action, :from, :from_name])
     |> validate_required([:action])
-
-    # |> cast_embed(:to)
+    |> cast_embed(:to)
   end
 end

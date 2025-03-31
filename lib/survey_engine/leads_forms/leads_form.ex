@@ -4,7 +4,7 @@ defmodule SurveyEngine.LeadsForms.LeadsForm do
 
   schema "leads_forms" do
     field :active, :boolean, default: false
-    field :name, :string
+    # field :name, :string #delete
     field :language, :string
     field :external_id, :string
     field :behaviour, :string, default: "affiliate_register"
@@ -18,7 +18,6 @@ defmodule SurveyEngine.LeadsForms.LeadsForm do
   def changeset(leads_form, attrs) do
     leads_form
     |> cast(attrs, [
-      :name,
       :language,
       :external_id,
       :active,
@@ -27,6 +26,6 @@ defmodule SurveyEngine.LeadsForms.LeadsForm do
       :provider,
       :form_group_id
     ])
-    |> validate_required([:name, :language, :external_id, :active, :behaviour])
+    |> validate_required([:language, :external_id, :active, :behaviour])
   end
 end

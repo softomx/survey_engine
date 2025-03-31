@@ -9,7 +9,6 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage mailer_config records in your database.</:subtitle>
       </.header>
 
       <.form
@@ -19,6 +18,7 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
+        <.input type="hidden" field={@form[:site_configuration_id]} value={@site_config_id} />
         <.field field={@form[:name]} type="text" label="Name" />
         <.field field={@form[:email_from]} type="text" label="Remitente" />
         <.field field={@form[:email_name]} type="text" label="Nombre remitente" />

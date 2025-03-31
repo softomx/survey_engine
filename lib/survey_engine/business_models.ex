@@ -55,6 +55,10 @@ defmodule SurveyEngine.BusinessModels do
     |> Repo.insert()
   end
 
+  def preload_assocs(query, preloads) do
+    Repo.preload(query, preloads)
+  end
+
   @doc """
   Updates a business_model.
 
@@ -131,6 +135,9 @@ defmodule SurveyEngine.BusinessModels do
     |> Enum.reduce(query, fn
       {:business_model_id, business_model_id}, query ->
         from q in query, where: q.business_model_id == ^business_model_id
+
+      {:ids, ids}, query ->
+        from q in query, where: q.id in ^ids
     end)
   end
 
