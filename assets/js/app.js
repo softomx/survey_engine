@@ -32,6 +32,12 @@ let liveSocket = new LiveSocket("/live", Socket, {
   params: {_csrf_token: csrfToken},
   hooks: {...Hooks, ...PetalFrameworkHooks},
   dom:  {
+  onNodeAdded(el) {
+    if (el.nodeType == 1 && el._x_marker) {
+      el._x_marker = undefined;
+      window.Alpine.initTree(el);
+    }
+  },
   onBeforeElUpdated(from, to) {
     if (from._x_dataStack) {
       window.Alpine.clone(from, to);
