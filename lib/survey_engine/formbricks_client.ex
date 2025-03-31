@@ -57,4 +57,23 @@ defmodule SurveyEngine.FormbricksClient do
         {:error, reason}
     end
   end
+
+  def encode_file(file_url) do
+    case HTTPoison.get(file_url, "x-api-key": "5a59e36304167ea0257cf1ac0b8e8252") do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, Base.encode64(body)}
+
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        {:error, "Not found"}
+
+      {:ok, %HTTPoison.Response{status_code: 401}} ->
+        {:error, "Unauthorized"}
+
+      {:ok, %HTTPoison.Response{status_code: 500}} ->
+        {:error, "Internal server error"}
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        {:error, reason}
+    end
+  end
 end

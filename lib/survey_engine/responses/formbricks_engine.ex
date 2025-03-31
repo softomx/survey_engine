@@ -3,7 +3,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   alias SurveyEngine.LeadsForms
   alias SurveyEngine.Responses
   alias SurveyEngine.FormbricksClient
-  @base_url "https://form-surveys-formbricks-app.mbf3gu.easypanel.host/s"
+  @base_url "https://form-surveys-formbricks-app.mbf3gu.easypanel.host"
   def process_response(response) do
     case response.event do
       "responseCreated" ->
@@ -33,7 +33,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     query_string =
       prefilling_survey(response)
 
-    "#{@base_url}/#{form.external_id}?userId=#{current_user.id}&suId=#{build_unique_id(company, current_user)}&#{query_string}"
+    "#{@base_url}/s/#{form.external_id}?userId=#{current_user.id}&suId=#{build_unique_id(company, current_user)}&#{query_string}"
   end
 
   defp build_unique_id(company, user) do
@@ -83,7 +83,6 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
       lead_form_id: lead_form.id,
       form_group_id: lead_form.form_group_id
     }
-    |> IO.inspect(label: "attrs")
     |> Responses.create_survey_response()
   end
 
@@ -145,8 +144,9 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
 
   defp format_response(survey, data) do
     data
+    |> IO.inspect(label: "ksksks")
     |> Enum.reduce([], fn {question_id, answer}, acc ->
-      question = Map.get(survey.questions, question_id)
+      question = Map.get(survey.questions, question_id) |> IO.inspect()
 
       case question do
         nil ->
@@ -158,13 +158,25 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
               %{
                 index: question.index,
                 question: question.title,
-                answer: answer,
+                answer: format_answer(answer, question),
                 type: question.type,
                 external_id: question.id
               }
             ]
       end
     end)
+  end
+
+  defp format_answer(answer, %{type: "fileUpload"} = _question) do
+    answer
+    |> Enum.map(fn a ->
+      {:ok, file} = FormbricksClient.encode_file(a)
+      file
+    end)
+  end
+
+  defp format_answer(answer, _question) do
+    answer
   end
 
   defp prefilling_survey(nil), do: nil
@@ -196,5 +208,24 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
       end
     end)
     |> URI.encode_query()
+  end
+
+  def encode_file(file_url) do
+    case HTTPoison.get(file_url, []) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, Base.encode64(body)}
+
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        {:error, "Not found"}
+
+      {:ok, %HTTPoison.Response{status_code: 401}} ->
+        {:error, "Unauthorized"}
+
+      {:ok, %HTTPoison.Response{status_code: 500}} ->
+        {:error, "Internal server error"}
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        {:error, reason}
+    end
   end
 end
