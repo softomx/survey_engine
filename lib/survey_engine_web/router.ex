@@ -77,9 +77,7 @@ defmodule SurveyEngineWeb.Router do
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
-      live "/users/log_in/policies", UserLoginLive, :policies
-      live "/users/log_in/goals", UserLoginLive, :goals
-      live "/users/log_in/scopes", UserLoginLive, :scopes
+      live "/policies", PolicyLive, :show
     end
 
     post "/users/log_in", UserSessionController, :create
