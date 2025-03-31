@@ -5,7 +5,6 @@ defmodule SurveyEngine.Companies.Company do
   schema "companies" do
     field :language, :string
     field :agency_name, :string
-    field :rfc, :string
     field :legal_name, :string
     field :country, :string
     field :town, :string
