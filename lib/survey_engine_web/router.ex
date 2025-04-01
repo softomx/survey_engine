@@ -77,10 +77,23 @@ defmodule SurveyEngineWeb.Router do
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
-      live "/policies", PolicyLive, :show
     end
 
     post "/users/log_in", UserSessionController, :create
+  end
+
+  scope "/", SurveyEngineWeb do
+    pipe_through [:browser, :locale]
+
+    live_session :general,
+      on_mount: [
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :current_page},
+        {ContextSession, :set_locale}
+      ],
+      layout: {SurveyEngineWeb.Layouts, :login} do
+      live "/policies", PolicyLive.Show, :show
+    end
   end
 
   scope "/", SurveyEngineWeb do

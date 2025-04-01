@@ -5,7 +5,7 @@ defmodule SurveyEngine.Notifications.Notification do
   schema "notifications" do
     field :action, :string
 
-    embeds_many :to, SurveyEngine.Notifications.NotificationTo
+    embeds_many :to, SurveyEngine.Notifications.NotificationTo, on_replace: :delete
 
     has_many :contents, SurveyEngine.Translations.Translation,
       foreign_key: :resource_id,
@@ -23,6 +23,6 @@ defmodule SurveyEngine.Notifications.Notification do
     notification
     |> cast(attrs, [:action])
     |> validate_required([:action])
-    |> cast_embed(:to)
+    |> cast_embed(:to, sort_param: :to_sort, drop_param: :to_drop)
   end
 end

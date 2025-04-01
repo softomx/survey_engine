@@ -12,7 +12,7 @@ defmodule SurveyEngine.Workers.ClientSurveyUpdatedNotificationWorker do
          {:ok, company} <- Companies.get_company(company_id),
          {:ok, user} <- Accounts.get_user_by_company(company_id),
          {:ok, notification_config} <-
-           Notifications.get_notification_by_action("validating_info") do
+           Notifications.get_notification_by_action("survey_finished") do
       notify_client(user, company, site_config, notification_config, response)
     end
   end

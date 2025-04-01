@@ -190,15 +190,6 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
           |> Map.put(response_item["external_id"], response_item["answer"] |> Enum.join(","))
 
         "fileUpload" ->
-          response_item
-
-          # answer =
-          #   if allow_multiple_files do
-          #     response_item["answer"]
-          #   else
-          #     response_item["answer"] |> List.first()
-          #   end
-
           acc
           |> Map.put(response_item["external_id"], response_item["answer"] |> Enum.join(","))
 

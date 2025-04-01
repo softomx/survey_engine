@@ -19,8 +19,7 @@ defmodule SurveyEngineWeb.NotificationLive.FormComponent do
   def handle_event("validate", %{"notification" => notification_params}, socket) do
     changeset =
       socket.assigns.notification
-      |> IO.inspect(label: "skksksk")
-      |> Notifications.change_notification(notification_params |> IO.inspect())
+      |> Notifications.change_notification(notification_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign_form(socket, changeset)}
@@ -28,40 +27,6 @@ defmodule SurveyEngineWeb.NotificationLive.FormComponent do
 
   def handle_event("save", %{"notification" => notification_params}, socket) do
     save_notification(socket, socket.assigns.action, notification_params)
-  end
-
-  def handle_event("add_to_email", _, socket) do
-    # existing_to_emails =
-    #   Ecto.Changeset.get_field(socket.assigns.form.source, :to, [])
-    #   |> IO.inspect()
-    #   |> Enum.map(fn i -> Map.from_struct(i) end)
-
-    append_to_email =
-      Notifications.change_notification(socket.assigns.notification, %{
-        "to" => (socket.assigns.emails ++ [%{name: "", email: ""}]) |> IO.inspect()
-      })
-
-    up =
-      append_to_email
-      |> Ecto.Changeset.apply_changes()
-      |> IO.inspect()
-
-    {:noreply, assign(socket, emails: up.to, form: to_form(append_to_email))}
-  end
-
-  def handle_event("remove_to_email", %{"index" => index}, socket) do
-    updated_to_emails =
-      Ecto.Changeset.get_field(socket.assigns.form.source, :to, [])
-      |> IO.inspect()
-      |> List.delete_at(String.to_integer(index))
-      |> Enum.map(fn i -> Map.from_struct(i) end)
-
-    remove_to_email =
-      Notifications.change_notification(socket.assigns.notification, %{
-        "to" => updated_to_emails
-      })
-
-    {:noreply, assign(socket, form: to_form(remove_to_email))}
   end
 
   defp save_notification(socket, :edit, notification_params) do

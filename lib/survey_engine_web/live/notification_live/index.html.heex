@@ -18,7 +18,9 @@
   <.data_table :if={@index_params} meta={@meta} items={@notifications}>
     <:if_empty>No hay notificaciones configuradas</:if_empty>
     <:col field={:action} sortable filterable={[:ilike]} label="Motivo" />
-    <:col field={:to} sortable />
+    <:col :let={notification} field={:to} sortable>
+      {notification.to |> Enum.map(& &1.email)}
+    </:col>
 
     <:col :let={notification} label="Acciones" align_right>
       <.button

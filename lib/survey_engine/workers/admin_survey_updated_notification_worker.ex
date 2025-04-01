@@ -12,11 +12,11 @@ defmodule SurveyEngine.Workers.AdminSurveyUpdatedNotificationWorker do
          {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, company} <- Companies.get_company(company_id),
          {:ok, notification_config} <-
-           Notifications.get_notification_by_action("validating_info"),
+           Notifications.get_notification_by_action("survey_finished"),
          {:ok, emails} <- {:ok, get_emails(notification_config)} do
       AdminNotifier.deliver_survey_updated(
         emails,
-        "Asignacion de modelo de negocio",
+        "Formulario finalizado",
         %{company: company, user: user, site_config: site_config, response: response},
         site_config.id
       )
@@ -24,7 +24,7 @@ defmodule SurveyEngine.Workers.AdminSurveyUpdatedNotificationWorker do
   end
 
   defp get_emails(notification_config) do
-    (notification_config.to ++ [%{email: "joss1091@gmail.com"}])
+    notification_config.to
     |> Enum.map(fn e -> e.email end)
   end
 end

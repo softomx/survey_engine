@@ -7,7 +7,6 @@ defmodule SurveyEngine.NotificationManager do
   alias SurveyEngine.Repo
   alias SurveyEngine.Accounts.UserToken
   alias SurveyEngine.SiteConfigurations.SiteConfiguration
-  alias SurveyEngine.Workers.ClientBusinessModelAssignedNotificationWorker
 
   def register_lead_notification(
         %User{} = user,
@@ -18,13 +17,13 @@ defmodule SurveyEngine.NotificationManager do
            {:ok, UserToken.build_email_token(user, "confirm")},
          {:ok, _} <- Repo.insert(user_token),
          {:ok, url} <- {:ok, confirmation_url_fun.(encoded_token)} do
-      Exq.enqueue(Exq, "notifications", SurveyEngine.Workers.ClientRegisterNotificationWorker, [
+      enqueue_worker(SurveyEngine.Workers.ClientRegisterNotificationWorker, [
         user.id,
         site_config.id,
         url
       ])
 
-      Exq.enqueue(Exq, "notifications", SurveyEngine.Workers.AdminRegisterNotificationWorker, [
+      enqueue_worker(SurveyEngine.Workers.AdminRegisterNotificationWorker, [
         user.id,
         site_config.id
       ])
@@ -35,9 +34,7 @@ defmodule SurveyEngine.NotificationManager do
         %Company{} = company,
         %SiteConfiguration{} = site_config
       ) do
-    Exq.enqueue(
-      Exq,
-      "notifications",
+    enqueue_worker(
       SurveyEngine.Workers.ClientBusinessModelAssignedNotificationWorker,
       [
         company.id,
@@ -45,9 +42,7 @@ defmodule SurveyEngine.NotificationManager do
       ]
     )
 
-    Exq.enqueue(
-      Exq,
-      "notifications",
+    enqueue_worker(
       SurveyEngine.Workers.AdminBusinessModelAssignedNotificationWorker,
       [
         company.id,
@@ -58,9 +53,7 @@ defmodule SurveyEngine.NotificationManager do
 
   def notify_survey_finished(%SurveyResponse{} = response, site_config_id) do
     with {:ok, user} <- Accounts.get_user(response.user_id) do
-      Exq.enqueue(
-        Exq,
-        "notifications",
+      enqueue_worker(
         SurveyEngine.Workers.ClientSurveyUpdatedNotificationWorker,
         [
           response.id,
@@ -69,9 +62,7 @@ defmodule SurveyEngine.NotificationManager do
         ]
       )
 
-      Exq.enqueue(
-        Exq,
-        "notifications",
+      enqueue_worker(
         SurveyEngine.Workers.AdminSurveyUpdatedNotificationWorker,
         [
           response.id,
@@ -80,5 +71,14 @@ defmodule SurveyEngine.NotificationManager do
         ]
       )
     end
+  end
+
+  defp enqueue_worker(module, options) do
+    Exq.enqueue(
+      Exq,
+      "notifications",
+      module,
+      options
+    )
   end
 end

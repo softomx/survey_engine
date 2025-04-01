@@ -12,26 +12,39 @@
       options={[
         {"Registro", "register"},
         {"Asignacion modelo de negocio", "assign_busines_model"},
-        {"Validando informacion", "validating_info"},
+        {"Formulario respondido", "survey_finished"},
         {"Error informacion", "info_error"},
         {"Informacion aprobada", "info_approved"}
       ]}
     />
-    <span phx-click="add_to_email" phx-target={@myself}>agregar</span>
 
+    <input type="hidden" name="notitication[to_drop][]" />
     <.inputs_for :let={f2} field={@form[:to]}>
       <div class="flex items-center gap-2">
-        <.field type="text" field={f2[:email]} label="to" />
-        <div phx-click="remove_to_email" phx-value-index={0} phx-target={@myself}>
-          <.icon
-            name="hero-x-mark"
-            class="w-8 h-8 relative top-4 bg-red-500 hover:bg-red-700 hover:cursor-pointer"
-          />
-        </div>
+        <input type="hidden" name="notification[to_sort][]" value={f2.index} />
+        <.field type="text" field={f2[:name]} label="Nombre" />
+        <.field type="text" field={f2[:email]} label="correo electronico" />
+
+        <button
+          type="button"
+          name="notification[to_drop][]"
+          value={f2.index}
+          phx-click={JS.dispatch("change")}
+        >
+          <.icon name="hero-x-mark" class="w-6 h-6 relative top-2" />
+        </button>
       </div>
     </.inputs_for>
 
     <div class="flex justify-end">
+      <button
+        type="button"
+        name="notification[to_sort][]"
+        value="new"
+        phx-click={JS.dispatch("change")}
+      >
+        add more
+      </button>
       <.button type="submit" phx-disable-with="Saving..." label="Save" />
     </div>
   </.form>
