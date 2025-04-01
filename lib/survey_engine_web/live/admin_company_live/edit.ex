@@ -15,13 +15,13 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Edit do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "New Form registration")
+    |> assign(:page_title, "Editar Empresa")
     |> assign(:company, Companies.get_company!(id))
   end
 
   defp apply_action(socket, :assign, %{"id" => id}) do
     socket
-    |> assign(:page_title, "New Form registration")
+    |> assign(:page_title, "Asignar modelo de negocio")
     |> assign(:company, Companies.get_company!(id))
   end
 end

@@ -19,7 +19,7 @@ defmodule SurveyEngineWeb.TranslationLive.New do
          %{"type" => type, "resource_id" => resource_id, "behaviour" => behaviour} = _params
        ) do
     socket
-    |> assign(:page_title, "New Translation")
+    |> assign(:page_title, "Nueva traduccion")
     |> assign(:translation, %Translation{})
     |> assign(:resource_id, resource_id)
     |> assign(:type, type)

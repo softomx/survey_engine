@@ -1,76 +1,81 @@
-<.header>
-  <:actions></:actions>
-</.header>
-<.card>
-  <.card_content heading="Configuracion de correo">
-    <div class="justify-end flex m-0 ">
-      <.link :if={is_nil(@mailer_config)} patch={~p"/admin/mailer_configs/new"}>
-        <.button>Crear configuracion</.button>
-      </.link>
-      <.link
-        :if={@mailer_config && @live_action != :new}
-        patch={~p"/admin/mailer_configs/#{@mailer_config}/edit"}
+<div class="justify-end flex m-0 ">
+  <.link :if={is_nil(@mailer_config)} patch={~p"/admin/mailer_configs/new"}>
+    <.button>Crear configuracion</.button>
+  </.link>
+  <.link
+    :if={@mailer_config && @live_action != :new}
+    patch={~p"/admin/mailer_configs/#{@mailer_config}/edit"}
+  >
+    <.button>editar</.button>
+  </.link>
+</div>
+<div :if={@mailer_config && @live_action != :new}>
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.name}
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Remitente Nombre</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.email_name}
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Remitente correo electronico</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.email_from}
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Adaptador</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.adapter}
+        </dd>
+      </div>
+      <div
+        :if={@mailer_config.adapter in ["mailgun", "mailjet", "sparkpost"]}
+        class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
       >
-        <.button>editar</.button>
-      </.link>
-    </div>
-    <div :if={@mailer_config && @live_action != :new}>
-      <div class="mt-6 border-t border-gray-100">
-        <dl class="divide-y divide-gray-100">
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
-            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {@mailer_config.name}
-            </dd>
-          </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm/6 font-medium text-gray-900">Remitente Nombre</dt>
-            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {@mailer_config.email_name}
-            </dd>
-          </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm/6 font-medium text-gray-900">Remitente correo electronico</dt>
-            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {@mailer_config.email_from}
-            </dd>
-          </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm/6 font-medium text-gray-900">Adaptador</dt>
-            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {@mailer_config.adapter}
-            </dd>
-          </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm/6 font-medium text-gray-900">API key</dt>
-            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {@mailer_config.configuration.api_key}
-            </dd>
-          </div>
-        </dl>
+        <dt class="text-sm/6 font-medium text-gray-900">API key</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@mailer_config.configuration.api_key}
+        </dd>
       </div>
+    </dl>
+  </div>
 
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Secret</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {@mailer_config.configuration.secret}
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Region</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {@mailer_config.configuration.region}
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Dominio</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {@mailer_config.configuration.domain}
-        </dd>
-      </div>
-    </div>
-  </.card_content>
-</.card>
+  <div
+    :if={@mailer_config.adapter in ["amazon_ses", "mailjet"]}
+    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+  >
+    <dt class="text-sm/6 font-medium text-gray-900">Secret</dt>
+    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+      {@mailer_config.configuration.secret}
+    </dd>
+  </div>
+  <div
+    :if={@mailer_config.adapter in ["amazon_ses"]}
+    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+  >
+    <dt class="text-sm/6 font-medium text-gray-900">Region</dt>
+    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+      {@mailer_config.configuration.region}
+    </dd>
+  </div>
+  <div
+    :if={@mailer_config.adapter in ["mailgun"]}
+    class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+  >
+    <dt class="text-sm/6 font-medium text-gray-900">Dominio</dt>
+    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+      {@mailer_config.configuration.domain}
+    </dd>
+  </div>
+</div>
 
 <.modal :if={@live_action in [:new, :edit]}>
   <.live_component

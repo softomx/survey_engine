@@ -206,6 +206,16 @@ defmodule SurveyEngineWeb.CoreComponents do
     """
   end
 
+  attr :value, :string, required: true
+
+  def company_state_badge(assigns) do
+    ~H"""
+    <.badge :if={@value == "finished"} color="success" label="Finalizado" />
+    <.badge :if={@value == "pending"} color="warning" label="Pendiente" />
+    <.badge :if={@value == "info_error"} color="danger" label="Error en la informacion" />
+    """
+  end
+
   attr :required, :boolean, required: true
 
   def required_badge(assigns) do

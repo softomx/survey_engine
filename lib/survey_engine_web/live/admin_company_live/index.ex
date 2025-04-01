@@ -11,8 +11,8 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
       order_by: [:id, :inserted_at],
       order_directions: [:asc, :asc]
     },
-    sortable: [:id, :inserted_at],
-    filterable: [:id, :inserted_at]
+    sortable: [:id, :inserted_at, :status, :legal_name, :agency_name],
+    filterable: [:id, :inserted_at, :status, :legal_name, :agency_name]
   ]
 
   @impl true
@@ -25,21 +25,9 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Editar espresa")
-    |> assign(:company, Companies.get_company!(id))
-  end
-
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New Agency type")
-    |> assign(:company, %Company{})
-  end
-
   defp apply_action(socket, :index, params) do
     socket
-    |> assign(:page_title, "Listing Agency types")
+    |> assign(:page_title, "Listado de empresas")
     |> assign(:company, nil)
     |> assign_companies(params)
     |> assign(:index_params, params)

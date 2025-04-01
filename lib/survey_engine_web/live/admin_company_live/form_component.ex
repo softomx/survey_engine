@@ -27,7 +27,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
             options={[{"Español", "es"}, {"Ingles", "en"}]}
           />
           <.field field={@form[:agency_name]} type="text" label="Nombre de la agencia" />
-          <.field field={@form[:rfc]} type="text" label="Rfc" />
+
           <.field field={@form[:legal_name]} type="text" label="Legal name" />
           <.combo_box
             field={@form[:country]}

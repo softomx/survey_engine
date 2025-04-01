@@ -1,4 +1,4 @@
-defmodule SurveyEngineWeb.SiteContentive.Show do
+defmodule SurveyEngineWeb.SiteContentLive.Show do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Translations
@@ -10,15 +10,13 @@ defmodule SurveyEngineWeb.SiteContentive.Show do
 
   @impl true
   def handle_params(
-        %{"id" => id, "type" => type, "behaviour" => behaviour, "resource_id" => resource_id},
+        %{"id" => id, "behaviour" => behaviour},
         _,
         socket
       ) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:resource_id, resource_id)
-     |> assign(:type, type)
      |> assign(:behaviour, behaviour)
      |> assign(:translation, Translations.get_translation!(id))}
   end

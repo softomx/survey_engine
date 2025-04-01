@@ -7,11 +7,6 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
-        {@title}
-        <:subtitle>Use this form to manage translation records in your database.</:subtitle>
-      </.header>
-
       <.form
         for={@form}
         id="translation-form"
@@ -38,7 +33,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
         />
         <.field field={@form[:description]} type="textarea" label="Description" />
 
-        <.button phx-disable-with="Saving...">Save Translation</.button>
+        <.button phx-disable-with="Saving...">Guardar</.button>
       </.form>
     </div>
     """

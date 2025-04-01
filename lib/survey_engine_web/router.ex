@@ -237,6 +237,7 @@ defmodule SurveyEngineWeb.Router do
       live "/content/:behaviour", SiteContentLive.Index, :index
       live "/content/:behaviour/new", SiteContentLive.New, :new
       live "/content/:behaviour/:id/edit", SiteContentLive.Edit, :edit
+      live "/content/:behaviour/:id", SiteContentLive.Show, :show
 
       live "/notifications", NotificationLive.Index, :index
       live "/notifications/new", NotificationLive.New, :new

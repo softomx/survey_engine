@@ -1,19 +1,13 @@
-<.header>
-  Listing Agency types
-  <:actions>
-    <.link patch={~p"/admin/companies/new"}>
-      <.button>New Agency type</.button>
-    </.link>
-  </:actions>
-</.header>
+<.header></.header>
 <.data_table :if={@index_params} meta={@meta} items={@companies}>
-  <:if_empty>No se encontraron monedas</:if_empty>
+  <:if_empty>No se encontraron compañias con elcriterio de busqueda</:if_empty>
   <:col field={:agency_name} sortable />
   <:col field={:legal_name} sortable />
-  <:col field={:rfc} sortable />
-  <:col field={:status} sortable />
+  <:col :let={company} field={:status} sortable>
+    <.company_state_badge value={company.status} />
+  </:col>
   <:col field={:business_model_id} sortable />
-  <:col field={:inserted_at} sortable />
+  <:col field={:inserted_at} sortable label="Fecha de registro" />
 
   <:col :let={company} label="Actions" align_right>
     <.button
@@ -25,6 +19,7 @@
       to={~p"/admin/companies/#{company}/edit"}
     />
     <.button
+      :if={is_nil(company.business_model_id)}
       color="white"
       variant="outline"
       size="xs"

@@ -26,19 +26,19 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Site configuration")
+    |> assign(:page_title, "Editar sitio")
     |> assign(:site_configuration, SiteConfigurations.get_site_configuration!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Site configuration")
+    |> assign(:page_title, "Nuevo sitio")
     |> assign(:site_configuration, %SiteConfiguration{})
   end
 
   defp apply_action(socket, :index, params) do
     socket
-    |> assign(:page_title, "Listing Site configurations")
+    |> assign(:page_title, "Listado de sitios")
     |> assign(:site_configuration, nil)
     |> assign(:index_params, params)
     |> assign_site_configurations(params)
