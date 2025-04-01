@@ -2,6 +2,7 @@ defmodule SurveyEngineWeb.SurveyResponseLive.Show do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Responses
+  alias SurveyEngine.TransaleteHelper
 
   @impl true
   def mount(_params, _session, socket) do

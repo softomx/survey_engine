@@ -4,6 +4,7 @@ defmodule SurveyEngineWeb.CompanyLive.Index do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Companies
+  alias SurveyEngine.TransaleteHelper
 
   @impl true
   def mount(_params, _session, socket) do
@@ -44,7 +45,7 @@ defmodule SurveyEngineWeb.CompanyLive.Index do
 
   defp assign_user_responses(socket, current_user) do
     responses =
-      Responses.list_survey_resposes(%{filter: %{user_id: current_user.id, state: "finished"}})
+      Responses.list_survey_resposes(%{filter: %{user_id: current_user.id}})
 
     business_configs =
       socket.assigns.business_configs
