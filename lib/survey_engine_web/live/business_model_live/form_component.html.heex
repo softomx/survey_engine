@@ -6,10 +6,11 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <.field type="text" field={@form[:name]} />
+    <.field type="text" field={@form[:name]} label="Nombre" />
+    <.field type="textarea" field={@form[:description]} label="Descripcion" />
 
     <div class="flex justify-end">
-      <.button type="submit" phx-disable-with="Saving..." label="Save" />
+      <.button type="submit" phx-disable-with="Saving..." label="Guardar" />
     </div>
   </.form>
 </div>

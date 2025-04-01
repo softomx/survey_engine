@@ -41,7 +41,7 @@
         },
         %{
           name: ~p"/admin/catalogs/business_models",
-          label: "Asignacion de formularios ",
+          label: "Modelos de negocio",
           path: ~p"/admin/catalogs/business_models",
           icon: "hero-user"
         },
@@ -126,7 +126,11 @@
 >
   <.flash_group flash={@flash} />
   <.container class="mt-4">
-    {@inner_content}
+    <.card>
+      <.card_content heading={assigns[:page_title]}>
+        {@inner_content}
+      </.card_content>
+    </.card>
   </.container>
   <:top_right>
     <.dropdown js_lib="live_view_js">

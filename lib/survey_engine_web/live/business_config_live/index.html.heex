@@ -1,8 +1,8 @@
 <.container class="py-16">
-  <.page_header title="Listing Business configs">
+  <.page_header title="">
     <.button
       link_type="live_patch"
-      label="New Business config"
+      label="Asignar nuevo formulario"
       to={~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/new"}
     />
   </.page_header>
@@ -24,7 +24,9 @@
   <.data_table :if={@index_params} meta={@meta} items={@business_configs}>
     <:if_empty>No business_configs found</:if_empty>
     <:col field={:order} sortable label="orden" />
-    <:col field={:required} sortable label="Requerido" />
+    <:col :let={business_config} field={:required} label="Requerido">
+      <.required_badge required={business_config.required} />
+    </:col>
     <:col :let={business_config} field={:form_group} sortable label="Formulario">
       {business_config.form_group.name}
     </:col>

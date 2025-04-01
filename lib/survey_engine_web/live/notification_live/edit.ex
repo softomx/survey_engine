@@ -17,7 +17,7 @@ defmodule SurveyEngineWeb.NotificationLive.Edit do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Notification")
+    |> assign(:page_title, "Editar Notification")
     |> assign(:notification, Notifications.get_notification!(id))
   end
 

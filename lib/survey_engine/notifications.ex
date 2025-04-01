@@ -35,7 +35,8 @@ defmodule SurveyEngine.Notifications do
       ** (Ecto.NoResultsError)
 
   """
-  def get_notification!(id), do: Repo.get!(Notification, id)
+  def get_notification!(id),
+    do: Repo.get!(Notification, id) |> Repo.preload([:contents, :subjects])
 
   def get_notification_by_action(action) do
     Repo.get_by(Notification, action: action)

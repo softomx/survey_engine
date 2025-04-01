@@ -20,7 +20,7 @@ defmodule SurveyEngineWeb.CompanyLive.Index do
       company = Companies.get_company!(company_id)
 
       socket
-      |> assign(:page_title, "Listing Form registrations")
+      |> assign(:page_title, "Empresa")
       |> assign(:company, company)
       |> assign_business_configs(company)
       |> assign_user_responses(socket.assigns.current_user)

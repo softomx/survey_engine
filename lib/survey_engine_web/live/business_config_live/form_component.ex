@@ -36,7 +36,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.FormComponent do
       {:ok, _business_config} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Business config updated successfully")
+         |> put_flash(:info, "Actualizado correctamente")
          |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -49,7 +49,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.FormComponent do
       {:ok, _business_config} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Business config created successfully")
+         |> put_flash(:info, "Creado correctamente")
          |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -66,7 +66,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.FormComponent do
       socket,
       :depend_lead_forms,
       socket.assigns.form_groups
-      |> Enum.reject(fn {k, v} -> "#{v}" == business_config_params["form_group_id"] end)
+      |> Enum.reject(fn {_k, v} -> "#{v}" == business_config_params["form_group_id"] end)
     )
   end
 end

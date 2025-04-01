@@ -26,6 +26,6 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Show do
      )}
   end
 
-  defp page_title(:show), do: "Show Business config"
-  defp page_title(:edit), do: "Edit Business config"
+  defp page_title(:show), do: "Ver asignacion de formulario"
+  defp page_title(:edit), do: "Editar asignacion de formulario"
 end

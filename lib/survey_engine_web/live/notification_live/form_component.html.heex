@@ -17,7 +17,7 @@
         {"Informacion aprobada", "info_approved"}
       ]}
     />
-
+    <.label>Notificar a</.label>
     <input type="hidden" name="notitication[to_drop][]" />
     <.inputs_for :let={f2} field={@form[:to]}>
       <div class="flex items-center gap-2">
@@ -25,27 +25,32 @@
         <.field type="text" field={f2[:name]} label="Nombre" />
         <.field type="text" field={f2[:email]} label="correo electronico" />
 
-        <button
+        <.button
+          with_icon
+          color="danger"
           type="button"
+          size="xs"
           name="notification[to_drop][]"
           value={f2.index}
           phx-click={JS.dispatch("change")}
         >
-          <.icon name="hero-x-mark" class="w-6 h-6 relative top-2" />
-        </button>
+          <.icon name="hero-x-mark" class="w-4 h-4 " />
+        </.button>
       </div>
     </.inputs_for>
-
+    <.button
+      with_icon
+      color="info"
+      type="button"
+      size="xs"
+      name="notification[to_sort][]"
+      value="new"
+      phx-click={JS.dispatch("change")}
+    >
+      <.icon name="hero-plus" class="w-4 h-4" /> destinatario
+    </.button>
     <div class="flex justify-end">
-      <button
-        type="button"
-        name="notification[to_sort][]"
-        value="new"
-        phx-click={JS.dispatch("change")}
-      >
-        add more
-      </button>
-      <.button type="submit" phx-disable-with="Saving..." label="Save" />
+      <.button type="submit" phx-disable-with="Saving..." label="Guardar" />
     </div>
   </.form>
 </div>

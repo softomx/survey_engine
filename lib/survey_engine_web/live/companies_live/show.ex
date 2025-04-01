@@ -31,7 +31,7 @@ defmodule SurveyEngineWeb.CompanyLive.Show do
       company = Companies.get_company!(company_id)
 
       socket
-      |> assign(:page_title, "Listing Form registrations")
+      |> assign(:page_title, "Empresa")
       |> assign(:company, company)
     else
       socket

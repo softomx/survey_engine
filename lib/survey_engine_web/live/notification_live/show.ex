@@ -21,6 +21,6 @@ defmodule SurveyEngineWeb.NotificationLive.Show do
     {:noreply, push_patch(socket, to: ~p"/notifications/#{socket.assigns.notification}")}
   end
 
-  defp page_title(:show), do: "Show Notification"
+  defp page_title(:show), do: "Detalles de notificacion"
   defp page_title(:edit), do: "Edit Notification"
 end

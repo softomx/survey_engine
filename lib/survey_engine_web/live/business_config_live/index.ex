@@ -12,8 +12,8 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
       order_by: [:order, :inserted_at],
       order_directions: [:asc, :asc]
     },
-    sortable: [:id, :inserted_at, :order, :required, :previous_lead_form_finished],
-    filterable: [:id, :inserted_at, :order, :required, :previous_lead_form_finished]
+    sortable: [:id, :inserted_at, :order, :previous_lead_form_finished, :form_group_id],
+    filterable: [:id, :inserted_at, :order, :previous_lead_form_finished]
   ]
 
   @impl true
@@ -28,7 +28,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id, "business_model_id" => business_model_id}) do
     socket
-    |> assign(:page_title, "Edit Business config")
+    |> assign(:page_title, "Editar asignacion de formulario")
     |> assign(:business_config, BusinessModels.get_business_config!(id))
     |> assign(:business_model_id, business_model_id)
     |> assign(:form_groups, LeadsForms.list_form_groups() |> Enum.map(&{&1.name, &1.id}))
@@ -36,7 +36,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
 
   defp apply_action(socket, :new, %{"business_model_id" => business_model_id}) do
     socket
-    |> assign(:page_title, "New Business config")
+    |> assign(:page_title, "Asignar nuevo formulario")
     |> assign(:business_config, %BusinessConfig{business_model_id: business_model_id})
     |> assign(:business_model_id, business_model_id)
     |> assign(:form_groups, LeadsForms.list_form_groups() |> Enum.map(&{&1.name, &1.id}))
@@ -44,7 +44,7 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
 
   defp apply_action(socket, :index, %{"business_model_id" => business_model_id} = params) do
     socket
-    |> assign(:page_title, "Listing Business configs")
+    |> assign(:page_title, "Listado de formularios asignados")
     |> assign_business_configs(params)
     |> assign(index_params: params)
     |> assign(:business_model_id, business_model_id)
@@ -55,11 +55,17 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
   end
 
   @impl true
-  def handle_event("update_filters", params, socket) do
-    query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
+  def handle_event(
+        "update_filters",
+        %{"filters" => filter_params, "business_model_id" => business_model_id},
+        socket
+      ) do
+    query_params = DataTable.build_filter_params(socket.assigns.meta.flop, filter_params)
 
     {:noreply,
-     push_patch(socket, to: ~p"/catalogs/business_models/business_configs?#{query_params}")}
+     push_patch(socket,
+       to: ~p"/catalogs/business_models/#{business_model_id}/business_configs?#{query_params}"
+     )}
   end
 
   @impl true

@@ -4,6 +4,7 @@ defmodule SurveyEngine.BusinessModels.BusinessModel do
 
   schema "business_models" do
     field :name, :string
+    field :description, :string
 
     has_many :business_config, SurveyEngine.BusinessModels.BusinessConfig
 
@@ -13,7 +14,7 @@ defmodule SurveyEngine.BusinessModels.BusinessModel do
   @doc false
   def changeset(business_model, attrs) do
     business_model
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :description])
     |> validate_required([:name])
   end
 end

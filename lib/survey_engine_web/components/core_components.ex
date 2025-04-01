@@ -206,6 +206,42 @@ defmodule SurveyEngineWeb.CoreComponents do
     """
   end
 
+  attr :required, :boolean, required: true
+
+  def required_badge(assigns) do
+    ~H"""
+    <.badge :if={@required} color="danger" label="Requerido" />
+    <.badge :if={!@required} color="gray" label="opcional" />
+    """
+  end
+
+  attr :status, :boolean, required: true
+
+  def active_badge(assigns) do
+    ~H"""
+    <.badge :if={!@status} color="danger" label="Inactivo" />
+    <.badge :if={@status} color="success" label="Activo" />
+    """
+  end
+
+  def notification_action_badge(assigns) do
+    ~H"""
+    <.badge :if={@value == "register"} color="danger" label="Nuevo registro" />
+    <.badge
+      :if={@value == "assign_busines_model"}
+      color="success"
+      label="Asignacion de logica de negocio"
+    />
+    <.badge :if={@value == "survey_finished"} color="success" label="Fomulario finalizado" />
+    <.badge
+      :if={@value == "survey_error"}
+      color="success"
+      label="Error en la informacion del formulario"
+    />
+    <.badge :if={@value == "survey_accepted"} color="success" label="Formulario aceptado " />
+    """
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

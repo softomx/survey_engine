@@ -27,19 +27,19 @@ defmodule SurveyEngineWeb.BusinessModelLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Business model")
+    |> assign(:page_title, "Editar modelo de negocio")
     |> assign(:business_model, BusinessModels.get_business_model!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Business model")
+    |> assign(:page_title, "Nuevo modelo de negocio")
     |> assign(:business_model, %BusinessModel{})
   end
 
   defp apply_action(socket, :index, params) do
     socket
-    |> assign(:page_title, "Listing Business models")
+    |> assign(:page_title, "Listado de modelos de negocio")
     |> assign_business_models(params)
     |> assign(index_params: params)
   end
@@ -52,19 +52,6 @@ defmodule SurveyEngineWeb.BusinessModelLive.Index do
   def handle_event("update_filters", params, socket) do
     query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
     {:noreply, push_patch(socket, to: ~p"/admin/catalogs/business_models?#{query_params}")}
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    business_model = BusinessModels.get_business_model!(id)
-    {:ok, _} = BusinessModels.delete_business_model(business_model)
-
-    socket =
-      socket
-      |> assign_business_models(socket.assigns.index_params)
-      |> put_flash(:info, "Business model deleted")
-
-    {:noreply, socket}
   end
 
   @impl true

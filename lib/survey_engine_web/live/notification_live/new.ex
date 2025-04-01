@@ -2,19 +2,8 @@ defmodule SurveyEngineWeb.NotificationLive.New do
   alias SurveyEngine.Notifications.NotificationTo
   use SurveyEngineWeb, :live_view
 
-  alias SurveyEngine.Notifications
   alias SurveyEngine.Notifications.Notification
   alias PetalFramework.Components.DataTable
-
-  @data_table_opts [
-    default_limit: 10,
-    default_order: %{
-      order_by: [:id, :inserted_at],
-      order_directions: [:asc, :asc]
-    },
-    sortable: [:id, :inserted_at, :action, :to, :from, :from_name, :subject, :content],
-    filterable: [:id, :inserted_at, :action, :to, :from, :from_name, :subject, :content]
-  ]
 
   @impl true
   def mount(_params, _session, socket) do

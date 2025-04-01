@@ -155,7 +155,8 @@ defmodule SurveyEngine.BusinessModels do
       ** (Ecto.NoResultsError)
 
   """
-  def get_business_config!(id), do: Repo.get!(BusinessConfig, id)
+  def get_business_config!(id),
+    do: Repo.get!(BusinessConfig, id) |> Repo.preload([:form_group, :business_model])
 
   @doc """
   Creates a business_config.

@@ -12,7 +12,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
       order_by: [:id, :inserted_at],
       order_directions: [:asc, :asc]
     },
-    sortable: [:id, :inserted_at, :date, :state, :data],
+    sortable: [:id, :inserted_at, :language],
     filterable: [:id, :inserted_at, :language, :external_id]
   ]
   @impl true
@@ -36,14 +36,14 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id, "form_group_id" => form_group_id}) do
     socket
-    |> assign(:page_title, "Editar Formulario")
+    |> assign(:page_title, "Editar variable Formulario")
     |> assign(:leads_form, LeadsForms.get_leads_form!(id))
     |> assign(:form_group_id, form_group_id)
   end
 
   defp apply_action(socket, :new, %{"form_group_id" => form_group_id} = params) do
     socket
-    |> assign(:page_title, "Nuevo formulario")
+    |> assign(:page_title, "Nuevo variable formulario")
     |> assign(:leads_form, %LeadsForm{})
     |> assign(index_params: params)
     |> assign(:form_group_id, form_group_id)
@@ -51,7 +51,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.Index do
 
   defp apply_action(socket, :index, %{"form_group_id" => form_group_id} = params) do
     socket
-    |> assign(:page_title, "Listado de formularios")
+    |> assign(:page_title, "Listado de variables formulario")
     |> assign_survey_responses(params)
     |> assign(index_params: params)
     |> assign(:form_group_id, form_group_id)

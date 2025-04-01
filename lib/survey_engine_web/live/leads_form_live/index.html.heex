@@ -1,6 +1,5 @@
 <.container>
   <.header>
-    Listado de variables
     <:actions>
       <.link patch={~p"/admin/form_groups/#{@form_group_id}/leads_forms/new"}>
         <.button>Nueva variable</.button>
@@ -10,8 +9,21 @@
   <.data_table :if={@index_params} meta={@meta} items={@leads_forms}>
     <:if_empty>No se encontraronvariables para el formulario</:if_empty>
 
-    <:col field={:language} sortable class="uppercase" label="Lenguage" filterable={[:ilike]} />
-    <:col field={:external_id} sortable filterable={[:ilike]} lable="Id externo" />
+    <:col
+      :let={variable}
+      field={:language}
+      sortable
+      class=""
+      label="Lenguage"
+      filterable={[:ilike]}
+    >
+      <span class="uppercase">{variable.language}</span>
+    </:col>
+
+    <:col :let={variable} field={:active}>
+      <.active_badge status={variable.active} />
+    </:col>
+    <:col field={:external_id} sortable filterable={[:ilike]} label="Id externo" />
     <:col :let={lead_form} label="Acciones" align_right>
       <.button
         color="white"

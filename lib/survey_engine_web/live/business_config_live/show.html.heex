@@ -1,14 +1,8 @@
 <.container class="py-16">
-  <.page_header title="Show Business config">
-    <.button
-      link_type="live_patch"
-      label="Edit Business config"
-      to={~p"/business_configs/#{@business_config}/show/edit"}
-    />
-
+  <.page_header title="">
     <.button
       link_type="live_redirect"
-      label="Back"
+      label="Atras"
       to={~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs"}
     />
   </.page_header>
@@ -27,34 +21,66 @@
     </.modal>
   <% end %>
 
-  <div class="max-w-lg">
-    <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-      <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          Order
+  <div>
+    <div class="px-4 sm:px-0">
+      <h3 class="text-base/7 font-semibold text-gray-900">Informacion de la empresa</h3>
+      <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">Personal details and application.</p>
+    </div>
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Orden</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            {@business_config.order}
+          </dd>
         </div>
-        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          {@business_config.order}
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Obligatorio</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <.required_badge required={@business_config.required} />
+          </dd>
         </div>
-      </div>
 
-      <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          Required
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Dependencia de formularios</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            {@business_config.previous_lead_form_finished}
+          </dd>
         </div>
-        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          {@business_config.required}
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Formulario asociado</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            {@business_config.form_group.name}
+            <.icon_button
+              target="_blank"
+              link_type="a"
+              to={~p"/admin/form_groups/#{@business_config.form_group.id}/leads_forms"}
+              tooltip="Formulario asociado"
+              size="xs"
+            >
+              <.icon name="hero-link-solid" class="w-5 h-5" />
+            </.icon_button>
+          </dd>
         </div>
-      </div>
+      </dl>
+    </div>
 
-      <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          Previous lead form finished
-        </div>
-        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          {@business_config.previous_lead_form_finished}
-        </div>
-      </div>
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="text-sm/6 font-medium text-gray-900">Modelo de negocio</dt>
+      <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+        {@business_config.business_model.name}
+        <.icon_button
+          target="_blank"
+          link_type="a"
+          to={
+            ~p"/admin/catalogs/business_models/#{@business_config.business_model.id}/business_configs"
+          }
+          tooltip="Modelo de negocio asociado"
+          size="xs"
+        >
+          <.icon name="hero-link-solid" class="w-5 h-5" />
+        </.icon_button>
+      </dd>
     </div>
   </div>
 </.container>
