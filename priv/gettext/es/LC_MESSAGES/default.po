@@ -11,22 +11,22 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:29
+#: lib/survey_engine_web/live/companies_live/show.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "agency type"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:35
+#: lib/survey_engine_web/live/companies_live/show.html.heex:30
 #, elixir-autogen, elixir-format
 msgid "billing currency"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:56
+#: lib/survey_engine_web/live/companies_live/show.html.heex:51
 #, elixir-autogen, elixir-format
 msgid "city"
 msgstr ""
 
-#: lib/survey_engine_web/components/core_components.ex:133
+#: lib/survey_engine_web/components/core_components.ex:62
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
@@ -36,7 +36,7 @@ msgstr ""
 msgid "company name"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:44
+#: lib/survey_engine_web/live/companies_live/show.html.heex:39
 #, elixir-autogen, elixir-format
 msgid "country"
 msgstr ""
@@ -46,52 +46,183 @@ msgstr ""
 msgid "legal name"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:23
-#, elixir-autogen, elixir-format
-msgid "rfc"
-msgstr ""
-
-#: lib/survey_engine_web/live/companies_live/show.html.heex:50
+#: lib/survey_engine_web/live/companies_live/show.html.heex:45
 #, elixir-autogen, elixir-format
 msgid "town"
 msgstr ""
 
-#: lib/survey_engine_web/live/user_login_live.ex:11
+#: lib/survey_engine_web/live/user_login_live.ex:33
 #, elixir-autogen, elixir-format
 msgid "Don't have an account?"
 msgstr "¿No tienes una cuenta?"
 
-#: lib/survey_engine_web/live/user_login_live.ex:34
+#: lib/survey_engine_web/live/user_login_live.ex:15
 #, elixir-autogen, elixir-format
 msgid "Goals"
 msgstr "Metas"
 
-#: lib/survey_engine_web/live/user_login_live.ex:20
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:44
+#: lib/survey_engine_web/live/user_login_live.ex:48
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr "Correo electronico"
 
-#: lib/survey_engine_web/live/user_login_live.ex:31
+#: lib/survey_engine_web/live/user_login_live.ex:71
 #, elixir-autogen, elixir-format
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
 
-#: lib/survey_engine_web/live/user_login_live.ex:29
-#, elixir-autogen, elixir-format
-msgid "Keep me logged in"
-msgstr ""
-
-#: lib/survey_engine_web/live/user_login_live.ex:38
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:11
 #, elixir-autogen, elixir-format
 msgid "Log in"
 msgstr ""
 
-#: lib/survey_engine_web/live/user_login_live.ex:24
+#: lib/survey_engine_web/live/user_login_live.ex:58
 #, elixir-autogen, elixir-format
 msgid "Password"
 msgstr "Contraseña"
 
-#: lib/survey_engine_web/live/user_login_live.ex:13
+#: lib/survey_engine_web/live/user_login_live.ex:38
 #, elixir-autogen, elixir-format
 msgid "Sign up"
 msgstr "Registrate"
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:114
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Agency Type"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:8
+#, elixir-autogen, elixir-format
+msgid "Already registered?"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:104
+#, elixir-autogen, elixir-format
+msgid "Billy Currency"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:94
+#, elixir-autogen, elixir-format, fuzzy
+msgid "City"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:77
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Country"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:137
+#, elixir-autogen, elixir-format
+msgid "Create an account"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:146
+#, elixir-autogen, elixir-format
+msgid "Description of Agencies"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/agency_description_component.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Description of the agencies availables"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:122
+#, elixir-autogen, elixir-format
+msgid "Detail Agencies"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:69
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Legal name"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/agency_description_component.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "No description available"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:12
+#, elixir-autogen, elixir-format
+msgid "Programa de afiliados"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Register for an account"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:21
+#, elixir-autogen, elixir-format
+msgid "Scope"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:101
+#, elixir-autogen, elixir-format
+msgid "Select a billing currency"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:76
+#, elixir-autogen, elixir-format
+msgid "Select a country"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:86
+#, elixir-autogen, elixir-format
+msgid "Select a town"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:111
+#, elixir-autogen, elixir-format
+msgid "Select an agency"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_login_live.ex:31
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Sign In"
+msgstr "Registrate"
+
+#: lib/survey_engine_web/live/user_login_live.ex:80
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Sign in"
+msgstr "Registrate"
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:85
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Town"
+msgstr ""
+
+#: lib/survey_engine_web/live/embed_live/user_register_form.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "to your account now"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/index.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "view_response"
+msgstr "Ver Respuestas"
+
+#: lib/survey_engine_web/states_helper.ex:6
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response.finished"
+msgstr "Finalizado"
+
+#: lib/survey_engine_web/states_helper.ex:7
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response.updated"
+msgstr "Actualizada"
+
+#: lib/survey_engine_web/live/survey_response_live/show.html.heex:6
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response.date"
+msgstr "Fecha"
+
+#: lib/survey_engine_web/live/survey_response_live/show.html.heex:15
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response.state"
+msgstr "Status"
+
+#: lib/survey_engine_web/live/companies_live/index.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "link_survey"
+msgstr "Responder"

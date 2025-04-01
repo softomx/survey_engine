@@ -1,45 +1,24 @@
 <div class="mt-12">
   <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-    <div
-      :for={busines_config <- @business_configs}
-      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md"
-    >
-      <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-          class="w-6 h-6 text-white"
-        >
-          <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
-          </path>
-        </svg>
+    <.card :for={busines_config <- @business_configs} class="max-w-sm" variant="outline">
+      <.card_content category={"#{busines_config.order}"} >
+      <div class="text-center">
+        <.icon name="hero-check-circle" :if={busines_config.response.state == "finished"} class="text-primary-700 dark:text-primary-300 w-16 h-16" />
+        <.icon name="hero-arrow-path-rounded-square" :if={busines_config.response.state != "finished"} class="text-primary-700 dark:text-primary-300 w-16 h-16" />
       </div>
-      <div class="p-4 text-right">
-        <p
-          :if={!is_nil(busines_config.response)}
-          class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600"
-        >
-          status
-        </p>
-        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-          {busines_config.form_group.name}
-        </h4>
-        <.a
-          :if={is_nil(busines_config.response)}
-          link_type="live_redirect"
-          to={"/business_model_form/#{busines_config.form_group_id}/new"}
-          label="link"
-        />
-
-        <p></p>
+      <h1 class="text-center text-2xl font-bold text-gray-500">{TransaleteHelper.survey_response_state(busines_config.response.state)}</h1>
+      <p class="my-4 text-center text-gray-500">{busines_config.form_group.name}</p>
+      <div class="flex justify-end" :if={busines_config.response.state == "finished"}>
+        <.button link_type="live_redirect" size="xs" to={"/survey_responses/#{busines_config.response.id}"}>
+          <.icon name="hero-eye" class="mr-2"/> {gettext("view_response")}
+        </.button>
       </div>
-      <div class="border-t border-blue-gray-50 p-4">
-        <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-          <strong class="text-green-500"></strong>{busines_config.form_group.name}
-        </p>
+      <div class="flex justify-end" :if={busines_config.response.state != "finished"}>
+        <.button link_type="live_redirect" size="xs" to={"/business_model_form/#{busines_config.form_group_id}/new"}>
+            <.icon name="hero-pencil-square" class="mr-2"/>{gettext("link_survey")}
+        </.button>
       </div>
-    </div>
+    </.card_content>
+    </.card>
   </div>
 </div>

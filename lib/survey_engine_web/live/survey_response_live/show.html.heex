@@ -1,60 +1,49 @@
 <.container class="py-16">
-  <.page_header title="Show Survey response">
-    <.button
-      link_type="live_patch"
-      label="Edit Survey response"
-      to={~p"/survey_responses/#{@survey_response}/show/edit"}
-    />
-
-    <.button
-      link_type="live_redirect"
-      label="Back"
-      to={~p"/survey_responses"}
-    />
-  </.page_header>
-
-  <%= if @live_action in [:new, :edit] do %>
-    <.modal title={@page_title}>
-      <.live_component
-        module={SurveyEngineWeb.SurveyResponseLive.FormComponent}
-        id={@survey_response.id || :new}
-        action={@live_action}
-        survey_response={@survey_response}
-        return_to={~p"/survey_responses/#{@survey_response}"}
-      />
-    </.modal>
-  <% end %>
-
-  <div class="max-w-lg">
+  <div class="">
     <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-    
       <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          Date
+        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">
+          {gettext("survey_response.date")}
         </div>
         <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @survey_response.date %>
+         {SurveyEngine.format_date(@survey_response.date)}
         </div>
       </div>
     
       <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          State
+        <div class="text-sm font-bold text-gray-500 dark:text-gray-400">
+          {gettext("survey_response.state")}
         </div>
-        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @survey_response.state %>
-        </div>
-      </div>
-    
-      <div class="sm:col-span-1">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          Data
-        </div>
-        <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @survey_response.data %>
+        <div class="flex gap-2 mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <.icon name="hero-check-circle" :if={@survey_response.state == "finished"} class="text-primary-700 dark:text-primary-300" />
+          <.icon name="hero-arrow-path-rounded-square" :if={@survey_response.state != "finished"} class="text-primary-700 dark:text-primary-300" />
+          <.badge color="primary" label={TransaleteHelper.survey_response_state( @survey_response.state)} />
         </div>
       </div>
-    
+    </div>
+
+    <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+      <.card :for={response <- @survey_response.data["response"] |> Enum.sort_by(fn i -> i["index"] end)} class="my-2" variant="outline">
+        <.card_content>
+          <div class="flex gap-2">
+            <div>
+              <.badge color="primary" label={response["index"]} />
+            </div>
+            <div>
+              <p class="text-1xl font-bold text-gray-500">{response["question"]}</p>
+              <%= if response["type"] == "fileUpload" do %>
+                <%= for file <- response["answer"] do %>
+                  <a href={"data:application/octet-stream;base64,#{file}"} download={"#{response["question"]}.pdf"} class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md ">
+                    <.icon name="hero-clipboard-document-list" class="mr-2"/> Ver Documento
+                  </a>
+                <% end %>
+              <% else %>
+                <p>{response["answer"]}</p>
+              <% end %>
+            </div>
+          </div>
+        </.card_content>
+      </.card>
     </div>
   </div>
 </.container>
