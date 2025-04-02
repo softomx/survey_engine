@@ -21,7 +21,7 @@ defmodule SurveyEngine.Workers.AdminRegisterNotificationWorker do
   end
 
   defp get_emails(notification_config) do
-    (notification_config.to ++ [%{email: "joss1091@gmail.com"}])
+    notification_config.to
     |> Enum.map(fn e -> e.email end)
   end
 end

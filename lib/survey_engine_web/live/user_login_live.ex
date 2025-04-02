@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.UserLoginLive do
+  alias Phoenix.LiveView.AsyncResult
   alias SurveyEngine.Translations
   use SurveyEngineWeb, :live_view
 
@@ -14,13 +15,20 @@ defmodule SurveyEngineWeb.UserLoginLive do
             <div class="self-start hidden lg:flex flex-col  text-gray-600">
               <h3 class="my-3 font-semibold text-xl">{gettext("Goals")}</h3>
               <p class="pr-3 text-sm text-gray-500">
-                {@goals.description}
+                <.async_result :let={goals} assign={@goals}>
+                  <:loading>Loading goals...</:loading>
+                  {goals.description}
+                </.async_result>
               </p>
             </div>
             <div class="self-start hidden lg:flex flex-col  text-gray-600">
               <h3 class="my-3 font-semibold text-xl">{gettext("Scope")}</h3>
               <p class="pr-3 text-sm text-gray-500">
-                {@scopes.description}
+                <.async_result :let={scopes} assign={@scopes}>
+                  <:loading>Loading scopes...</:loading>
+
+                  {scopes.description}
+                </.async_result>
               </p>
             </div>
           </div>
@@ -102,23 +110,49 @@ defmodule SurveyEngineWeb.UserLoginLive do
   end
 
   defp apply_action(socket, :new, _params) do
-    with {:ok, translate} <-
-           Translations.get_transalation_by_language_or_default(
-             socket.assigns.site_config.id,
-             "site_configurations",
-             "goals",
-             socket.assigns.locale
-           ),
-         {:ok, translate} <-
-           Translations.get_transalation_by_language_or_default(
-             socket.assigns.site_config.id,
-             "site_configurations",
-             "scopes",
-             socket.assigns.locale
-           ) do
-      socket
-      |> assign(:goals, translate)
-      |> assign(:scopes, translate)
-    end
+    site_config_id = socket.assigns.site_config.id
+    locale = socket.assigns.locale
+
+    socket
+    |> assign(:goals, AsyncResult.loading())
+    |> assign(:scopes, AsyncResult.loading())
+    |> start_async(:get_goals, fn ->
+      Translations.get_transalation_by_language_or_default(
+        site_config_id,
+        "site_configurations",
+        "goals",
+        locale
+      )
+    end)
+    |> start_async(:get_scopes, fn ->
+      Translations.get_transalation_by_language_or_default(
+        site_config_id,
+        "site_configurations",
+        "scopes",
+        locale
+      )
+    end)
+  end
+
+  def handle_async(:get_scopes, {:ok, {:ok, fetched_org}}, socket) do
+    IO.inspect(fetched_org)
+    %{scopes: scopes} = socket.assigns
+    {:noreply, assign(socket, :scopes, AsyncResult.ok(scopes, fetched_org))}
+  end
+
+  def handle_async(:get_scopes, {:ok, {:error, reason}}, socket) do
+    %{scopes: scopes} = socket.assigns
+    {:noreply, assign(socket, :scopes, AsyncResult.failed(scopes, {:exit, reason}))}
+  end
+
+  def handle_async(:get_goals, {:ok, {:ok, fetched_goals}}, socket) do
+    IO.inspect(fetched_goals)
+    %{goals: goals} = socket.assigns
+    {:noreply, assign(socket, :goals, AsyncResult.ok(goals, fetched_goals))}
+  end
+
+  def handle_async(:get_goals, {:ok, {:error, reason}}, socket) do
+    %{goals: goals} = socket.assigns
+    {:noreply, assign(socket, :goals, AsyncResult.failed(goals, {:exit, reason}))}
   end
 end
