@@ -14,7 +14,7 @@ defmodule SurveyEngineWeb.EmbedLive.UserRegisterForm do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :index, params) do
+  defp apply_action(socket, :index, _params) do
     list_languages = [%{name: "Español", slug: "es"}, %{name: "Ingles", slug: "en"}]
     list_agency_desciptions = Catalogs.list_agency_types_with_preload()
 
@@ -25,7 +25,6 @@ defmodule SurveyEngineWeb.EmbedLive.UserRegisterForm do
     |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(&{&1.name, &1.name}))
     |> assign(list_languages: list_languages)
     |> assign(list_agency_desciptions: list_agency_desciptions)
-    |> assign(:index_params, params)
     |> assign(:user, %User{})
   end
 

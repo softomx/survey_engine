@@ -114,6 +114,49 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 {get_text_with_locale(@locale, gettext("Glossary"))}
               </span>
             </div>
+            <div class="col-span-12">
+              <label>Redes Sociales</label>
+              <input type="hidden" name="user[company][link_drop][]" />
+              <.inputs_for :let={links_form} field={f2[:links]}>
+                <div class="grid grid-cols-7 gap-2">
+                  <input type="hidden" name="user[company][links_sort][]" value={links_form.index} />
+                  <.combo_box
+                    wrapper_class="col-span-2"
+                    type="text"
+                    field={links_form[:type]}
+                    label="Tipo"
+                    options={@url_types}
+                  />
+                  <div class="col-span-4">
+                    <.field type="text" field={links_form[:url]} label="Url" />
+                  </div>
+                  <div class="col-span-1">
+                    <.button
+                      with_icon
+                      color="danger"
+                      type="button"
+                      size="xs"
+                      name="user[company][links_drop][]"
+                      value={links_form.index}
+                      phx-click={JS.dispatch("change")}
+                    >
+                      <.icon name="hero-x-mark" class="w-4 h-4 " />
+                    </.button>
+                  </div>
+                </div>
+              </.inputs_for>
+              <.button
+                with_icon
+                color="info"
+                type="button"
+                size="xs"
+                name="user[company][links_sort][]"
+                value="new"
+                phx-click={JS.dispatch("change")}
+              >
+                <.icon name="hero-plus" class="w-4 h-4" /> red social
+              </.button>
+            </div>
           </.inputs_for>
         </div>
         <.button phx-disable-with="Creating account..." class="w-full">
@@ -136,6 +179,12 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
       |> assign(trigger_submit: false, check_errors: false)
       |> assign_form(changeset)
       |> assign(:towns, [])
+      |> assign(:url_types, [
+        {"Sitio web", "website"},
+        {"Facebook", "facebook"},
+        {"Instagram", "instagram"},
+        {"Tiktok", "tiktok"}
+      ])
     }
   end
 

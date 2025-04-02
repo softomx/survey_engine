@@ -13,7 +13,7 @@ defmodule SurveyEngine.Companies.Company do
     field :billing_currency, :string
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
     field :status, :string, default: "pending"
-
+    embeds_many :links, SurveyEngine.Companies.CompanyLink, on_replace: :delete
     timestamps(type: :utc_datetime)
   end
 
@@ -41,5 +41,6 @@ defmodule SurveyEngine.Companies.Company do
       :agency_type,
       :billing_currency
     ])
+    |> cast_embed(:links, sort_param: :links_sort, drop_param: :links_drop)
   end
 end
