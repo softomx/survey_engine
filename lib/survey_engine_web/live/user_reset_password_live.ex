@@ -5,23 +5,32 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.form for={@form} id="reset_password_form" phx-submit="reset_password" phx-change="validate">
-        <.field field={@form[:password]} type="password" label="New password" required />
-        <.field
-          field={@form[:password_confirmation]}
-          type="password"
-          label="Confirm new password"
-          required
-        />
+    <div class="h-full w-full py-10 px-10">
+      <div class="mx-auto max-w-sm">
+        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800 space-y-5">
+          <.form
+            for={@form}
+            id="reset_password_form"
+            phx-submit="reset_password"
+            phx-change="validate"
+          >
+            <.field field={@form[:password]} type="password" label="New password" required />
+            <.field
+              field={@form[:password_confirmation]}
+              type="password"
+              label="Confirm new password"
+              required
+            />
 
-        <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
-      </.form>
+            <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
+          </.form>
 
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
-      </p>
+          <p class="text-center text-sm mt-4">
+            <.link href={~p"/users/register"}>Register</.link>
+            | <.link href={~p"/users/log_in"}>Log in</.link>
+          </p>
+        </div>
+      </div>
     </div>
     """
   end

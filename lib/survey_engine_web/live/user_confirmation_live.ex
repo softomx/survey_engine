@@ -5,20 +5,24 @@ defmodule SurveyEngineWeb.UserConfirmationLive do
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">Confirm Account</.header>
+    <div class="h-full w-full py-10 px-10">
+      <div class="mx-auto max-w-sm">
+        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800 space-y-5">
+          <.header class="text-center">Confirm Account</.header>
 
-      <.form for={@form} id="confirmation_form" phx-submit="confirm_account">
-        <input type="hidden" name={@form[:token].name} value={@form[:token].value} viewable />
-        <.field type="password" field={@form["password"]} />
-        <.field type="password" field={@form["comfirm_password"]} viewable />
-        <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
-      </.form>
+          <.form for={@form} id="confirmation_form" phx-submit="confirm_account">
+            <input type="hidden" name={@form[:token].name} value={@form[:token].value} viewable />
+            <.field type="password" field={@form["password"]} />
+            <.field type="password" field={@form["comfirm_password"]} viewable />
+            <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
+          </.form>
 
-      <p class="text-center mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
-      </p>
+          <p class="text-center mt-4">
+            <.link href={~p"/users/register"}>Register</.link>
+            | <.link href={~p"/users/log_in"}>Log in</.link>
+          </p>
+        </div>
+      </div>
     </div>
     """
   end

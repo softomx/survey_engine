@@ -48,20 +48,6 @@
           <.inputs_for :let={f2} field={@form[:company]}>
             <.field field={f2[:date]} type="hidden" value={Timex.today()} />
             <.field field={f2[:language]} type="hidden" />
-            <%!-- <%= if @language == "es" do %>
-              <.field field={f2[:language]} type="hidden" value="es" />
-            <% else %>
-              <.field field={f2[:language]} type="hidden" value="en" />
-            <% end %> --%>
-            <%!-- <div class="col-span-3">
-              <.combo_box
-                field={f2[:language]}
-                type="select"
-                label="Language"
-                placeholder="Selecciona un lenguage"
-                options={[{"Español", "es"}, {"Ingles", "en"}]}
-              />
-            </div> --%>
             <div class="col-span-3">
               <.field
                 field={f2[:legal_name]}
@@ -119,18 +105,9 @@
                 class="pc-button pc-button--primary pc-button--md pc-button--radius-md w-full"
                 navigate={~p"/embed/users/register/form/#{@language}/agencies_info"}
               >
-                {get_text_with_locale(@language, gettext("Detail Agencies"))}
+                {get_text_with_locale(@language, gettext("Glossary"))}
               </.link>
             </div>
-            <%!-- <div class="col-span-3">
-              <.combo_box
-                field={f2[:agency_type]}
-                placeholder="Selecciona el tipo de agencia"
-                type="select"
-                options={@agency_types}
-                label="Agency type"
-              />
-            </div> --%>
           </.inputs_for>
         </div>
         <.button phx-disable-with="Creating account..." class="w-full">

@@ -60,4 +60,19 @@ defmodule SurveyEngine.Accounts.AdminNotifier do
       site_config_id
     )
   end
+
+  def deliver_reset_user_password(
+        to,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "admin_reset_password_notification.html",
+      to,
+      subject,
+      content,
+      site_config_id
+    )
+  end
 end

@@ -30,6 +30,28 @@ defmodule SurveyEngine.NotificationManager do
     end
   end
 
+  def resert_password_notification(
+        %User{} = user,
+        %SiteConfiguration{} = site_config,
+        resert_url_fun
+      ) do
+    with {:ok, {encoded_token, user_token}} <-
+           {:ok, UserToken.build_email_token(user, "reset_password")},
+         {:ok, _} <- Repo.insert(user_token),
+         {:ok, url} <- {:ok, resert_url_fun.(encoded_token)} do
+      enqueue_worker(SurveyEngine.Workers.ClientResertPasswordNotificationWorker, [
+        user.id,
+        site_config.id,
+        url
+      ])
+
+      enqueue_worker(SurveyEngine.Workers.AdminResetPasswordNotificationWorker, [
+        user.id,
+        site_config.id
+      ])
+    end
+  end
+
   def notify_business_model_assigned(
         %Company{} = company,
         %SiteConfiguration{} = site_config

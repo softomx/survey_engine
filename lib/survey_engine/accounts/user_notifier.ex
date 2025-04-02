@@ -61,6 +61,21 @@ defmodule SurveyEngine.Accounts.UserNotifier do
     )
   end
 
+  def deliver_reset_password_instructions(
+        user,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "client_reset_password_notification.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
   @doc """
   Deliver instructions to reset a user password.
   """
