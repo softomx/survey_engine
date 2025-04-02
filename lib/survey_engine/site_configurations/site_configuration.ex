@@ -7,6 +7,7 @@ defmodule SurveyEngine.SiteConfigurations.SiteConfiguration do
     field :name, :string
     field :url, :string
     field :tenant, :string
+    field :consumer_api_token, :string
 
     has_many :objects, SurveyEngine.Translations.Translation,
       foreign_key: :resource_id,
@@ -27,7 +28,7 @@ defmodule SurveyEngine.SiteConfigurations.SiteConfiguration do
   @doc false
   def changeset(site_configuration, attrs) do
     site_configuration
-    |> cast(attrs, [:name, :url, :tenant, :active])
+    |> cast(attrs, [:name, :url, :tenant, :active, :consumer_api_token])
     |> validate_required([:name, :url, :tenant, :active])
   end
 end
