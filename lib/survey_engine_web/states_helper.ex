@@ -5,6 +5,7 @@ defmodule SurveyEngine.TransaleteHelper do
     case state do
       "finished" -> gettext("survey_response.finished")
       "updated" -> gettext("survey_response.updated")
+      "init" -> gettext("survey_response.init")
       _ -> state
     end
   end
