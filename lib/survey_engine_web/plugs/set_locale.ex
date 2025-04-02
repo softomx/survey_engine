@@ -6,7 +6,6 @@ defmodule SurveyEngineWeb.Plugs.Locale do
   def init(default), do: default
 
   def call(%Plug.Conn{params: %{"locale" => loc}} = conn, _default) when loc in @locales do
-    IO.inspect("ksksks")
     Gettext.put_locale(SurveyEngineWeb.Gettext, loc)
 
     conn

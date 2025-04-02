@@ -144,7 +144,6 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
 
   defp format_response(survey, data) do
     data
-    |> IO.inspect(label: "ksksks")
     |> Enum.reduce([], fn {question_id, answer}, acc ->
       question = Map.get(survey.questions, question_id) |> IO.inspect()
 

@@ -273,8 +273,8 @@ defmodule SurveyEngineWeb.Router do
         {ContextSession, :set_locale}
       ],
       layout: {SurveyEngineWeb.Layouts, :iframe} do
-      live "/users/register/form/:locale", EmbedLive.UserRegisterForm, :index
-      live "/users/register/form/:locale/agencies_info", EmbedLive.UserRegisterForm, :modal_show
+      live "/users/register/form", EmbedLive.UserRegisterForm, :index
+      live "/users/register/form/agencies_info", EmbedLive.UserRegisterForm, :modal_show
     end
   end
 end
