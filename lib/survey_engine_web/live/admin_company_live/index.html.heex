@@ -7,8 +7,9 @@
     <.company_state_badge value={company.status} />
   </:col>
   <:col field={:business_model_id} sortable />
-  <:col field={:inserted_at} sortable label="Fecha de registro" />
-
+  <:col field={:inserted_at} sortable label="Fecha de registro" :let={company} >
+    {SurveyEngine.to_timezone(company.inserted_at)}
+  </:col>
   <:col :let={company} label="Actions" align_right>
     <.button
       color="white"

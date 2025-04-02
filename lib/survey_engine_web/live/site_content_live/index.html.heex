@@ -8,7 +8,9 @@
 
 <.data_table :if={@index_params} meta={@meta} items={@translations}>
   <:if_empty>No se encontraron traducciones</:if_empty>
-  <:col field={:language} sortable />
+  <:col :let={translation} field={:language} sortable>
+    <.language_badge value={translation.language} />
+  </:col>
   <:col field={:description} sortable />
 
   <:col :let={translation} label="Actions" align_right>

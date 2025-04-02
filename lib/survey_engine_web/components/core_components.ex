@@ -252,6 +252,13 @@ defmodule SurveyEngineWeb.CoreComponents do
     """
   end
 
+  def language_badge(assigns) do
+    ~H"""
+    <.badge :if={@value == "es"} color="success" label="Español" />
+    <.badge :if={@value == "en"} color="primary" label="Ingles" />
+    """
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do
