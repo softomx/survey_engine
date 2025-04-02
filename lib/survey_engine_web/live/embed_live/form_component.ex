@@ -44,8 +44,8 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
         <.error :if={@check_errors}>
           Oops, something went wrong! Please check the errors below.
         </.error>
-        <div class="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5">
-          <div class="col-span-3">
+        <div class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5">
+          <div class="col-span-12 lg:col-span-6 md:col-span-4">
             <.field
               field={@form[:email]}
               type="email"
@@ -56,14 +56,14 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
           <.inputs_for :let={f2} field={@form[:company]}>
             <.field field={f2[:date]} type="hidden" value={Timex.today()} />
             <.field field={f2[:language]} type="hidden" value={@locale} />
-            <div class="col-span-3">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
                 field={f2[:legal_name]}
                 type="text"
                 label={get_text_with_locale(@locale, gettext("Legal name"))}
               />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:country]}
                 type="select"
@@ -72,7 +72,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 options={@countries}
               />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:town]}
                 type="select"
@@ -81,14 +81,14 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 options={@towns}
               />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
                 field={f2[:city]}
                 type="text"
                 label={get_text_with_locale(@locale, gettext("City"))}
               />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:billing_currency]}
                 placeholder={get_text_with_locale(@locale, gettext("Select a billing currency"))}
@@ -97,7 +97,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 options={@currencies}
               />
             </div>
-            <div class="col-span-5">
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:agency_type]}
                 placeholder={get_text_with_locale(@locale, gettext("Select an agency"))}
@@ -106,7 +106,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 label={get_text_with_locale(@locale, gettext("Agency Type"))}
               />
             </div>
-            <div class="col-span-1 self-center">
+            <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center">
               <span
                 class="pc-button pc-button--primary pc-button--md pc-button--radius-md w-full"
                 phx-click={JS.push("show_glossary", target: @myself)}
