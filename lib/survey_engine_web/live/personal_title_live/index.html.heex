@@ -24,15 +24,6 @@
     <:col field={:name} sortable />
     <:col :let={personal_title} label="Actions" align_right>
       <.button
-        color="primary"
-        variant="outline"
-        size="xs"
-        link_type="live_redirect"
-        label="Show"
-        to={~p"/admin/catalogs/personal_titles/#{personal_title}"}
-      />
-
-      <.button
         color="white"
         variant="outline"
         size="xs"
