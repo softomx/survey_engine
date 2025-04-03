@@ -13,7 +13,7 @@ defmodule SurveyEngine.Workers.AdminResetPasswordNotificationWorker do
          {:ok, emails} <- {:ok, get_emails(notification_config)} do
       AdminNotifier.deliver_reset_user_password(
         emails,
-        "Cambio contraseña",
+        "Cambio de contraseña",
         %{company: company, user: user, site_config: site_config},
         site_config.id
       )

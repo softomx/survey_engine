@@ -21,6 +21,10 @@ defmodule SurveyEngine.Companies do
     Repo.all(Company)
   end
 
+  def list_companies_with_preloads(companies) do
+    companies |> Repo.preload([:business_model])
+  end
+
   @doc """
   Gets a single company.
 

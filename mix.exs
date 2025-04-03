@@ -65,7 +65,9 @@ defmodule SurveyEngine.MixProject do
       {:petal_components, "~> 2.0"},
       {:petal_framework, "~> 0.9", repo: "petal"},
       {:phoenix_swoosh, "~> 1.0"},
-      {:exq, "~> 0.19.0"}
+      {:exq, "~> 0.19.0"},
+      {:flop, "~> 0.25.0"},
+      {:flop_phoenix, "~> 0.24.1"},
     ]
   end
 

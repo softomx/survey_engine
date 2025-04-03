@@ -2,6 +2,11 @@ defmodule SurveyEngine.Companies.Company do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:agency_type, :legal_name, :status, :business_model_id], sortable: [:agency_type]
+  }
+
   schema "companies" do
     field :language, :string
     field :agency_name, :string

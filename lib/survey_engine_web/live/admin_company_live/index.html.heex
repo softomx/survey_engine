@@ -1,4 +1,33 @@
 <.header></.header>
+<div class="p-4">
+  <.filter_form
+    css="grid mt-6 gap-4 grid-cols-3"
+    fields={[
+      agency_name: [label: "Agencia", op: :ilike_and, place_holder: "Nombre de la agencia"],
+      legal_name: [label: "Legal Name", op: :ilike_and, place_holder: "Nombre legal"],
+      status: [
+        prompt: "Selecciona una opción",
+        label: "Estatus",
+        op: :==,
+        type: "select",
+        options: [
+          {"Pendiente", "pending"},
+          {"Finalizado", "finished"},
+          {"Error en la informacion", "info_error"}
+        ]
+      ],
+      business_model_id: [
+        prompt: "Selecciona una opción",
+        label: "Businness model",
+        op: :==,
+        type: "select",
+        options: @businnes_models |> Enum.map(&{&1.name, &1.id})
+      ]
+    ]}
+    meta={@meta}
+    id="companies-filter-form"
+  />
+</div>
 <.data_table :if={@index_params} meta={@meta} items={@companies}>
   <:if_empty>No se encontraron compañias con elcriterio de busqueda</:if_empty>
   <:col field={:agency_name} sortable />
@@ -6,8 +35,21 @@
   <:col :let={company} field={:status} sortable>
     <.company_state_badge value={company.status} />
   </:col>
-  <:col field={:business_model_id} sortable />
-  <:col field={:inserted_at} sortable label="Fecha de registro" :let={company} >
+  <:col
+    field={:business_model_id}
+    label="Business model"
+    renderer={
+      fn company ->
+        if company.business_model do
+          if company.business_model.id do
+            company.business_model.name
+          end
+        end
+      end
+    }
+    
+  />
+  <:col :let={company} field={:inserted_at} sortable label="Fecha de registro">
     {SurveyEngine.to_timezone(company.inserted_at)}
   </:col>
   <:col :let={company} label="Actions" align_right>

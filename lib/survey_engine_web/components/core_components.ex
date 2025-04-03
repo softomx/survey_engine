@@ -335,4 +335,60 @@ defmodule SurveyEngineWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  attr(:meta, Flop.Meta, required: true)
+  attr(:fields, :list, required: true)
+  attr(:id, :string, default: nil)
+  attr(:change_event, :string, default: "update-filter")
+  attr(:reset_event, :string, default: "reset-filter")
+  attr(:submit_event, :string, default: "submit-filter")
+  attr(:target, :string, default: nil)
+  attr(:debounce, :integer, default: 250)
+  attr(:css, :string, default: nil)
+
+  def filter_form(assigns) do
+    ~H"""
+    <div class="mt-5 md:col-span-2 md:mt-0 pb-2">
+      <.form
+        :let={f}
+        for={@meta}
+        as={:filter}
+        id={@id}
+        phx-target={@target}
+        phx-submit={@submit_event}
+      >
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="overflow-hidden shadow sm:rounded-md">
+            <div class="bg-white px-4 py-2">
+              <div class={"#{@css} mb-2"}>
+                <Flop.Phoenix.filter_fields :let={i} form={f} fields={@fields}>
+                  <.field
+                    field={i.field}
+                    label={i.label}
+                    type={i.type}
+                    {i.rest}
+                    options={i.rest[:options]}
+                    phx-debounce={@debounce}
+                    placeholder={i.rest[:place_holder]}
+                    max={i.rest[:maxDate]}
+                    autocomplete="off"
+                  />
+                </Flop.Phoenix.filter_fields>
+              </div>
+
+              <div class="flex justify-end">
+                <div class="pr-2">
+                  <a href="#" phx-target={@target} phx-click={@reset_event} class="py-3 px-4 text-sm">
+                    Limpiar
+                  </a>
+                </div>
+                <.button type="submit">Buscar</.button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </.form>
+    </div>
+    """
+  end
 end

@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.AdminCompanyLive.Index do
+  alias SurveyEngine.BusinessModels
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Companies
@@ -17,7 +18,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :index_params, nil)}
+    {:ok, assign(socket, :index_params, nil) |> assign(:meta, %Flop.Meta{})}
   end
 
   @impl true
@@ -26,16 +27,30 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
   end
 
   defp apply_action(socket, :index, params) do
+    businnes_models = BusinessModels.list_business_models()
+
     socket
     |> assign(:page_title, "Listado de empresas")
     |> assign(:company, nil)
+    |> assign(:businnes_models, businnes_models)
     |> assign_companies(params)
     |> assign(:index_params, params)
+  end
+
+  @impl true
+  def handle_event("submit-filter", %{"filter" => params}, %{assigns: _assigns} = socket) do
+    {:noreply, push_patch(socket, to: ~p"/admin/companies?#{params}")}
+  end
+
+  @impl true
+  def handle_event("reset-filter", _, %{assigns: _assigns} = socket) do
+    {:noreply, push_patch(socket, to: ~p"/admin/companies")}
   end
 
   defp assign_companies(socket, params) do
     starting_query = Company
     {companies, meta} = DataTable.search(starting_query, params, @data_table_opts)
+    companies = companies |> Companies.list_companies_with_preloads()
     assign(socket, companies: companies, meta: meta)
   end
 end
