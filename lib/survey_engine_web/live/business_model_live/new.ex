@@ -16,8 +16,6 @@ defmodule SurveyEngineWeb.BusinessModelForm.New do
   end
 
   defp apply_action(socket, :new, %{"id" => id}) do
-    IO.inspect(socket.assigns.locale, label: "New Business Model Form")
-
     if company = socket.assigns.current_user.company_id do
       with {:ok, company} <-
              Companies.get_company(company),
@@ -27,10 +25,9 @@ defmodule SurveyEngineWeb.BusinessModelForm.New do
               LeadsForms.get_lead_form_by_language_or_default(
                 form_group.id,
                 socket.assigns.locale
-              )}
-             |> IO.inspect() do
+              )} do
         socket
-        |> assign(:page_title, "New Currency")
+        |> assign(:page_title, nil)
         |> assign(:register_form, company)
         |> assign(:form_group, form_group)
         |> assign_preious_response(lead_from, socket.assigns.current_user, company)
