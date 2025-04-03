@@ -25,6 +25,46 @@ defmodule SurveyEngine.Companies do
     companies |> Repo.preload([:business_model])
   end
 
+  def list_companies(args) do
+    args
+    |> Enum.reduce(Company, fn
+      {:filter, filter}, query ->
+        query |> companies_filter(filter)
+    end)
+    |> Repo.all()
+  end
+
+  def companies_filter(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {_key, nil}, query ->
+        query
+      {:agency_name, agency_name}, query ->
+        from q in query, where: ilike(q.agency_name, ^"%#{agency_name}%")
+
+      {:languages, languages}, query ->
+        from q in query, where: q.language in ^languages
+
+      {:status, status}, query ->
+        from q in query, where: q.status in ^status
+
+      {:business_models, business_models}, query ->
+        from q in query, where: q.business_model_id in ^business_models
+
+      {:agency_types, agency_types}, query ->
+        from q in query, where: q.agency_type in ^agency_types
+
+      {:countries, countries}, query ->
+        from q in query, where: q.country in ^countries
+
+      {:towns, towns}, query ->
+        from q in query, where: q.town in ^towns
+
+      _, query ->
+        query
+    end)
+  end
+
   @doc """
   Gets a single company.
 
@@ -112,5 +152,35 @@ defmodule SurveyEngine.Companies do
   """
   def change_company(%Company{} = company, attrs \\ %{}) do
     Company.changeset(company, attrs)
+  end
+
+  def get_agency_types() do
+    query =
+      from q in Company,
+        select: q.agency_type,
+        distinct: q.agency_type,
+        where: not is_nil(q.agency_type)
+
+    Repo.all(query)
+  end
+
+  def get_countries() do
+    query =
+      from q in Company,
+        select: q.country,
+        distinct: q.country,
+        where: not is_nil(q.country)
+
+    Repo.all(query)
+  end
+
+  def get_towns() do
+    query =
+      from q in Company,
+        select: q.town,
+        distinct: q.town,
+        where: not is_nil(q.town)
+
+    Repo.all(query)
   end
 end

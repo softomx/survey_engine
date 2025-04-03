@@ -243,6 +243,9 @@ defmodule SurveyEngineWeb.Router do
       live "/notifications/new", NotificationLive.New, :new
       live "/notifications/:id/edit", NotificationLive.Edit, :edit
       live "/notifications/:id", NotificationLive.Show, :show
+
+      live "/reports/pre_registration", ReportLive.PreRegistration, :pre_registration
+
     end
   end
 

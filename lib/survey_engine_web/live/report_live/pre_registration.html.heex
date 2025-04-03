@@ -1,0 +1,62 @@
+<.page_header title="Reporte Pre-registro" />
+
+<.form
+    for={@form}
+    id="currency-form"
+    phx-submit="filter"
+>
+        <div class="grid grid-cols-3 gap-4">
+
+        <.combo_box
+            type="select"
+            field={@form[:languages]}
+            options={["en", "es"]}
+            multiple/>
+    
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+            <.field field={@form[:agency_name]} type="text" label="Name" />
+
+            <.combo_box
+            type="select"
+            field={@form[:agency_type]}
+            options={@agency_types}
+            multiple/>
+        <.combo_box
+            type="select"
+            field={@form[:business_models]}
+            options={@business_models}
+            multiple/>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+
+        <.combo_box 
+            type="select"
+            field={@form[:status]}
+            options={["finished", "pending"]}
+            multiple />
+            <.combo_box
+            type="select"
+            field={@form[:countries]}
+            options={@countries}
+            multiple/>
+            <.combo_box
+            type="select"
+            field={@form[:towns]}
+            options={@towns}
+            multiple/>
+    </div>
+   
+
+    <.button phx-disable-with="...">{gettext("report.search")}</.button>
+</.form>
+
+<div class="flex justify-end mt-5">
+    <.button color="primary"  variant="outline" phx-click={JS.push("export")}>
+        <.icon name="hero-arrow-down-tray" class="mr-2"/>{gettext("report.export")}
+    </.button>
+</div>
+  
+<div id="pre-registration" class="my-2" phx-hook="Handsontable"></div>
+  
