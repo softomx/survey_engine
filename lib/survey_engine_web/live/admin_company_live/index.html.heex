@@ -10,11 +10,7 @@
         label: "Estatus",
         op: :==,
         type: "select",
-        options: [
-          {"Pendiente", "pending"},
-          {"Finalizado", "finished"},
-          {"Error en la informacion", "info_error"}
-        ]
+        options: @response_states
       ],
       business_model_id: [
         prompt: "Selecciona una opción",

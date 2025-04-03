@@ -1,5 +1,6 @@
 defmodule SurveyEngineWeb.CoreComponents do
   use PetalComponents
+  alias SurveyEngine.TransaleteHelper
 
   @moduledoc """
   Provides core UI components.
@@ -210,9 +211,9 @@ defmodule SurveyEngineWeb.CoreComponents do
 
   def company_state_badge(assigns) do
     ~H"""
-    <.badge :if={@value == "finished"} color="success" label="Finalizado" />
-    <.badge :if={@value == "pending"} color="warning" label="Pendiente" />
-    <.badge :if={@value == "info_error"} color="danger" label="Error en la informacion" />
+    <.badge :if={@value == "finished"} color="success" label={TransaleteHelper.survey_response_state("finished")} />
+    <.badge :if={@value == "pending"} color="warning" label={TransaleteHelper.survey_response_state("pending")}/>
+    <.badge :if={@value == "info_error"} color="danger" label={TransaleteHelper.survey_response_state("info_error")}/>
     """
   end
 

@@ -60,6 +60,19 @@ defmodule SurveyEngine.Companies do
       {:towns, towns}, query ->
         from q in query, where: q.town in ^towns
 
+      {:register_dates, register_dates}, query ->
+        start_date =
+        register_dates.start_date
+          |> Timex.to_datetime("America/Cancun")
+          |> Timex.to_datetime("Etc/UTC")
+
+        end_date =
+        register_dates.end_date
+          |> Timex.to_datetime("America/Cancun")
+          |> Timex.end_of_day()
+          |> Timex.to_datetime("Etc/UTC")
+
+          from(q in query, where: q.inserted_at >= ^start_date and q.inserted_at <= ^end_date)
       _, query ->
         query
     end)

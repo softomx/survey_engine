@@ -10,6 +10,11 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
     field :agency_types, {:array, :string}
     field :business_models, {:array, :string}
     field :status, {:array, :string}
+    embeds_one :register_dates, RegisterDates, [primary_key: false] do
+      @derive Jason.Encoder
+      field :start_date, :date
+      field :end_date, :date
+    end
   end
 
   @doc false
@@ -24,5 +29,11 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
       :business_models,
       :status
     ])
+    |> cast_embed(:register_dates, with: &changeset_dates/2)
+  end
+
+  def changeset_dates(struct, attrs \\ %{}) do
+    struct
+    |> cast(attrs, [:start_date, :end_date])
   end
 end

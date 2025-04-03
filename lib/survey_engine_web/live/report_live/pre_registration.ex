@@ -2,10 +2,13 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
   use SurveyEngineWeb, :live_view
   alias SurveyEngine.{Companies, BusinessModels}
   alias SurveyEngine.Filters.PreRegistrationFilter
+  alias SurveyEngine.TransaleteHelper
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
       socket
+      |> assign(:response_states, TransaleteHelper.list_survey_response_states())
+      |> assign(:list_languages, TransaleteHelper.list_languages())
       |> assign(:agency_types, Companies.get_agency_types())
       |> assign(:countries, Companies.get_countries())
       |> assign(:towns, Companies.get_towns())
@@ -29,8 +32,12 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
   end
 
   defp apply_action(socket, :pre_registration, _params) do
+    default_params = %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}
+    changeset = PreRegistrationFilter.changeset(%PreRegistrationFilter{}, default_params)
+    params = changeset |> Ecto.Changeset.apply_changes()
     socket
-    |> init_table(%{})
+    |> assign(:form, to_form(changeset))
+    |> init_table(Map.from_struct(params))
   end
 
   defp init_table(socket, params) do
@@ -56,15 +63,16 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
 
   defp get_cols() do
     [
-      %{title: "Idioma", type: "text", data: "language"},
-      %{title: "Agency_name", type: "text", data: "agency_name"},
-      %{title: "Legal_name", type: "text", data: "legal_name"},
-      %{title: "Country", type: "text", data: "country"},
-      %{title: "Town", type: "text", data: "town"},
-      %{title: "city", type: "text", data: "city"},
-      %{title: "agency_type", type: "text", data: "agency_type"},
-      %{title: "business_model", type: "text", data: "business_model"},
-      %{title: "billing_currency", type: "text", data: "billing_currency"},
+      %{title: gettext("report.register_date"), type: "text", data: "inserted_at"},
+      %{title: gettext("language"), type: "text", data: "language"},
+      %{title: gettext("company name"), type: "text", data: "agency_name"},
+      %{title: gettext("legal name"), type: "text", data: "legal_name"},
+      %{title: gettext("country"), type: "text", data: "country"},
+      %{title: gettext("town"), type: "text", data: "town"},
+      %{title: gettext("city"), type: "text", data: "city"},
+      %{title: gettext("agency type"), type: "text", data: "agency_type"},
+      %{title: gettext("business model"), type: "text", data: "business_model"},
+      %{title: gettext("billing currency"), type: "text", data: "billing_currency"},
       %{title: "status", type: "text", data: "status"}
     ]
   end
@@ -75,7 +83,8 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
     |> Stream.map(fn company ->
       business_model = if company.business_model, do: company.business_model.name, else: "-"
       %{
-        language: company.language,
+        inserted_at: SurveyEngine.to_timezone(company.inserted_at),
+        language: TransaleteHelper.language(company.language),
         agency_name: company.agency_name,
         legal_name: company.legal_name,
         country: company.country,
@@ -83,8 +92,8 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
         city: company.city,
         agency_type: company.agency_type,
         business_model: business_model,
-        billing_currency: company.billing_currency,
-        status: company.status
+        billing_currency: String.upcase(company.billing_currency),
+        status: company.status |> TransaleteHelper.survey_response_state()
       }
     end)
     |> Enum.to_list()

@@ -18,7 +18,10 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :index_params, nil) |> assign(:meta, %Flop.Meta{})}
+    {:ok,
+      assign(socket, :index_params, nil)
+      |> assign(:meta, %Flop.Meta{})
+      |> assign(:response_states, SurveyEngine.TransaleteHelper.list_survey_response_states())}
   end
 
   @impl true
