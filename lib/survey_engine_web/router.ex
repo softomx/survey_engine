@@ -157,7 +157,7 @@ defmodule SurveyEngineWeb.Router do
       live "/catalogs/currencies", CurrencyLive.Index, :index
       live "/catalogs/currencies/new", CurrencyLive.Index, :new
       live "/catalogs/currencies/:id/edit", CurrencyLive.Index, :edit
-
+      live "/survey_answers", SurveyReponseLive.Index, :index
       live "/catalogs/agency_types", AgencyTypeLive.Index, :index
 
       live "/catalogs/agency_types/new", AgencyTypeLive.Index, :new
@@ -246,7 +246,6 @@ defmodule SurveyEngineWeb.Router do
 
       live "/reports/pre_registration", ReportLive.PreRegistration, :pre_registration
       live "/reports/response", ReportLive.SurveyResponse, :survey_response
-
     end
   end
 

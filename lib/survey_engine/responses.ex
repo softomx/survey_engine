@@ -26,6 +26,10 @@ defmodule SurveyEngine.Responses do
     Repo.all(SurveyResponse)
   end
 
+  def list_survey_responses_with_preloads(responses) do
+    responses |> Repo.preload([:lead_form, :form_group, :user])
+  end
+
   def list_survey_resposes(args) do
     args
     |> Enum.reduce(SurveyResponse, fn

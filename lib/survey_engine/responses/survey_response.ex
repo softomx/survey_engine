@@ -2,6 +2,11 @@ defmodule SurveyEngine.Responses.SurveyResponse do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {
+    Flop.Schema,
+    filterable: [:date, :state, :user_id, :form_group_id], sortable: [:date]
+  }
+
   schema "survey_responses" do
     field :data, :map
     field :date, :date
