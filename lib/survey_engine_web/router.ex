@@ -217,9 +217,24 @@ defmodule SurveyEngineWeb.Router do
       live "/form_groups/:id/edit", FormGroupLive.Index, :edit
 
       live "/form_groups/:form_group_id/leads_forms", LeadsFormLive.Index, :index
-      live "/form_groups/:form_group_id/leads_forms/responses", LeadsFormLive.Index, :index
+      live "/form_groups/:form_group_id/leads_forms/:id", LeadsFormLive.Show, :show
       live "/form_groups/:form_group_id/leads_forms/new", LeadsFormLive.Index, :new
       live "/form_groups/:form_group_id/leads_forms/:id/edit", LeadsFormLive.Index, :edit
+
+      live "/form_groups/:form_group_id/leads_forms/:lead_form_id/survey_mapper",
+           SurveyMapperLive.Index,
+           :index
+
+      live "/form_groups/:form_group_id/leads_forms/:lead_form_id/survey_mapper/new",
+           SurveyMapperLive.Index,
+           :new
+
+      live "/form_groups/:form_group_id/leads_forms/:lead_form_id/survey_mapper/:id/edit",
+           SurveyMapperLive.Index,
+           :edit
+
+      live "/:lead_form_id/survey_mapper/:id", SurveyMapperLive.Show, :show
+      live "/:lead_form_id/survey_mapper/:id/show/edit", SurveyMapperLive.Show, :edit
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
@@ -246,6 +261,19 @@ defmodule SurveyEngineWeb.Router do
 
       live "/reports/pre_registration", ReportLive.PreRegistration, :pre_registration
 
+      live "/affiliates", AffiliateLive.Index, :index
+      live "/affiliates/new", AffiliateLive.Index, :new
+      live "/affiliates/:id/edit", AffiliateLive.Index, :edit
+
+      live "/affiliates/:id", AffiliateLive.Show, :show
+      live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
+
+      live "/:lead_form_id/survey_mapper", SurveyMapperLive.Index, :index
+      live "/:lead_form_id/survey_mapper/new", SurveyMapperLive.Index, :new
+      live "/:lead_form_id/survey_mapper/:id/edit", SurveyMapperLive.Index, :edit
+
+      live "/:lead_form_id/survey_mapper/:id", SurveyMapperLive.Show, :show
+      live "/:lead_form_id/survey_mapper/:id/show/edit", SurveyMapperLive.Show, :edit
     end
   end
 

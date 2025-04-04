@@ -52,7 +52,7 @@ defmodule SurveyEngineWeb.BusinessModelForm.New do
           lang: socket.assigns.locale
         }
       )
-      |> SurveyEngine.Responses.ResponseEngine.build_url_embed_survey()
+      |> SurveyEngine.Responses.ExternalSurveyEngine.build_url_embed_survey()
 
     assign(socket, previous_response: previous_response)
     |> assign(url: url)

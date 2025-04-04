@@ -1,0 +1,45 @@
+<div>
+  <.form
+    for={@form}
+    id={"survey_mapper-form-#{@id}"}
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <div class="flex gap-2">
+      <.field
+        type="select"
+        options={@fields}
+        field={@form[:field]}
+        id={"survey_mapper_field_#{@id}"}
+      />
+
+      <.field
+        type="select"
+        options={
+          @questions |> Enum.map(fn {id, question_params} -> {question_params.title, id} end)
+        }
+        field={@form[:question_id]}
+        id={"survey_mapper_question_id_#{@id}"}
+      />
+
+      <.field
+        type="hidden"
+        field={@form[:type]}
+        value="affiliate"
+        id={"survey_mapper_type_#{@id}"}
+      />
+
+      <.field
+        type="hidden"
+        field={@form[:survey_id]}
+        value={@survey_id}
+        id={"survey_mapper_survey_id_#{@id}"}
+      />
+
+      <div class="flex justify-end">
+        <.button type="submit" phx-disable-with="Saving..." label="Save" />
+      </div>
+    </div>
+  </.form>
+</div>

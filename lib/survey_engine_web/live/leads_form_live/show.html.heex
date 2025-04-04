@@ -1,0 +1,36 @@
+<.container>
+  <.table>
+    <.tr>
+      <.th>Pregunta</.th>
+      <.th>opciones</.th>
+
+      <.th></.th>
+    </.tr>
+
+    <.tr :for={{external_id, question} <- @questions}>
+      <.td class="pl-5 pr-3 whitespace-no-wrap">
+        {question.title}
+      </.td>
+
+      <.td class="whitespace-nowrap ">
+        <div class="text-blue-500 hover:underline py-1">Id: {external_id}</div>
+        <div class="text-gray-400 py-1">Tipo: {question.type}</div>
+        <div class="text-gray-400 py-1">
+          Requerido: <.required_badge required={question.required} />
+        </div>
+
+        <div class="text-gray-400 py-1">
+          <div class="grid grid-cols-2">
+            <div class="text-gray-400">Opciones</div>
+            <div>
+              <ol class="list-decimal">
+                <li :for={option <- question.options}>{option["label"]["default"]}</li>
+                <!-- ... -->
+              </ol>
+            </div>
+          </div>
+        </div>
+      </.td>
+    </.tr>
+  </.table>
+</.container>

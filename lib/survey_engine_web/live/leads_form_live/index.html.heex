@@ -30,8 +30,25 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
+        label="ver"
+        to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}"}
+      />
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
         label="Editar"
         to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}/edit"}
+      />
+
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Mapper"
+        to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}/survey_mapper"}
       />
     </:col>
   </.data_table>

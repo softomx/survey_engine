@@ -23,8 +23,12 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     end
   end
 
-  def get_survey(data) do
-    FormbricksClient.get_survey(data["external_id"])
+  def get_survey(params) do
+    with {:ok, survey_response} <-
+           FormbricksClient.get_survey(params.data.id),
+         {:ok, survey} <- format_survey(survey_response) do
+      {:ok, survey}
+    end
   end
 
   def build_url_embed_survey(%{
@@ -46,7 +50,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
          {:ok, survey_response} <-
            FormbricksClient.get_survey(lead_form.external_id),
          {:ok, survey} <- format_survey(survey_response),
-         {:ok, response} <- {:ok, format_response(survey, data["data"])} do
+         {:ok, response} <- {:ok, format_client_response(survey, data["data"])} do
       fun.(response, lead_form, data)
     end
   end
@@ -140,9 +144,9 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     end
   end
 
-  defp format_response(_survey, nil), do: []
+  defp format_client_response(_survey, nil), do: []
 
-  defp format_response(survey, data) do
+  defp format_client_response(survey, data) do
     data
     |> Enum.reduce([], fn {question_id, answer}, acc ->
       question = Map.get(survey.questions, question_id) |> IO.inspect()

@@ -14,7 +14,7 @@ defmodule SurveyEngineWeb.WebhookController do
           data,
           params["event"]
         )
-        |> SurveyEngine.Responses.ResponseEngine.process_response()
+        |> SurveyEngine.Responses.ExternalSurveyEngine.process_response()
     end
 
     conn
