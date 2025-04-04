@@ -149,7 +149,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   defp format_client_response(survey, data) do
     data
     |> Enum.reduce([], fn {question_id, answer}, acc ->
-      question = Map.get(survey.questions, question_id) |> IO.inspect()
+      question = Map.get(survey.questions, question_id)
 
       case question do
         nil ->
@@ -163,7 +163,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
                 question: question.title,
                 answer: format_answer(answer, question),
                 type: question.type,
-                external_id: question.id
+                question_id: question.id
               }
             ]
       end

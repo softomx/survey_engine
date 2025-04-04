@@ -55,6 +55,11 @@ defmodule SurveyEngineWeb do
       use Phoenix.LiveView,
         layout: {SurveyEngineWeb.Layouts, :app}
 
+      @impl true
+      def handle_info({:put_flash, type, message}, socket) do
+        {:noreply, put_flash(socket, type, message)}
+      end
+
       unquote(html_helpers())
     end
   end
