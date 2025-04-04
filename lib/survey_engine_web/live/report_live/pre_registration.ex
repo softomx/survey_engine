@@ -65,8 +65,7 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
     [
       %{title: gettext("report.register_date"), type: "text", data: "inserted_at"},
       %{title: gettext("language"), type: "text", data: "language"},
-      %{title: gettext("company name"), type: "text", data: "agency_name"},
-      %{title: gettext("legal name"), type: "text", data: "legal_name"},
+      %{title: gettext("company name"), type: "text", data: "legal_name"},
       %{title: gettext("country"), type: "text", data: "country"},
       %{title: gettext("town"), type: "text", data: "town"},
       %{title: gettext("city"), type: "text", data: "city"},
@@ -85,7 +84,6 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
       %{
         inserted_at: SurveyEngine.to_timezone(company.inserted_at),
         language: TransaleteHelper.language(company.language),
-        agency_name: company.agency_name,
         legal_name: company.legal_name,
         country: company.country,
         town: company.town,

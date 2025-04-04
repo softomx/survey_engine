@@ -39,8 +39,12 @@ defmodule SurveyEngine.Companies do
     |> Enum.reduce(query, fn
       {_key, nil}, query ->
         query
+
       {:agency_name, agency_name}, query ->
         from q in query, where: ilike(q.agency_name, ^"%#{agency_name}%")
+
+      {:legal_name, legal_name}, query ->
+        from q in query, where: ilike(q.legal_name, ^"%#{legal_name}%")
 
       {:languages, languages}, query ->
         from q in query, where: q.language in ^languages
@@ -62,17 +66,18 @@ defmodule SurveyEngine.Companies do
 
       {:register_dates, register_dates}, query ->
         start_date =
-        register_dates.start_date
+          register_dates.start_date
           |> Timex.to_datetime("America/Cancun")
           |> Timex.to_datetime("Etc/UTC")
 
         end_date =
-        register_dates.end_date
+          register_dates.end_date
           |> Timex.to_datetime("America/Cancun")
           |> Timex.end_of_day()
           |> Timex.to_datetime("Etc/UTC")
 
-          from(q in query, where: q.inserted_at >= ^start_date and q.inserted_at <= ^end_date)
+        from(q in query, where: q.inserted_at >= ^start_date and q.inserted_at <= ^end_date)
+
       _, query ->
         query
     end)

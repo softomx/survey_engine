@@ -5,6 +5,7 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
   embedded_schema do
     field :languages, {:array, :string}
     field :agency_name, :string
+    field :legal_name, :string
     field :countries, {:array, :string}
     field :towns, {:array, :string}
     field :agency_types, {:array, :string}
@@ -23,6 +24,7 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
     |> cast(attrs, [
       :languages,
       :agency_name,
+      :legal_name,
       :countries,
       :towns,
       :agency_types,

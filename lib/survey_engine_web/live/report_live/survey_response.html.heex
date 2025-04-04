@@ -7,7 +7,16 @@
 >
         <div class="grid grid-cols-3 gap-4">
             <.inputs_for :let={company_filter} field={@form[:company_filter]}>
-            <.field field={company_filter[:agency_name]} label={gettext("report.agency_name")} type="text" />
+                <.inputs_for :let={register_dates} field={company_filter[:register_dates]}>
+                    <.field field={register_dates[:start_date]} type="date" label={gettext("report.register_date")} help_text={gettext("report.register_start_date")}/>
+                    <.field field={register_dates[:end_date]} type="date" label={gettext("report.register_date")} help_text={gettext("report.register_end_date")}/>
+                </.inputs_for>
+            </.inputs_for>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+            <.inputs_for :let={company_filter} field={@form[:company_filter]}>
+            <.field field={company_filter[:legal_name]} label={gettext("report.agency_name")} type="text" />
             <.combo_box
                 type="select"
                 field={company_filter[:agency_types]}
@@ -45,7 +54,7 @@
                 options={@form_groups}/>
 
         </div>
-        <div class="">
+        <div class="flex justify-end mb-5">
             <.button phx-disable-with="...">{gettext("report.search")}</.button>
         </div>
 </.form>

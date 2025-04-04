@@ -38,7 +38,7 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
   end
 
   defp apply_action(socket, :survey_response, _params) do
-    default_params = %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}
+    default_params = %{company_filter: %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}}
     changeset = SurveyResponseFilter.changeset(%SurveyResponseFilter{}, default_params)
 
     socket
@@ -79,7 +79,7 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
       %{title: gettext("country"), type: "text", data: "country"},
       %{title: gettext("user"), type: "text", data: "user_email"},
       %{title: gettext("state"), type: "text", data: "state"},
-      %{title: gettext("form"), type: "text", data: "form"},
+      %{title: gettext("report.form_groups"), type: "text", data: "form"},
       %{title: gettext("question"), type: "text", data: "question"},
       %{title: gettext("answer"), type: "text", data: "answer"}
     ]
@@ -97,7 +97,7 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
       response.data["response"]
       |> Enum.map(fn d ->
         %{
-          inserted_at: SurveyEngine.to_timezone(response.inserted_at),
+          inserted_at: SurveyEngine.to_timezone(response.user.company.inserted_at),
           legal_name: response.user.company.legal_name,
           agency_type: response.user.company.agency_type,
           business_model: business_model,
