@@ -1,0 +1,108 @@
+<.header></.header>
+<div class="p-4">
+  <.filter_form
+    css="grid mt-6 gap-4 grid-cols-3"
+    fields={[
+      date: [label: gettext("date"), type: "date", op: :==],
+      state: [
+        prompt: gettext("select option"),
+        label: gettext("state"),
+        op: :==,
+        type: "select",
+        options: [
+          {gettext("survey_response.init"), "init"},
+          {gettext("survey_response.updated"), "updated"},
+          {gettext("survey_response.finished"), "finished"}
+        ]
+      ],
+      form_group_id: [
+        prompt: gettext("select option"),
+        label: gettext("form group"),
+        op: :==,
+        type: "select",
+        options: @from_groups |> Enum.map(&{&1.name, &1.id})
+      ],
+      user_id: [
+        prompt: gettext("select option"),
+        label: gettext("user"),
+        op: :==,
+        type: "select",
+        options: @users |> Enum.map(&{&1.email, &1.id})
+      ]
+    ]}
+    meta={@meta}
+    id="companies-filter-form"
+  />
+</div>
+<.data_table :if={@index_params} meta={@meta} items={@survey_reponse}>
+  <:if_empty>No se encontraron respuestas con el criterio de busqueda</:if_empty>
+  <:col
+    field={:user_id}
+    label={gettext("user")}
+    renderer={
+      fn response ->
+        if response.user do
+          if response.user.id do
+            response.user.email
+          end
+        end
+      end
+    }
+  />
+  <:col
+    field={:state}
+    label={gettext("state")}
+    renderer={
+      fn response ->
+        if response.state do
+          TransaleteHelper.survey_response_state(response.state)
+        end
+      end
+    }
+  />
+  <:col field={:date} label={gettext("date")} />
+  <%!-- <:col :let={company} field={:status} sortable>
+    <.company_state_badge value={company.status} />
+  </:col> --%>
+  <:col
+    field={:form_group_id}
+    label={gettext("form group")}
+    renderer={
+      fn response ->
+        if response.form_group do
+          if response.form_group.id do
+            response.form_group.name
+          end
+        end
+      end
+    }
+  />
+
+  <:col :let={response} label={gettext("Actions")} align_right>
+    <.button
+      color="primary"
+      variant="outline"
+      size="xs"
+      link_type="live_redirect"
+      label={gettext("show")}
+      to={~p"/survey_responses/#{response}"}
+    />
+    <%!-- <.button
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Editar"
+      to={~p"/admin/companies/#{company}/edit"}
+    />
+    <.button
+      :if={is_nil(company.business_model_id)}
+      color="white"
+      variant="outline"
+      size="xs"
+      link_type="live_patch"
+      label="Clasificar"
+      to={~p"/admin/companies/#{company}/assign"}
+    /> --%>
+  </:col>
+</.data_table>

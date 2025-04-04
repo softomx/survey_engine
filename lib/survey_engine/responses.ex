@@ -4,6 +4,9 @@ defmodule SurveyEngine.Responses do
   """
 
   import Ecto.Query, warn: false
+  alias SurveyEngine.Companies
+  alias SurveyEngine.Companies.Company
+  alias SurveyEngine.Accounts.User
   alias SurveyEngine.LeadsForms.LeadsForm
   alias SurveyEngine.LeadsForms.FormGroup
   alias SurveyEngine.Repo
@@ -23,6 +26,10 @@ defmodule SurveyEngine.Responses do
     Repo.all(SurveyResponse)
   end
 
+  def list_survey_responses_with_preloads(responses) do
+    responses |> Repo.preload([:lead_form, :form_group, :user])
+  end
+
   def list_survey_resposes(args) do
     args
     |> Enum.reduce(SurveyResponse, fn
@@ -33,9 +40,16 @@ defmodule SurveyEngine.Responses do
     |> Repo.all()
   end
 
+  def survey_resposes_with_preloads(survey_resposes, preloads) do
+    survey_resposes
+    |> Repo.preload(preloads)
+  end
+
   def filter_survey_response(query, filter) do
     filter
     |> Enum.reduce(query, fn
+       {_key, nil}, query ->
+        query
       {:user_id, user_id}, query ->
         from q in query, where: q.user_id == ^user_id
 
@@ -52,6 +66,20 @@ defmodule SurveyEngine.Responses do
 
       {:state, state}, query ->
         from q in query, where: q.state == ^state
+
+      {:states, states}, query ->
+        from q in query, where: q.state in ^states
+
+      {:company_filter, company_filter}, query ->
+        query_company = Companies.companies_filter(Company, company_filter)
+
+        from q in query,
+        join: u in User,
+        on: q.user_id == u.id,
+        join: c in ^query_company,
+        on: u.company_id == c.id
+        _, query ->
+          query
     end)
   end
 

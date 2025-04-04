@@ -16,4 +16,35 @@ defmodule SurveyEngine do
     |> Timex.to_datetime("America/Cancun")
     |> Timex.format!("{0D}-{0M}-{YYYY} {h24}:{m}:{s}")
   end
+
+
+  def santize_map(%Date{} = date) do
+    date
+  end
+
+  def santize_map(map) when is_struct(map) do
+    map
+    |> Map.from_struct()
+    |> Enum.reduce(%{}, fn {k, v}, acc ->
+      cond do
+        is_struct(v) ->
+          new_value = santize_map(v)
+
+          acc
+          |> Map.put(k, new_value)
+
+        !is_nil(v) ->
+          acc
+          |> Map.put(k, v)
+
+        true ->
+          acc
+      end
+    end)
+  end
+
+  def santize_map(nil), do: nil
+
+  def santize_map(_), do: %{}
+
 end
