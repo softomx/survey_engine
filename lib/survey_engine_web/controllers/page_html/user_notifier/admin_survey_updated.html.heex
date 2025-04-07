@@ -545,23 +545,12 @@
                                     >
                                       {response["index"]}. {response["question"]}
                                     </p>
-                                    <%= if response["type"] == "fileUpload" do %>
-                                      <%= for _file <- response["answer"] do %>
-                                        <p
-                                          class="text-14 font-strong text-center"
-                                          style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
-                                        >
-                                          {"#{response["question"]}.pdf"}
-                                        </p>
-                                      <% end %>
-                                    <% else %>
-                                      <p
-                                        class="text-14 font-strong text-center"
-                                        style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
-                                      >
-                                        {response["answer"]}
-                                      </p>
-                                    <% end %>
+                                    <p
+                                      class="text-14 font-strong text-center"
+                                      style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
+                                    >
+                                      {response["answer"]}
+                                    </p>
                                   </center>
                                 <% end %>
                               </td>

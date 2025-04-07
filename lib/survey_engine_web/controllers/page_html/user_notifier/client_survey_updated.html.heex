@@ -538,7 +538,6 @@
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
                                   <br />{"Survey Answers"}:
                                 </h4>
-
                                 <%= for response <- @response.data["response"] |> Enum.sort_by(fn i -> i["index"] end) do %>
                                   <center style="border-bottom-width: 1px; border-bottom-color: #f0f0f0; border-bottom-style: solid; border-bottom-style: solid; padding-bottom: 4px;">
                                     <p
@@ -547,25 +546,60 @@
                                     >
                                       {response["index"]}. {response["question"]}
                                     </p>
-                                    <%= if response["type"] == "fileUpload" do %>
-                                      <%= for _file <- response["answer"] do %>
-                                        <p
-                                          class="text-14 font-strong text-center"
-                                          style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
-                                        >
-                                          {"#{response["question"]}.pdf"}
-                                        </p>
-                                      <% end %>
-                                    <% else %>
-                                      <p
-                                        class="text-14 font-strong text-center"
-                                        style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
-                                      >
-                                        {response["answer"]}
-                                      </p>
-                                    <% end %>
+                                    <p
+                                      class="text-14 font-strong text-center"
+                                      style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
+                                    >
+                                      {response["answer"]}
+                                    </p>
                                   </center>
                                 <% end %>
+                                <%!-- <table style="width: 100%;">
+                                  <tr>
+                                    <td align="center">
+                                      <table
+                                        class="table"
+                                        cellspacing="0"
+                                        cellpadding="0"
+                                        style="color: #000; font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; border-collapse: collapse; width: 80%;"
+                                      >
+                                        <tr style="border-bottom-width: 1px; border-top-color: #f0f0f0; border-top-style: solid;">
+                                          <td
+                                            class="text-14"
+                                            style=" font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0; white-space: nowrap; font-weight: 600; opacity: 60%;"
+                                          >
+                                            {"Question"}
+                                          </td>
+                                          <td
+                                            class="text-14 text-right"
+                                            style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 4px 0 4px 12px; font-weight: 600; opacity: 60%;"
+                                            align="right"
+                                          >
+                                            {"Answer"}
+                                          </td>
+                                        </tr>
+                                        <%= for response <- @response.data["response"] |> Enum.sort_by(fn i -> i["index"] end) do %>
+                                          <tr>
+                                            <td
+                                              class="text-14"
+                                              style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
+                                            >
+                                              {response["index"]}. {response["question"]}
+                                            </td>
+                                            <td
+                                              class="text-14 font-strong text-right"
+                                              style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px;"
+                                              align="right"
+                                            >
+                                              {response["answer"]}
+                                            </td>
+                                          </tr>
+                                        <% end %>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                  <tr></tr>
+                                </table> --%>
                               </td>
                             </tr>
                           </table>
