@@ -3,6 +3,7 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
   import Ecto.Changeset
 
   schema "affiliates" do
+    field :survey_id, :id, virtual: true
     field :name, :string
     field :affiliate_slug, :string
     field :trading_name, :string
@@ -17,14 +18,15 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
   @doc false
   def changeset(affiliate, attrs) do
     affiliate
-    |> cast(attrs, [:name, :affiliate_slug, :trading_name, :business_name, :rfc, :company_type])
+    |> cast(attrs, [:name, :affiliate_slug, :trading_name, :business_name, :rfc, :company_type, :company_id])
     |> validate_required([
       :name,
       :affiliate_slug,
       :trading_name,
       :business_name,
       :rfc,
-      :company_type
+      :company_type,
+      :company_id
     ])
   end
 end

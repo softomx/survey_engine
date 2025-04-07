@@ -48,7 +48,7 @@ defmodule SurveyEngine.Responses do
   def filter_survey_response(query, filter) do
     filter
     |> Enum.reduce(query, fn
-       {_key, nil}, query ->
+      {_key, nil}, query ->
         query
       {:user_id, user_id}, query ->
         from q in query, where: q.user_id == ^user_id
