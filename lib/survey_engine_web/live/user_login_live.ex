@@ -17,7 +17,11 @@ defmodule SurveyEngineWeb.UserLoginLive do
               <p class="pr-3 text-sm text-gray-500">
                 <.async_result :let={goals} assign={@goals}>
                   <:loading>Loading goals...</:loading>
-                  {goals.description}
+                  <.description
+                    description={goals.description}
+                    type={goals.content_type}
+                    class="prose-sm"
+                  />
                 </.async_result>
               </p>
             </div>
@@ -26,8 +30,11 @@ defmodule SurveyEngineWeb.UserLoginLive do
               <p class="pr-3 text-sm text-gray-500">
                 <.async_result :let={scopes} assign={@scopes}>
                   <:loading>Loading scopes...</:loading>
-
-                  {scopes.description}
+                  <.description
+                    description={scopes.description}
+                    type={scopes.content_type}
+                    class="prose-sm"
+                  />
                 </.async_result>
               </p>
             </div>

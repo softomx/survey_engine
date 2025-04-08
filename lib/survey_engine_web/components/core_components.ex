@@ -19,7 +19,7 @@ defmodule SurveyEngineWeb.CoreComponents do
   """
   use Phoenix.Component
   use Gettext, backend: SurveyEngineWeb.Gettext
-
+  import Phoenix.HTML
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -211,9 +211,21 @@ defmodule SurveyEngineWeb.CoreComponents do
 
   def company_state_badge(assigns) do
     ~H"""
-    <.badge :if={@value == "finished"} color="success" label={TransaleteHelper.survey_response_state("finished")} />
-    <.badge :if={@value == "pending"} color="warning" label={TransaleteHelper.survey_response_state("pending")}/>
-    <.badge :if={@value == "info_error"} color="danger" label={TransaleteHelper.survey_response_state("info_error")}/>
+    <.badge
+      :if={@value == "finished"}
+      color="success"
+      label={TransaleteHelper.survey_response_state("finished")}
+    />
+    <.badge
+      :if={@value == "pending"}
+      color="warning"
+      label={TransaleteHelper.survey_response_state("pending")}
+    />
+    <.badge
+      :if={@value == "info_error"}
+      color="danger"
+      label={TransaleteHelper.survey_response_state("info_error")}
+    />
     """
   end
 
@@ -391,5 +403,39 @@ defmodule SurveyEngineWeb.CoreComponents do
       </.form>
     </div>
     """
+  end
+
+  attr :class, :string, default: nil
+  attr :description, :string, required: true
+  attr :type, :string, values: ["markdown"]
+
+  def description(assigns) do
+    ~H"""
+    <%= if  @type == "html" do %>
+      <div class={["prose", @class]}>
+        {Earmark.as_html!(@description) |> raw()}
+      </div>
+    <% else %>
+      <div class={["prose", @class]}>
+        {@description}
+      </div>
+    <% end %>
+    """
+  end
+
+  def markdown_text(nil), do: ""
+
+  def markdown_text(type_description, description) do
+    if type_description == "html" do
+      Earmark.as_html!(description) |> raw()
+    else
+      description
+    end
+  end
+
+  def gettext_with_locale(locale, gettext) do
+    Gettext.with_locale(SurveyEngineWeb.Gettext, locale, fn ->
+      gettext
+    end)
   end
 end

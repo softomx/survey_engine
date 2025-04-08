@@ -31,7 +31,22 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
           placeholder="Selecciona un tipo de contenido"
           options={[{"Texto plano", "text_plain"}, {"HTML", "html"}]}
         />
-        <.field field={@form[:description]} type="textarea" label="Description" />
+        <%= if @type_input_text == "html" do %>
+          <.field
+            field={@form[:description]}
+            type="textarea"
+            label="Description"
+            id={"#{Phoenix.HTML.Form.input_id(@form, :description)}"}
+            phx-hook="MarkDownEditor"
+          />
+        <% else %>
+          <.field
+            field={@form[:description]}
+            type="textarea"
+            label="Description"
+            id="#form-description"
+          />
+        <% end %>
 
         <.button phx-disable-with="Saving...">Guardar</.button>
       </.form>
@@ -41,9 +56,12 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
 
   @impl true
   def update(%{translation: translation} = assigns, socket) do
+    content_type = Map.get(translation, :content_type, "text_plain")
+
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:type_input_text, content_type)
      |> assign_new(:form, fn ->
        to_form(Translations.change_translation(translation))
      end)}
@@ -52,7 +70,12 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
   @impl true
   def handle_event("validate", %{"translation" => translation_params}, socket) do
     changeset = Translations.change_translation(socket.assigns.translation, translation_params)
-    {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
+    content_type = Map.get(translation_params, "content_type", "text_plain")
+
+    {:noreply,
+     socket
+     |> assign(form: to_form(changeset, action: :validate))
+     |> assign(type_input_text: content_type)}
   end
 
   def handle_event("save", %{"translation" => translation_params}, socket) do

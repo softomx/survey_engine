@@ -9,15 +9,15 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
     ~H"""
     <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800">
       <.header class="text-center">
-        {get_text_with_locale(@locale, gettext("Register for an account"))}
+        {gettext_with_locale(@locale, gettext("Register for an account"))}
 
         <:subtitle>
-          {get_text_with_locale(@locale, gettext("Already registered?"))}
+          {gettext_with_locale(@locale, gettext("Already registered?"))}
 
           <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
-            {get_text_with_locale(@locale, gettext("Log in"))}
+            {gettext_with_locale(@locale, gettext("Log in"))}
           </.link>
-          {get_text_with_locale(@locale, gettext("to your account now"))} .
+          {gettext_with_locale(@locale, gettext("to your account now"))} .
         </:subtitle>
       </.header>
 
@@ -49,7 +49,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             <.field
               field={@form[:email]}
               type="email"
-              label={get_text_with_locale(@locale, gettext("Email"))}
+              label={gettext_with_locale(@locale, gettext("Email"))}
               required
             />
           </div>
@@ -60,15 +60,15 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               <.field
                 field={f2[:legal_name]}
                 type="text"
-                label={get_text_with_locale(@locale, gettext("Legal name"))}
+                label={gettext_with_locale(@locale, gettext("Legal name"))}
               />
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:country]}
                 type="select"
-                placeholder={get_text_with_locale(@locale, gettext("Select a country"))}
-                label={get_text_with_locale(@locale, gettext("Country"))}
+                placeholder={gettext_with_locale(@locale, gettext("Select a country"))}
+                label={gettext_with_locale(@locale, gettext("Country"))}
                 options={@countries}
               />
             </div>
@@ -76,8 +76,8 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               <.combo_box
                 field={f2[:town]}
                 type="select"
-                label={get_text_with_locale(@locale, gettext("Town"))}
-                placeholder={get_text_with_locale(@locale, gettext("Select a town"))}
+                label={gettext_with_locale(@locale, gettext("Town"))}
+                placeholder={gettext_with_locale(@locale, gettext("Select a town"))}
                 options={@towns}
               />
             </div>
@@ -85,25 +85,25 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               <.field
                 field={f2[:city]}
                 type="text"
-                label={get_text_with_locale(@locale, gettext("City"))}
+                label={gettext_with_locale(@locale, gettext("City"))}
               />
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:billing_currency]}
-                placeholder={get_text_with_locale(@locale, gettext("Select a billing currency"))}
+                placeholder={gettext_with_locale(@locale, gettext("Select a billing currency"))}
                 type="select"
-                label={get_text_with_locale(@locale, gettext("Billy Currency"))}
+                label={gettext_with_locale(@locale, gettext("Billy Currency"))}
                 options={@currencies}
               />
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
                 field={f2[:agency_type]}
-                placeholder={get_text_with_locale(@locale, gettext("Select an agency"))}
+                placeholder={gettext_with_locale(@locale, gettext("Select an agency"))}
                 type="select"
                 options={@agency_types}
-                label={get_text_with_locale(@locale, gettext("Agency Type"))}
+                label={gettext_with_locale(@locale, gettext("Agency Type"))}
               />
             </div>
             <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center">
@@ -111,7 +111,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 class="pc-button pc-button--primary pc-button--md pc-button--radius-md w-full"
                 phx-click={JS.push("show_glossary", target: @myself)}
               >
-                {get_text_with_locale(@locale, gettext("Glossary"))}
+                {gettext_with_locale(@locale, gettext("Glossary"))}
               </span>
             </div>
             <div class="col-span-12">
@@ -160,7 +160,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
           </.inputs_for>
         </div>
         <.button phx-disable-with="Creating account..." class="w-full">
-          {get_text_with_locale(@locale, gettext("Create an account"))}
+          {gettext_with_locale(@locale, gettext("Create an account"))}
         </.button>
       </.form>
     </div>
@@ -232,12 +232,6 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   def handle_event("show_glossary", _params, socket) do
     notify_parent("show_glossary")
     {:noreply, socket}
-  end
-
-  defp get_text_with_locale(locale, funtion) do
-    Gettext.with_locale(SurveyEngineWeb.Gettext, locale, fn ->
-      funtion
-    end)
   end
 
   defp get_towns_by_country(nil), do: []

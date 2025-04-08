@@ -14,7 +14,7 @@
 
 <.list>
   <:item title="Type">{@translation.type}</:item>
-  <:item title="Description">{@translation.description}</:item>
+  <:item title="Description">{markdown_text(@translation.content_type, @translation.description)}</:item>
 </.list>
 
 <.back navigate={~p"/admin/catalogs/#{@type}/#{@resource_id}/translations/#{@behaviour}"}>

@@ -296,7 +296,13 @@
               class="preheader"
               style="font-size: 0; padding: 0; display: none; max-height: 0; mso-hide: all; line-height: 0; color: transparent; height: 0; max-width: 0; opacity: 0; overflow: hidden; visibility: hidden; width: 0;"
             >
-              Registro exitoso.
+              {Gettext.with_locale(
+                SurveyEngineWeb.Gettext,
+                @content.language,
+                fn ->
+                  gettext("successful registration")
+                end
+              )}
             </span>
             <table
               class="wrap"
@@ -382,7 +388,13 @@
                                   style="font-weight: 300; font-size: 28px; line-height: 130%; margin: 16px 0 0;"
                                   align="center"
                                 >
-                                  {"successful registration"}
+                                  {Gettext.with_locale(
+                                    SurveyEngineWeb.Gettext,
+                                    @content.language,
+                                    fn ->
+                                      gettext("successful registration")
+                                    end
+                                  )}
                                 </h1>
                               </td>
                             </tr>
@@ -391,9 +403,12 @@
                                 class="content pt-xl"
                                 style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 48px 48px 40px;"
                               >
-                                <p style="margin: 0 0 1em;">Hola {@company.legal_name},</p>
                                 <p style="margin: 0 0 1em;">
-                                  {@content.description}
+                                  <.description
+                                    description={@content.description}
+                                    type={@content.content_type}
+                                    class="prose-sm"
+                                  />
                                 </p>
                               </td>
                             </tr>
@@ -405,7 +420,13 @@
                                 <!-- Detalles de la cuenta registrada -->
 
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
-                                  <br />{"This is the information entered"}:
+                                  <br /><br /> {Gettext.with_locale(
+                                    SurveyEngineWeb.Gettext,
+                                    @content.language,
+                                    fn ->
+                                      gettext("This is the information entered")
+                                    end
+                                  )}:
                                 </h4>
                                 <table style="width: 100%;">
                                   <tr>
@@ -421,7 +442,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0; white-space: nowrap;"
                                           >
-                                            {"Legal Name"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Legal name")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -436,7 +463,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"Agency Type"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Agency Type")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -451,7 +484,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"Billing Currency"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Billy Currency")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -466,7 +505,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"Language"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Language")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -481,7 +526,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"Country"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Country")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -496,7 +547,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"Town"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("Town")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -511,7 +568,13 @@
                                             class="text-14"
                                             style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
                                           >
-                                            {"City"}
+                                            {Gettext.with_locale(
+                                              SurveyEngineWeb.Gettext,
+                                              @content.language,
+                                              fn ->
+                                                gettext("City")
+                                              end
+                                            )}
                                           </td>
                                           <td
                                             class="text-14 font-strong text-right"
@@ -536,7 +599,13 @@
                                 <!-- Detalles de la respuestas registrada -->
 
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
-                                  <br />{"Survey Answers"}:
+                                  <br />{Gettext.with_locale(
+                                    SurveyEngineWeb.Gettext,
+                                    @content.language,
+                                    fn ->
+                                      gettext("Survey Answers")
+                                    end
+                                  )}:
                                 </h4>
                                 <%= for response <- @response.data["response"] |> Enum.sort_by(fn i -> i["index"] end) do %>
                                   <center style="border-bottom-width: 1px; border-bottom-color: #f0f0f0; border-bottom-style: solid; border-bottom-style: solid; padding-bottom: 4px;">
@@ -546,60 +615,31 @@
                                     >
                                       {response["index"]}. {response["question"]}
                                     </p>
-                                    <p
-                                      class="text-14 font-strong text-center"
-                                      style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
-                                    >
-                                      {response["answer"]}
-                                    </p>
+                                    <%= if response["type"] == "fileUpload" do %>
+                                      <%= for _file <- response["answer"] do %>
+                                        <p
+                                          class="text-14 font-strong text-center"
+                                          style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
+                                        >
+                                          {Gettext.with_locale(
+                                            SurveyEngineWeb.Gettext,
+                                            @content.language,
+                                            fn ->
+                                              gettext("Document")
+                                            end
+                                          )}
+                                        </p>
+                                      <% end %>
+                                    <% else %>
+                                      <p
+                                        class="text-14 font-strong text-center"
+                                        style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
+                                      >
+                                        {response["answer"]}
+                                      </p>
+                                    <% end %>
                                   </center>
                                 <% end %>
-                                <%!-- <table style="width: 100%;">
-                                  <tr>
-                                    <td align="center">
-                                      <table
-                                        class="table"
-                                        cellspacing="0"
-                                        cellpadding="0"
-                                        style="color: #000; font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; border-collapse: collapse; width: 80%;"
-                                      >
-                                        <tr style="border-bottom-width: 1px; border-top-color: #f0f0f0; border-top-style: solid;">
-                                          <td
-                                            class="text-14"
-                                            style=" font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0; white-space: nowrap; font-weight: 600; opacity: 60%;"
-                                          >
-                                            {"Question"}
-                                          </td>
-                                          <td
-                                            class="text-14 text-right"
-                                            style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 4px 0 4px 12px; font-weight: 600; opacity: 60%;"
-                                            align="right"
-                                          >
-                                            {"Answer"}
-                                          </td>
-                                        </tr>
-                                        <%= for response <- @response.data["response"] |> Enum.sort_by(fn i -> i["index"] end) do %>
-                                          <tr>
-                                            <td
-                                              class="text-14"
-                                              style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 8px 12px 8px 0;"
-                                            >
-                                              {response["index"]}. {response["question"]}
-                                            </td>
-                                            <td
-                                              class="text-14 font-strong text-right"
-                                              style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px;"
-                                              align="right"
-                                            >
-                                              {response["answer"]}
-                                            </td>
-                                          </tr>
-                                        <% end %>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                  <tr></tr>
-                                </table> --%>
                               </td>
                             </tr>
                           </table>

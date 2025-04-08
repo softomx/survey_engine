@@ -1,6 +1,17 @@
 import Handsontable from "./handsontable";
+import EasyMDE from "../vendor/easymde"
 
 let Hooks = {};
+
+Hooks.MarkDownEditor = {
+    mounted() {
+      const editor = create_editor(this.el)
+    }
+  }
+  
+  let create_editor = (el) => {
+    return new EasyMDE({maxHeight: "300px", element: el, toolbar: ["bold", "italic", "strikethrough","horizontal-rule","heading", "quote","code", "link", "table", "unordered-list", "ordered-list", "horizontal-rule","preview", "guide"]})
+  }
 
 Hooks.formbrickForm = {
     mounted() {

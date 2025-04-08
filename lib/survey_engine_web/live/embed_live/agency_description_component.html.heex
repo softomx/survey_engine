@@ -12,7 +12,11 @@
       <:item :for={agency <- @list_agencies} heading={agency.name}>
         <%= if agency.translation != nil do %>
           <div class="opacity-60 text-sm">
-            <p>{agency.translation.description}</p>
+            <.description
+              description={agency.translation.description}
+              type={agency.translation.content_type}
+              class="prose-sm"
+            />
           </div>
         <% else %>
           <div class="opacity-60 text-sm text-center">

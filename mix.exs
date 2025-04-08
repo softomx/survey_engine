@@ -68,6 +68,7 @@ defmodule SurveyEngine.MixProject do
       {:exq, "~> 0.19.0"},
       {:flop, "~> 0.25.0"},
       {:flop_phoenix, "~> 0.24.1"},
+      {:earmark, "~> 1.4"}
     ]
   end
 
