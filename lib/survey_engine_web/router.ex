@@ -28,6 +28,8 @@ defmodule SurveyEngineWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, html: {SurveyEngineWeb.Layouts, :root}
     plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    # plug :allow_iframe
     plug SurveyEngineWeb.Plugs.AllowIframe
   end
 
@@ -308,6 +310,7 @@ defmodule SurveyEngineWeb.Router do
         {ContextSession, :set_locale}
       ],
       layout: {SurveyEngineWeb.Layouts, :iframe} do
+      live "/users/log_in", UserLoginLive, :new
       live "/users/register/form", EmbedLive.UserRegisterForm, :index
       live "/users/register/form/agencies_info", EmbedLive.UserRegisterForm, :modal_show
     end

@@ -44,7 +44,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     lead_form = LeadsForms.get_leads_form!(params["lead_form_id"])
 
     {:ok, external_survey} = get_external_form(lead_form, socket.assigns.site_config.id)
-    SurveyEngine.SurveyMappers.get_fields_of_schema(Notification) |> format_data()
 
     socket
     |> assign(:page_title, "Listing Survey mapper")
@@ -53,7 +52,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     |> assign(:external_survey, external_survey)
     |> assign(
       :fields,
-      SurveyEngine.SurveyMappers.get_fields_of_schema(Notification)
+      SurveyEngine.SurveyMappers.get_fields_of_schema(Affiliate)
       |> format_data()
     )
     |> assign(:lead_form, lead_form)
@@ -134,9 +133,9 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
 
       field =
         if parent do
-          "#{parent}->#{field}"
+          {"#{parent}->#{field}", "#{parent}/#{field}"}
         else
-          field
+          {field, field}
         end
 
       [field | acc]

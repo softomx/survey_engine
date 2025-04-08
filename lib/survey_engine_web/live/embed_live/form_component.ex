@@ -37,7 +37,6 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
         phx-target={@myself}
         phx-submit="save"
         phx-change="validate"
-        phx-trigger-action={@trigger_submit}
         action={~p"/users/log_in?_action=registered"}
         method="post"
       >
@@ -213,7 +212,12 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
           )
 
         changeset = Accounts.change_user_registration_with_company(user)
-        {:noreply, socket |> assign(trigger_submit: true) |> assign_form(changeset)}
+
+        {:noreply,
+         socket
+         |> assign(trigger_submit: true)
+         |> assign_form(changeset)
+         |> push_navigate(to: ~p"/embed/users/log_in?_action=registered")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, socket |> assign(check_errors: true) |> assign_form(changeset)}

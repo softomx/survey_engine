@@ -34,7 +34,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   defp delete_survey_mapper(socket, :edit, %{"index" => index}) do
     case SurveyMappers.delete_survey_mapper(socket.assigns.survey_mapper) do
       {:ok, _survey_mapper} ->
-        send(self(), {:put_flash, :info, "Survey mapper deleted successfully11"})
+        send(self(), {:put_flash, :info, "Mapeo eliminado correctamente"})
         send(self(), {:delete_mapper, index})
 
         {
@@ -48,7 +48,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   end
 
   defp delete_survey_mapper(socket, :new, %{"index" => index}) do
-    send(self(), {:put_flash, :info, "Survey mapper deleted successfully 22"})
+    send(self(), {:put_flash, :info, "Mapeo eliminado correctamente"})
     send(self(), {:delete_mapper, index})
 
     {
@@ -60,7 +60,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   defp save_survey_mapper(socket, :edit, survey_mapper_params) do
     case SurveyMappers.update_survey_mapper(socket.assigns.survey_mapper, survey_mapper_params) do
       {:ok, survey_mapper} ->
-        send(self(), {:put_flash, :info, "Survey mapper updated successfully"})
+        send(self(), {:put_flash, :info, "Mapeo actualizado correctamente"})
         send(self(), {:save_mapper, {socket.assigns.index, survey_mapper}})
 
         {
@@ -76,7 +76,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   defp save_survey_mapper(socket, :new, survey_mapper_params) do
     case SurveyMappers.create_survey_mapper(survey_mapper_params) do
       {:ok, survey_mapper} ->
-        send(self(), {:put_flash, :info, "Survey mapper created successfully"})
+        send(self(), {:put_flash, :info, "Mapeo creado correctamente"})
         send(self(), {:save_mapper, {socket.assigns.index, survey_mapper}})
 
         {
@@ -90,6 +90,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
-    assign(socket, :form, to_form(changeset) |> IO.inspect())
+    assign(socket, :form, to_form(changeset) )
   end
 end

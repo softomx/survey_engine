@@ -8,7 +8,8 @@ defmodule SurveyEngineWeb.Endpoint do
     store: :cookie,
     key: "_survey_engine_key",
     signing_salt: "6XwBeGud",
-    same_site: "Lax"
+    same_site: "None",
+    secure: true
   ]
 
   socket "/live", Phoenix.LiveView.Socket,
