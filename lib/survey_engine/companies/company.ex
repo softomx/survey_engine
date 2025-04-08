@@ -19,6 +19,8 @@ defmodule SurveyEngine.Companies.Company do
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
     field :status, :string, default: "pending"
     embeds_many :links, SurveyEngine.Companies.CompanyLink, on_replace: :delete
+    has_one :affiliate, SurveyEngine.AffiliateEngine.Affiliate, on_replace: :delete
+
     timestamps(type: :utc_datetime)
   end
 

@@ -154,6 +154,8 @@ defmodule SurveyEngineWeb.Router do
       live "/companies/:id", AdminCompanyLive.Show, :show
       live "/companies/:id/assign", AdminCompanyLive.Edit, :assign
       live "/companies/:id/edit", AdminCompanyLive.Edit, :edit
+      live "/companies/:id/new_affiliate", AdminCompanyLive.NewAffiliate, :new_affiliate
+      live "/companies/:id/affiliate", AdminCompanyLive.ShowAffiliate, :show_affiliate
       live "/catalogs/currencies", CurrencyLive.Index, :index
       live "/catalogs/currencies/new", CurrencyLive.Index, :new
       live "/catalogs/currencies/:id/edit", CurrencyLive.Index, :edit

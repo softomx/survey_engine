@@ -36,6 +36,31 @@ defmodule SurveyEngine.SurveyMappers do
     Repo.all(SurveyMapper)
   end
 
+  def list_survey_mappers(args) do
+    args
+    |> Enum.reduce(SurveyMapper, fn
+      {:filter, filter}, query ->
+        query
+        |> filter_survey_mapper(filter)
+    end)
+    |> Repo.all()
+  end
+
+
+  def filter_survey_mapper(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {:survey_id, survey_id}, query ->
+        from q in query, where: q.survey_id == ^survey_id
+
+      {:type, type}, query ->
+        from q in query, where: q.type == ^type
+
+        _, query ->
+          query
+    end)
+  end
+
   @doc """
   Gets a single survey_mapper.
 

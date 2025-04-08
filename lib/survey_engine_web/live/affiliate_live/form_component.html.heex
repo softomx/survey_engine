@@ -6,17 +6,18 @@
     phx-change="validate"
     phx-submit="save">
     
-    <.field type="text" field={@form[:name]} />
+    <.field type="text" field={@form[:name]} label={gettext("affiliate.name")}/>
     
-    <.field type="text" field={@form[:affiliate_slug]} />
+    <.field type="text" field={@form[:affiliate_slug]} label={gettext("affiliate.slug")}/>
     
-    <.field type="text" field={@form[:trading_name]} />
+    <.field type="text" field={@form[:trading_name]} label={gettext("affiliate.trading_name")}/>
     
-    <.field type="text" field={@form[:business_name]} />
+    <.field type="text" field={@form[:business_name]} label={gettext("affiliate.business_name")}/>
     
-    <.field type="text" field={@form[:rfc]} />
+    <.field type="text" field={@form[:rfc]} label={gettext("affiliate.rfc")}/>
     
-    <.field type="text" field={@form[:company_type]} />
+    <.field type="text" field={@form[:company_type]} label={gettext("affiliate.company_type")}/>
+    <.field type="hidden" field={@form[:company_id]} />
     
     <div class="flex justify-end">
       <.button

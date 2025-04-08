@@ -66,6 +66,25 @@
       label="Clasificar"
       to={~p"/admin/companies/#{company}/assign"}
     />
+    <%= if is_nil(company.affiliate) do %>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Crear Afiliado"
+        to={~p"/admin/companies/#{company}/new_affiliate"}
+      />
+    <% else %>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Ver Afiliado"
+        to={~p"/admin/companies/#{company}/affiliate"}
+      />
+    <% end %>
   </:col>
 </.data_table>
 

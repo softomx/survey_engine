@@ -22,7 +22,7 @@ defmodule SurveyEngine.Companies do
   end
 
   def list_companies_with_preloads(companies) do
-    companies |> Repo.preload([:business_model])
+    companies |> Repo.preload([:business_model, :affiliate])
   end
 
   def list_companies(args) do
@@ -39,6 +39,9 @@ defmodule SurveyEngine.Companies do
     |> Enum.reduce(query, fn
       {_key, nil}, query ->
         query
+
+      {:id, id}, query ->
+        from q in query, where: q.id == ^id
 
       {:agency_name, agency_name}, query ->
         from q in query, where: ilike(q.agency_name, ^"%#{agency_name}%")
@@ -104,6 +107,14 @@ defmodule SurveyEngine.Companies do
     |> case do
       nil -> {:error, "register notfound"}
       register -> {:ok, register}
+    end
+  end
+
+  def get_company_with_preloads(id, preloads) do
+    get_company(id)
+    |> case do
+      {:ok, company} -> {:ok, company |> Repo.preload(preloads)}
+      {:error, error} -> {:error, error}
     end
   end
 
