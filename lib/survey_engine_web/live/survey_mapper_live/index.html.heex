@@ -1,7 +1,11 @@
-<.container class="py-16">
-  <.page_header title="Listing Survey mapper"></.page_header>
-  <span phx-click={JS.push("add")}>add</span>
-  <div :for={{item, index} <- @survey_mapper |> Enum.with_index()} class="mb-4">
+<.container class="">
+  <.page_header title={@lead_form.id}></.page_header>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      {@lead_form.form_group.name}
+    </div>
+  </div>
+  <div :for={{item, index} <- @survey_mapper |> Enum.with_index()} class="">
     <.live_component
       module={SurveyEngineWeb.SurveyMapperLive.FormComponent}
       id={"form-#{index}"}
@@ -10,7 +14,9 @@
       questions={@external_survey.questions}
       fields={@fields}
       survey_id={@lead_form.id}
+      index={index}
       return_to={current_index_path(@index_params)}
     />
   </div>
+  <.button phx-click={JS.push("add")} color="success" label="Agregar" />
 </.container>

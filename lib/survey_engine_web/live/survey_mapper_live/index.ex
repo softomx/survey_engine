@@ -1,4 +1,6 @@
 defmodule SurveyEngineWeb.SurveyMapperLive.Index do
+  alias SurveyEngine.Notifications.Notification
+  alias SurveyEngine.LeadsForms
   alias SurveyEngine.AffiliateEngine.Affiliate
   use SurveyEngineWeb, :live_view
 
@@ -39,9 +41,10 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
   end
 
   defp apply_action(socket, :index, params) do
-    lead_form = SurveyEngine.LeadsForms.get_leads_form!(params["lead_form_id"])
+    lead_form = LeadsForms.get_leads_form!(params["lead_form_id"])
 
     {:ok, external_survey} = get_external_form(lead_form, socket.assigns.site_config.id)
+    SurveyEngine.SurveyMappers.get_fields_of_schema(Notification) |> format_data()
 
     socket
     |> assign(:page_title, "Listing Survey mapper")
@@ -50,7 +53,8 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     |> assign(:external_survey, external_survey)
     |> assign(
       :fields,
-      SurveyEngine.SurveyMappers.get_fields_of_schema(Affiliate) |> format_data() |> IO.inspect()
+      SurveyEngine.SurveyMappers.get_fields_of_schema(Notification)
+      |> format_data()
     )
     |> assign(:lead_form, lead_form)
   end
@@ -59,10 +63,26 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     ~p"/survey_mapper?#{index_params || %{}}"
   end
 
-  @impl true
-  def handle_event("update_filters", params, socket) do
-    query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
-    {:noreply, push_patch(socket, to: ~p"/survey_mapper?#{query_params}")}
+  def handle_info({:delete_mapper, index}, socket) do
+    survey_mapper = List.delete_at(socket.assigns.survey_mapper, index)
+
+    socket =
+      socket
+      |> assign(:survey_mapper, survey_mapper)
+
+    {:noreply, socket}
+  end
+
+  def handle_info({:save_mapper, {index, mapper_updated}}, socket) do
+    # index = String.to_integer(index)
+    survey_mapper =
+      List.update_at(socket.assigns.survey_mapper, index, fn _ -> mapper_updated end)
+
+    socket =
+      socket
+      |> assign(:survey_mapper, survey_mapper)
+
+    {:noreply, socket}
   end
 
   def handle_event("add", _, socket) do
@@ -70,7 +90,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
      socket
      |> assign(
        :survey_mapper,
-       (socket.assigns.survey_mapper ++ [%SurveyMapper{}]) |> IO.inspect()
+       socket.assigns.survey_mapper ++ [%SurveyMapper{}]
      )}
   end
 
@@ -107,9 +127,18 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     |> SurveyEngine.Responses.ExternalSurveyEngine.get_survey()
   end
 
-  defp format_data(list) do
+  defp format_data(list, parent \\ nil) do
     list
     |> Enum.reduce([], fn %{field: field, deps: deps}, acc ->
+      acc = acc ++ format_data(deps, field)
+
+      field =
+        if parent do
+          "#{parent}->#{field}"
+        else
+          field
+        end
+
       [field | acc]
     end)
   end

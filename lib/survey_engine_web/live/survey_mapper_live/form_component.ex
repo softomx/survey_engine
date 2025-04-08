@@ -5,7 +5,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
 
   @impl true
   def update(%{survey_mapper: survey_mapper} = assigns, socket) do
-    IO.inspect(survey_mapper, label: "Survey Mapper")
     changeset = SurveyMappers.change_survey_mapper(survey_mapper)
 
     {:ok,
@@ -28,16 +27,45 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
     save_survey_mapper(socket, socket.assigns.action, survey_mapper_params)
   end
 
-  defp save_survey_mapper(socket, :edit, survey_mapper_params) do
-    case SurveyMappers.update_survey_mapper(socket.assigns.survey_mapper, survey_mapper_params) do
+  def handle_event("delete", survey_mapper_params, socket) do
+    delete_survey_mapper(socket, socket.assigns.action, survey_mapper_params)
+  end
+
+  defp delete_survey_mapper(socket, :edit, %{"index" => index}) do
+    case SurveyMappers.delete_survey_mapper(socket.assigns.survey_mapper) do
       {:ok, _survey_mapper} ->
-        send(self(), {:put_flash, :info, "Survey mapper updated successfully"})
+        send(self(), {:put_flash, :info, "Survey mapper deleted successfully11"})
+        send(self(), {:delete_mapper, index})
 
         {
           :noreply,
           socket
-          |> put_flash(:info, "Survey mapper updated successfully")
-          #  |> push_navigate(to: socket.assigns.return_to)}
+        }
+
+      eerr ->
+        {:noreply, socket}
+    end
+  end
+
+  defp delete_survey_mapper(socket, :new, %{"index" => index}) do
+    send(self(), {:put_flash, :info, "Survey mapper deleted successfully 22"})
+    send(self(), {:delete_mapper, index})
+
+    {
+      :noreply,
+      socket
+    }
+  end
+
+  defp save_survey_mapper(socket, :edit, survey_mapper_params) do
+    case SurveyMappers.update_survey_mapper(socket.assigns.survey_mapper, survey_mapper_params) do
+      {:ok, survey_mapper} ->
+        send(self(), {:put_flash, :info, "Survey mapper updated successfully"})
+        send(self(), {:save_mapper, {socket.assigns.index, survey_mapper}})
+
+        {
+          :noreply,
+          socket
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -47,14 +75,13 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
 
   defp save_survey_mapper(socket, :new, survey_mapper_params) do
     case SurveyMappers.create_survey_mapper(survey_mapper_params) do
-      {:ok, _survey_mapper} ->
+      {:ok, survey_mapper} ->
         send(self(), {:put_flash, :info, "Survey mapper created successfully"})
+        send(self(), {:save_mapper, {socket.assigns.index, survey_mapper}})
 
         {
           :noreply,
           socket
-          |> put_flash(:info, "Survey mapper created successfully")
-          #  |> push_navigate(to: socket.assigns.return_to)}
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -63,6 +90,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
-    assign(socket, :form, to_form(changeset))
+    assign(socket, :form, to_form(changeset) |> IO.inspect())
   end
 end

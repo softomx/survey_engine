@@ -9,6 +9,24 @@ Hooks.formbrickForm = {
     }
 }
 
+Hooks.BeforeUnload = {
+    mounted() {
+      var el = this.el
+      console.log(el.dataset)
+      this.beforeUnload = function(e) {
+        if (el.dataset.changesMade === 'true') {
+            console.log('Changes made')
+          e.preventDefault()
+          e.returnValue = ''
+        }
+      }
+      window.addEventListener('beforeunload', this.beforeUnload, true)
+    },
+    destroyed() {
+      window.removeEventListener('beforeunload', this.beforeUnload, true)
+    }
+  }
+
 Hooks.Handsontable = Handsontable
 
 export default Hooks;

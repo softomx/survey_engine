@@ -62,7 +62,7 @@ defmodule SurveyEngine.LeadsForms do
       ** (Ecto.NoResultsError)
 
   """
-  def get_leads_form!(id), do: Repo.get!(LeadsForm, id)
+  def get_leads_form!(id), do: Repo.get!(LeadsForm, id) |> Repo.preload([:form_group])
 
   def get_lead_form_by_language_or_default(form_group_id, lang) do
     list = list_leads_forms(%{filter: %{form_group_id: form_group_id}})

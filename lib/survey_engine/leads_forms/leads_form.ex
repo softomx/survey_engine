@@ -10,7 +10,7 @@ defmodule SurveyEngine.LeadsForms.LeadsForm do
     field :behaviour, :string, default: "affiliate_register"
     field :slug, :string
     field :provider, :string, default: "formbricks"
-    belongs_to :form_group, SurveyEngine.FormGroups.FormGroup
+    belongs_to :form_group, SurveyEngine.LeadsForms.FormGroup
     timestamps(type: :utc_datetime)
   end
 

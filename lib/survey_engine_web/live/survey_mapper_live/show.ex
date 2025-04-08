@@ -13,7 +13,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:survey_mapper, SurveyMappers.get_survey_mapper!(id))}
+     |> assign(:survey_mappers, SurveyMappers.list_survey_mapper!(id))}
   end
 
   @impl true

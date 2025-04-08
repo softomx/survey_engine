@@ -6,40 +6,78 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <div class="flex gap-2">
-      <.field
-        type="select"
-        options={@fields}
-        field={@form[:field]}
-        id={"survey_mapper_field_#{@id}"}
-      />
+    <div
+      id={"container-#{@id}"}
+      class="flex items-center justify-between   border-slate-200"
+      phx-hook="BeforeUnload"
+      data-changes-made={"#{!Enum.empty?(@form.source.changes)}"}
+    >
+      <div class="  border-slate-200">
+        <div class="flex items-center gap-3">
+          <div class="flex flex-col">
+            <.field
+              type="select"
+              options={@fields}
+              field={@form[:field]}
+              id={"survey_mapper_field_#{@id}"}
+              prompt="Select a field"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="  border-slate-200">
+        <div class="flex flex-col">
+          <.field
+            type="select"
+            options={
+              @questions |> Enum.map(fn {id, question_params} -> {question_params.title, id} end)
+            }
+            field={@form[:question_id]}
+            id={"survey_mapper_question_id_#{@id}"}
+            prompt="Select a question"
+          />
+        </div>
+      </div>
+      <div class="  border-slate-200">
+        <div class="w-max">
+          <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold  uppercase rounded-md select-none whitespace-nowrap ">
+            <div class="flex justify-end gap-3">
+              <span
+                class="pc-button pc-button--danger pc-button--xs pc-button--radius-md"
+                color="danger"
+                size="xs"
+                phx-click={
+                  JS.push("delete",
+                    target: @myself,
+                    value: %{id: @survey_mapper.id, index: @index}
+                  )
+                }
+              >
+                X
+              </span>
+              <.button size="xs" type="submit" phx-disable-with="Guardando..." label="Guardar" />
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <.field
-        type="select"
-        options={
-          @questions |> Enum.map(fn {id, question_params} -> {question_params.title, id} end)
-        }
-        field={@form[:question_id]}
-        id={"survey_mapper_question_id_#{@id}"}
-      />
-
-      <.field
-        type="hidden"
-        field={@form[:type]}
-        value="affiliate"
-        id={"survey_mapper_type_#{@id}"}
-      />
-
-      <.field
-        type="hidden"
-        field={@form[:survey_id]}
-        value={@survey_id}
-        id={"survey_mapper_survey_id_#{@id}"}
-      />
-
-      <div class="flex justify-end">
-        <.button type="submit" phx-disable-with="Saving..." label="Save" />
+      <div class=" border-slate-200">
+        <button
+          class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-slate-900 transition-all hover:bg-slate-900/10 active:bg-slate-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+        >
+          <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+          </span>
+        </button>
       </div>
     </div>
+    <.field type="hidden" field={@form[:type]} value="affiliate" id={"survey_mapper_type_#{@id}"} />
+
+    <.field
+      type="hidden"
+      field={@form[:survey_id]}
+      value={@survey_id}
+      id={"survey_mapper_survey_id_#{@id}"}
+    />
   </.form>
 </div>
