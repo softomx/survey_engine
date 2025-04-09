@@ -1,7 +1,4 @@
 defmodule SurveyEngineWeb.LeadsFormLive.Show do
-  alias SurveyEngine.Responses.SurveyResponse
-  alias Flop.Meta
-  alias PetalFramework.Components.DataTable
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.LeadsForms

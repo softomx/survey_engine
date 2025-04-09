@@ -221,8 +221,9 @@ defmodule SurveyEngineWeb.Router do
       live "/form_groups/:id/edit", FormGroupLive.Index, :edit
 
       live "/form_groups/:form_group_id/leads_forms", LeadsFormLive.Index, :index
-      live "/form_groups/:form_group_id/leads_forms/:id", LeadsFormLive.Show, :show
       live "/form_groups/:form_group_id/leads_forms/new", LeadsFormLive.Index, :new
+      live "/form_groups/:form_group_id/leads_forms/:id", LeadsFormLive.Show, :show
+
       live "/form_groups/:form_group_id/leads_forms/:id/edit", LeadsFormLive.Index, :edit
 
       live "/form_groups/:form_group_id/leads_forms/:lead_form_id/survey_mapper",

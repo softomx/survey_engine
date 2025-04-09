@@ -5,7 +5,7 @@ defmodule SurveyEngine.BusinessModels.BusinessConfig do
   schema "business_configs" do
     field :required, :boolean, default: false
     field :order, :integer
-    field :previous_lead_form_finished, {:array, :id}
+    field :previous_lead_form_finished, {:array, :id}, default: []
     belongs_to :form_group, SurveyEngine.LeadsForms.FormGroup
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
     timestamps(type: :utc_datetime)
