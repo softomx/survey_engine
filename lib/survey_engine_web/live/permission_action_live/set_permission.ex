@@ -63,7 +63,24 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
     end
   end
 
-  defp apply_action(socket, :set_permission, _params) do
+  def handle_event("syn_permissions", _params, %{assigns: _assigns} = socket) do
+    with {:ok, _permissions} <- Permissions.sync_permissions() do
+      {:noreply,
+       socket
+       |> put_flash(:info, "Listado de permisos actualizado correctamente")
+       |> push_patch(to: ~p"/admin/permissions_actions/set")}
+    else
+      _error -> {:noreply, socket}
+    end
+  end
+
+  @impl true
+  def handle_event("close_modal", _, socket) do
+    {:noreply, push_patch(socket, to: ~p"/admin/permissions_actions/set")}
+  end
+
+
+  defp apply_action(socket, :set_permission , _params) do
     roles = Accounts.list_roles_with_preloads(:permission_actions)
 
     selected_permissions =
@@ -75,12 +92,29 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
     |> assign(:permissions, Permissions.list_permissions_actions())
     |> assign(:roles, roles)
     |> assign(:selected_permissions, selected_permissions)
+    |> assign(:page_title, "Asignar permisos")
+  end
+
+  defp apply_action(socket, :sync_permission, _params) do
+
+    socket
+    |> assign(:page_title, "Sincronizar")
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-    <.button color="primary" label="Guardar" phx-click="update_role_actions" />
+
+    <%= if @live_action in [:sync_permission] do %>
+      <.modal title={@page_title}>
+        <.button color="primary" label="Sincronizar permisos" phx-click="syn_permissions" class="m-2" />
+      </.modal>
+
+    <% else %>
+    <div class="flex justify-end gap-2 mb-2">
+      <.button link_type="live_patch" to={~p"/admin/permissions_actions/sync"} label="Sincronizar permisos"  variant="outline"/>
+      <.button color="primary" label="Guardar" phx-click="update_role_actions" />
+    </div>
     <.table>
       <.tr>
         <.th>Name</.th>
@@ -88,24 +122,30 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
           <.th>{role.name}</.th>
         <% end %>
       </.tr>
-      <%= for permission <- @permissions do %>
-        <.tr>
-          <.td>{permission.name}</.td>
-          <%= for role <- @roles do %>
-            <.td>
-              <input
-                type="checkbox"
-                class="form-check-input"
-                phx-click="set_action"
-                phx-value-role_id={role.id}
-                phx-value-action_id={permission.id}
-                checked={"#{permission.id}" in Map.get(@selected_permissions, "#{role.id}", [])}
-              />
-            </.td>
-          <% end %>
+      <%= for {r, permissions} <- @permissions |> Enum.group_by(fn p -> p.resource end) do %>
+        <.tr class="bg-gray-200">
+          <.td colspan={length(@roles) + 1}>{r}</.td>
         </.tr>
+        <%= for permission <- permissions do %>
+          <.tr>
+            <.td>{permission.name}</.td>
+            <%= for role <- @roles do %>
+              <.td>
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  phx-click="set_action"
+                  phx-value-role_id={role.id}
+                  phx-value-action_id={permission.id}
+                  checked={"#{permission.id}" in Map.get(@selected_permissions, "#{role.id}", [])}
+                />
+              </.td>
+            <% end %>
+          </.tr>
+        <% end %>
       <% end %>
     </.table>
+    <% end %>
     """
   end
 end

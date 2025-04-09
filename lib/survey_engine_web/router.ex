@@ -128,9 +128,6 @@ defmodule SurveyEngineWeb.Router do
       live "/company", CompanyLive.Show, :show
       live "/company/edit", CompanyLive.Index, :edit
 
-      get "/error", PageController, :home
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
@@ -140,6 +137,23 @@ defmodule SurveyEngineWeb.Router do
 
       live "/survey_responses/:id", SurveyResponseLive.Show, :show
       live "/survey_responses/:id/show/edit", SurveyResponseLive.Show, :edit
+    end
+  end
+
+  scope "/", SurveyEngineWeb do
+    pipe_through [:browser, :require_authenticated_user, :locale]
+
+    live_session :require_authenticated_user_settings,
+      on_mount: [
+        {SurveyEngineWeb.UserAuth, :ensure_authenticated},
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :current_page},
+        {ContextSession, :set_locale}
+      ] do
+
+      get "/error", PageController, :home
+      live "/users/settings", UserSettingsLive, :edit
+      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
   end
 
@@ -210,10 +224,6 @@ defmodule SurveyEngineWeb.Router do
       live "/catalogs/personal_titles/new", PersonalTitleLive.Index, :new
       live "/catalogs/personal_titles/:id/edit", PersonalTitleLive.Index, :edit
 
-      get "/error", PageController, :home
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-
       live "/site_configurations", SiteConfigurationLive.Index, :index
       live "/site_configurations/new", SiteConfigurationLive.Index, :new
       live "/site_configurations/:id/edit", SiteConfigurationLive.Index, :edit
@@ -269,10 +279,10 @@ defmodule SurveyEngineWeb.Router do
 
       live "/affiliates", AffiliateLive.Index, :index
       live "/affiliates/new", AffiliateLive.Index, :new
-      live "/affiliates/:id/edit", AffiliateLive.Index, :edit
+      # live "/affiliates/:id/edit", AffiliateLive.Index, :edit
 
-      live "/affiliates/:id", AffiliateLive.Show, :show
-      live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
+      # live "/affiliates/:id", AffiliateLive.Show, :show
+      # live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
 
       live "/:lead_form_id/survey_mapper", SurveyMapperLive.Index, :index
       live "/:lead_form_id/survey_mapper/new", SurveyMapperLive.Index, :new
@@ -287,10 +297,11 @@ defmodule SurveyEngineWeb.Router do
       live "/roles/new", RoleLive.Index, :new
       live "/roles/:id/edit", RoleLive.Index, :edit
 
-      live "/permissions_actions", PermissionActionLive.Index, :index
-      live "/permissions_actions/new", PermissionActionLive.Index, :new
+      # live "/permissions_actions", PermissionActionLive.Index, :index
+      # live "/permissions_actions/new", PermissionActionLive.Index, :new
       live "/permissions_actions/set", PermissionActionLive.SetPermission, :set_permission
-      live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
+      live "/permissions_actions/sync", PermissionActionLive.SetPermission, :sync_permission
+      #live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
 
     end
   end

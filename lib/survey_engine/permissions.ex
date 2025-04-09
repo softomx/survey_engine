@@ -127,15 +127,23 @@ defmodule SurveyEngine.Permissions do
   def permissions() do
     SurveyEngineWeb.Router.__routes__()
     |> Enum.filter(&(&1.plug == Phoenix.LiveView.Plug))
+    |> Enum.filter(fn live_route ->
+        {_module, _action, _router_details, details} = live_route.metadata.phoenix_live_view
+        details.extra.on_mount
+        |> Enum.any?(fn m ->
+            {_conextt, validate_action} = m.id
+            validate_action == :validate_route
+        end)
+    end)
     |> Enum.map(fn live_route ->
-      {module, action, _router, details} = live_route.metadata.phoenix_live_view
-
+      {module, action, _router, _details} = live_route.metadata.phoenix_live_view
+      ["Elixir", _project, resource, _action] = String.split("#{module}", ".")
       %{
         path: live_route.path,
         module: module,
         action: Atom.to_string(action),
-        resource: Atom.to_string(details.name),
-        slug: "#{details.name}_#{action}"
+        resource: resource,
+        slug: String.downcase("#{resource}_#{action}")
       }
     end)
   end
@@ -276,7 +284,7 @@ defmodule SurveyEngine.Permissions do
                 {:ok, local_action} ->
                   create_permission_role_action(%{
                     role_id: root_role.id,
-                    permissions_action_id: local_action.id
+                    permission_action_id: local_action.id
                   })
 
                 error ->

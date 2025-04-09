@@ -6,7 +6,7 @@ defmodule SurveyEngineWeb.PermissionActionLive.Index do
   alias PetalFramework.Components.DataTable
 
   @data_table_opts [
-    default_limit: 30,
+    default_limit: 40,
     default_order: %{
       order_by: [:id, :inserted_at],
       order_directions: [:asc, :asc]
