@@ -121,7 +121,8 @@ defmodule SurveyEngineWeb.Router do
         {SurveyEngineWeb.UserAuth, :ensure_authenticated},
         {SurveyEngineWeb.ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
-        {ContextSession, :set_locale}
+        {ContextSession, :set_locale},
+        {ContextSession, :validate_route}
       ] do
       live "/dashboard", CompanyLive.Index, :index
       live "/company", CompanyLive.Show, :show
@@ -150,7 +151,8 @@ defmodule SurveyEngineWeb.Router do
         {SurveyEngineWeb.UserAuth, :ensure_authenticated},
         {SurveyEngineWeb.ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
-        {ContextSession, :set_locale}
+        {ContextSession, :set_locale},
+        {ContextSession, :validate_route}
       ] do
       live "/companies", AdminCompanyLive.Index, :index
       live "/companies/:id", AdminCompanyLive.Show, :show
@@ -280,6 +282,16 @@ defmodule SurveyEngineWeb.Router do
       live "/:lead_form_id/survey_mapper/:id/show/edit", SurveyMapperLive.Show, :edit
 
       live "/reports/response", ReportLive.SurveyResponse, :survey_response
+
+      live "/roles", RoleLive.Index, :index
+      live "/roles/new", RoleLive.Index, :new
+      live "/roles/:id/edit", RoleLive.Index, :edit
+
+      live "/permissions_actions", PermissionActionLive.Index, :index
+      live "/permissions_actions/new", PermissionActionLive.Index, :new
+      live "/permissions_actions/set", PermissionActionLive.SetPermission, :set_permission
+      live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
+
     end
   end
 

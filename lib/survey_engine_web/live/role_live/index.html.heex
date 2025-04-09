@@ -1,0 +1,32 @@
+<div>
+  <.page_header title={gettext("Listing Roles")}>
+    <.button link_type="live_patch" label={gettext("New Role")} to={~p"/admin/roles/new"} />
+  </.page_header>
+
+  <.data_table :if={@index_params} meta={@meta} items={@roles}>
+    <:col field={:name} sortable filterable={[:ilike]}/>
+    <:col field={:slug} />
+    <:col label="Actions" :let={role} align_right>
+        <.button
+          color="white"
+          variant="outline"
+          size="xs"
+          link_type="live_patch"
+          label="Edit"
+          to={~p"/admin/roles/#{role}/edit"}
+        />
+      </:col>
+  </.data_table>
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.RoleLive.FormComponent}
+        id={@role.id || :new}
+        title={@page_title}
+        action={@live_action}
+        role={@role}
+        patch={~p"/admin/roles"}
+      />
+    </.modal>
+  <% end %>
+</div>

@@ -1,0 +1,32 @@
+ <div>
+  <.page_header title={gettext("Listing Permissions")}>
+  </.page_header>
+  <.data_table :if={@index_params} meta={@meta} items={@permissions_actions}>
+    <:col :let={permission_action} label="Name">{permission_action.name}</:col>
+    <:col :let={permission_action} label="Path">{permission_action.path}</:col>
+    <:col :let={permission_action} label="Resource">{permission_action.resource}</:col>
+    <:col label="Actions" :let={permission_action} align_right>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Edit"
+        to={~p"/admin/permissions_actions/#{permission_action}/edit"}
+      />
+    </:col>
+  </.data_table>
+  <%= if @live_action in [:new, :edit] do %>
+
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.PermissionActionLive.FormComponent}
+        id={@permission_action.id || :new}
+        title={@page_title}
+        action={@live_action}
+        permission_action={@permission_action}
+        patch={~p"/admin/permissions_actions"}
+      />
+    </.modal>
+  <% end %>
+</div> 
