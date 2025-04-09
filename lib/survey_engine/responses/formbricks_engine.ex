@@ -77,17 +77,38 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     {:ok, %{questions: questions, name: data["name"], status: data["status"]}}
   end
 
-  defp create_new_response(response, lead_form, data) do
-    %{
-      state: "created",
-      date: Timex.today(),
-      data: %{response: response},
-      external_id: data["id"],
-      user_id: data["person"]["userId"],
-      lead_form_id: lead_form.id,
-      form_group_id: lead_form.form_group_id
-    }
-    |> Responses.create_survey_response()
+  defp create_new_response(response, lead_form, data, state \\ "created") do
+    Ecto.Multi.new()
+    |> Ecto.Multi.run(:survey_response, fn _, _ ->
+      %{
+        state: state,
+        date: Timex.today(),
+        external_id: data["id"],
+        user_id: data["person"]["userId"],
+        lead_form_id: lead_form.id,
+        form_group_id: lead_form.form_group_id
+      }
+      |> Responses.create_survey_response()
+    end)
+    |> Ecto.Multi.merge(fn %{survey_response: survey_response} ->
+      response
+      |> Enum.reduce(Ecto.Multi.new(), fn response, multi ->
+        multi
+        |> Ecto.Multi.run("item#{response.index}", fn _, _ ->
+          response
+          |> Map.put(:survey_response_id, survey_response.id)
+          |> Responses.create_survey_response_item()
+        end)
+      end)
+    end)
+    |> SurveyEngine.Repo.transaction()
+    |> case do
+      {:ok, %{survey_response: survey_response}} ->
+        {:ok, survey_response}
+
+      {:error, _multi, changeset, _} ->
+        {:error, changeset}
+    end
   end
 
   defp update_response(response, lead_form, data) do
@@ -95,25 +116,15 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
 
     case previour_response do
       nil ->
-        %{
-          state: "created",
-          date: Timex.today(),
-          data: %{response: response},
-          external_id: data["id"],
-          user_id: data["person"]["userId"],
-          lead_form_id: lead_form.id,
-          form_group_id: lead_form.form_group_id
-        }
-        |> Responses.create_survey_response()
+        create_new_response(
+          response,
+          lead_form,
+          data,
+          "updated"
+        )
 
       survey_response ->
-        attrs = %{
-          state: "updated",
-          date: Timex.today(),
-          data: %{response: response}
-        }
-
-        Responses.update_survey_response(survey_response, attrs)
+        update_response_multi(survey_response, response, "updated")
     end
   end
 
@@ -122,25 +133,51 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
 
     case previour_response do
       nil ->
-        %{
-          state: "finished",
-          date: Timex.today(),
-          data: %{response: response},
-          external_id: data["id"],
-          user_id: data["person"]["userId"],
-          lead_form_id: lead_form.id,
-          form_group_id: lead_form.form_group_id
-        }
-        |> Responses.create_survey_response()
+        create_new_response(
+          response,
+          lead_form,
+          data,
+          "finished"
+        )
 
       survey_response ->
-        attrs = %{
-          state: "finished",
-          date: Timex.today(),
-          data: %{response: response}
-        }
+        update_response_multi(survey_response, response, "finished")
+    end
+  end
 
-        Responses.update_survey_response(survey_response, attrs)
+  defp update_response_multi(survey_response, current_response, new_state) do
+    Ecto.Multi.new()
+    |> Ecto.Multi.run(:survey_response, fn _, _ ->
+      Responses.update_survey_response(survey_response, %{
+        state: new_state
+      })
+    end)
+    |> Ecto.Multi.merge(fn %{survey_response: survey_response} ->
+      current_response
+      |> Enum.reduce(Ecto.Multi.new(), fn response, multi ->
+        multi
+        |> Ecto.Multi.run("item#{response.index}", fn _, _ ->
+          prev_item =
+            survey_response.response_items
+            |> Enum.find(&(&1.question_id == response.question_id))
+
+          if prev_item do
+            Responses.update_survey_response_item(prev_item, response)
+          else
+            response
+            |> Map.put(:survey_response_id, survey_response.id)
+            |> Responses.create_survey_response_item()
+          end
+        end)
+      end)
+    end)
+    |> SurveyEngine.Repo.transaction()
+    |> case do
+      {:ok, %{survey_response: survey_response}} ->
+        {:ok, survey_response}
+
+      {:error, _multi, changeset, _} ->
+        {:error, changeset}
     end
   end
 
@@ -171,34 +208,40 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   end
 
   defp format_answer(answer, %{type: "fileUpload"} = _question) do
-    answer
-    |> Enum.map(fn a ->
-      {:ok, file} = FormbricksClient.encode_file(a)
-      file
-    end)
+    answer =
+      answer
+      |> Enum.map(fn url ->
+        {:ok, file} = FormbricksClient.encode_file(url)
+        %{url: url, file: file}
+      end)
+
+    %{data: answer}
   end
 
   defp format_answer(answer, _question) do
-    answer
+    %{data: answer}
   end
 
   defp prefilling_survey(nil), do: nil
 
   defp prefilling_survey(response) do
-    (response.data["response"] || [])
+    (response.response_items || [])
     |> Enum.reduce(%{}, fn response_item, acc ->
-      case response_item["type"] do
+      case response_item.type do
         "multipleChoiceMulti" ->
           acc
-          |> Map.put(response_item["external_id"], response_item["answer"] |> Enum.join(","))
+          |> Map.put(response_item.question_id, response_item.answer["data"] |> Enum.join(","))
 
         "fileUpload" ->
           acc
-          |> Map.put(response_item["external_id"], response_item["answer"] |> Enum.join(","))
+          |> Map.put(
+            response_item.question_id,
+            response_item.answer["data"] |> Enum.map(& &1["url"]) |> Enum.join(",")
+          )
 
         _ ->
           acc
-          |> Map.put(response_item["external_id"], response_item["answer"])
+          |> Map.put(response_item.question_id, response_item.answer["data"])
       end
     end)
     |> URI.encode_query()

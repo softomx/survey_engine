@@ -11,11 +11,11 @@ defmodule SurveyEngine.Responses.SurveyResponse do
     field :data, :map
     field :date, :date
     field :state, :string
-    #field :user_id, :id
     field :external_id, :string
     belongs_to :user, SurveyEngine.Accounts.User
     belongs_to :lead_form, SurveyEngine.LeadsForms.LeadsForm
     belongs_to :form_group, SurveyEngine.LeadsForms.FormGroup
+    has_many :response_items, SurveyEngine.Responses.SurveyResponseItem
     timestamps(type: :utc_datetime)
   end
 

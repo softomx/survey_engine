@@ -38,7 +38,10 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
   end
 
   defp apply_action(socket, :survey_response, _params) do
-    default_params = %{company_filter: %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}}
+    default_params = %{
+      company_filter: %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}
+    }
+
     changeset = SurveyResponseFilter.changeset(%SurveyResponseFilter{}, default_params)
 
     socket
@@ -87,14 +90,18 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
 
   defp get_rows(params) do
     Responses.list_survey_resposes(%{filter: params})
-    |> Responses.survey_resposes_with_preloads([:form_group, user: [company: [:business_model]]])
+    |> Responses.survey_resposes_with_preloads([
+      :response_items,
+      :form_group,
+      user: [company: [:business_model]]
+    ])
     |> Stream.map(fn response ->
       business_model =
         if response.user.company.business_model,
           do: response.user.company.business_model.name,
           else: "-"
 
-      response.data["response"]
+      response.response_items
       |> Enum.map(fn d ->
         %{
           inserted_at: SurveyEngine.to_timezone(response.user.company.inserted_at),
@@ -105,12 +112,12 @@ defmodule SurveyEngineWeb.ReportLive.SurveyResponse do
           user_email: response.user.email,
           state: response.state |> TransaleteHelper.survey_response_state(),
           form: response.form_group.name,
-          question: d["question"],
+          question: d.question,
           answer:
-            if d["type"] == "fileUpload" do
+            if d.type == "fileUpload" do
               "Documento.PDF"
             else
-              d["answer"]
+              d.answer["data"]
             end
         }
       end)

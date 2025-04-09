@@ -12,6 +12,7 @@ defmodule SurveyEngine.Responses do
   alias SurveyEngine.Repo
 
   alias SurveyEngine.Responses.SurveyResponse
+  alias SurveyEngine.Responses.SurveyResponseItem
 
   @doc """
   Returns the list of survey_responses.
@@ -50,6 +51,7 @@ defmodule SurveyEngine.Responses do
     |> Enum.reduce(query, fn
       {_key, nil}, query ->
         query
+
       {:user_id, user_id}, query ->
         from q in query, where: q.user_id == ^user_id
 
@@ -74,12 +76,13 @@ defmodule SurveyEngine.Responses do
         query_company = Companies.companies_filter(Company, company_filter)
 
         from q in query,
-        join: u in User,
-        on: q.user_id == u.id,
-        join: c in ^query_company,
-        on: u.company_id == c.id
-        _, query ->
-          query
+          join: u in User,
+          on: q.user_id == u.id,
+          join: c in ^query_company,
+          on: u.company_id == c.id
+
+      _, query ->
+        query
     end)
   end
 
@@ -101,6 +104,7 @@ defmodule SurveyEngine.Responses do
 
   def get_survey_response_by_external_id(external_id) do
     Repo.get_by(SurveyResponse, external_id: external_id)
+    |> Repo.preload([:response_items])
   end
 
   def get_previous_response(form_group_id, user_id) do
@@ -108,6 +112,7 @@ defmodule SurveyEngine.Responses do
       filter: %{user_id: user_id, form_group_id: form_group_id, state: "finished"}
     })
     |> List.last()
+    |> Repo.preload([:response_items])
   end
 
   @doc """
@@ -173,5 +178,70 @@ defmodule SurveyEngine.Responses do
   """
   def change_survey_response(%SurveyResponse{} = survey_response, attrs \\ %{}) do
     SurveyResponse.changeset(survey_response, attrs)
+  end
+
+  @doc """
+  Creates a survey_response_item.
+
+  ## Examples
+
+      iex> create_survey_response_item(%{field: value})
+      {:ok, %SurveyResponse{}}
+
+      iex> create_survey_response_item(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_survey_response_item(attrs \\ %{}) do
+    %SurveyResponseItem{}
+    |> SurveyResponseItem.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a survey_response_item.
+
+  ## Examples
+
+      iex> update_survey_response_item(survey_response_item, %{field: new_value})
+      {:ok, %SurveyResponseItem{}}
+
+      iex> update_survey_response_item(survey_response_item, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_survey_response_item(%SurveyResponseItem{} = survey_response_item, attrs) do
+    survey_response_item
+    |> SurveyResponseItem.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a survey_response_item.
+
+  ## Examples
+
+      iex> delete_survey_response_item(survey_response_item)
+      {:ok, %SurveyResponseItem{}}
+
+      iex> delete_survey_response_item(survey_response_item)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_survey_response_item(%SurveyResponseItem{} = survey_response_item) do
+    Repo.delete(survey_response_item)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking survey_response_item changes.
+
+  ## Examples
+
+      iex> change_survey_response_item(survey_response_item)
+      %Ecto.Changeset{data: %SurveyResponseItem{}}
+
+  """
+  def change_survey_response_item(%SurveyResponseItem{} = survey_response_item, attrs \\ %{}) do
+    SurveyResponseItem.changeset(survey_response_item, attrs)
   end
 end
