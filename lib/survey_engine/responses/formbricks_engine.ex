@@ -77,7 +77,25 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     {:ok, %{questions: questions, name: data["name"], status: data["status"]}}
   end
 
-  defp create_new_response(response, lead_form, data, state \\ "created") do
+  defp create_new_response(response, lead_form, data) do
+    previour_response =
+      Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
+
+    case previour_response do
+      nil ->
+        do_create_new_response(
+          response,
+          lead_form,
+          data,
+          "created"
+        )
+
+      survey_response ->
+        update_response_multi(survey_response, response, "created")
+    end
+  end
+
+  defp do_create_new_response(response, lead_form, data, state \\ "created") do
     Ecto.Multi.new()
     |> Ecto.Multi.run(:survey_response, fn _, _ ->
       %{
@@ -112,11 +130,12 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   end
 
   defp update_response(response, lead_form, data) do
-    previour_response = Responses.get_survey_response_by_external_id(data["id"])
+    previour_response =
+      Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
 
     case previour_response do
       nil ->
-        create_new_response(
+        do_create_new_response(
           response,
           lead_form,
           data,
@@ -129,11 +148,12 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   end
 
   defp response_finished(response, lead_form, data) do
-    previour_response = Responses.get_survey_response_by_external_id(data["id"])
+    previour_response =
+      Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
 
     case previour_response do
       nil ->
-        create_new_response(
+        do_create_new_response(
           response,
           lead_form,
           data,

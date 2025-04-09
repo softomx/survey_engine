@@ -14,7 +14,7 @@ defmodule SurveyEngine.Workers.AdminBusinessModelAssignedNotificationWorker do
          {:ok, emails} <- {:ok, get_emails(notification_config)} do
       AdminNotifier.deliver_business_model_assigned(
         emails,
-        "modelo de negocio asignado",
+        "Modelo de negocio asignado",
         %{company: company, user: user, site_config: site_config, locale: company.language},
         site_config.id
       )

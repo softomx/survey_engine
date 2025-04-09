@@ -103,8 +103,11 @@ defmodule SurveyEngine.Responses do
   def get_survey_response!(id),
     do: Repo.get!(SurveyResponse, id) |> Repo.preload([:response_items])
 
-  def get_survey_response_by_external_id(external_id) do
-    Repo.get_by(SurveyResponse, external_id: external_id)
+  def get_survey_response_by_external_id(user_id, lead_form_id) do
+    Repo.get_by(SurveyResponse,
+      user_id: user_id,
+      lead_form_id: lead_form_id
+    )
     |> Repo.preload([:response_items])
   end
 
