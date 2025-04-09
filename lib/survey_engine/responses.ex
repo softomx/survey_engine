@@ -100,16 +100,17 @@ defmodule SurveyEngine.Responses do
       ** (Ecto.NoResultsError)
 
   """
-  def get_survey_response!(id), do: Repo.get!(SurveyResponse, id)
+  def get_survey_response!(id),
+    do: Repo.get!(SurveyResponse, id) |> Repo.preload([:response_items])
 
   def get_survey_response_by_external_id(external_id) do
     Repo.get_by(SurveyResponse, external_id: external_id)
     |> Repo.preload([:response_items])
   end
 
-  def get_previous_response(form_group_id, user_id) do
+  def get_last_response(form_group_id, user_id) do
     list_survey_resposes(%{
-      filter: %{user_id: user_id, form_group_id: form_group_id, state: "finished"}
+      filter: %{user_id: user_id, form_group_id: form_group_id}
     })
     |> List.last()
     |> Repo.preload([:response_items])

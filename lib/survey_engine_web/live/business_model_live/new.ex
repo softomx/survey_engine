@@ -38,23 +38,29 @@ defmodule SurveyEngineWeb.BusinessModelForm.New do
   end
 
   defp assign_preious_response(socket, lead_form, user, company) do
-    previous_response = Responses.get_previous_response(lead_form.form_group_id, user.id)
+    previous_response =
+      Responses.get_last_response(lead_form.form_group_id, user.id)
 
-    url =
-      ResponseProviderBuilder.build_response_provider(
-        lead_form.provider,
-        socket.assigns.site_config,
-        %{
-          response: previous_response,
-          current_user: user,
-          company: company,
-          form: lead_form,
-          lang: socket.assigns.locale
-        }
-      )
-      |> SurveyEngine.Responses.ExternalSurveyEngine.build_url_embed_survey()
+    if !is_nil(previous_response) && previous_response.state == "finished" do
+      socket
+      |> push_navigate(to: ~p"/survey_responses/#{previous_response.id}")
+    else
+      url =
+        ResponseProviderBuilder.build_response_provider(
+          lead_form.provider,
+          socket.assigns.site_config,
+          %{
+            response: previous_response,
+            current_user: user,
+            company: company,
+            form: lead_form,
+            lang: socket.assigns.locale
+          }
+        )
+        |> SurveyEngine.Responses.ExternalSurveyEngine.build_url_embed_survey()
 
-    assign(socket, previous_response: previous_response)
-    |> assign(url: url)
+      assign(socket, previous_response: previous_response)
+      |> assign(url: url)
+    end
   end
 end

@@ -6,39 +6,58 @@
           {gettext("survey_response.date")}
         </div>
         <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-         {SurveyEngine.format_date(@survey_response.date)}
+          {SurveyEngine.format_date(@survey_response.date)}
         </div>
       </div>
-    
+
       <div class="sm:col-span-1">
         <div class="text-sm font-bold text-gray-500 dark:text-gray-400">
           {gettext("survey_response.state")}
         </div>
         <div class="flex gap-2 mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <.icon name="hero-check-circle" :if={@survey_response.state == "finished"} class="text-primary-700 dark:text-primary-300" />
-          <.icon name="hero-arrow-path-rounded-square" :if={@survey_response.state != "finished"} class="text-primary-700 dark:text-primary-300" />
-          <.badge color="primary" label={TransaleteHelper.survey_response_state( @survey_response.state)} />
+          <.icon
+            :if={@survey_response.state == "finished"}
+            name="hero-check-circle"
+            class="text-primary-700 dark:text-primary-300"
+          />
+          <.icon
+            :if={@survey_response.state != "finished"}
+            name="hero-arrow-path-rounded-square"
+            class="text-primary-700 dark:text-primary-300"
+          />
+          <.badge
+            color="primary"
+            label={TransaleteHelper.survey_response_state(@survey_response.state)}
+          />
         </div>
       </div>
     </div>
 
     <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-      <.card :for={response <- @survey_response.data["response"] |> Enum.sort_by(fn i -> i["index"] end)} class="my-2" variant="outline">
+      <.card
+        :for={response <- @survey_response.response_items |> Enum.sort_by(fn i -> i.index end)}
+        class="my-2"
+        variant="outline"
+      >
         <.card_content>
           <div class="flex gap-2">
             <div>
-              <.badge color="primary" label={response["index"]} />
+              <.badge color="primary" label={response.index} />
             </div>
             <div>
-              <p class="text-1xl font-bold text-gray-500">{response["question"]}</p>
-              <%= if response["type"] == "fileUpload" do %>
-                <%= for file <- response["answer"] do %>
-                  <a href={"data:application/octet-stream;base64,#{file}"} download={"#{response["question"]}.pdf"} class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md ">
-                    <.icon name="hero-clipboard-document-list" class="mr-2"/> Ver Documento
+              <p class="text-1xl font-bold text-gray-500">{response.question}</p>
+              <%= if response.type == "fileUpload" do %>
+                <%= for file <- response.answer["data"] do %>
+                  <a
+                    href={"data:application/octet-stream;base64,#{file["file"]}"}
+                    download={"#{response.question}.pdf"}
+                    class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md "
+                  >
+                    <.icon name="hero-clipboard-document-list" class="mr-2" /> Ver Documento
                   </a>
                 <% end %>
               <% else %>
-                <p>{response["answer"]}</p>
+                <p>{response.answer["data"]}</p>
               <% end %>
             </div>
           </div>

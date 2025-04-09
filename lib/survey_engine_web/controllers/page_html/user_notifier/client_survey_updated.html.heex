@@ -607,16 +607,16 @@
                                     end
                                   )}:
                                 </h4>
-                                <%= for response <- @response.data["response"] |> Enum.sort_by(fn i -> i["index"] end) do %>
+                                <%= for response <- @response.response_items |> Enum.sort_by(fn i -> i.index end) do %>
                                   <center style="border-bottom-width: 1px; border-bottom-color: #f0f0f0; border-bottom-style: solid; border-bottom-style: solid; padding-bottom: 4px;">
                                     <p
                                       class="text-20 font-strong text-center"
                                       style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px;"
                                     >
-                                      {response["index"]}. {response["question"]}
+                                      {response.index}. {response.question}
                                     </p>
-                                    <%= if response["type"] == "fileUpload" do %>
-                                      <%= for _file <- response["answer"] do %>
+                                    <%= if response.type == "fileUpload" do %>
+                                      <%= for _file <- response.answer do %>
                                         <p
                                           class="text-14 font-strong text-center"
                                           style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
@@ -635,7 +635,7 @@
                                         class="text-14 font-strong text-center"
                                         style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
                                       >
-                                        {response["answer"]}
+                                        {response.answer["data"]}
                                       </p>
                                     <% end %>
                                   </center>

@@ -37,7 +37,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     query_string =
       prefilling_survey(response)
 
-    "#{@base_url}/s/#{form.external_id}?userId=#{current_user.id}&suId=#{build_unique_id(company, current_user)}&#{query_string}"
+    "#{@base_url}/s/#{form.external_id}?skipPrefilled=true&userId=#{current_user.id}&suId=#{build_unique_id(company, current_user)}&#{query_string}"
   end
 
   defp build_unique_id(company, user) do
