@@ -1,4 +1,6 @@
 defmodule SurveyEngine.Accounts.User do
+  alias SurveyEngine.Accounts.UserRole
+  alias SurveyEngine.Accounts.Role
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,6 +12,7 @@ defmodule SurveyEngine.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
     belongs_to :company, SurveyEngine.Companies.Company
+    many_to_many(:roles, Role, join_through: UserRole, join_keys: [ user_id: :id, role_id: :id],  on_replace: :delete)
     timestamps(type: :utc_datetime)
   end
 
