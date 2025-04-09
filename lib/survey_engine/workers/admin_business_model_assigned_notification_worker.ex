@@ -15,7 +15,7 @@ defmodule SurveyEngine.Workers.AdminBusinessModelAssignedNotificationWorker do
       AdminNotifier.deliver_business_model_assigned(
         emails,
         "modelo de negocio asignado",
-        %{company: company, user: user, site_config: site_config},
+        %{company: company, user: user, site_config: site_config, locale: company.language},
         site_config.id
       )
     end

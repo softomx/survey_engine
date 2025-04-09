@@ -14,7 +14,7 @@ defmodule SurveyEngine.Workers.AdminRegisterNotificationWorker do
       AdminNotifier.deliver_new_register(
         emails,
         "Nuevo registro",
-        %{company: company, user: user, site_config: site_config},
+        %{company: company, user: user, site_config: site_config, locale: company.language},
         site_config.id
       )
     end

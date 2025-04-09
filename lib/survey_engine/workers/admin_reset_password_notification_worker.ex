@@ -14,7 +14,7 @@ defmodule SurveyEngine.Workers.AdminResetPasswordNotificationWorker do
       AdminNotifier.deliver_reset_user_password(
         emails,
         "Cambio de contraseña",
-        %{company: company, user: user, site_config: site_config},
+        %{company: company, user: user, site_config: site_config, locale: company.language},
         site_config.id
       )
     end

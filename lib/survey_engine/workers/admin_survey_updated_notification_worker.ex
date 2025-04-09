@@ -17,7 +17,13 @@ defmodule SurveyEngine.Workers.AdminSurveyUpdatedNotificationWorker do
       AdminNotifier.deliver_survey_updated(
         emails,
         "Formulario finalizado",
-        %{company: company, user: user, site_config: site_config, response: response},
+        %{
+          company: company,
+          user: user,
+          site_config: site_config,
+          response: response,
+          locale: company.language
+        },
         site_config.id
       )
     end
