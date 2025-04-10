@@ -3,6 +3,7 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
 
   alias SurveyEngine.Accounts
   alias SurveyEngine.Permissions
+  alias SurveyEngine.TransaleteHelper
 
   @impl true
   def mount(_params, _session, socket) do
@@ -124,11 +125,11 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
       </.tr>
       <%= for {r, permissions} <- @permissions |> Enum.group_by(fn p -> p.resource end) do %>
         <.tr class="bg-gray-200">
-          <.td colspan={length(@roles) + 1}>{r}</.td>
+          <.td colspan={length(@roles) + 1}>{TransaleteHelper.permission_resource(r)}</.td>
         </.tr>
         <%= for permission <- permissions do %>
           <.tr>
-            <.td>{permission.name}</.td>
+            <.td>{TransaleteHelper.permission_action(permission.action)}</.td>
             <%= for role <- @roles do %>
               <.td>
                 <input
