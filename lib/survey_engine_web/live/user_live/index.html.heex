@@ -1,0 +1,33 @@
+<div>
+  <.page_header title={gettext("Listing Users")} />
+  <.data_table :if={@index_params} meta={@meta} items={@users}>
+    <:col field={:email} sortable filterable={[:ilike]}/>
+    <:col :let={user}  field={:inserted_at}>
+        <p>{SurveyEngine.to_timezone(user.inserted_at)}</p>
+    </:col>
+    <:col label="Actions" :let={user} align_right>
+        <.button
+          color="white"
+          variant="outline"
+          size="xs"
+          link_type="live_patch"
+          label="Edit"
+          to={~p"/admin/users/#{user}/edit_roles"}
+        />
+      </:col>
+  </.data_table>
+
+  <%= if @live_action in [:edit_roles] do %>
+  <.modal title={@page_title}>
+    <.live_component
+      module={SurveyEngineWeb.UserLive.FormRoleComponent}
+      id={@user.id || :new}
+      title={@page_title}
+      action={@live_action}
+      user={@user}
+      patch={~p"/admin/users"}
+    />
+  </.modal>
+<% end %>
+
+</div>

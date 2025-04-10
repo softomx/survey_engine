@@ -90,6 +90,12 @@ defmodule SurveyEngine.PermissionManager do
         icon: "hero-clipboard-document-list"
       },
       %{
+        name: ~p"/admin/users",
+        label: "Usuarios",
+        path: ~p"/admin/users",
+        icon: "hero-user"
+      },
+      %{
         name: ~p"/admin/roles",
         label: "Roles",
         path: ~p"/admin/roles",

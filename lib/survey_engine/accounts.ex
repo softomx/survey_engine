@@ -80,6 +80,15 @@ defmodule SurveyEngine.Accounts do
     end
   end
 
+  def get_user_with_preloads(id, preloads) do
+    get_user(id)
+    |> case do
+      {:ok, user} ->
+        {:ok, user |> Repo.preload(preloads)}
+      error -> error
+    end
+  end
+
   ## User registration
 
   @doc """
@@ -413,6 +422,25 @@ defmodule SurveyEngine.Accounts do
   """
   def list_roles do
     Repo.all(Role)
+  end
+
+  def list_roles(args) do
+    args
+    |> Enum.reduce(Role, fn
+      {:filter, filter}, query ->
+        query |> roles_filter(filter)
+    end)
+    |> Repo.all()
+  end
+
+  def roles_filter(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {:ids, ids}, query ->
+        from q in query, where: q.id in ^ids
+      _, query ->
+        query
+    end)
   end
 
   def list_roles_with_preloads(preloads) do
