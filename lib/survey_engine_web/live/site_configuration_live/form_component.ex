@@ -21,8 +21,55 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
       >
         <.field field={@form[:name]} type="text" label="Name" />
         <.field field={@form[:url]} type="text" label="Url" />
-        <.field field={@form[:tenant]} type="text" label="Tenant" />
         <.field field={@form[:active]} type="checkbox" label="Active" />
+
+        <.label>Webhook</.label>
+        <.inputs_for :let={extra_config} field={@form[:extra_config]}>
+          <.field field={extra_config[:url]} type="text" label="url" />
+          <.field field={extra_config[:api_key]} type="text" label="API key" />
+        </.inputs_for>
+        <.label>Configuracion de proveedores de formularios</.label>
+        <input type="hidden" name="notitication[providers_drop][]" />
+        <.inputs_for :let={survey_provider_form} field={@form[:survey_providers]}>
+          <div class="flex items-center gap-2">
+            <input
+              type="hidden"
+              name="site_configuration[to_sort][]"
+              value={survey_provider_form.index}
+            />
+            <.combo_box
+              options={[{"Formbricks", "formbricks"}]}
+              type="select"
+              field={survey_provider_form[:provider]}
+              label="Proveedor"
+            />
+            <.field type="text" wrapper_class="flex-1" field={survey_provider_form[:url]} label="Url" />
+            <.field type="text" field={survey_provider_form[:api_key]} label="apiKey" />
+
+            <.button
+              with_icon
+              color="danger"
+              type="button"
+              size="xs"
+              name="site_configuration[providers_drop][]"
+              value={survey_provider_form.index}
+              phx-click={JS.dispatch("change")}
+            >
+              <.icon name="hero-x-mark" class="w-4 h-4 " />
+            </.button>
+          </div>
+        </.inputs_for>
+        <.button
+          with_icon
+          color="info"
+          type="button"
+          size="xs"
+          name="site_configuration[providers_sort][]"
+          value="new"
+          phx-click={JS.dispatch("change")}
+        >
+          <.icon name="hero-plus" class="w-4 h-4" /> proveedor formularios
+        </.button>
 
         <.button phx-disable-with="Saving...">Save Site configuration</.button>
       </.form>
@@ -64,7 +111,7 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Site configuration updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
+         |> push_navigate(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}

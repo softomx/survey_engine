@@ -1,39 +1,39 @@
 defmodule SurveyEngine.FormbricksClient do
-  def get_survey(id) do
-    get_base_url()
+  def get_survey(survey_provider_config, id) do
+    get_base_url(survey_provider_config)
     |> build_url("/api/v1/management/surveys/#{id}")
-    |> make_request(:get)
+    |> make_request(survey_provider_config, :get)
   end
 
-  def get_survey_response(id) do
-    get_base_url()
+  def get_survey_response(survey_provider_config, id) do
+    get_base_url(survey_provider_config)
     |> build_url("/api/v1/management/responses/#{id}")
-    |> make_request(:get)
+    |> make_request(survey_provider_config, :get)
   end
 
-  def get_responses_by_survey(survey_id) do
-    get_base_url()
+  def get_responses_by_survey(survey_provider_config, survey_id) do
+    get_base_url(survey_provider_config)
     |> build_url("/api/v1/management/responses?surveyId=#{survey_id}")
-    |> make_request(:get)
+    |> make_request(survey_provider_config, :get)
   end
 
-  def get_webhooks() do
-    get_base_url()
+  def get_webhooks(survey_provider_config) do
+    get_base_url(survey_provider_config)
     |> build_url("/api/v1/management/webhooks")
-    |> make_request(:get)
+    |> make_request(survey_provider_config, :get)
   end
 
-  defp get_base_url() do
-    "https://form-surveys-formbricks-app.mbf3gu.easypanel.host"
+  defp get_base_url(survey_provider_config) do
+    survey_provider_config.url
   end
 
   defp build_url(base_url, path) do
     base_url <> path
   end
 
-  defp make_request(url, method, body \\ "") do
+  defp make_request(url, survey_provider_config, method, body \\ "") do
     HTTPoison.start()
-    headers = ["x-api-key": "5a59e36304167ea0257cf1ac0b8e8252"]
+    headers = ["x-api-key": survey_provider_config.api_key]
 
     case HTTPoison.request(method, url, body, headers) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -58,8 +58,8 @@ defmodule SurveyEngine.FormbricksClient do
     end
   end
 
-  def encode_file(file_url) do
-    case HTTPoison.get(file_url, "x-api-key": "5a59e36304167ea0257cf1ac0b8e8252") do
+  def encode_file(file_url, survey_provider_config) do
+    case HTTPoison.get(file_url, "x-api-key": survey_provider_config.api_key) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, Base.encode64(body)}
 

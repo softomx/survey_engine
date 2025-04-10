@@ -298,7 +298,7 @@
             >
               {Gettext.with_locale(
                 SurveyEngineWeb.Gettext,
-                @content.language,
+                @locale,
                 fn ->
                   gettext("A new record was created with the following information")
                 end
@@ -390,7 +390,7 @@
                                 >
                                   {Gettext.with_locale(
                                     SurveyEngineWeb.Gettext,
-                                    @content.language,
+                                    @locale,
                                     fn ->
                                       gettext("continue process")
                                     end
@@ -418,7 +418,7 @@
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
                                   <br />{Gettext.with_locale(
                                     SurveyEngineWeb.Gettext,
-                                    @content.language,
+                                    @locale,
                                     fn ->
                                       gettext("This is the information entered")
                                     end
@@ -440,7 +440,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Legal name")
                                               end
@@ -461,7 +461,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Agency Type")
                                               end
@@ -482,7 +482,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Billy Currency")
                                               end
@@ -503,7 +503,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Language")
                                               end
@@ -524,7 +524,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Country")
                                               end
@@ -545,7 +545,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("Town")
                                               end
@@ -566,7 +566,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @content.language,
+                                              @locale,
                                               fn ->
                                                 gettext("City")
                                               end
@@ -606,14 +606,14 @@
                                       {response.index}. {response.question}
                                     </p>
                                     <%= if response.type == "fileUpload" do %>
-                                      <%= for _file <- response["answer"] do %>
+                                      <%= for _file <- response.answer do %>
                                         <p
                                           class="text-14 font-strong text-center"
                                           style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: 600; padding: 4px 0 4px 12px; opacity: 60%;"
                                         >
                                           {Gettext.with_locale(
                                             SurveyEngineWeb.Gettext,
-                                            @content.language,
+                                            @locale,
                                             fn ->
                                               gettext("Document")
                                             end

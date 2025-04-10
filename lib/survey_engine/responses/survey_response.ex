@@ -12,6 +12,7 @@ defmodule SurveyEngine.Responses.SurveyResponse do
     field :date, :date
     field :state, :string
     field :external_id, :string
+    field :review_state, :string, default: "pending"
     belongs_to :user, SurveyEngine.Accounts.User
     belongs_to :lead_form, SurveyEngine.LeadsForms.LeadsForm
     belongs_to :form_group, SurveyEngine.LeadsForms.FormGroup
@@ -22,7 +23,16 @@ defmodule SurveyEngine.Responses.SurveyResponse do
   @doc false
   def changeset(survey_response, attrs) do
     survey_response
-    |> cast(attrs, [:date, :state, :user_id, :lead_form_id, :data, :external_id, :form_group_id])
+    |> cast(attrs, [
+      :date,
+      :state,
+      :user_id,
+      :lead_form_id,
+      :data,
+      :external_id,
+      :form_group_id,
+      :review_state
+    ])
     |> validate_required([:date, :state, :external_id, :form_group_id])
   end
 end

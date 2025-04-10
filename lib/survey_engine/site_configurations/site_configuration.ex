@@ -22,13 +22,21 @@ defmodule SurveyEngine.SiteConfigurations.SiteConfiguration do
       where: [type: "site_configurations", behaviour: "politicas"]
 
     has_one :mailer_configuration, SurveyEngine.Mailer.MailerConfiguration
+
+    embeds_one :extra_config, SurveyEngine.SiteConfigurations.ExtraConfig, on_replace: :delete
+
+    embeds_many :survey_providers, SurveyEngine.SiteConfigurations.SurveyProvider,
+      on_replace: :delete
+
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(site_configuration, attrs) do
     site_configuration
-    |> cast(attrs, [:name, :url, :tenant, :active, :consumer_api_token])
-    |> validate_required([:name, :url, :tenant, :active])
+    |> cast(attrs, [:name, :url, :tenant, :active])
+    |> validate_required([:name, :url, :active])
+    |> cast_embed(:extra_config)
+    |> cast_embed(:survey_providers, sort_param: :providers_sort, drop_param: :providers_drop)
   end
 end

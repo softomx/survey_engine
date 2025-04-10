@@ -217,14 +217,29 @@ defmodule SurveyEngineWeb.CoreComponents do
       label={TransaleteHelper.survey_response_state("finished")}
     />
     <.badge
+      :if={@value == "assigned"}
+      color="success"
+      label={TransaleteHelper.survey_response_state("Asignado")}
+    />
+    <.badge
       :if={@value == "pending"}
       color="warning"
       label={TransaleteHelper.survey_response_state("pending")}
     />
     <.badge
-      :if={@value == "info_error"}
+      :if={@value == "rejected"}
       color="danger"
-      label={TransaleteHelper.survey_response_state("info_error")}
+      label={TransaleteHelper.survey_response_state("rejected")}
+    />
+    <.badge
+      :if={@value == "approved"}
+      color="danger"
+      label={TransaleteHelper.survey_response_state("approved")}
+    />
+    <.badge
+      :if={@value == "created"}
+      color="danger"
+      label={TransaleteHelper.survey_response_state("created")}
     />
     """
   end

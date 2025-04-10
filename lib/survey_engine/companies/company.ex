@@ -17,7 +17,9 @@ defmodule SurveyEngine.Companies.Company do
     field :agency_type, :string
     field :billing_currency, :string
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
+    # pending,assigned,finished, approved, rejected, created
     field :status, :string, default: "pending"
+
     embeds_many :links, SurveyEngine.Companies.CompanyLink, on_replace: :delete
     has_one :affiliate, SurveyEngine.AffiliateEngine.Affiliate, on_replace: :delete
 

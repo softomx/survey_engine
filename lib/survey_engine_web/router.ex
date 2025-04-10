@@ -213,8 +213,8 @@ defmodule SurveyEngineWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
       live "/site_configurations", SiteConfigurationLive.Index, :index
-      live "/site_configurations/new", SiteConfigurationLive.Index, :new
-      live "/site_configurations/:id/edit", SiteConfigurationLive.Index, :edit
+      live "/site_configurations/new", SiteConfigurationLive.New, :new
+      live "/site_configurations/:id/edit", SiteConfigurationLive.Edit, :edit
 
       live "/form_groups", FormGroupLive.Index, :index
       live "/form_groups/new", FormGroupLive.Index, :new
