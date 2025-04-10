@@ -211,6 +211,8 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             &url(~p"/users/confirm/#{&1}")
           )
 
+        Accounts.set_user_cllient_role(user)
+
         changeset = Accounts.change_user_registration_with_company(user)
 
         {:noreply,

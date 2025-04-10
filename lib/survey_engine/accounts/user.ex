@@ -54,6 +54,12 @@ defmodule SurveyEngine.Accounts.User do
     |> cast_assoc(:company)
   end
 
+  def roles_changeset(user, roles) do
+    user
+    |> change()
+    |> put_assoc(:roles, roles)
+  end
+
   defp validate_email(changeset, opts) do
     changeset
     |> validate_required([:email])

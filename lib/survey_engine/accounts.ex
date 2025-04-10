@@ -179,6 +179,21 @@ defmodule SurveyEngine.Accounts do
     end
   end
 
+  def update_user_with_roles(%User{} = user, roles) do
+    user
+    |> Repo.preload(:roles)
+    |> User.roles_changeset(roles)
+    |> Repo.update()
+  end
+
+  def set_user_cllient_role(%User{} = user) do
+    get_role_by_slug("client")
+    |> case do
+      {:ok, role} -> update_user_with_roles(user, [role])
+      _error -> {:ok, user}
+    end
+  end
+
   defp user_email_multi(user, email, context) do
     changeset =
       user
