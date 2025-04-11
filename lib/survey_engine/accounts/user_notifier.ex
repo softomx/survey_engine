@@ -76,6 +76,36 @@ defmodule SurveyEngine.Accounts.UserNotifier do
     )
   end
 
+  def deliver_rejected_survey(
+      user,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "client_survey_rejected.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
+  def deliver_approved_survey(
+        user,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "client_survey_approved.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
   @doc """
   Deliver instructions to reset a user password.
   """

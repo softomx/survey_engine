@@ -110,4 +110,15 @@ defmodule SurveyEngine.Notifications do
   def change_notification(%Notification{} = notification, attrs \\ %{}) do
     Notification.changeset(notification, attrs)
   end
+
+  def get_content_by_language([], _), do: {:error, "no se encuentra elcontenido del mensaje"}
+
+  def get_content_by_language(contents, language) do
+    contents
+    |> Enum.find(&(&1.language == language))
+    |> case do
+      nil -> {:ok, contents |> List.first()}
+      content -> {:ok, content}
+    end
+  end
 end

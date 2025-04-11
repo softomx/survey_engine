@@ -75,4 +75,34 @@ defmodule SurveyEngine.Accounts.AdminNotifier do
       site_config_id
     )
   end
+
+  def deliver_rejected_survey(
+        to,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "admin_survey_rejected.html",
+      to,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
+  def deliver_approved_survey(
+        to,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "admin_survey_approved.html",
+      to,
+      subject,
+      content,
+      site_config_id
+    )
+  end
 end

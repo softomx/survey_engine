@@ -95,6 +95,27 @@ defmodule SurveyEngine.NotificationManager do
     end
   end
 
+  def notify_review_survey(
+        %SurveyResponse{} = survey_response,
+        %SiteConfiguration{} = site_config
+      ) do
+    enqueue_worker(
+      SurveyEngine.Workers.ClientReviewSurveyNotificationWorker,
+      [
+        survey_response.id,
+        site_config.id
+      ]
+    )
+
+    enqueue_worker(
+      SurveyEngine.Workers.AdminReviewSurveyNotificationWorker,
+      [
+        survey_response.id,
+        site_config.id
+      ]
+    )
+  end
+
   defp enqueue_worker(module, options) do
     Exq.enqueue(
       Exq,

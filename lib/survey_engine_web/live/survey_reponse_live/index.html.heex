@@ -77,6 +77,9 @@
       end
     }
   />
+  <:col :let={response}  field={:review_state} >
+    {response.review_state}
+  </:col>
 
   <:col :let={response} label={gettext("Actions")} align_right>
     <.button
@@ -86,6 +89,15 @@
       link_type="live_redirect"
       label={gettext("show")}
       to={~p"/survey_responses/#{response}"}
+    />
+    <.button
+      :if={response.review_state == "pending"}
+      color="primary"
+      variant="outline"
+      size="xs"
+      link_type="live_redirect"
+      label={gettext("validate")}
+      to={~p"/admin/survey_answers/#{response}/validate"}
     />
     <%!-- <.button
       color="white"

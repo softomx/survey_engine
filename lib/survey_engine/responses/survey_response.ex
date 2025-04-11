@@ -13,6 +13,7 @@ defmodule SurveyEngine.Responses.SurveyResponse do
     field :state, :string
     field :external_id, :string
     field :review_state, :string, default: "pending"
+    field :review_comments, :string
     belongs_to :user, SurveyEngine.Accounts.User
     belongs_to :lead_form, SurveyEngine.LeadsForms.LeadsForm
     belongs_to :form_group, SurveyEngine.LeadsForms.FormGroup
@@ -31,7 +32,8 @@ defmodule SurveyEngine.Responses.SurveyResponse do
       :data,
       :external_id,
       :form_group_id,
-      :review_state
+      :review_state,
+      :review_comments
     ])
     |> validate_required([:date, :state, :external_id, :form_group_id])
   end

@@ -103,6 +103,14 @@ defmodule SurveyEngine.Responses do
   def get_survey_response!(id),
     do: Repo.get!(SurveyResponse, id) |> Repo.preload([:response_items])
 
+  def get_survey_response(id) do
+    Repo.get(SurveyResponse, id)
+    |> case do
+      nil -> {:error, "SurveyResponse notfound"}
+      survey_response -> {:ok, survey_response}
+    end
+  end
+
   def get_survey_response_by_external_id(user_id, lead_form_id) do
     Repo.get_by(SurveyResponse,
       user_id: user_id,
@@ -117,6 +125,14 @@ defmodule SurveyEngine.Responses do
     })
     |> List.last()
     |> Repo.preload([:response_items])
+  end
+
+  def get_survey_response_with_preloads(id, preloads) do
+    get_survey_response(id)
+    |> case do
+      {:ok, survey_response} -> {:ok, survey_response |> Repo.preload(preloads)}
+      {:error, error} -> {:error, error}
+    end
   end
 
   @doc """
