@@ -438,6 +438,41 @@ defmodule SurveyEngineWeb.CoreComponents do
     """
   end
 
+  attr :survey_response, :map, default: %{}
+
+  def card_survey_response(assigns) do
+    ~H"""
+      <.card
+        :for={response <- @survey_response.response_items |> Enum.sort_by(fn i -> i.index end)}
+        class="my-2"
+        variant="outline"
+      >
+        <.card_content>
+          <div class="flex gap-2">
+            <div>
+              <.badge color="primary" label={response.index} />
+            </div>
+            <div>
+              <p class="text-1xl font-bold text-gray-500">{response.question}</p>
+              <%= if response.type == "fileUpload" do %>
+                <a
+                  :for={file <- response.answer["data"]}
+                  href={"data:application/octet-stream;base64,#{file["file"]}"}
+                  download={"#{response.question}.pdf"}
+                  class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md "
+                >
+                  <.icon name="hero-clipboard-document-list" class="mr-2" /> Ver Documento
+                </a>
+              <% else %>
+                <p>{response.answer["data"]}</p>
+              <% end %>
+            </div>
+          </div>
+        </.card_content>
+      </.card>
+    """
+  end
+
   def markdown_text(nil), do: ""
 
   def markdown_text(type_description, description) do

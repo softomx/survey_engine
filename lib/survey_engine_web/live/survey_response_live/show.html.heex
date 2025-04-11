@@ -39,34 +39,7 @@
     </div>
 
     <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-      <.card
-        :for={response <- @survey_response.response_items |> Enum.sort_by(fn i -> i.index end)}
-        class="my-2"
-        variant="outline"
-      >
-        <.card_content>
-          <div class="flex gap-2">
-            <div>
-              <.badge color="primary" label={response.index} />
-            </div>
-            <div>
-              <p class="text-1xl font-bold text-gray-500">{response.question}</p>
-              <%= if response.type == "fileUpload" do %>
-                <a
-                  :for={file <- response.answer["data"]}
-                  href={"data:application/octet-stream;base64,#{file["file"]}"}
-                  download={"#{response.question}.pdf"}
-                  class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md "
-                >
-                  <.icon name="hero-clipboard-document-list" class="mr-2" /> Ver Documento
-                </a>
-              <% else %>
-                <p>{response.answer["data"]}</p>
-              <% end %>
-            </div>
-          </div>
-        </.card_content>
-      </.card>
+      <.card_survey_response survey_response={@survey_response} />
     </div>
   </div>
 </.container>
