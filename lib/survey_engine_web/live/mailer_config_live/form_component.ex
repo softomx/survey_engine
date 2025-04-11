@@ -120,7 +120,7 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
   end
 
   defp save_mailer_config(socket, :new, mailer_config_params) do
-    case MailerManager.create_mailer_config(mailer_config_params) |> IO.inspect() do
+    case MailerManager.create_mailer_config(mailer_config_params) do
       {:ok, mailer_config} ->
         {:noreply,
          socket

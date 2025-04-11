@@ -16,9 +16,12 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
 
   defp apply_action(socket, :new_affiliate, %{"id" => id}) do
     company = Companies.get_company!(id)
+
     responses =
-      Responses.list_survey_resposes(%{filter: %{state: "finished", company_filter: %{id: company.id}}})
-      |> Responses.survey_resposes_with_preloads([:user, :form_group])
+      Responses.list_survey_resposes(%{
+        filter: %{state: "finished", company_filter: %{id: company.id}}
+      })
+      |> Responses.survey_resposes_with_preloads([:response_items, :user, :form_group])
 
     socket
     |> assign(:page_title, "#{String.upcase(company.legal_name)}: Nuevo Afiliado")
@@ -34,7 +37,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
       |> Enum.find(fn response -> "#{response.id}" == "#{survey_response_id}" end)
       |> case do
         nil -> %Affiliate{company_id: socket.assigns.company.id}
-        response ->  mapper_affiliate(response, socket.assigns.company)
+        response -> mapper_affiliate(response, socket.assigns.company)
       end
 
     {:noreply, socket |> assign(:affiliate, affiliate)}
@@ -42,20 +45,24 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
 
   defp mapper_affiliate(response, company) do
     init_affiliate = %Affiliate{company_id: company.id}
+
     mappers =
-    SurveyMappers.list_survey_mappers(%{filter: %{survey_id: response.lead_form_id, type: "affiliate"}})
+      SurveyMappers.list_survey_mappers(%{
+        filter: %{survey_id: response.lead_form_id, type: "affiliate"}
+      })
+
     if length(mappers) > 0 do
-      res = response.data["response"]
+      res = response.response_items
+
       Enum.reduce(mappers, init_affiliate, fn mapper, acc ->
-        Enum.find(res, fn r -> r["external_id"] ==  "#{mapper.question_id}" end)
+        Enum.find(res, fn r -> r.question_id == "#{mapper.question_id}" end)
         |> case do
           nil -> acc
-          res_value -> Map.put(acc, String.to_atom(mapper.field), res_value["answer"])
+          res_value -> Map.put(acc, String.to_atom(mapper.field), res_value.answer["data"])
         end
       end)
     else
       init_affiliate
     end
   end
-
 end

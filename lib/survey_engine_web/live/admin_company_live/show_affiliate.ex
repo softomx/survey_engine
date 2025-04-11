@@ -1,4 +1,6 @@
 defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
+  alias SurveyEngine.AffiliateEngine
+  alias SurveyEngine.AffiliateEngine.Affiliate
   use SurveyEngineWeb, :live_view
   alias SurveyEngine.{Companies}
   @impl true
@@ -11,6 +13,24 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
+  def handle_event("create_external_affiliate", _params, socket) do
+    with {:ok, external_affiliate} <-
+           AffiliateEngine.create_external_affiliate(
+             socket.assigns.site_config,
+             socket.assigns.affiliate
+           )
+           |> IO.inspect() do
+      socket
+      |> put_flash(:info, gettext("affiliate.external_affiliate_created"))
+    else
+      {:error, changeset} ->
+        socket
+        |> put_flash(:error, gettext("affiliate.external_affiliate_error"))
+        |> assign(:changeset, changeset)
+    end
+
+    {:noreply, socket}
+  end
 
   defp apply_action(socket, :show_affiliate, %{"id" => id}) do
     with {:ok, company} <- Companies.get_company_with_preloads(id, :affiliate) do
@@ -28,64 +48,64 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
   @impl true
   def render(assigns) do
     ~H"""
-      <div class="max-w-lg">
-        <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.name")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.name %>
-            </div>
+    <div class="max-w-lg">
+      <.button label="Crear afiliado en GXS" phx-click="create_external_affiliate" />
+      <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.name")}
           </div>
-
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.slug")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.affiliate_slug %>
-            </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.name}
           </div>
+        </div>
 
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.trading_name")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.trading_name %>
-            </div>
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.slug")}
           </div>
-
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.business_name")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.business_name %>
-            </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.affiliate_slug}
           </div>
+        </div>
 
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.rfc")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.rfc %>
-            </div>
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.trading_name")}
           </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.trading_name}
+          </div>
+        </div>
 
-          <div class="sm:col-span-1">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {gettext("affiliate.company_type")}
-            </div>
-            <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-              <%= @affiliate.company_type %>
-            </div>
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.business_name")}
+          </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.business_name}
+          </div>
+        </div>
+
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.rfc")}
+          </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.rfc}
+          </div>
+        </div>
+
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.company_type")}
+          </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.company_type}
           </div>
         </div>
       </div>
+    </div>
     """
   end
-
 end

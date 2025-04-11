@@ -74,10 +74,10 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     with {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, lead_form} <-
            LeadsForms.get_lead_form_by_external_id("formbricks", data["surveyId"]),
-         {:ok, survey_response} <-
-           FormbricksClient.get_survey(site_config, lead_form.external_id),
-         {:ok, survey} <- format_survey(survey_response),
          {:ok, survey_provider_config} <- get_surver_provider_config(site_config),
+         {:ok, survey_response} <-
+           FormbricksClient.get_survey(survey_provider_config, lead_form.external_id),
+         {:ok, survey} <- format_survey(survey_response),
          {:ok, response} <-
            {:ok, format_client_response(survey, data["data"], survey_provider_config)} do
       fun.(response, lead_form, data)

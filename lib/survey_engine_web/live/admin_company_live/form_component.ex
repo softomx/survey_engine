@@ -133,7 +133,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
   defp save_company(socket, :assign, company_params) do
     case Companies.update_company(
            socket.assigns.company,
-           company_params |> Map.put("status", "finished")
+           company_params |> Map.put("status", "assigned")
          ) do
       {:ok, company} ->
         NotificationManager.notify_business_model_assigned(company, socket.assigns.site_config)

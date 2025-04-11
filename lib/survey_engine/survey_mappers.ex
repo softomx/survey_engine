@@ -46,7 +46,6 @@ defmodule SurveyEngine.SurveyMappers do
     |> Repo.all()
   end
 
-
   def filter_survey_mapper(query, filter) do
     filter
     |> Enum.reduce(query, fn
@@ -56,8 +55,8 @@ defmodule SurveyEngine.SurveyMappers do
       {:type, type}, query ->
         from q in query, where: q.type == ^type
 
-        _, query ->
-          query
+      _, query ->
+        query
     end)
   end
 

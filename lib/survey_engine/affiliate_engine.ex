@@ -8,6 +8,41 @@ defmodule SurveyEngine.AffiliateEngine do
 
   alias SurveyEngine.AffiliateEngine.Affiliate
 
+  def create_external_affiliate(site_config, %Affiliate{} = affiliate) do
+    webhook_config = site_config.extra_config
+
+    affiliate_attrs =
+      %{
+        name: affiliate.name,
+        slug: affiliate.name,
+        trading_name: affiliate.trading_name,
+        business_name: affiliate.business_name,
+        rfc: affiliate.rfc,
+        agency_type: "credito",
+        company_type: affiliate.company_type,
+        fiscal_address: %{
+          street: "street name",
+          external_number: "external_number",
+          neighborhood: "neighborhood",
+          country: "country",
+          postal_code: "postal_code",
+          location: "0"
+        }
+      }
+      |> IO.inspect()
+
+    with {:ok, response} <-
+           SurveyEngine.ReservatorClient.create_external_affiliate(
+             webhook_config.url,
+             affiliate_attrs,
+             [
+               {"Authorization", webhook_config.api_key}
+             ]
+           ) do
+    end
+    |> IO.inspect()
+  end
+
   @doc """
   Returns the list of affiliates.
 
