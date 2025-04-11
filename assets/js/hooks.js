@@ -5,7 +5,10 @@ let Hooks = {};
 
 Hooks.MarkDownEditor = {
     mounted() {
-      const editor = create_editor(this.el)
+      create_editor(this.el)
+    },
+    updated() {
+      create_editor(this.el)
     }
   }
   
@@ -18,6 +21,21 @@ Hooks.formbrickForm = {
         console.log("jjj")
         var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://unpkg.com/@formbricks/js@^1.6.5/dist/index.umd.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e),setTimeout(function(){window.formbricks.init({environmentId: "cm7jd1jwk000a30l593liijl3", apiHost: "https://form-surveys-formbricks-app.mbf3gu.easypanel.host"})},500)
     }
+}
+
+Hooks.Copy = {
+  mounted() {
+    this.el.addEventListener("click", async () => {
+      const textToCopy = this.el.dataset.clipboardText || this.el.innerText;
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        this.el.innerText = "Copiado!";
+      } catch (err) {
+        console.error("Error al copiar al portapapeles", err);
+      }
+    });
+  }
 }
 
 Hooks.BeforeUnload = {

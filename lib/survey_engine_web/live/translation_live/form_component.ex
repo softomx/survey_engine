@@ -24,13 +24,17 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
           placeholder="Selecciona un lenguage"
           options={[{"Español", "es"}, {"Ingles", "en"}]}
         />
-        <.combo_box
-          field={@form[:content_type]}
-          type="select"
-          label="Tipo de contenido"
-          placeholder="Selecciona un tipo de contenido"
-          options={[{"Texto plano", "text_plain"}, {"HTML", "html"}]}
-        />
+        <%= if @behaviour != "policies" do %>
+          <.combo_box
+            field={@form[:content_type]}
+            type="select"
+            label="Tipo de contenido"
+            placeholder="Selecciona un tipo de contenido"
+            options={[{"Texto plano", "text_plain"}, {"HTML", "html"}]}
+          />
+        <% else %>
+          <.input field={@form[:content_type]} type="hidden" value={@type_input_text} />
+        <% end %>
         <%= if @type_input_text == "html" do %>
           <.field
             field={@form[:description]}
@@ -56,7 +60,11 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
 
   @impl true
   def update(%{translation: translation} = assigns, socket) do
-    content_type = Map.get(translation, :content_type, "text_plain")
+    content_type =
+      case assigns.behaviour do
+        "policies" -> "html"
+        _ -> Map.get(translation, :content_type, "text_plain")
+      end
 
     {:ok,
      socket
@@ -70,7 +78,12 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
   @impl true
   def handle_event("validate", %{"translation" => translation_params}, socket) do
     changeset = Translations.change_translation(socket.assigns.translation, translation_params)
-    content_type = Map.get(translation_params, "content_type", "text_plain")
+
+    content_type =
+      case socket.assigns.behaviour do
+        "policies" -> "html"
+        _ -> Map.get(translation_params, "content_type", "text_plain")
+      end
 
     {:noreply,
      socket

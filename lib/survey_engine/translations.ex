@@ -4,6 +4,7 @@ defmodule SurveyEngine.Translations do
   """
 
   import Ecto.Query, warn: false
+  alias SurveyEngine.Translations.PolicyForm
   alias SurveyEngine.Repo
 
   alias SurveyEngine.Translations.Translation
@@ -146,5 +147,9 @@ defmodule SurveyEngine.Translations do
   """
   def change_translation(%Translation{} = translation, attrs \\ %{}) do
     Translation.changeset(translation, attrs)
+  end
+
+  def change_policy_form(%PolicyForm{} = filter, attrs \\ %{}) do
+    PolicyForm.changeset(filter, attrs)
   end
 end

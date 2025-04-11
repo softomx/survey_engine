@@ -24,9 +24,29 @@ defmodule SurveyEngineWeb.SiteContentLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
+  @impl true
+  def handle_event("close_modal", _, socket) do
+    {:noreply, push_patch(socket, to: current_index_path(socket.assigns.behaviour))}
+  end
+
   defp apply_action(
          socket,
          :index,
+         %{"behaviour" => behaviour} = params
+       ) do
+    socket
+    |> assign(:page_title, build_page_title(params))
+    |> assign(:translation, nil)
+    |> assign_translations(params)
+    |> assign(:index_params, params)
+    |> assign(:resource_id, socket.assigns.site_config.id)
+    |> assign(:type, "site_configurations")
+    |> assign(:behaviour, behaviour)
+  end
+
+  defp apply_action(
+         socket,
+         :policie_url_modal,
          %{"behaviour" => behaviour} = params
        ) do
     socket
@@ -81,5 +101,9 @@ defmodule SurveyEngineWeb.SiteContentLive.Index do
       behaviour == "policies" ->
         "Nueva Politica"
     end
+  end
+
+  defp current_index_path(behaviour) do
+    ~p"/admin/content/#{behaviour}"
   end
 end

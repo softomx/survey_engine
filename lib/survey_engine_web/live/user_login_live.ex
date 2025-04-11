@@ -38,6 +38,11 @@ defmodule SurveyEngineWeb.UserLoginLive do
                 </.async_result>
               </p>
             </div>
+            <div class="self-start hidden lg:flex flex-col my-3">
+              <.link navigate={~p"/policies"} class="text-md text-primary-700 hover:text-primary-700">
+                {gettext("Policies")}
+              </.link>
+            </div>
           </div>
         </div>
         <div class="flex justify-center self-center  z-10">
