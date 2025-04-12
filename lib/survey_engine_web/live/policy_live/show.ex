@@ -20,8 +20,7 @@ defmodule SurveyEngineWeb.PolicyLive.Show do
              "site_configurations",
              "policies",
              assigns.locale
-           )
-           |> IO.inspect() do
+           ) do
       {:noreply,
        socket
        |> assign(:page_title, page_title(socket.assigns.live_action))

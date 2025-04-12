@@ -1,4 +1,4 @@
-defmodule SurveyEngineWeb.SurveyResponseLive.Show do
+defmodule SurveyEngineWeb.SurveyReponseLive.Show do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Responses
@@ -18,7 +18,7 @@ defmodule SurveyEngineWeb.SurveyResponseLive.Show do
 
   @impl true
   def handle_event("close_modal", _, socket) do
-    {:noreply, push_patch(socket, to: ~p"/survey_responses/#{socket.assigns.survey_response}")}
+    {:noreply, push_patch(socket, to: ~p"/admin/survey_answers/#{socket.assigns.survey_response}")}
   end
 
   defp page_title(:show), do: "Show Survey response"

@@ -163,6 +163,7 @@ defmodule SurveyEngineWeb.Router do
       live "/catalogs/currencies/:id/edit", CurrencyLive.Index, :edit
       live "/survey_answers", SurveyReponseLive.Index, :index
       live "/survey_answers/:id/validate", SurveyResponseLive.Validate, :validate
+      live "/survey_answers/:id", SurveyReponseLive.Show, :show
       live "/catalogs/agency_types", AgencyTypeLive.Index, :index
 
       live "/catalogs/agency_types/new", AgencyTypeLive.Index, :new

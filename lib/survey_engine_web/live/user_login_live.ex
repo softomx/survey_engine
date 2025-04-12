@@ -147,7 +147,6 @@ defmodule SurveyEngineWeb.UserLoginLive do
   end
 
   def handle_async(:get_scopes, {:ok, {:ok, fetched_org}}, socket) do
-    IO.inspect(fetched_org)
     %{scopes: scopes} = socket.assigns
     {:noreply, assign(socket, :scopes, AsyncResult.ok(scopes, fetched_org))}
   end
@@ -158,7 +157,6 @@ defmodule SurveyEngineWeb.UserLoginLive do
   end
 
   def handle_async(:get_goals, {:ok, {:ok, fetched_goals}}, socket) do
-    IO.inspect(fetched_goals)
     %{goals: goals} = socket.assigns
     {:noreply, assign(socket, :goals, AsyncResult.ok(goals, fetched_goals))}
   end
