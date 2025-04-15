@@ -60,7 +60,7 @@ msgstr ""
 msgid "town"
 msgstr "Estado"
 
-#: lib/survey_engine_web/live/user_login_live.ex:48
+#: lib/survey_engine_web/live/user_login_live.ex:53
 #, elixir-autogen, elixir-format
 msgid "Don't have an account?"
 msgstr "¿No tienes una cuenta?"
@@ -71,12 +71,12 @@ msgid "Goals"
 msgstr "Metas"
 
 #: lib/survey_engine_web/live/embed_live/form_component.ex:51
-#: lib/survey_engine_web/live/user_login_live.ex:63
+#: lib/survey_engine_web/live/user_login_live.ex:68
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr "Correo electronico"
 
-#: lib/survey_engine_web/live/user_login_live.ex:86
+#: lib/survey_engine_web/live/user_login_live.ex:91
 #, elixir-autogen, elixir-format
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
@@ -86,12 +86,12 @@ msgstr "¿Olvidaste tu contraseña?"
 msgid "Log in"
 msgstr ""
 
-#: lib/survey_engine_web/live/user_login_live.ex:73
+#: lib/survey_engine_web/live/user_login_live.ex:78
 #, elixir-autogen, elixir-format
 msgid "Password"
 msgstr "Contraseña"
 
-#: lib/survey_engine_web/live/user_login_live.ex:53
+#: lib/survey_engine_web/live/user_login_live.ex:58
 #, elixir-autogen, elixir-format
 msgid "Sign up"
 msgstr "Registrate"
@@ -212,12 +212,12 @@ msgstr ""
 msgid "Select an agency"
 msgstr ""
 
-#: lib/survey_engine_web/live/user_login_live.ex:46
+#: lib/survey_engine_web/live/user_login_live.ex:51
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Sign In"
 msgstr "Registrate"
 
-#: lib/survey_engine_web/live/user_login_live.ex:95
+#: lib/survey_engine_web/live/user_login_live.ex:100
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Sign in"
 msgstr "Registrate"
@@ -635,17 +635,17 @@ msgstr "Información aprovada"
 msgid "notification_mailer.rejected_information"
 msgstr "Información Descartada"
 
-#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:16
+#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "response.comments"
 msgstr "Comentarios"
 
-#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:14
+#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:11
 #, elixir-autogen, elixir-format
 msgid "response.review_state"
-msgstr "Estado de validacion"
+msgstr "Estado de validación"
 
-#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:19
+#: lib/survey_engine_web/live/survey_response_live/validate.html.heex:15
 #, elixir-autogen, elixir-format
 msgid "save"
 msgstr "Guardar"
@@ -665,4 +665,45 @@ msgstr ""
 #: lib/survey_engine_web/live/survey_reponse_live/index.html.heex:99
 #, elixir-autogen, elixir-format
 msgid "validate"
+msgstr ""
+
+#: lib/survey_engine_web/live/site_content_live/policies_url_modal.ex:12
+#, elixir-autogen, elixir-format
+msgid "Policie Url"
+msgstr ""
+
+#: lib/survey_engine_web/live/policy_live/show.html.heex:2
+#: lib/survey_engine_web/live/user_login_live.ex:43
+#, elixir-autogen, elixir-format
+msgid "Policies"
+msgstr ""
+
+#: lib/survey_engine_web/live/site_content_live/index.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Policies url"
+msgstr ""
+
+#: lib/survey_engine_web/live/survey_reponse_live/index.html.heex:80
+#, elixir-autogen, elixir-format
+msgid "review_state"
+msgstr "Estado de validación"
+
+#: lib/survey_engine_web/states_helper.ex:18
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response_review.approved"
+msgstr "Aprovado"
+
+#: lib/survey_engine_web/states_helper.ex:17
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response_review.pending"
+msgstr "Pendiente"
+
+#: lib/survey_engine_web/states_helper.ex:19
+#, elixir-autogen, elixir-format, fuzzy
+msgid "survey_response_review.rejected"
+msgstr "Rechazado"
+
+#: lib/survey_engine_web/live/site_content_live/policies_url_modal.ex:15
+#, elixir-autogen, elixir-format
+msgid "url"
 msgstr ""

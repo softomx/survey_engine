@@ -1,0 +1,29 @@
+<.container class="py-16">
+  <.card_survey_response survey_response={@survey_response}>
+    <:actions :let={response_item}>
+      <.button
+        disabled={response_item.type == "consent"}
+        color="primary"
+        link_type="live_patch"
+        label={"Editar"}
+        to={~p"/admin/survey_answers/#{@survey_response}/edit_item/#{response_item}"}
+      />
+    </:actions>
+
+  </.card_survey_response>
+
+
+  <%= if @live_action in [:edit_response_item] do %>
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.SurveyResponseLive.EditComponent}
+        id={@survey_response_item.id}
+        action={@live_action}
+        external_form={@external_form}
+        survey_response_item={@survey_response_item}
+        return_to={~p"/admin/survey_answers/#{@survey_response}"}
+      />
+    </.modal>
+  <% end %>
+
+</.container>

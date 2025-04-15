@@ -77,8 +77,8 @@
       end
     }
   />
-  <:col :let={response}  field={:review_state} >
-    {response.review_state}
+  <:col :let={response} field={:review_state}  label={gettext("review_state")}>
+    <.response_review_state_badge value={response.review_state} />
   </:col>
 
   <:col :let={response} label={gettext("Actions")} align_right>
@@ -88,7 +88,7 @@
       size="xs"
       link_type="live_redirect"
       label={gettext("show")}
-      to={~p"/survey_responses/#{response}"}
+      to={~p"/admin/survey_answers/#{response}"}
     />
     <.button
       :if={response.review_state == "pending"}
@@ -99,22 +99,5 @@
       label={gettext("validate")}
       to={~p"/admin/survey_answers/#{response}/validate"}
     />
-    <%!-- <.button
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label="Editar"
-      to={~p"/admin/companies/#{company}/edit"}
-    />
-    <.button
-      :if={is_nil(company.business_model_id)}
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label="Clasificar"
-      to={~p"/admin/companies/#{company}/assign"}
-    /> --%>
   </:col>
 </.data_table>

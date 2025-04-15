@@ -244,6 +244,28 @@ defmodule SurveyEngineWeb.CoreComponents do
     """
   end
 
+  attr :value, :string, required: true
+
+  def response_review_state_badge(assigns) do
+    ~H"""
+     <.badge
+        :if={@value == "pending"}
+        color="warning"
+        label={TransaleteHelper.survey_response_review_state("pending")}
+      />
+      <.badge
+        :if={@value == "approved"}
+        color="success"
+        label={TransaleteHelper.survey_response_review_state("approved")}
+      />
+      <.badge
+        :if={@value == "rejected"}
+        color="danger"
+        label={TransaleteHelper.survey_response_review_state("rejected")}
+      />
+    """
+  end
+
   attr :required, :boolean, required: true
 
   def required_badge(assigns) do
@@ -439,6 +461,7 @@ defmodule SurveyEngineWeb.CoreComponents do
   end
 
   attr :survey_response, :map, default: %{}
+  slot :actions, doc: "the slot for form actions, such as an action button"
 
   def card_survey_response(assigns) do
     ~H"""
@@ -452,25 +475,50 @@ defmodule SurveyEngineWeb.CoreComponents do
             <div>
               <.badge color="primary" label={response.index} />
             </div>
-            <div>
+            <div class="flex-1">
               <p class="text-1xl font-bold text-gray-500">{response.question}</p>
-              <%= if response.type == "fileUpload" do %>
-                <a
-                  :for={file <- response.answer["data"]}
-                  href={"data:application/octet-stream;base64,#{file["file"]}"}
-                  download={"#{response.question}.pdf"}
-                  class="pc-button pc-button--primary-inverted pc-button--md pc-button--radius-md "
-                >
-                  <.icon name="hero-clipboard-document-list" class="mr-2" /> Ver Documento
-                </a>
-              <% else %>
-                <p>{response.answer["data"]}</p>
+              <%= case response.type do %>
+                <% "fileUpload" -> %>
+                  <div class="flex gap-2">
+                    <.card variant="outline" :for={file <- response.answer["data"]}>
+                      <.card_content category={""} class="p-3">
+                      <div>
+                        <.icon
+                          name="hero-document"
+                          class="text-primary-700 dark:text-primary-300 w-16 h-16"
+                        />
+                        <.badge color="primary" label=".PDF" />
+                      </div>
+                      <a
+                        href={"data:application/octet-stream;base64,#{file["file"]}"}
+                        download={"#{response.question}.pdf"}
+                        class="pc-button pc-button--primary-inverted pc-button--xs pc-button--radius-md "
+                      >
+                        Ver Documento
+                      </a>
+                      </.card_content>
+                    </.card>
+                  </div>
+                <% "multipleChoiceMulti" -> %>
+                  <ul>
+                    <%= for answer <- response.answer["data"] do %>
+                      <li>{answer}</li>
+                    <% end %>
+                  </ul>
+                <% _ -> %>
+                  <p>{response.answer["data"]}</p>
               <% end %>
+
             </div>
-          </div>
-        </.card_content>
-      </.card>
-    """
+            <div :if={@actions != []}>
+            <p class="mt-2 text-sm leading-6 text-zinc-600">
+                {render_slot(@actions, response)}
+              </p>
+            </div>
+        </div>
+      </.card_content>
+    </.card>
+  """
   end
 
   def markdown_text(nil), do: ""

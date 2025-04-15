@@ -12,6 +12,15 @@ defmodule SurveyEngine.TransaleteHelper do
     end
   end
 
+  def survey_response_review_state(state) do
+    case state do
+      "pending" -> gettext("survey_response_review.pending")
+      "approved" -> gettext("survey_response_review.approved")
+      "rejected" -> gettext("survey_response_review.rejected")
+      _ -> state
+    end
+  end
+
   def list_survey_response_states() do
     ["pending", "updated", "finished", "info_error"]
     |> Enum.map(fn state ->
