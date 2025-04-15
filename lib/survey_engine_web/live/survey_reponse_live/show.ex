@@ -19,13 +19,15 @@ defmodule SurveyEngineWeb.SurveyReponseLive.Show do
   end
 
   defp apply_action(socket, :show, %{"id" => id}) do
+    {:ok, survey_response} = Responses.get_survey_response_with_preloads(id, [[response_items: :editor_user]])
+
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:survey_response, Responses.get_survey_response!(id))
+     |> assign(:survey_response, survey_response)
   end
 
   defp apply_action(socket, :edit_response_item, %{"id" => id, "item_id" => item_id}) do
-    {:ok, survey_response} = Responses.get_survey_response_with_preloads(id, [:response_items, :lead_form])
+    {:ok, survey_response} = Responses.get_survey_response_with_preloads(id, [[response_items: :editor_user],  :lead_form])
     response_item = Enum.find(survey_response.response_items, fn item -> "#{item.id}" == item_id end)
     socket
     |> assign(:page_title, page_title(socket.assigns.live_action))

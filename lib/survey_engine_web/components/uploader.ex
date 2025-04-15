@@ -30,7 +30,8 @@ defmodule SurveyEngineWeb.UploaderComponent do
         survey_response_item.answer["data"] ++ [%{"url" => url, "file" => file_base64}]
 
       case SurveyEngine.Responses.update_survey_response_item(socket.assigns.resource, %{
-             "answer" => %{"data" => data}
+             "answer" => %{"data" => data},
+             "editor_user_id" => socket.assigns.current_user.id
            }) do
         {:ok, _survey_response_item} ->
           {:ok, path}

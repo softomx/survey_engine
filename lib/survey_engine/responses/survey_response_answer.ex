@@ -9,13 +9,14 @@ defmodule SurveyEngine.Responses.SurveyResponseItem do
     field :question, :string
     field :question_id, :string
     belongs_to :survey_response, SurveyEngine.Responses.SurveyResponse
+    belongs_to :editor_user, SurveyEngine.Accounts.User, foreign_key: :editor_user_id
     timestamps(type: :utc_datetime)
   end
 
   @doc false
   def changeset(survey_response, attrs) do
     survey_response
-    |> cast(attrs, [:type, :index, :answer, :question, :question_id, :survey_response_id])
+    |> cast(attrs, [:type, :index, :answer, :question, :question_id, :survey_response_id, :editor_user_id])
     |> validate_required([:type, :index, :answer, :question, :question_id, :survey_response_id])
   end
 end
