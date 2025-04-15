@@ -16,3 +16,33 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+  Your application is ready to be deployed in a release!
+
+See https://hexdocs.pm/mix/Mix.Tasks.Release.html for more information about Elixir releases.
+
+Using the generated Dockerfile, your release will be bundled into
+a Docker image, ready for deployment on platforms that support Docker.
+
+For more information about deploying with Docker see
+https://hexdocs.pm/phoenix/releases.html#containers
+
+Here are some useful release commands you can run in any release environment:
+
+    # To build a release
+    mix release
+
+    # To start your system with the Phoenix server running
+    _build/dev/rel/survey_engine/bin/server
+
+    # To run migrations
+    _build/dev/rel/survey_engine/bin/migrate
+
+Once the release is running you can connect to it remotely:
+
+    _build/dev/rel/survey_engine/bin/survey_engine remote
+
+To list all commands:
+
+    _build/dev/rel/survey_engine/bin/survey_engine
