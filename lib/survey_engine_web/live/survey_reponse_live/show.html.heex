@@ -1,15 +1,22 @@
 <.container class="py-16">
   <.card_survey_response survey_response={@survey_response}>
     <:actions :let={response_item}>
-      <.button
-        disabled={response_item.type == "consent"}
-        color="primary"
-        link_type="live_patch"
-        label={"Editar"}
-        to={~p"/admin/survey_answers/#{@survey_response}/edit_item/#{response_item}"}
-      />
+      <div class="flex flex-col  items-end ">
+        <.button
+          disabled={response_item.type == "consent"}
+          color="primary"
+          link_type="live_patch"
+          label={"Editar"}
+          to={~p"/admin/survey_answers/#{@survey_response}/edit_item/#{response_item}"}
+        />
+        <div :if={response_item.editor_user}>
+          <p class="text-xs">{gettext("edit_details")}</p>
+          <p class="text-xs">{response_item.editor_user.email}</p>
+          <p class="text-xs">{SurveyEngine.to_timezone(response_item.updated_at)}</p>
+        </div>
+      </div>
     </:actions>
-
+    editor_user
   </.card_survey_response>
 
 
@@ -21,6 +28,7 @@
         action={@live_action}
         external_form={@external_form}
         survey_response_item={@survey_response_item}
+        current_user={@current_user}
         return_to={~p"/admin/survey_answers/#{@survey_response}"}
       />
     </.modal>

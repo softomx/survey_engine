@@ -31,27 +31,28 @@
         </div>
 
         <hr class="m-2">
-
+        <.label>{gettext("upload file")}</.label>
         <.live_component
             id="upload_survey_response_item_file"
             resource={@survey_response_item}
             module={SurveyEngineWeb.UploaderComponent}
+            current_user={@current_user}
             return_to={@return_to}
             accept_file={~w(.pdf)}
             helper_text=".pdf" />
     <% else %>
-        <.form :let={f} for={to_form(%{}, as: :response_item)} id="validate-response-form" phx-submit="save" phx-target={@myself}>
+        <.form for={@form} id="validate-response-form" phx-submit="save" phx-change="validate" phx-target={@myself}>
             <%= case @survey_response_item.type do %>
                 <% "date" ->%>
-                    <.field type="date" field={f[:date]} value={@survey_response_item.answer["data"]} label={@survey_response_item.question}/>
+                    <.field type="date" field={@form[:date]} label={@survey_response_item.question}/>
                 <% "openText" -> %>
-                    <.field type="textarea" cols="5" field={f[:open_text]} value={@survey_response_item.answer["data"]} label={@survey_response_item.question} />
+                    <.field required type="textarea" cols="5" field={@form[:open_text]} label={@survey_response_item.question} />
                 <% "multipleChoiceMulti" -> %>
                     <.field
-                        field={f[:choice_multiple]}
+                        required
+                        field={@form[:choice_multiple]}
                         type="checkbox-group"
                         label={@survey_response_item.question}
-                        checked={@survey_response_item.answer["data"]}
                         options={@response_item_info.options |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)}
                         group_layout="col"
                     />
@@ -59,17 +60,16 @@
 
                 <.field
                     type="radio-group"
-                    field={f[:choice_single]}
+                    field={@form[:choice_single]}
                     group_layout="col"
                     label={@survey_response_item.question}
-                    value={@survey_response_item.answer["data"]}
                     options={@response_item_info.options |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)}
                 />
                 <% _ -> %>
                 not implemented
             <% end %>
             <div class="flex justify-end">
-                <.button type="submit" phx-disable-with="Guardando..." label={gettext("save")} />
+                <.button type="submit" phx-disable-with="Guardando..." label={gettext("save")} disabled={!@form.source.valid?} />
             </div>
         </.form>
     <% end %>
