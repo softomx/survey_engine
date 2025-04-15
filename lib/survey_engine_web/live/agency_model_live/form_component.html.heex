@@ -1,0 +1,19 @@
+<div>
+  <.form
+    for={@form}
+    id="agency_model-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+    
+    <.field type="text" field={@form[:name]} />
+    
+    <div class="flex justify-end">
+      <.button
+        type="submit"
+        phx-disable-with="Saving..."
+        label="Save"
+      />
+    </div>
+  </.form>
+</div>

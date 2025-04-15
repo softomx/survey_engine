@@ -6,13 +6,17 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
     field :survey_id, :id, virtual: true
     field :name, :string
     field :affiliate_slug, :string
+    # fiscal_name
     field :trading_name, :string
     field :business_name, :string
     field :rfc, :string
-    field :company_type, :string
-    field :external_affiliate_id, :string, virtual: true
+    field :agency_model, :string, source: :company_type
+    field :agency_type, :string
+    field :base_currency, :string
+    field :external_affiliate_id, :string
+    field :state, :string, default: "draft"
     belongs_to :company, SurveyEngine.Companies.Company
-    # embeds_one :address, SurveyEngine.AffiliateEngine.Address
+    embeds_one :address, SurveyEngine.AffiliateEngine.Address, on_replace: :update
     timestamps(type: :utc_datetime)
   end
 
@@ -25,9 +29,10 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
       :trading_name,
       :business_name,
       :rfc,
-      :company_type,
+      :agency_model,
       :company_id,
-      :external_affiliate_id
+      :external_affiliate_id,
+      :state
     ])
     |> validate_required([
       :name,
@@ -35,10 +40,10 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
       :trading_name,
       :business_name,
       :rfc,
-      :company_type,
-      :company_id
+      :agency_model,
+      :company_id,
+      :state
     ])
-
-    # |> cast_embed(:address)
+    |> cast_embed(:address)
   end
 end

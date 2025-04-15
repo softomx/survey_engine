@@ -18,8 +18,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
            AffiliateEngine.create_external_affiliate(
              socket.assigns.site_config,
              socket.assigns.affiliate
-           )
-           |> IO.inspect() do
+           ) do
       socket
       |> put_flash(:info, gettext("affiliate.external_affiliate_created"))
     else
@@ -37,7 +36,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
       socket
       |> assign(:page_title, "#{String.upcase(company.legal_name)}: Afiliado")
       |> assign(:company, company)
-      |> assign(:affiliate, company.affiliate)
+      |> assign(:affiliate, %{company.affiliate | company: company})
     else
       _error ->
         socket
@@ -49,7 +48,11 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
   def render(assigns) do
     ~H"""
     <div class="max-w-lg">
-      <.button label="Crear afiliado en GXS" phx-click="create_external_affiliate" />
+      <.button
+        :if={is_nil(@affiliate.external_affiliate_id)}
+        label="Crear afiliado en GXS"
+        phx-click="create_external_affiliate"
+      />
       <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
         <div class="sm:col-span-1">
           <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -57,6 +60,14 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
           </div>
           <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
             {@affiliate.name}
+          </div>
+        </div>
+        <div class="sm:col-span-1">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {gettext("affiliate.external_affiliate_id")}
+          </div>
+          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            {@affiliate.external_affiliate_id}
           </div>
         </div>
 
@@ -98,10 +109,10 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
 
         <div class="sm:col-span-1">
           <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.company_type")}
+            {gettext("affiliate.agency_model")}
           </div>
           <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.company_type}
+            {@affiliate.agency_model}
           </div>
         </div>
       </div>

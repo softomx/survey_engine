@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
+  alias SurveyEngine.AffiliateEngine.Address
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.SurveyMappers
@@ -32,19 +33,43 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
 
   @impl true
   def handle_event("select_response", %{"survey_response_id" => survey_response_id}, socket) do
-    affiliate =
+    responses =
       socket.assigns.responses
-      |> Enum.find(fn response -> "#{response.id}" == "#{survey_response_id}" end)
-      |> case do
-        nil -> %Affiliate{company_id: socket.assigns.company.id}
-        response -> mapper_affiliate(response, socket.assigns.company)
+
+    affiliate =
+      cond do
+        length(responses) == 1 ->
+          responses
+          |> List.first()
+          |> mapper_affiliate(socket.assigns.company)
+
+        true ->
+          responses
+          |> Enum.find(fn response -> "#{response.id}" == "#{survey_response_id}" end)
+          |> case do
+            nil -> %Affiliate{company_id: socket.assigns.company.id}
+            response -> mapper_affiliate(response, socket.assigns.company)
+          end
       end
+      |> IO.inspect()
 
     {:noreply, socket |> assign(:affiliate, affiliate)}
   end
 
   defp mapper_affiliate(response, company) do
-    init_affiliate = %Affiliate{company_id: company.id}
+    init_affiliate =
+      %Affiliate{
+        company_id: company.id,
+        trading_name: company.legal_name,
+        business_name: company.agency_name,
+        agency_type: company.agency_type,
+        agency_model: company.agency_model,
+        address: %Address{
+          country: company.country,
+          state: company.town,
+          city: company.city
+        }
+      }
 
     mappers =
       SurveyMappers.list_survey_mappers(%{

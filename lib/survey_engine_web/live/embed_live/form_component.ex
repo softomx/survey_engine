@@ -105,6 +105,15 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 label={gettext_with_locale(@locale, gettext("Agency Type"))}
               />
             </div>
+            <div class="col-span-12 lg:col-span-6 md:col-span-4">
+              <.combo_box
+                field={f2[:agency_model]}
+                placeholder={gettext_with_locale(@locale, gettext("Select an agency"))}
+                type="select"
+                options={@agency_models}
+                label={gettext_with_locale(@locale, gettext("Agency model"))}
+              />
+            </div>
             <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center">
               <span
                 class="pc-button pc-button--primary pc-button--md pc-button--radius-md w-full"

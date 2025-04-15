@@ -4,6 +4,7 @@ defmodule SurveyEngine.AffiliateEngine do
   """
 
   import Ecto.Query, warn: false
+  alias SurveyEngine.AffiliateEngine
   alias SurveyEngine.Repo
 
   alias SurveyEngine.AffiliateEngine.Affiliate
@@ -18,18 +19,19 @@ defmodule SurveyEngine.AffiliateEngine do
         trading_name: affiliate.trading_name,
         business_name: affiliate.business_name,
         rfc: affiliate.rfc,
-        agency_type: "credito",
-        company_type: affiliate.company_type,
+        agency_type: affiliate.agency_model,
+        company_type: affiliate.agency_type,
+        base_currency: affiliate.base_currency,
         fiscal_address: %{
-          street: "street name",
-          external_number: "external_number",
-          neighborhood: "neighborhood",
-          country: "country",
-          postal_code: "postal_code",
+          street: affiliate.address.street,
+          internal_number: affiliate.address.internal_number,
+          external_number: affiliate.address.external_number,
+          neighborhood: affiliate.address.neighborhood,
+          country: affiliate.address.country,
+          postal_code: affiliate.address.postal_code,
           location: "0"
         }
       }
-      |> IO.inspect()
 
     with {:ok, response} <-
            SurveyEngine.ReservatorClient.create_external_affiliate(
@@ -39,10 +41,15 @@ defmodule SurveyEngine.AffiliateEngine do
                {"Authorization", webhook_config.api_key}
              ]
            ) do
+      AffiliateEngine.update_affiliate(affiliate, %{
+        state: "created",
+        external_affiliate_id: "#{response["data"]["id"]}"
+      })
+      |> IO.inspect(label: "AffiliateEngine.update_affiliate")
     end
-    |> IO.inspect()
   end
 
+  @spec list_affiliates() :: any()
   @doc """
   Returns the list of affiliates.
 

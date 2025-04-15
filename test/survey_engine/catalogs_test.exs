@@ -170,4 +170,58 @@ defmodule SurveyEngine.CatalogsTest do
       assert %Ecto.Changeset{} = Catalogs.change_personal_title(personal_title)
     end
   end
+
+  describe "agency_models" do
+    alias SurveyEngine.Catalogs.AgencyModel
+
+    import SurveyEngine.CatalogsFixtures
+
+    @invalid_attrs %{name: nil}
+
+    test "list_agency_models/0 returns all agency_models" do
+      agency_model = agency_model_fixture()
+      assert Catalogs.list_agency_models() == [agency_model]
+    end
+
+    test "get_agency_model!/1 returns the agency_model with given id" do
+      agency_model = agency_model_fixture()
+      assert Catalogs.get_agency_model!(agency_model.id) == agency_model
+    end
+
+    test "create_agency_model/1 with valid data creates a agency_model" do
+      valid_attrs = %{name: "some name"}
+
+      assert {:ok, %AgencyModel{} = agency_model} = Catalogs.create_agency_model(valid_attrs)
+      assert agency_model.name == "some name"
+    end
+
+    test "create_agency_model/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Catalogs.create_agency_model(@invalid_attrs)
+    end
+
+    test "update_agency_model/2 with valid data updates the agency_model" do
+      agency_model = agency_model_fixture()
+      update_attrs = %{name: "some updated name"}
+
+      assert {:ok, %AgencyModel{} = agency_model} = Catalogs.update_agency_model(agency_model, update_attrs)
+      assert agency_model.name == "some updated name"
+    end
+
+    test "update_agency_model/2 with invalid data returns error changeset" do
+      agency_model = agency_model_fixture()
+      assert {:error, %Ecto.Changeset{}} = Catalogs.update_agency_model(agency_model, @invalid_attrs)
+      assert agency_model == Catalogs.get_agency_model!(agency_model.id)
+    end
+
+    test "delete_agency_model/1 deletes the agency_model" do
+      agency_model = agency_model_fixture()
+      assert {:ok, %AgencyModel{}} = Catalogs.delete_agency_model(agency_model)
+      assert_raise Ecto.NoResultsError, fn -> Catalogs.get_agency_model!(agency_model.id) end
+    end
+
+    test "change_agency_model/1 returns a agency_model changeset" do
+      agency_model = agency_model_fixture()
+      assert %Ecto.Changeset{} = Catalogs.change_agency_model(agency_model)
+    end
+  end
 end

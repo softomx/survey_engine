@@ -17,6 +17,7 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
           user={@user}
           list_languages={@languages}
           agency_types={@agency_types}
+          agency_models={@agency_models}
           countries={@countries}
           site_config={@site_config}
         />
@@ -47,6 +48,7 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
       |> assign(:countries, Countries.all() |> Enum.map(&{&1.name, &1.alpha2}))
       |> assign(:currencies, Catalogs.list_currencies() |> Enum.map(&{&1.name, &1.slug}))
       |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(&{&1.name, &1.name}))
+      |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(&{&1.name, &1.name}))
       |> assign(:towns, [])
       |> assign(:user, %User{})
       |> assign(:languages, list_languages)

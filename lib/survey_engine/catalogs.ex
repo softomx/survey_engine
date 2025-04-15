@@ -317,4 +317,100 @@ defmodule SurveyEngine.Catalogs do
   def change_personal_title(%PersonalTitle{} = personal_title, attrs \\ %{}) do
     PersonalTitle.changeset(personal_title, attrs)
   end
+
+  alias SurveyEngine.Catalogs.AgencyModel
+
+  @doc """
+  Returns the list of agency_models.
+
+  ## Examples
+
+      iex> list_agency_models()
+      [%AgencyModel{}, ...]
+
+  """
+  def list_agency_models do
+    Repo.all(AgencyModel)
+  end
+
+  @doc """
+  Gets a single agency_model.
+
+  Raises `Ecto.NoResultsError` if the Agency model does not exist.
+
+  ## Examples
+
+      iex> get_agency_model!(123)
+      %AgencyModel{}
+
+      iex> get_agency_model!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_agency_model!(id), do: Repo.get!(AgencyModel, id)
+
+  @doc """
+  Creates a agency_model.
+
+  ## Examples
+
+      iex> create_agency_model(%{field: value})
+      {:ok, %AgencyModel{}}
+
+      iex> create_agency_model(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_agency_model(attrs \\ %{}) do
+    %AgencyModel{}
+    |> AgencyModel.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a agency_model.
+
+  ## Examples
+
+      iex> update_agency_model(agency_model, %{field: new_value})
+      {:ok, %AgencyModel{}}
+
+      iex> update_agency_model(agency_model, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_agency_model(%AgencyModel{} = agency_model, attrs) do
+    agency_model
+    |> AgencyModel.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a agency_model.
+
+  ## Examples
+
+      iex> delete_agency_model(agency_model)
+      {:ok, %AgencyModel{}}
+
+      iex> delete_agency_model(agency_model)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_agency_model(%AgencyModel{} = agency_model) do
+    Repo.delete(agency_model)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking agency_model changes.
+
+  ## Examples
+
+      iex> change_agency_model(agency_model)
+      %Ecto.Changeset{data: %AgencyModel{}}
+
+  """
+  def change_agency_model(%AgencyModel{} = agency_model, attrs \\ %{}) do
+    AgencyModel.changeset(agency_model, attrs)
+  end
 end

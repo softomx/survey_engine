@@ -42,6 +42,13 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
         label="Agency type"
       />
       <.combo_box
+        field={@form[:agency_model]}
+        placeholder="Selecciona el tipo de agencia"
+        type="select"
+        options={@agency_models}
+        label="Agency type"
+      />
+      <.combo_box
         field={@form[:billing_currency]}
         placeholder="Selecciona una moneda de facturacion"
         type="select"
@@ -75,6 +82,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
       |> assign(:countries, Countries.all() |> Enum.map(&{&1.name, &1.alpha2}))
       |> assign(:currencies, Catalogs.list_currencies() |> Enum.map(&{&1.name, &1.slug}))
       |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(&{&1.name, &1.name}))
+      |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(&{&1.name, &1.name}))
       |> assign(:towns, [])
     }
   end

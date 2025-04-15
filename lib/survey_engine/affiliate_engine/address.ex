@@ -2,6 +2,8 @@ defmodule SurveyEngine.AffiliateEngine.Address do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:country, :state, :city]}
+
   @primary_key false
   embedded_schema do
     field(:street, :string)
@@ -9,7 +11,6 @@ defmodule SurveyEngine.AffiliateEngine.Address do
     field(:external_number, :string)
     field(:neighborhood, :string)
     field(:city, :string)
-    field(:town, :string)
     field(:country, :string)
     field(:state, :string)
     field(:postal_code, :string)
@@ -25,7 +26,6 @@ defmodule SurveyEngine.AffiliateEngine.Address do
       :country,
       :state,
       :postal_code,
-      :town,
       :external_number,
       :location
     ])
@@ -34,8 +34,7 @@ defmodule SurveyEngine.AffiliateEngine.Address do
       :external_number,
       :neighborhood,
       :country,
-      :postal_code,
-      :location
+      :postal_code
     ])
   end
 end

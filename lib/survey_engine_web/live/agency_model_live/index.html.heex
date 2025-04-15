@@ -1,37 +1,31 @@
 <.container class="py-16">
-  <.page_header title="Listing Affiliates">
-    <.button link_type="live_patch" label="New Affiliate" to={~p"/affiliates/new"} />
+  <.page_header title="Listing Agency models">
+    <.button link_type="live_patch" label="New Agency model" to={~p"/catalogs/agency_models/new"} />
   </.page_header>
 
   <%= if @live_action in [:new, :edit] do %>
     <.modal title={@page_title}>
       <.live_component
-        module={SurveyEngineWeb.AffiliateLive.FormComponent}
-        id={@affiliate.id || :new}
+        module={SurveyEngineWeb.AgencyModelLive.FormComponent}
+        id={@agency_model.id || :new}
         action={@live_action}
-        affiliate={@affiliate}
-        company_types={@company_types}
+        agency_model={@agency_model}
         return_to={current_index_path(@index_params)}
       />
     </.modal>
   <% end %>
 
-  <.data_table :if={@index_params} meta={@meta} items={@affiliates}>
-    <:if_empty>No affiliates found</:if_empty>
+  <.data_table :if={@index_params} meta={@meta} items={@agency_models}>
+    <:if_empty>No agency_models found</:if_empty>
     <:col field={:name} sortable />
-    <:col field={:affiliate_slug} sortable />
-    <:col field={:trading_name} sortable />
-    <:col field={:business_name} sortable />
-    <:col field={:rfc} sortable />
-    <:col field={:company_type} sortable />
-    <:col :let={affiliate} label="Actions" align_right>
+    <:col :let={agency_model} label="Actions" align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
         label="Show"
-        to={~p"/affiliates/#{affiliate}"}
+        to={~p"/catalogs/agency_models/#{agency_model}"}
       />
 
       <.button
@@ -40,7 +34,7 @@
         size="xs"
         link_type="live_patch"
         label="Edit"
-        to={~p"/affiliates/#{affiliate}/edit"}
+        to={~p"/catalogs/agency_models/#{agency_model}/edit"}
       />
 
       <.button
@@ -51,7 +45,7 @@
         size="xs"
         label="Delete"
         phx-click="delete"
-        phx-value-id={affiliate.id}
+        phx-value-id={agency_model.id}
         data-confirm="Are you sure?"
       />
     </:col>

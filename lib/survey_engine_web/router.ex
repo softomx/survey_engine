@@ -170,6 +170,13 @@ defmodule SurveyEngineWeb.Router do
       live "/catalogs/agency_types/new", AgencyTypeLive.Index, :new
       live "/catalogs/agency_types/:id/edit", AgencyTypeLive.Index, :edit
 
+      live "/catalogs/agency_models", AgencyModelLive.Index, :index
+      live "/catalogs/agency_models/new", AgencyModelLive.Index, :new
+      live "/catalogs/agency_models/:id/edit", AgencyModelLive.Index, :edit
+
+      live "/catalogs/agency_models/:id", AgencyModelLive.Show, :show
+      live "/catalogs/agency_models/:id/show/edit", AgencyModelLive.Show, :edit
+
       live "/catalogs/business_models", BusinessModelLive.Index, :index
       live "/catalogs/business_models/new", BusinessModelLive.Index, :new
       live "/catalogs/business_models/:id/edit", BusinessModelLive.Index, :edit

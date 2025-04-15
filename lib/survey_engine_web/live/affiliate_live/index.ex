@@ -1,4 +1,6 @@
 defmodule SurveyEngineWeb.AffiliateLive.Index do
+  alias SurveyEngine.Catalogs
+  alias SurveyEngine.Companies
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.AffiliateEngine
@@ -11,8 +13,26 @@ defmodule SurveyEngineWeb.AffiliateLive.Index do
       order_by: [:id, :inserted_at],
       order_directions: [:asc, :asc]
     },
-    sortable: [:id, :inserted_at, :name, :affiliate_slug, :trading_name, :business_name, :rfc, :company_type],
-    filterable: [:id, :inserted_at, :name, :affiliate_slug, :trading_name, :business_name, :rfc, :company_type]
+    sortable: [
+      :id,
+      :inserted_at,
+      :name,
+      :affiliate_slug,
+      :trading_name,
+      :business_name,
+      :rfc,
+      :company_type
+    ],
+    filterable: [
+      :id,
+      :inserted_at,
+      :name,
+      :affiliate_slug,
+      :trading_name,
+      :business_name,
+      :rfc,
+      :company_type
+    ]
   ]
 
   @impl true

@@ -14,6 +14,7 @@ defmodule SurveyEngine.Companies.Company do
     field :country, :string
     field :town, :string
     field :city, :string
+    field :agency_model, :string
     field :agency_type, :string
     field :billing_currency, :string
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
@@ -39,7 +40,8 @@ defmodule SurveyEngine.Companies.Company do
       :agency_type,
       :billing_currency,
       :status,
-      :business_model_id
+      :business_model_id,
+      :agency_model
     ])
     |> validate_required([
       :language,
@@ -48,7 +50,8 @@ defmodule SurveyEngine.Companies.Company do
       :town,
       :city,
       :agency_type,
-      :billing_currency
+      :billing_currency,
+      :agency_model
     ])
     |> cast_embed(:links, sort_param: :links_sort, drop_param: :links_drop)
   end

@@ -1,16 +1,22 @@
 defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
+  alias SurveyEngine.Catalogs
   use SurveyEngineWeb, :live_component
 
   alias SurveyEngine.AffiliateEngine
 
   @impl true
   def update(%{affiliate: affiliate} = assigns, socket) do
-    changeset = AffiliateEngine.change_affiliate(affiliate)
+    changeset = AffiliateEngine.change_affiliate(affiliate |> IO.inspect(label: "sss"))
 
     {:ok,
      socket
      |> assign(assigns)
-     |> assign_form(changeset)}
+     |> assign_form(changeset)
+     |> assign(:states, [])
+     |> assign(:countries, Countries.all() |> Enum.map(&{&1.name, &1.alpha2}))
+     |> assign(:company_types, Catalogs.list_agency_types() |> Enum.map(& &1.name))
+     |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(& &1.name))
+     |> assign(:states, get_states(affiliate.address))}
   end
 
   @impl true
@@ -41,7 +47,7 @@ defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
   end
 
   defp save_affiliate(socket, :new, affiliate_params) do
-    case AffiliateEngine.create_affiliate(affiliate_params) do
+    case AffiliateEngine.create_affiliate(affiliate_params) |> IO.inspect() do
       {:ok, _affiliate} ->
         {:noreply,
          socket
@@ -55,5 +61,17 @@ defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
     assign(socket, :form, to_form(changeset))
+  end
+
+  defp get_states(nil), do: []
+
+  defp get_states(%{country: country}) do
+    country =
+      Countries.filter_by(:alpha2, country)
+      |> List.first()
+
+    country
+    |> Countries.Subdivisions.all()
+    |> Enum.map(&{&1.name, &1.name})
   end
 end

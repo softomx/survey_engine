@@ -48,4 +48,18 @@ defmodule SurveyEngine.CatalogsFixtures do
 
     personal_title
   end
+
+  @doc """
+  Generate a agency_model.
+  """
+  def agency_model_fixture(attrs \\ %{}) do
+    {:ok, agency_model} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> SurveyEngine.Catalogs.create_agency_model()
+
+    agency_model
+  end
 end

@@ -3,6 +3,7 @@ defmodule SurveyEngine.ReservatorClient do
 
   def create_external_affiliate(url, attrs, headers) do
     HTTPoison.post(url, attrs |> Jason.encode!(), @headers ++ headers)
+    |> process_response()
   end
 
   def process_response(response) do
