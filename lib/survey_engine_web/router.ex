@@ -121,15 +121,13 @@ defmodule SurveyEngineWeb.Router do
         {SurveyEngineWeb.UserAuth, :ensure_authenticated},
         {SurveyEngineWeb.ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
-        {ContextSession, :set_locale}
+        {ContextSession, :set_locale},
+        {ContextSession, :validate_route}
       ] do
       live "/dashboard", CompanyLive.Index, :index
       live "/company", CompanyLive.Show, :show
       live "/company/edit", CompanyLive.Index, :edit
 
-      get "/error", PageController, :home
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
@@ -142,6 +140,23 @@ defmodule SurveyEngineWeb.Router do
     end
   end
 
+  scope "/", SurveyEngineWeb do
+    pipe_through [:browser, :require_authenticated_user, :locale]
+
+    live_session :require_authenticated_user_settings,
+      on_mount: [
+        {SurveyEngineWeb.UserAuth, :ensure_authenticated},
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :current_page},
+        {ContextSession, :set_locale}
+      ] do
+
+      get "/error", PageController, :home
+      live "/users/settings", UserSettingsLive, :edit
+      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+    end
+  end
+
   scope "/admin", SurveyEngineWeb do
     pipe_through [:browser, :require_authenticated_user, :locale]
 
@@ -150,7 +165,8 @@ defmodule SurveyEngineWeb.Router do
         {SurveyEngineWeb.UserAuth, :ensure_authenticated},
         {SurveyEngineWeb.ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
-        {ContextSession, :set_locale}
+        {ContextSession, :set_locale},
+        {ContextSession, :validate_route}
       ] do
       live "/companies", AdminCompanyLive.Index, :index
       live "/companies/:id", AdminCompanyLive.Show, :show
@@ -218,10 +234,6 @@ defmodule SurveyEngineWeb.Router do
       live "/catalogs/personal_titles/new", PersonalTitleLive.Index, :new
       live "/catalogs/personal_titles/:id/edit", PersonalTitleLive.Index, :edit
 
-      get "/error", PageController, :home
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-
       live "/site_configurations", SiteConfigurationLive.Index, :index
       live "/site_configurations/new", SiteConfigurationLive.New, :new
       live "/site_configurations/:id/edit", SiteConfigurationLive.Edit, :edit
@@ -279,10 +291,10 @@ defmodule SurveyEngineWeb.Router do
 
       live "/affiliates", AffiliateLive.Index, :index
       live "/affiliates/new", AffiliateLive.Index, :new
-      live "/affiliates/:id/edit", AffiliateLive.Index, :edit
+      # live "/affiliates/:id/edit", AffiliateLive.Index, :edit
 
-      live "/affiliates/:id", AffiliateLive.Show, :show
-      live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
+      # live "/affiliates/:id", AffiliateLive.Show, :show
+      # live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
 
       live "/:lead_form_id/survey_mapper", SurveyMapperLive.Index, :index
       live "/:lead_form_id/survey_mapper/new", SurveyMapperLive.Index, :new
@@ -292,6 +304,21 @@ defmodule SurveyEngineWeb.Router do
       live "/:lead_form_id/survey_mapper/:id/show/edit", SurveyMapperLive.Show, :edit
 
       live "/reports/response", ReportLive.SurveyResponse, :survey_response
+
+      live "/roles", RoleLive.Index, :index
+      live "/roles/new", RoleLive.Index, :new
+      live "/roles/:id/edit", RoleLive.Index, :edit
+
+      live "/users", UserLive.Index, :index
+      live "/users/new", UserLive.Index, :new
+      live "/users/:id/edit_roles", UserLive.Index, :edit_roles
+
+      # live "/permissions_actions", PermissionActionLive.Index, :index
+      # live "/permissions_actions/new", PermissionActionLive.Index, :new
+      live "/permissions_actions/set", PermissionActionLive.SetPermission, :set_permission
+      live "/permissions_actions/sync", PermissionActionLive.SetPermission, :sync_permission
+      #live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
+
     end
   end
 

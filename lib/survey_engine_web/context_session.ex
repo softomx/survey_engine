@@ -2,6 +2,7 @@ defmodule SurveyEngineWeb.ContextSession do
   use SurveyEngineWeb, :verified_routes
 
   import Phoenix.Controller
+  alias SurveyEngine.PermissionManager
   alias SurveyEngine.SiteConfigurations
 
   @doc """
@@ -44,6 +45,14 @@ defmodule SurveyEngineWeb.ContextSession do
     end
   end
 
+  def on_mount(:validate_route, _params, _session, socket) do
+    {:cont,
+     socket
+     |> Phoenix.LiveView.attach_hook(:current_uri, :handle_params, &validate_user_route/3)
+     |> Phoenix.Component.assign_new(:main_menu, fn -> PermissionManager.map_menu(socket.assigns.current_user) end)}
+  end
+
+
   defp get_current_page(_params, url, socket) do
     {:cont,
      socket
@@ -59,5 +68,24 @@ defmodule SurveyEngineWeb.ContextSession do
 
   defp locale_from_params(_params) do
     nil
+  end
+
+  defp validate_user_route(_params, url, socket) do
+    uri = URI.parse(url)
+    Phoenix.Router.route_info(SurveyEngineWeb.Router, "GET", uri.path, uri.host)
+    |> case do
+      :error ->
+        {:cont, socket}
+
+      route_info ->
+        {:cont, Phoenix.Component.assign(socket, :current_uri, uri)}
+        if PermissionManager.authorize_user?(socket.assigns.current_user, %{
+             path: route_info.route
+           }) do
+          {:cont, Phoenix.Component.assign(socket, :current_uri, uri)}
+        else
+          {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/dashboard")}
+        end
+    end
   end
 end
