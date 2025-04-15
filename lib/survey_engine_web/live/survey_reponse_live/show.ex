@@ -9,11 +9,8 @@ defmodule SurveyEngineWeb.SurveyReponseLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:survey_response, Responses.get_survey_response!(id))}
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   @impl true
@@ -21,6 +18,36 @@ defmodule SurveyEngineWeb.SurveyReponseLive.Show do
     {:noreply, push_patch(socket, to: ~p"/admin/survey_answers/#{socket.assigns.survey_response}")}
   end
 
+  defp apply_action(socket, :show, %{"id" => id}) do
+     socket
+     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:survey_response, Responses.get_survey_response!(id))
+  end
+
+  defp apply_action(socket, :edit_response_item, %{"id" => id, "item_id" => item_id}) do
+    {:ok, survey_response} = Responses.get_survey_response_with_preloads(id, [:response_items, :lead_form])
+    response_item = Enum.find(survey_response.response_items, fn item -> "#{item.id}" == item_id end)
+    socket
+    |> assign(:page_title, page_title(socket.assigns.live_action))
+    |> assign(:survey_response, survey_response)
+    |> assign(:survey_response_item, response_item)
+    |> assign(:external_form, get_external_form(survey_response, socket.assigns.site_config.id))
+ end
+
   defp page_title(:show), do: "Show Survey response"
-  defp page_title(:edit), do: "Edit Survey response"
+  defp page_title(:edit_response_item), do: "Edit Survey response"
+
+  def get_external_form(survey_response, site_config_id) do
+    SurveyEngine.Responses.ResponseProviderBuilder.build_response_provider(
+      survey_response.lead_form.provider,
+      site_config_id,
+      %{id: survey_response.lead_form.external_id}
+    )
+    |> SurveyEngine.Responses.ExternalSurveyEngine.get_survey()
+    |> case do
+      {:ok, form} -> form
+      {:error, _error} -> %{questios: %{}}
+    end
+  end
+
 end
