@@ -15,6 +15,9 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
     field :base_currency, :string
     field :external_affiliate_id, :string
     field :state, :string, default: "draft"
+    belongs_to :created_by, SurveyEngine.Accounts.User
+    belongs_to :sync_by, SurveyEngine.Accounts.User
+    field :sync_date, :utc_datetime
     belongs_to :company, SurveyEngine.Companies.Company
     embeds_one :address, SurveyEngine.AffiliateEngine.Address, on_replace: :update
     timestamps(type: :utc_datetime)
@@ -22,6 +25,8 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
 
   @doc false
   def changeset(affiliate, attrs) do
+    country = attrs["address"]["country"]
+
     affiliate
     |> cast(attrs, [
       :name,
@@ -32,7 +37,12 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
       :agency_model,
       :company_id,
       :external_affiliate_id,
-      :state
+      :state,
+      :base_currency,
+      :agency_type,
+      :created_by_id,
+      :sync_by_id,
+      :sync_date
     ])
     |> validate_required([
       :name,
@@ -44,6 +54,16 @@ defmodule SurveyEngine.AffiliateEngine.Affiliate do
       :company_id,
       :state
     ])
+    |> validate_rfc(country)
     |> cast_embed(:address)
+  end
+
+  defp validate_rfc(changeset, "MX") do
+    changeset
+    |> validate_required([:rfc])
+  end
+
+  defp validate_rfc(changeset, _) do
+    changeset
   end
 end

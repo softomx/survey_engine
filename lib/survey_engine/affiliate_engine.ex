@@ -40,12 +40,9 @@ defmodule SurveyEngine.AffiliateEngine do
              [
                {"Authorization", webhook_config.api_key}
              ]
-           ) do
-      AffiliateEngine.update_affiliate(affiliate, %{
-        state: "created",
-        external_affiliate_id: "#{response["data"]["id"]}"
-      })
-      |> IO.inspect(label: "AffiliateEngine.update_affiliate")
+           )
+           |> IO.inspect() do
+      {:ok, response}
     end
   end
 

@@ -45,13 +45,13 @@ defmodule SurveyEngineWeb.AgencyModelLive.Index do
   end
 
   defp current_index_path(index_params) do
-    ~p"/catalogs/agency_models?#{index_params || %{}}"
+    ~p"/admin/catalogs/agency_models?#{index_params || %{}}"
   end
 
   @impl true
   def handle_event("update_filters", params, socket) do
     query_params = DataTable.build_filter_params(socket.assigns.meta.flop, params)
-    {:noreply, push_patch(socket, to: ~p"/catalogs/agency_models?#{query_params}")}
+    {:noreply, push_patch(socket, to: ~p"/admin/catalogs/agency_models?#{query_params}")}
   end
 
   @impl true

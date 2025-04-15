@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
+  alias SurveyEngine.Catalogs
   alias SurveyEngine.AffiliateEngine.Address
   use SurveyEngineWeb, :live_view
 
@@ -20,25 +21,43 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
 
     responses =
       Responses.list_survey_resposes(%{
-        filter: %{state: "finished", company_filter: %{id: company.id}}
+        filter: %{
+          state: "finished",
+          review_state: "approved",
+          company_filter: %{id: company.id}
+        }
       })
       |> Responses.survey_resposes_with_preloads([:response_items, :user, :form_group])
 
-    socket
-    |> assign(:page_title, "#{String.upcase(company.legal_name)}: Nuevo Afiliado")
-    |> assign(:company, company)
-    |> assign(:affiliate, %Affiliate{company_id: company.id})
-    |> assign(:responses, responses)
+    if length(responses) == 0 do
+      socket
+      |> put_flash(:error, "No hay respuestas disponibles para la empresa #{company.legal_name}")
+      |> push_navigate(to: ~p"/admin/companies")
+    else
+      socket
+      |> assign(:page_title, "#{String.upcase(company.legal_name)}: Nuevo Afiliado")
+      |> assign(:company, company)
+      |> assign(:responses, responses)
+      |> assign(
+        :currencies,
+        Catalogs.list_currencies() |> Enum.map(&{&1.name, String.downcase(&1.name)})
+      )
+      |> assign_affiliate(nil)
+    end
   end
 
   @impl true
   def handle_event("select_response", %{"survey_response_id" => survey_response_id}, socket) do
+    {:noreply, socket |> assign_affiliate(survey_response_id)}
+  end
+
+  defp assign_affiliate(socket, survey_response_id) do
     responses =
       socket.assigns.responses
 
     affiliate =
       cond do
-        length(responses) == 1 ->
+        is_nil(survey_response_id) and length(responses) == 1 ->
           responses
           |> List.first()
           |> mapper_affiliate(socket.assigns.company)
@@ -51,9 +70,9 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
             response -> mapper_affiliate(response, socket.assigns.company)
           end
       end
-      |> IO.inspect()
 
-    {:noreply, socket |> assign(:affiliate, affiliate)}
+    socket
+    |> assign(:affiliate, affiliate)
   end
 
   defp mapper_affiliate(response, company) do
@@ -62,8 +81,10 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
         company_id: company.id,
         trading_name: company.legal_name,
         business_name: company.agency_name,
+        name: company.legal_name,
         agency_type: company.agency_type,
         agency_model: company.agency_model,
+        base_currency: company.billing_currency,
         address: %Address{
           country: company.country,
           state: company.town,

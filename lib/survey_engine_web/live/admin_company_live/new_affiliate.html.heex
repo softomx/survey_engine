@@ -1,24 +1,27 @@
 <.container>
-
-
-  <.simple_form :let={f} for={%{}} phx-change="select_response" class="mb-2">
-
+  <.simple_form
+    :let={f}
+    :if={length(@responses) > 1}
+    for={%{}}
+    phx-change="select_response"
+    class="mb-2"
+  >
     <.combo_box
       type="select"
       name="survey_response_id"
-      field={f[:response_id]} 
+      field={f[:response_id]}
       label={gettext("affiliate.select_response")}
-      options={@responses |> Enum.map(fn r -> {"#{r.user.email}-#{r.form_group.name}", r.id} end)}/>
+      options={@responses |> Enum.map(fn r -> {"#{r.user.email}-#{r.form_group.name}", r.id} end)}
+    />
   </.simple_form>
 
-
-
-   <.live_component
-        module={SurveyEngineWeb.AffiliateLive.FormComponent}
-        id={@affiliate.id || :new}
-        action={:new}
-        affiliate={@affiliate}
-        return_to={~p"/admin/companies/#{@company.id}/affiliate"}
-    />
-  </.container>
-  
+  <.live_component
+    module={SurveyEngineWeb.AffiliateLive.FormComponent}
+    id={@affiliate.id || :new}
+    action={:new}
+    affiliate={@affiliate}
+    currencies={@currencies}
+    current_user={@current_user}
+    return_to={~p"/admin/companies/#{@company.id}/affiliate"}
+  />
+</.container>

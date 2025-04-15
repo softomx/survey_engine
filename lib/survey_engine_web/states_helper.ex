@@ -6,7 +6,8 @@ defmodule SurveyEngine.TransaleteHelper do
       "finished" -> gettext("survey_response.finished")
       "updated" -> gettext("survey_response.updated")
       "pending" -> gettext("survey_response.pending")
-      "info_error" -> gettext("survey_response.info_error")
+      "rejected" -> gettext("survey_response.rejected")
+      "approved" -> gettext("survey_response.approved")
       "init" -> gettext("survey_response.init")
       _ -> state
     end
@@ -22,7 +23,7 @@ defmodule SurveyEngine.TransaleteHelper do
   end
 
   def list_survey_response_states() do
-    ["pending", "updated", "finished", "info_error"]
+    ["pending", "updated", "finished", "rejected", "approved"]
     |> Enum.map(fn state ->
       {survey_response_state(state), state}
     end)
@@ -36,9 +37,9 @@ defmodule SurveyEngine.TransaleteHelper do
     case language do
       "es" ->
         "Español"
+
       "en" ->
         "Ingles"
     end
   end
-
 end

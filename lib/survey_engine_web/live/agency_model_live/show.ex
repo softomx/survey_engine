@@ -18,7 +18,8 @@ defmodule SurveyEngineWeb.AgencyModelLive.Show do
 
   @impl true
   def handle_event("close_modal", _, socket) do
-    {:noreply, push_patch(socket, to: ~p"/catalogs/agency_models/#{socket.assigns.agency_model}")}
+    {:noreply,
+     push_patch(socket, to: ~p"/admin/catalogs/agency_models/#{socket.assigns.agency_model}")}
   end
 
   defp page_title(:show), do: "Show Agency model"

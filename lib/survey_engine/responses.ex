@@ -81,6 +81,9 @@ defmodule SurveyEngine.Responses do
           join: c in ^query_company,
           on: u.company_id == c.id
 
+      {:review_state, review_state}, query ->
+        from q in query, where: q.review_state == ^review_state
+
       _, query ->
         query
     end)

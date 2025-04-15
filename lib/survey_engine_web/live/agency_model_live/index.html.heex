@@ -1,6 +1,10 @@
 <.container class="py-16">
   <.page_header title="Listing Agency models">
-    <.button link_type="live_patch" label="New Agency model" to={~p"/catalogs/agency_models/new"} />
+    <.button
+      link_type="live_patch"
+      label="New Agency model"
+      to={~p"/admin/catalogs/agency_models/new"}
+    />
   </.page_header>
 
   <%= if @live_action in [:new, :edit] do %>
@@ -25,7 +29,7 @@
         size="xs"
         link_type="live_redirect"
         label="Show"
-        to={~p"/catalogs/agency_models/#{agency_model}"}
+        to={~p"/admin/catalogs/agency_models/#{agency_model}"}
       />
 
       <.button
@@ -34,7 +38,7 @@
         size="xs"
         link_type="live_patch"
         label="Edit"
-        to={~p"/catalogs/agency_models/#{agency_model}/edit"}
+        to={~p"/admin/catalogs/agency_models/#{agency_model}/edit"}
       />
 
       <.button

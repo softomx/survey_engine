@@ -2,8 +2,6 @@ defmodule SurveyEngine.AffiliateEngine.Address do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:country, :state, :city]}
-
   @primary_key false
   embedded_schema do
     field(:street, :string)
@@ -27,14 +25,17 @@ defmodule SurveyEngine.AffiliateEngine.Address do
       :state,
       :postal_code,
       :external_number,
-      :location
+      :location,
+      :internal_number
     ])
     |> validate_required([
       :street,
-      :external_number,
+      :internal_number,
       :neighborhood,
       :country,
-      :postal_code
+      :postal_code,
+      :city,
+      :external_number
     ])
   end
 end

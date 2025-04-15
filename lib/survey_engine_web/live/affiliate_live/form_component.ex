@@ -6,7 +6,7 @@ defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
 
   @impl true
   def update(%{affiliate: affiliate} = assigns, socket) do
-    changeset = AffiliateEngine.change_affiliate(affiliate |> IO.inspect(label: "sss"))
+    changeset = AffiliateEngine.change_affiliate(affiliate)
 
     {:ok,
      socket
@@ -47,7 +47,9 @@ defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
   end
 
   defp save_affiliate(socket, :new, affiliate_params) do
-    case AffiliateEngine.create_affiliate(affiliate_params) |> IO.inspect() do
+    affiliate_params = Map.put(affiliate_params, "created_by_id", socket.assigns.current_user.id)
+
+    case AffiliateEngine.create_affiliate(affiliate_params) do
       {:ok, _affiliate} ->
         {:noreply,
          socket

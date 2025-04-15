@@ -3,10 +3,10 @@
     <.button
       link_type="live_patch"
       label="Edit Agency model"
-      to={~p"/catalogs/agency_models/#{@agency_model}/show/edit"}
+      to={~p"/admin/catalogs/agency_models/#{@agency_model}/show/edit"}
     />
 
-    <.button link_type="live_redirect" label="Back" to={~p"/catalogs/agency_models"} />
+    <.button link_type="live_redirect" label="Back" to={~p"/admin/catalogs/agency_models"} />
   </.page_header>
 
   <%= if @live_action in [:new, :edit] do %>
@@ -16,7 +16,7 @@
         id={@agency_model.id || :new}
         action={@live_action}
         agency_model={@agency_model}
-        return_to={~p"/catalogs/agency_models/#{@agency_model}"}
+        return_to={~p"/admin/catalogs/agency_models/#{@agency_model}"}
       />
     </.modal>
   <% end %>

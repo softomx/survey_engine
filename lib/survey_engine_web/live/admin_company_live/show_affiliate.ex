@@ -1,6 +1,6 @@
 defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
   alias SurveyEngine.AffiliateEngine
-  alias SurveyEngine.AffiliateEngine.Affiliate
+
   use SurveyEngineWeb, :live_view
   alias SurveyEngine.{Companies}
   @impl true
@@ -13,19 +13,26 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
+  @impl true
   def handle_event("create_external_affiliate", _params, socket) do
-    with {:ok, external_affiliate} <-
+    with {:ok, external_affiliate_response} <-
            AffiliateEngine.create_external_affiliate(
              socket.assigns.site_config,
              socket.assigns.affiliate
-           ) do
+           ),
+         {:ok, _affiliate} <-
+           AffiliateEngine.update_affiliate(socket.assigns.affiliate, %{
+             state: "created",
+             external_affiliate_id: "#{external_affiliate_response["data"]["id"]}",
+             sync_date: Timex.now(),
+             sync_by_id: socket.assigns.current_user.id
+           }) do
       socket
       |> put_flash(:info, gettext("affiliate.external_affiliate_created"))
     else
-      {:error, changeset} ->
+      {:error, reason} ->
         socket
-        |> put_flash(:error, gettext("affiliate.external_affiliate_error"))
-        |> assign(:changeset, changeset)
+        |> put_flash(:error, reason)
     end
 
     {:noreply, socket}

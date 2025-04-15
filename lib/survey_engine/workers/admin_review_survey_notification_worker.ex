@@ -10,9 +10,12 @@ defmodule SurveyEngine.Workers.AdminReviewSurveyNotificationWorker do
          {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, notification_config} <- get_notification_review_state(survey_response),
          {:ok, content} <-
-            Notifications.get_content_by_language(notification_config.contents,  survey_response.user.company.language),
+           Notifications.get_content_by_language(
+             notification_config.contents,
+             survey_response.user.company.language
+           ),
          {:ok, emails} <- {:ok, get_emails(notification_config)} do
-      deliver_by_review_state(emails,content, survey_response, site_config)
+      deliver_by_review_state(emails, content, survey_response, site_config)
     end
   end
 
@@ -69,7 +72,7 @@ defmodule SurveyEngine.Workers.AdminReviewSurveyNotificationWorker do
         Notifications.get_notification_by_action("info_rejected")
 
       "approved" ->
-        Notifications.get_notification_by_action("info_approved")
+        Notifications.get_notification_by_action("approved")
 
       _ ->
         {:error, "not implemented #{survey_response.review_state}"}

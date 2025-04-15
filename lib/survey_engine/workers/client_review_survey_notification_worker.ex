@@ -76,7 +76,7 @@ defmodule SurveyEngine.Workers.ClientReviewSurveyNotificationWorker do
         Notifications.get_notification_by_action("info_rejected")
 
       "approved" ->
-        Notifications.get_notification_by_action("info_approved")
+        Notifications.get_notification_by_action("approved")
 
       _ ->
         {:error, "not implemented #{survey_response.review_state}"}
