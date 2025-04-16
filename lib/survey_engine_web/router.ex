@@ -126,7 +126,7 @@ defmodule SurveyEngineWeb.Router do
       ] do
       live "/dashboard", CompanyLive.Index, :index
       live "/company", CompanyLive.Show, :show
-      live "/company/edit", CompanyLive.Index, :edit
+      live "/company/:id/edit", CompaniesLive.Edit, :edit
 
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new

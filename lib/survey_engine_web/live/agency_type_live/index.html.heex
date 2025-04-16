@@ -5,7 +5,7 @@
     </.link>
   </:actions>
 </.header>
-<.data_table :if={@index_params} meta={@meta} items={@agency_types}>
+<.data_table :if={@index_params} meta={@meta} items={@agency_types} class="py-5">
   <:if_empty>No se encontraron monedas</:if_empty>
   <:col field={:name} sortable />
 

@@ -17,6 +17,7 @@ defmodule SurveyEngine.Companies.Company do
     field :agency_model, :string
     field :agency_type, :string
     field :billing_currency, :string
+    field :user_id, :id
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
     # pending,assigned,finished, approved, rejected, created
     field :status, :string, default: "pending"
@@ -41,7 +42,8 @@ defmodule SurveyEngine.Companies.Company do
       :billing_currency,
       :status,
       :business_model_id,
-      :agency_model
+      :agency_model,
+      :user_id
     ])
     |> validate_required([
       :language,

@@ -74,6 +74,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
           label="Modelo denegocio"
           options={@business_models}
         />
+        <.input field={@form[:user_id]} type="hidden" value={@user_id} />
         <.button phx-disable-with="Saving...">Guardar</.button>
       </.form>
     </div>
