@@ -119,7 +119,7 @@ defmodule SurveyEngine.NotificationManager do
   defp enqueue_worker(module, options) do
     Exq.enqueue(
       Exq,
-      "notifications",
+      "survey_notifications",
       module,
       options
     )

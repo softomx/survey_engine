@@ -114,4 +114,19 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  config :exq,
+    name: Exq,
+    host: System.get_env("REDIS_HOST", "127.0.0.1"),
+    password: System.get_env("REDIS_PASS"),
+    port: 6379,
+    namespace: "exq",
+    concurrency: :infinite,
+    queues: ["survey_notifications"],
+    poll_timeout: 50,
+    scheduler_poll_timeout: 200,
+    scheduler_enable: true,
+    max_retries: 25,
+    shutdown_timeout: 5000,
+    start_on_application: false
 end
