@@ -24,6 +24,11 @@ FROM ${BUILDER_IMAGE} as builder
 RUN apt-get update -y && apt-get install -y build-essential git \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
+RUN mix hex.repo add petal https://petal.build/repo \
+    --fetch-public-key SHA256:6Ff7LeQCh4464psGV3w4a8WxReEwRl+xWmgtuHdHsjs \
+    --auth-key HpH5tMuMpIVhDF1JPXECyulA6Uj0PZesMUI9eFmhHWTKI37YUJ
+
+
 # prepare build dir
 WORKDIR /app
 
