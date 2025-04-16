@@ -6,4 +6,8 @@ defmodule SurveyEngineWeb.PageController do
     # so skip the default app layout.
     render(conn, :home, layout: false)
   end
+
+  def unauthorized(conn, _params) do
+    render(conn, :unauthorized, layout: false)
+  end
 end

@@ -65,6 +65,7 @@ defmodule SurveyEngine.TransaleteHelper do
       "SurveyResponseLive" -> gettext("permissions.survey_response")
       "SurveyMapperLive" -> gettext("permissions.survey_mapper")
       "SiteConfigurationLive" -> gettext("permissions.site_configuration")
+      "UserLive" -> gettext("permissions.users")
       _ -> resource
     end
   end

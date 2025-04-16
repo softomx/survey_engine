@@ -152,6 +152,7 @@ defmodule SurveyEngineWeb.Router do
       ] do
 
       get "/error", PageController, :home
+      get "/unauthorized", PageController, :unauthorized
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
     end
@@ -289,8 +290,8 @@ defmodule SurveyEngineWeb.Router do
 
       live "/reports/pre_registration", ReportLive.PreRegistration, :pre_registration
 
-      live "/affiliates", AffiliateLive.Index, :index
-      live "/affiliates/new", AffiliateLive.Index, :new
+      # live "/affiliates", AffiliateLive.Index, :index
+      # live "/affiliates/new", AffiliateLive.Index, :new
       # live "/affiliates/:id/edit", AffiliateLive.Index, :edit
 
       # live "/affiliates/:id", AffiliateLive.Show, :show

@@ -144,6 +144,12 @@ defmodule SurveyEngine.PermissionManager do
         icon: "hero-user"
       },
       %{
+        name: ~p"/admin/catalogs/agency_models",
+        label: "Modelos de agencia",
+        path: ~p"/admin/catalogs/agency_models",
+        icon: "hero-user"
+      },
+      %{
         name: ~p"/admin/catalogs/personal_titles",
         label: "Titulos personales",
         path: ~p"/admin/catalogs/personal_titles",

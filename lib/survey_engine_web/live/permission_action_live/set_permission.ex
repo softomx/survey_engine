@@ -129,7 +129,11 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
         </.tr>
         <%= for permission <- permissions do %>
           <.tr>
-            <.td>{TransaleteHelper.permission_action(permission.action)}</.td>
+            <.td
+              data-tippy-content={permission.path}
+              phx-hook="TippyHook">
+              <p>{TransaleteHelper.permission_action(permission.action)}</p>
+            </.td>
             <%= for role <- @roles do %>
               <.td>
                 <input

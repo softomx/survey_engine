@@ -78,13 +78,12 @@ defmodule SurveyEngineWeb.ContextSession do
         {:cont, socket}
 
       route_info ->
-        {:cont, Phoenix.Component.assign(socket, :current_uri, uri)}
         if PermissionManager.authorize_user?(socket.assigns.current_user, %{
              path: route_info.route
            }) do
           {:cont, Phoenix.Component.assign(socket, :current_uri, uri)}
         else
-          {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/dashboard")}
+          {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/unauthorized")}
         end
     end
   end
