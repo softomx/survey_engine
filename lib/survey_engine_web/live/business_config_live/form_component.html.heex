@@ -11,7 +11,7 @@
     <.combo_box
       field={@form[:form_group_id]}
       type="select"
-      label="Formulario"
+      label={gettext("business_config.form")}
       placeholder="Seleciona un formulario"
       options={@form_groups}
     />
@@ -19,14 +19,14 @@
       field={@form[:previous_lead_form_finished]}
       type="select"
       multiple
-      label="Dependencia de formularios"
+      label={gettext("business_config.previous_lead_form_finished")}
       placeholder="Selecciona los formularios de los que depende"
       options={@depend_lead_forms}
     />
-    <.field type="checkbox" field={@form[:required]} />
+    <.field type="checkbox" field={@form[:required]} label={gettext("business_config.required")} />
 
     <div class="flex justify-end">
-      <.button type="submit" phx-disable-with="Saving..." label="Guardar" />
+      <.button type="submit" phx-disable-with="Saving..." label={gettext("save")} />
     </div>
   </.form>
 </div>

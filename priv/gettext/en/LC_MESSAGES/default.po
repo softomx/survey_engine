@@ -11,20 +11,17 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:30
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:72
 #: lib/survey_engine_web/live/report_live/survey_response.ex:80
 #, elixir-autogen, elixir-format
 msgid "agency type"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:36
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:74
 #, elixir-autogen, elixir-format
 msgid "billing currency"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:57
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:71
 #, elixir-autogen, elixir-format
 msgid "city"
@@ -35,26 +32,18 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:17
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:68
 #: lib/survey_engine_web/live/report_live/survey_response.ex:79
 #, elixir-autogen, elixir-format
 msgid "company name"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:45
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:69
 #: lib/survey_engine_web/live/report_live/survey_response.ex:82
 #, elixir-autogen, elixir-format
 msgid "country"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/show.html.heex:23
-#, elixir-autogen, elixir-format
-msgid "legal name"
-msgstr ""
-
-#: lib/survey_engine_web/live/companies_live/show.html.heex:51
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:70
 #, elixir-autogen, elixir-format
 msgid "town"
@@ -464,6 +453,7 @@ msgstr "Form"
 msgid "select option"
 msgstr ""
 
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:33
 #: lib/survey_engine_web/live/survey_reponse_live/index.html.heex:90
 #, elixir-autogen, elixir-format
 msgid "show"
@@ -635,8 +625,11 @@ msgstr "Comments"
 msgid "response.review_state"
 msgstr ""
 
+#: lib/survey_engine_web/live/business_model_live/form_component.html.heex:13
+#: lib/survey_engine_web/live/leads_form_live/form_component.ex:38
 #: lib/survey_engine_web/live/permission_action_live/form_component.ex:18
 #: lib/survey_engine_web/live/role_live/form_component.ex:20
+#: lib/survey_engine_web/live/survey_mapper_live/form_component.html.heex:60
 #: lib/survey_engine_web/live/survey_response_live/edit_component.html.heex:72
 #: lib/survey_engine_web/live/survey_response_live/validate.html.heex:15
 #: lib/survey_engine_web/live/user_live/form_role_component.ex:18
@@ -813,7 +806,10 @@ msgstr "select response"
 msgid "affiliate.select_agency_type"
 msgstr "select response"
 
+#: lib/survey_engine_web/live/business_model_live/index.html.heex:32
 #: lib/survey_engine_web/live/companies_live/show.html.heex:5
+#: lib/survey_engine_web/live/form_group_live/index.html.heex:36
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:41
 #, elixir-autogen, elixir-format
 msgid "edit"
 msgstr ""
@@ -1019,4 +1015,146 @@ msgstr ""
 #: lib/survey_engine_web/states_helper.ex:68
 #, elixir-autogen, elixir-format, fuzzy
 msgid "permissions.users"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:16
+#, elixir-autogen, elixir-format
+msgid "company.agency_name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "company.agency_type"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:35
+#, elixir-autogen, elixir-format
+msgid "company.billing_currency"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:56
+#, elixir-autogen, elixir-format, fuzzy
+msgid "company.city"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:44
+#, elixir-autogen, elixir-format, fuzzy
+msgid "company.country"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:10
+#, elixir-autogen, elixir-format
+msgid "company.information"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:22
+#, elixir-autogen, elixir-format
+msgid "company.legal_name"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/show.html.heex:50
+#, elixir-autogen, elixir-format, fuzzy
+msgid "company.town"
+msgstr ""
+
+#: lib/survey_engine_web/live/business_config_live/index.html.heex:38
+#: lib/survey_engine_web/live/business_model_live/index.html.heex:26
+#: lib/survey_engine_web/live/form_group_live/index.html.heex:21
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:27
+#, elixir-autogen, elixir-format, fuzzy
+msgid "actions"
+msgstr "Actions"
+
+#: lib/survey_engine_web/live/form_group_live/index.html.heex:20
+#, elixir-autogen, elixir-format, fuzzy
+msgid "form_group.name"
+msgstr "Form"
+
+#: lib/survey_engine_web/live/form_group_live/index.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "form_group.variables"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/form_component.ex:36
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "leads_form.active"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/form_component.ex:35
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:26
+#, elixir-autogen, elixir-format
+msgid "leads_form.external_id"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/form_component.ex:26
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "leads_form.language"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "mapper"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/index.html.heex:5
+#, elixir-autogen, elixir-format, fuzzy
+msgid "leads_form.new_variable"
+msgstr ""
+
+#: lib/survey_engine_web/live/survey_mapper_live/index.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "survey_mapper.add"
+msgstr ""
+
+#: lib/survey_engine_web/live/survey_mapper_live/form_component.html.heex:20
+#, elixir-autogen, elixir-format
+msgid "survey_mapper.field"
+msgstr ""
+
+#: lib/survey_engine_web/live/survey_mapper_live/form_component.html.heex:33
+#, elixir-autogen, elixir-format
+msgid "survey_mapper.question"
+msgstr ""
+
+#: lib/survey_engine_web/live/leads_form_live/form_component.ex:32
+#, elixir-autogen, elixir-format, fuzzy
+msgid "leads_form.provider"
+msgstr ""
+
+#: lib/survey_engine_web/live/business_model_live/form_component.html.heex:9
+#: lib/survey_engine_web/live/business_model_live/index.html.heex:24
+#, elixir-autogen, elixir-format, fuzzy
+msgid "business_model.name"
+msgstr "Business model"
+
+#: lib/survey_engine_web/live/business_model_live/index.html.heex:5
+#, elixir-autogen, elixir-format, fuzzy
+msgid "business_models.new"
+msgstr "Business model"
+
+#: lib/survey_engine_web/live/business_model_live/index.html.heex:41
+#, elixir-autogen, elixir-format
+msgid "forms"
+msgstr ""
+
+#: lib/survey_engine_web/live/business_model_live/form_component.html.heex:10
+#, elixir-autogen, elixir-format, fuzzy
+msgid "business_model.description"
+msgstr "Business model"
+
+#: lib/survey_engine_web/live/business_config_live/index.html.heex:30
+#, elixir-autogen, elixir-format
+msgid "business_config.form"
+msgstr ""
+
+#: lib/survey_engine_web/live/business_config_live/index.html.heex:33
+#, elixir-autogen, elixir-format
+msgid "business_config.previous_lead_form_finished"
+msgstr ""
+
+#: lib/survey_engine_web/live/business_config_live/index.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "business_config.required"
 msgstr ""

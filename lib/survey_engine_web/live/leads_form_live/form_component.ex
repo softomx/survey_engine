@@ -23,19 +23,19 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
         <.field
           field={@form[:language]}
           type="select"
-          label="Lenguaje"
+          label={gettext("leads_form.language")}
           options={[{"Español", "es"}, {"Ingles", "en"}]}
         />
         <.field
           field={@form[:provider]}
           type="select"
-          label="Proveedor"
+          label={gettext("leads_form.provider")}
           options={[{"Formbricks", "formbricks"}]}
         />
-        <.field field={@form[:external_id]} type="text" label="ID External" />
-        <.field field={@form[:active]} type="switch" label="Activo" />
+        <.field field={@form[:external_id]} type="text" label={gettext("leads_form.external_id")}/>
+        <.field field={@form[:active]} type="switch" label={gettext("leads_form.active")} />
 
-        <.button phx-disable-with="Saving...">Guardar</.button>
+        <.button phx-disable-with="Saving...">{gettext("save")}</.button>
       </.form>
     </div>
     """

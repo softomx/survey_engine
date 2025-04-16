@@ -9,7 +9,6 @@ defmodule SurveyEngineWeb.GoalLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage translation records in your database.</:subtitle>
       </.header>
 
       <.form

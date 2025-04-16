@@ -9,7 +9,6 @@ defmodule SurveyEngineWeb.AgencyTypeLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage agency_type records in your database.</:subtitle>
       </.header>
 
       <.form

@@ -116,40 +116,46 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
       <.button link_type="live_patch" to={~p"/admin/permissions_actions/sync"} label="Sincronizar permisos"  variant="outline"/>
       <.button color="primary" label="Guardar" phx-click="update_role_actions" />
     </div>
-    <.table>
-      <.tr>
-        <.th>Name</.th>
-        <%= for role <- @roles do %>
-          <.th>{role.name}</.th>
-        <% end %>
-      </.tr>
-      <%= for {r, permissions} <- @permissions |> Enum.group_by(fn p -> p.resource end) do %>
-        <.tr class="bg-gray-200">
-          <.td colspan={length(@roles) + 1}>{TransaleteHelper.permission_resource(r)}</.td>
-        </.tr>
-        <%= for permission <- permissions do %>
-          <.tr>
-            <.td
-              data-tippy-content={permission.path}
-              phx-hook="TippyHook">
-              <p>{TransaleteHelper.permission_action(permission.action)}</p>
-            </.td>
+    <div class="lock-header">
+      <table class="w-full" >
+        <thead>
+          <tr>
+            <th>Nombre</th>
             <%= for role <- @roles do %>
-              <.td>
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  phx-click="set_action"
-                  phx-value-role_id={role.id}
-                  phx-value-action_id={permission.id}
-                  checked={"#{permission.id}" in Map.get(@selected_permissions, "#{role.id}", [])}
-                />
-              </.td>
+              <th>{role.name}</th>
             <% end %>
-          </.tr>
+          </tr>
+        </thead>
+        <tbody>
+        <%= for {r, permissions} <- @permissions |> Enum.group_by(fn p -> p.resource end) do %>
+          <tr class="bg-gray-200">
+            <th class="p-2">
+              <p class="text-left text-xs">{TransaleteHelper.permission_resource(r)} </p>
+            </th>
+            <td colspan={length(@roles)}></td>
+          </tr>
+          <%= for permission <- permissions do %>
+            <tr class="border">
+              <th class="p-2 bg-gray-50" >
+              <p class="text-left text-xs">{TransaleteHelper.permission_action(permission.action)}</p></th>
+              <%= for role <- @roles do %>
+                <td class="p-2 text-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    phx-click="set_action"
+                    phx-value-role_id={role.id}
+                    phx-value-action_id={permission.id}
+                    checked={"#{permission.id}" in Map.get(@selected_permissions, "#{role.id}", [])}
+                  />
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </.table>
+        </tbody>
+      </table>
+    </div>
     <% end %>
     """
   end

@@ -17,6 +17,7 @@
           <div class="flex flex-col">
             <.field
               type="select"
+              label={gettext("survey_mapper.field")}
               options={@fields}
               field={@form[:field]}
               id={"survey_mapper_field_#{@id}"}
@@ -29,6 +30,7 @@
         <div class="flex flex-col">
           <.field
             type="select"
+            label={gettext("survey_mapper.question")}
             options={
               @questions |> Enum.map(fn {id, question_params} -> {question_params.title, id} end)
             }
@@ -55,7 +57,7 @@
               >
                 X
               </span>
-              <.button size="xs" type="submit" phx-disable-with="Guardando..." label="Guardar" />
+              <.button size="xs" type="submit" phx-disable-with="Guardando..." label={gettext("save")} />
             </div>
           </div>
         </div>

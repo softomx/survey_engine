@@ -22,10 +22,6 @@
   <% end %>
 
   <div>
-    <div class="px-4 sm:px-0">
-      <h3 class="text-base/7 font-semibold text-gray-900">Informacion de la empresa</h3>
-      <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">Personal details and application.</p>
-    </div>
     <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -35,20 +31,20 @@
           </dd>
         </div>
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm/6 font-medium text-gray-900">Obligatorio</dt>
+          <dt class="text-sm/6 font-medium text-gray-900">{gettext("business_config.required")} </dt>
           <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
             <.required_badge required={@business_config.required} />
           </dd>
         </div>
 
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm/6 font-medium text-gray-900">Dependencia de formularios</dt>
+          <dt class="text-sm/6 font-medium text-gray-900">{gettext("business_config.previous_lead_form_finished")}</dt>
           <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
             {@business_config.previous_lead_form_finished}
           </dd>
         </div>
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm/6 font-medium text-gray-900">Formulario asociado</dt>
+          <dt class="text-sm/6 font-medium text-gray-900">{gettext("business_config.form")}</dt>
           <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
             {@business_config.form_group.name}
             <.icon_button
@@ -66,7 +62,7 @@
     </div>
 
     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-      <dt class="text-sm/6 font-medium text-gray-900">Modelo de negocio</dt>
+      <dt class="text-sm/6 font-medium text-gray-900">{gettext("business_config.business_model")}</dt>
       <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
         {@business_config.business_model.name}
         <.icon_button

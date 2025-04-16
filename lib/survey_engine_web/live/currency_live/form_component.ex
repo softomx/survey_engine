@@ -9,7 +9,6 @@ defmodule SurveyEngineWeb.CurrencyLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage currency records in your database.</:subtitle>
       </.header>
 
       <.form

@@ -17,14 +17,14 @@
 
   <.data_table :if={@index_params} meta={@meta} items={@form_groups}>
     <:if_empty>No se encontraron Formularios</:if_empty>
-    <:col field={:name} sortable label="Nombre" filterable={[:ilike]} />
-    <:col :let={form_group} label="Acciones" align_right>
+    <:col field={:name} sortable label={gettext("form_group.name")} filterable={[:ilike]} />
+    <:col :let={form_group} label={gettext("actions")} align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="variables"
+        label={gettext("form_group.variables")}
         to={~p"/admin/form_groups/#{form_group}/leads_forms"}
       />
 
@@ -33,7 +33,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Editar"
+        label={gettext("edit")}
         to={~p"/admin/form_groups/#{form_group}/edit"}
       />
     </:col>

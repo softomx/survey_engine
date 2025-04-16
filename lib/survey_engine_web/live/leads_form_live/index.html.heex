@@ -2,11 +2,11 @@
   <.header>
     <:actions>
       <.link patch={~p"/admin/form_groups/#{@form_group_id}/leads_forms/new"}>
-        <.button>Nueva variable</.button>
+        <.button>{gettext("leads_form.new_variable")}</.button>
       </.link>
     </:actions>
   </.header>
-  <.data_table :if={@index_params} meta={@meta} items={@leads_forms}>
+  <.data_table :if={@index_params} meta={@meta} items={@leads_forms} class="mt-2">
     <:if_empty>No se encontraronvariables para el formulario</:if_empty>
 
     <:col
@@ -14,23 +14,23 @@
       field={:language}
       sortable
       class=""
-      label="Lenguage"
+      label={gettext("leads_form.language")}
       filterable={[:ilike]}
     >
       <span class="uppercase">{variable.language}</span>
     </:col>
 
-    <:col :let={variable} field={:active}>
+    <:col :let={variable} field={:active} label={gettext("leads_form.active")}>
       <.active_badge status={variable.active} />
     </:col>
-    <:col field={:external_id} sortable filterable={[:ilike]} label="Id externo" />
-    <:col :let={lead_form} label="Acciones" align_right>
+    <:col field={:external_id} sortable filterable={[:ilike]} label={gettext("leads_form.external_id")} />
+    <:col :let={lead_form} label={gettext("actions")} align_right>
       <.button
         color="white"
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="ver"
+        label={gettext("show")}
         to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}"}
       />
       <.button
@@ -38,7 +38,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Editar"
+        label={gettext("edit")}
         to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}/edit"}
       />
 
@@ -47,7 +47,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Mapper"
+        label={gettext("mapper")}
         to={~p"/admin/form_groups/#{@form_group_id}/leads_forms/#{lead_form}/survey_mapper"}
       />
     </:col>

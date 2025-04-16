@@ -2,7 +2,7 @@
   <.page_header title="">
     <.button
       link_type="live_patch"
-      label="Nuevo modelo de negocio"
+      label={gettext("business_models.new")}
       to={~p"/admin/catalogs/business_models/new"}
     />
   </.page_header>
@@ -21,15 +21,15 @@
 
   <.data_table :if={@index_params} meta={@meta} items={@business_models}>
     <:if_empty>No business_models found</:if_empty>
-    <:col field={:name} sortable />
+    <:col field={:name} label={gettext("business_model.name")} sortable />
 
-    <:col :let={business_model} label="Actions" align_right>
+    <:col :let={business_model} label={gettext("actions")} align_right>
       <.button
         color="white"
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Editar"
+        label={gettext("edit")}
         to={~p"/admin/catalogs/business_models/#{business_model}/edit"}
       />
 
@@ -38,7 +38,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Formularios"
+        label={gettext("forms")}
         to={~p"/admin/catalogs/business_models/#{business_model}/business_configs"}
       />
     </:col>

@@ -24,24 +24,24 @@
   <.data_table :if={@index_params} meta={@meta} items={@business_configs}>
     <:if_empty>No business_configs found</:if_empty>
     <:col field={:order} sortable label="orden" />
-    <:col :let={business_config} field={:required} label="Requerido">
+    <:col :let={business_config} field={:required} label={gettext("business_config.required")}>
       <.required_badge required={business_config.required} />
     </:col>
-    <:col :let={business_config} field={:form_group} sortable label="Formulario">
+    <:col :let={business_config} field={:form_group} sortable label={gettext("business_config.form")}>
       {business_config.form_group.name}
     </:col>
-    <:col :let={business_config} field={:previous_lead_form_finished} label="Dependencia">
+    <:col :let={business_config} field={:previous_lead_form_finished} label={gettext("business_config.previous_lead_form_finished")}>
       <p :for={{form, index} <- business_config.depend_forms |> Enum.with_index(1)}>
         {index}. {form.name}
       </p>
     </:col>
-    <:col :let={business_config} label="Actions" align_right>
+    <:col :let={business_config} label={gettext("actions")} align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="Ver"
+        label={gettext("show")}
         to={
           ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}"
         }
@@ -52,7 +52,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Editar"
+        label={gettext("edit")}
         to={
           ~p"/admin/catalogs/business_models/#{@business_model_id}/business_configs/#{business_config}/edit"
         }
@@ -65,7 +65,7 @@
         to="#"
         size="xs"
         label="Eliminar"
-        phx-click="delete"
+        phx-click={gettext("delete")}
         phx-value-id={business_config.id}
         data-confirm="Are you sure?"
       />

@@ -8,3 +8,27 @@
 
 
 /* This file is for your main application CSS */
+.lock-header{
+    overflow-y: auto;
+    max-height: 800px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .lock-header thead th{
+    position: sticky;
+    top: 0;
+    background-color:  #f3f4f4;
+  }
+  
+  .lock-header thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+  }
+  
+  .lock-header tbody tr th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
