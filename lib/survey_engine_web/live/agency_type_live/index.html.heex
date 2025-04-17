@@ -9,13 +9,13 @@
   <:if_empty>No se encontraron monedas</:if_empty>
   <:col field={:name} sortable />
 
-  <:col :let={agency_type} label="Actions" align_right>
+  <:col :let={agency_type} label={gettext("actions")} align_right>
     <.button
       color="white"
       variant="outline"
       size="xs"
       link_type="live_patch"
-      label="Editar"
+      label={gettext("edit")}
       to={~p"/admin/catalogs/agency_types/#{agency_type}/edit"}
     />
     <.button

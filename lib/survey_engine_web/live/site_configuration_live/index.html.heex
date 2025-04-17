@@ -1,26 +1,26 @@
 <.header>
   <:actions>
     <.link patch={~p"/admin/site_configurations/new"}>
-      <.button>New Site configuration</.button>
+      <.button>{gettext("site_configuration.new_site_configuration")}</.button>
     </.link>
   </:actions>
 </.header>
 
-<.data_table :if={@index_params} meta={@meta} items={@site_configurations}>
+<.data_table :if={@index_params} meta={@meta} items={@site_configurations} class="mt-2">
   <:if_empty>No se encontraron sitios</:if_empty>
-  <:col field={:name} sortable label="Nombre" />
-  <:col field={:url} sortable label="URL" />
-  <:col :let={site_configuration} field={:active} sortable label="Status">
+  <:col field={:name} sortable label={gettext("site_configuration.name")} />
+  <:col field={:url} sortable label={gettext("site_configuration.url")} />
+  <:col :let={site_configuration} field={:active} sortable label={gettext("site_configuration.status")}>
     <.active_badge status={site_configuration.active} />
   </:col>
 
-  <:col :let={site_configuration} label="Actions" align_right>
+  <:col :let={site_configuration} label={gettext("actions")} align_right>
     <.button
       color="white"
       variant="outline"
       size="xs"
       link_type="live_patch"
-      label="Editar"
+      label={gettext("edit")}
       to={~p"/admin/site_configurations/#{site_configuration}/edit"}
     />
   </:col>

@@ -19,13 +19,13 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
         phx-submit="save"
       >
         <.input type="hidden" field={@form[:site_configuration_id]} value={@site_config_id} />
-        <.field field={@form[:name]} type="text" label="Name" />
-        <.field field={@form[:email_from]} type="text" label="Remitente" />
-        <.field field={@form[:email_name]} type="text" label="Nombre remitente" />
+        <.field field={@form[:name]} type="text" label={gettext("mailer_config.name")} />
+        <.field field={@form[:email_from]} type="text" label={gettext("mailer_config.email_from")} />
+        <.field field={@form[:email_name]} type="text" label={gettext("mailer_config.email_name")} />
         <.combo_box
           field={@form[:adapter]}
           type="select"
-          label="proveedor"
+          label={gettext("mailer_config.adapter")}
           placeholder="selecciona un proveedor"
           options={[
             {"AWS", "amazon_ses"},
@@ -72,7 +72,7 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
           />
         </.inputs_for>
 
-        <.button phx-disable-with="Saving...">Save Site configuration</.button>
+        <.button phx-disable-with="Saving...">{gettext("save")}</.button>
       </.form>
     </div>
     """

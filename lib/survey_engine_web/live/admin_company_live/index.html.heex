@@ -34,14 +34,14 @@
 </div>
 <.data_table :if={@index_params} meta={@meta} items={@companies}>
   <:if_empty>No se encontraron compañias con elcriterio de busqueda</:if_empty>
-  <:col field={:agency_name} sortable />
-  <:col field={:legal_name} sortable />
-  <:col :let={company} field={:status} sortable>
+  <:col field={:agency_name} sortable label={gettext("company.agency_name")}/>
+  <:col field={:legal_name} sortable label={gettext("company.legal_name")}/>
+  <:col :let={company} field={:status} sortable label={gettext("company.status")}>
     <.company_state_badge value={company.status} />
   </:col>
   <:col
     field={:business_model_id}
-    label="Business model"
+    label={gettext("company.business_model")}
     renderer={
       fn company ->
         if company.business_model do
@@ -55,13 +55,13 @@
   <:col :let={company} field={:inserted_at} sortable label="Fecha de registro">
     {SurveyEngine.to_timezone(company.inserted_at)}
   </:col>
-  <:col :let={company} label="Actions" align_right>
+  <:col :let={company} label={gettext("actions")} align_right>
     <.button
       color="white"
       variant="outline"
       size="xs"
       link_type="live_patch"
-      label="Editar"
+      label={gettext("edit")}
       to={~p"/admin/companies/#{company}/edit"}
     />
     <.button
@@ -70,7 +70,7 @@
       variant="outline"
       size="xs"
       link_type="live_patch"
-      label="Clasificar"
+      label={gettext("company.sort")}
       to={~p"/admin/companies/#{company}/assign"}
     />
     <%= if is_nil(company.affiliate) do %>
@@ -79,7 +79,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Crear Afiliado"
+        label={gettext("company.new_affiliate")}
         to={~p"/admin/companies/#{company}/new_affiliate"}
       />
     <% else %>
@@ -88,7 +88,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Ver Afiliado"
+        label={gettext("company.show_affiliate")}
         to={~p"/admin/companies/#{company}/affiliate"}
       />
     <% end %>

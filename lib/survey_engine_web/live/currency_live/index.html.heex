@@ -1,22 +1,22 @@
 <.header>
   <:actions>
     <.link patch={~p"/admin/catalogs/currencies/new"}>
-      <.button>New Currency</.button>
+      <.button>{gettext("currency.new_currency")}</.button>
     </.link>
   </:actions>
 </.header>
 <.data_table :if={@index_params} meta={@meta} items={@currencies}>
   <:if_empty>No se encontraron monedas</:if_empty>
-  <:col field={:name} sortable />
-  <:col field={:slug} sortable />
+  <:col field={:name} sortable label={gettext("currency.name")} />
+  <:col field={:slug} sortable label={gettext("currency.slug")}/>
 
-  <:col :let={currency} label="Actions" align_right>
+  <:col :let={currency} label={gettext("actions")} align_right>
     <.button
       color="white"
       variant="outline"
       size="xs"
       link_type="live_patch"
-      label="Editar"
+      label={gettext("edit")}
       to={~p"/admin/catalogs/currencies/#{currency}/edit"}
     />
 
@@ -27,7 +27,7 @@
       to="#"
       size="xs"
       label="eliminar"
-      phx-click="delete"
+      phx-click={gettext("delete")}
       phx-value-id={currency.id}
       data-confirm="Are you sure?"
     />

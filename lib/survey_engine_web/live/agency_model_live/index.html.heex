@@ -2,7 +2,7 @@
   <.page_header title="Listing Agency models">
     <.button
       link_type="live_patch"
-      label="New Agency model"
+      label={gettext("agency_model.new_agency_model")}
       to={~p"/admin/catalogs/agency_models/new"}
     />
   </.page_header>
@@ -21,14 +21,14 @@
 
   <.data_table :if={@index_params} meta={@meta} items={@agency_models}>
     <:if_empty>No agency_models found</:if_empty>
-    <:col field={:name} sortable />
-    <:col :let={agency_model} label="Actions" align_right>
+    <:col field={:name} sortable label={gettext("agency_model.name")} />
+    <:col :let={agency_model} label={gettext("actions")} align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="Show"
+        label={gettext("show")}
         to={~p"/admin/catalogs/agency_models/#{agency_model}"}
       />
 
@@ -37,7 +37,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label={gettext("edit")}
         to={~p"/admin/catalogs/agency_models/#{agency_model}/edit"}
       />
 
@@ -48,7 +48,7 @@
         to="#"
         size="xs"
         label="Delete"
-        phx-click="delete"
+        phx-click={gettext("delete")}
         phx-value-id={agency_model.id}
         data-confirm="Are you sure?"
       />

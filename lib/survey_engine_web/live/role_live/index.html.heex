@@ -4,15 +4,15 @@
   </.page_header>
 
   <.data_table :if={@index_params} meta={@meta} items={@roles}>
-    <:col field={:name} sortable filterable={[:ilike]}/>
-    <:col field={:slug} />
-    <:col label="Actions" :let={role} align_right>
+    <:col field={:name} sortable filterable={[:ilike]} label={gettext("role.name")}/>
+    <:col field={:slug} label={gettext("role.slug")}/>
+    <:col label={gettext("actions")} :let={role} align_right>
         <.button
           color="white"
           variant="outline"
           size="xs"
           link_type="live_patch"
-          label="Edit"
+          label={gettext("edit")}
           to={~p"/admin/roles/#{role}/edit"}
         />
       </:col>

@@ -21,14 +21,14 @@
 
   <.data_table :if={@index_params} meta={@meta} items={@personal_titles}>
     <:if_empty>No personal_titles found</:if_empty>
-    <:col field={:name} sortable />
-    <:col :let={personal_title} label="Actions" align_right>
+    <:col field={:name} sortable label={gettext("personal_title.name")}/>
+    <:col :let={personal_title} label={gettext("actions")} align_right>
       <.button
         color="white"
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Edit"
+        label={gettext("edit")}
         to={~p"/admin/catalogs/personal_titles/#{personal_title}/edit"}
       />
 
@@ -38,7 +38,7 @@
         link_type="a"
         to="#"
         size="xs"
-        label="Delete"
+        label={gettext("delete")}
         phx-click="delete"
         phx-value-id={personal_title.id}
         data-confirm="Are you sure?"

@@ -22,13 +22,13 @@
       {notification.to |> Enum.map(& &1.email)}
     </:col>
 
-    <:col :let={notification} label="Acciones" align_right>
+    <:col :let={notification} label={gettext("actions")} align_right>
       <.button
         color="primary"
         variant="outline"
         size="xs"
         link_type="live_redirect"
-        label="Ver"
+        label={gettext("show")}
         to={~p"/admin/notifications/#{notification}"}
       />
 
@@ -37,7 +37,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Editar"
+        label={gettext("edit")}
         to={~p"/admin/notifications/#{notification}/edit"}
       />
 

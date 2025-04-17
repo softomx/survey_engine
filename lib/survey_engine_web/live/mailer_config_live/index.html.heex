@@ -6,32 +6,32 @@
     :if={@mailer_config && @live_action != :new}
     patch={~p"/admin/mailer_configs/#{@mailer_config}/edit"}
   >
-    <.button>editar</.button>
+    <.button>{gettext("edit")}</.button>
   </.link>
 </div>
 <div :if={@mailer_config && @live_action != :new}>
   <div class="mt-6 border-t border-gray-100">
     <dl class="divide-y divide-gray-100">
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("mailer_config.name")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@mailer_config.name}
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Remitente Nombre</dt>
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("mailer_config.email_name")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@mailer_config.email_name}
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Remitente correo electronico</dt>
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("mailer_config.email_from")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@mailer_config.email_from}
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Adaptador</dt>
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("mailer_config.adapter")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@mailer_config.adapter}
         </dd>
@@ -40,7 +40,7 @@
         :if={@mailer_config.adapter in ["mailgun", "mailjet", "sparkpost"]}
         class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
       >
-        <dt class="text-sm/6 font-medium text-gray-900">API key</dt>
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("mailer_config.api_key")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@mailer_config.configuration.api_key}
         </dd>
