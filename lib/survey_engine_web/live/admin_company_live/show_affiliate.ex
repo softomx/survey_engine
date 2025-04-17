@@ -54,74 +54,66 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="max-w-lg">
-      <.button
-        :if={is_nil(@affiliate.external_affiliate_id)}
-        label="Crear afiliado en GXS"
-        phx-click="create_external_affiliate"
-      />
-      <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.name")}
+    <div>
+      <.page_header title="">
+        <.button
+          :if={is_nil(@affiliate.external_affiliate_id)}
+          label={gettext("create affiliate in gxs")}
+          phx-click="create_external_affiliate"
+        />
+      </.page_header>
+      <div class="px-4 sm:px-0">
+        <h3 class="text-base/7 font-semibold text-gray-900">{gettext("Affiliate Information")}</h3>
+        <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">{gettext("affiliate details")}</p>
+      </div>
+      <div class="mt-6 border-t border-gray-100">
+        <dl class="divide-y divide-gray-100">
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.name")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.name}
+            </dd>
           </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.name}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">
+              {gettext("affiliate.external_affiliate_id")}
+            </dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.external_affiliate_id}
+            </dd>
           </div>
-        </div>
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.external_affiliate_id")}
-          </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.external_affiliate_id}
-          </div>
-        </div>
 
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.slug")}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.slug")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.affiliate_slug}
+            </dd>
           </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.affiliate_slug}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.trading_name")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.trading_name}
+            </dd>
           </div>
-        </div>
-
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.trading_name")}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.business_name")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.business_name}
+            </dd>
           </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.trading_name}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.rfc")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.rfc}
+            </dd>
           </div>
-        </div>
-
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.business_name")}
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">{gettext("affiliate.agency_model")}</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {@affiliate.agency_model}
+            </dd>
           </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.business_name}
-          </div>
-        </div>
-
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.rfc")}
-          </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.rfc}
-          </div>
-        </div>
-
-        <div class="sm:col-span-1">
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {gettext("affiliate.agency_model")}
-          </div>
-          <div class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            {@affiliate.agency_model}
-          </div>
-        </div>
+        </dl>
       </div>
     </div>
     """

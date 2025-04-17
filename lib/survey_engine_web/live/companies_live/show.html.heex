@@ -6,8 +6,17 @@
       </.link>
     </:actions>
   </.header>
-  <div class="px-4 sm:px-0">
-    <h3 class="text-base/7 font-semibold text-gray-900">{gettext("company.information")}</h3>
+
+  <div class="flex flex-row justify-between">
+    <div class="px-4 sm:px-0">
+      <h3 class="text-base/7 font-semibold text-gray-900">{gettext("company.information")}</h3>
+    </div>
+    <div class="py-6">
+      <p class="text-sm/6 font-medium text-gray-900 text-center">{gettext("status")}</p>
+      <div class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+        <.company_state_badge value={@company.status} />
+      </div>
+    </div>
   </div>
 
   <div class="mt-6 border-t border-gray-100">
@@ -33,6 +42,28 @@
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">{gettext("company.billing_currency")}</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {@company.language}
+        </dd>
+      </div>
+      <%= if @company.affiliate != nil do %>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">{gettext("Affiliate")}</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            {@company.affiliate.name}
+          </dd>
+        </div>
+      <% end %>
+      <%= if @company.business_model != nil do %>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">{gettext("Business Model")}</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            {@company.business_model.name}
+          </dd>
+        </div>
+      <% end %>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">{gettext("billing currency")}</dt>
         <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
           {@company.billing_currency}
         </dd>

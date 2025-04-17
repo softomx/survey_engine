@@ -429,10 +429,10 @@ defmodule SurveyEngineWeb.CoreComponents do
               <div class="flex justify-end">
                 <div class="pr-2">
                   <a href="#" phx-target={@target} phx-click={@reset_event} class="py-3 px-4 text-sm">
-                    Limpiar
+                    {gettext("Clean")}
                   </a>
                 </div>
-                <.button type="submit">Buscar</.button>
+                <.button type="submit">{gettext("Search")}</.button>
               </div>
             </div>
           </div>

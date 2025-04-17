@@ -3,18 +3,26 @@
   <.filter_form
     css="grid mt-6 gap-4 grid-cols-3"
     fields={[
-      agency_name: [label: "Agencia", op: :ilike_and, place_holder: "Nombre de la agencia"],
-      legal_name: [label: "Legal Name", op: :ilike_and, place_holder: "Nombre legal"],
+      agency_name: [
+        label: gettext("Agency"),
+        op: :ilike_and,
+        place_holder: gettext("Agency name")
+      ],
+      legal_name: [
+        label: gettext("Legal Name"),
+        op: :ilike_and,
+        place_holder: gettext("Legal Name")
+      ],
       status: [
-        prompt: "Selecciona una opción",
-        label: "Estatus",
+        prompt: gettext("Select an option"),
+        label: gettext("Status"),
         op: :==,
         type: "select",
         options: @response_states
       ],
       business_model_id: [
-        prompt: "Selecciona una opción",
-        label: "Businness model",
+        prompt: gettext("Select an option"),
+        label: gettext("Businness model"),
         op: :==,
         type: "select",
         options: @businnes_models |> Enum.map(&{&1.name, &1.id})
@@ -43,7 +51,6 @@
         end
       end
     }
-    
   />
   <:col :let={company} field={:inserted_at} sortable label="Fecha de registro">
     {SurveyEngine.to_timezone(company.inserted_at)}

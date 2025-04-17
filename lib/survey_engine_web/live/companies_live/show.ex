@@ -28,7 +28,12 @@ defmodule SurveyEngineWeb.CompanyLive.Show do
 
   defp apply_action(socket, :show, _params) do
     if company_id = socket.assigns.current_user.company_id do
-      company = Companies.get_company!(company_id)
+      company =
+        Companies.get_company_with_preloads(company_id, [:business_model, :affiliate])
+        |> case do
+          {:ok, company} -> company
+          _ -> %{}
+        end
 
       socket
       |> assign(:page_title, "Empresa")
