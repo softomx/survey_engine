@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
+  alias SurveyEngine.NotificationManager
   alias SurveyEngine.Catalogs
   use SurveyEngineWeb, :live_component
 
@@ -50,7 +51,13 @@ defmodule SurveyEngineWeb.AffiliateLive.FormComponent do
     affiliate_params = Map.put(affiliate_params, "created_by_id", socket.assigns.current_user.id)
 
     case AffiliateEngine.create_affiliate(affiliate_params) do
-      {:ok, _affiliate} ->
+      {:ok, affiliate} ->
+        NotificationManager.notify_created_affiliate(
+          socket.assigns.current_user,
+          socket.assigns.site_config,
+          affiliate.company_id
+        )
+
         {:noreply,
          socket
          |> put_flash(:info, "Affiliate created successfully")

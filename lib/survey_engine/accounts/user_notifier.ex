@@ -77,7 +77,7 @@ defmodule SurveyEngine.Accounts.UserNotifier do
   end
 
   def deliver_rejected_survey(
-      user,
+        user,
         subject,
         content,
         site_config_id
@@ -99,6 +99,21 @@ defmodule SurveyEngine.Accounts.UserNotifier do
       ) do
     deliver(
       "client_survey_approved.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
+  def deliver_affiliate_created(
+        user,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "client_affiliate_created.html",
       user.email,
       subject,
       content,

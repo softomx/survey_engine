@@ -52,6 +52,18 @@ defmodule SurveyEngine.NotificationManager do
     end
   end
 
+  def notify_created_affiliate(
+        %User{} = user,
+        %SiteConfiguration{} = site_config,
+        company_id
+      ) do
+    enqueue_worker(SurveyEngine.Workers.ClientCreatedAffiliateWorker, [
+      user.id,
+      site_config.id,
+      company_id
+    ])
+  end
+
   def notify_business_model_assigned(
         %Company{} = company,
         %SiteConfiguration{} = site_config
