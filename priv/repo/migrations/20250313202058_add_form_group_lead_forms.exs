@@ -5,5 +5,9 @@ defmodule SurveyEngine.Repo.Migrations.AddFormGroupLeadForms do
     alter table(:leads_forms) do
       add :form_group_id, references(:form_groups, on_delete: :delete_all)
     end
+
+    alter table(:survey_responses) do
+      add :form_group_id, references(:form_groups, on_delete: :delete_all)
+    end
   end
 end
