@@ -1,4 +1,6 @@
 import customHandsontable from  "../vendor/handsontable/handsontable.full.min.js";
+import esMX from "../vendor/handsontable/es-MX.min.js";
+
 let Handsontable =  {
  mounted() {
   var table = null
