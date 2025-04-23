@@ -36,8 +36,6 @@ defmodule SurveyEngine.PermissionManager do
     |> map_menu_group(current_user, :reports)
     |> map_menu_group(current_user, :catalogs)
     |> map_menu_group(current_user, :sites)
-
-
   end
 
   def map_menu_group(base_menu, current_user, :client) do
@@ -50,7 +48,7 @@ defmodule SurveyEngine.PermissionManager do
       },
       %{
         name: ~p"/company",
-        label: "Empresa",
+        label: "Pre-registro",
         path: ~p"/company",
         icon: "hero-building-library"
       }
@@ -76,12 +74,11 @@ defmodule SurveyEngine.PermissionManager do
     |> validate_items(current_user, "Formularios", base_menu)
   end
 
-
   def map_menu_group(base_menu, current_user, :admin) do
     [
       %{
         name: ~p"/admin/companies",
-        label: "Empresas",
+        label: "Pre-registros",
         path: ~p"/admin/companies",
         icon: "hero-building-office-2"
       },
@@ -149,12 +146,6 @@ defmodule SurveyEngine.PermissionManager do
         name: ~p"/admin/catalogs/agency_models",
         label: "Modelos de agencia",
         path: ~p"/admin/catalogs/agency_models",
-        icon: "hero-user"
-      },
-      %{
-        name: ~p"/admin/catalogs/personal_titles",
-        label: "Titulos personales",
-        path: ~p"/admin/catalogs/personal_titles",
         icon: "hero-user"
       }
     ]

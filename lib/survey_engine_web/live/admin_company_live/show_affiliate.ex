@@ -20,7 +20,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
              socket.assigns.site_config,
              socket.assigns.affiliate
            ),
-         {:ok, _affiliate} <-
+         {:ok, affiliate} <-
            AffiliateEngine.update_affiliate(socket.assigns.affiliate, %{
              state: "created",
              external_affiliate_id: "#{external_affiliate_response["data"]["id"]}",
@@ -29,6 +29,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
            }) do
       socket
       |> put_flash(:info, gettext("affiliate.external_affiliate_created"))
+      |> assign(:affiliate, affiliate)
     else
       {:error, reason} ->
         socket
@@ -43,7 +44,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.ShowAffiliate do
       socket
       |> assign(:page_title, "#{String.upcase(company.legal_name)}: Afiliado")
       |> assign(:company, company)
-      |> assign(:affiliate, %{company.affiliate | company: company})
+      |> assign(:affiliate, company.affiliate)
     else
       _error ->
         socket

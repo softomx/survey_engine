@@ -4,7 +4,6 @@ defmodule SurveyEngine.AffiliateEngine do
   """
 
   import Ecto.Query, warn: false
-  alias SurveyEngine.AffiliateEngine
   alias SurveyEngine.Repo
 
   alias SurveyEngine.AffiliateEngine.Affiliate
@@ -40,8 +39,7 @@ defmodule SurveyEngine.AffiliateEngine do
              [
                {"Authorization", webhook_config.api_key}
              ]
-           )
-           |> IO.inspect() do
+           ) do
       {:ok, response}
     end
   end

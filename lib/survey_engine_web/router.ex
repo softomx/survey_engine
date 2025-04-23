@@ -128,7 +128,6 @@ defmodule SurveyEngineWeb.Router do
       live "/company", CompanyLive.Show, :show
       live "/company/:id/edit", CompaniesLive.Edit, :edit
 
-
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
       live "/survey_responses", SurveyResponseLive.Index, :index
@@ -150,7 +149,6 @@ defmodule SurveyEngineWeb.Router do
         {ContextSession, :current_page},
         {ContextSession, :set_locale}
       ] do
-
       get "/error", PageController, :home
       get "/unauthorized", PageController, :unauthorized
       live "/users/settings", UserSettingsLive, :edit
@@ -231,9 +229,9 @@ defmodule SurveyEngineWeb.Router do
            BusinessConfigLive.Show,
            :edit
 
-      live "/catalogs/personal_titles", PersonalTitleLive.Index, :index
-      live "/catalogs/personal_titles/new", PersonalTitleLive.Index, :new
-      live "/catalogs/personal_titles/:id/edit", PersonalTitleLive.Index, :edit
+      # live "/catalogs/personal_titles", PersonalTitleLive.Index, :index
+      # live "/catalogs/personal_titles/new", PersonalTitleLive.Index, :new
+      # live "/catalogs/personal_titles/:id/edit", PersonalTitleLive.Index, :edit
 
       live "/site_configurations", SiteConfigurationLive.Index, :index
       live "/site_configurations/new", SiteConfigurationLive.New, :new
@@ -318,8 +316,7 @@ defmodule SurveyEngineWeb.Router do
       # live "/permissions_actions/new", PermissionActionLive.Index, :new
       live "/permissions_actions/set", PermissionActionLive.SetPermission, :set_permission
       live "/permissions_actions/sync", PermissionActionLive.SetPermission, :sync_permission
-      #live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
-
+      # live "/permissions_actions/:id/edit", PermissionActionLive.Index, :edit
     end
   end
 
