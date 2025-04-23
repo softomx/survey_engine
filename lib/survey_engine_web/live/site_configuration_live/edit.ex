@@ -2,8 +2,7 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.Edit do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.SiteConfigurations
-  alias SurveyEngine.SiteConfigurations.SiteConfiguration
-  alias PetalFramework.Components.DataTable
+
   @impl true
   def render(assigns) do
     ~H"""

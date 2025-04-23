@@ -1,9 +1,8 @@
 defmodule SurveyEngineWeb.SiteConfigurationLive.New do
   use SurveyEngineWeb, :live_view
 
-  alias SurveyEngine.SiteConfigurations
   alias SurveyEngine.SiteConfigurations.SiteConfiguration
-  alias PetalFramework.Components.DataTable
+
   @impl true
   @spec render(any()) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do

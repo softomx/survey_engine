@@ -1,6 +1,6 @@
 defmodule SurveyEngineWeb.SurveyResponseLive.ResponseInfoComponent do
   use SurveyEngineWeb, :live_component
-  alias SurveyEngine.Responses
+
   alias SurveyEngine.TransaleteHelper
 
   @impl true

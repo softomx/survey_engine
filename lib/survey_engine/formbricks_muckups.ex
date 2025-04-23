@@ -32,7 +32,7 @@ defmodule SurveyEngine.FormbricksMuckups do
     }
   end
 
-  defp response_updated() do
+  def response_updated() do
     %{
       "data" => %{
         "createdAt" => "2025-03-12T15:59:04.641Z",

@@ -121,7 +121,7 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
 
   defp save_mailer_config(socket, :new, mailer_config_params) do
     case MailerManager.create_mailer_config(mailer_config_params) do
-      {:ok, mailer_config} ->
+      {:ok, _mailer_config} ->
         {:noreply,
          socket
          |> put_flash(:info, "Site configuration created successfully")

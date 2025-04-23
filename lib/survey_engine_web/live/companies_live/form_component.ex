@@ -61,12 +61,6 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
 
   @impl true
   def update(%{action: :validate, company_params: company_params}, socket) do
-    # changeset =
-    #   Companies.change_company(
-    #     socket.assigns.company,
-    #     company_params
-    #   )
-
     {:ok,
      assign(socket,
        towns: get_towns_by_country(company_params["country"])
@@ -74,7 +68,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
   end
 
   @impl true
-  def update(%{company: company} = assigns, socket) do
+  def update(%{company: _company} = assigns, socket) do
     {
       :ok,
       socket

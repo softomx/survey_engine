@@ -2,7 +2,7 @@ defmodule SurveyEngine.PermissionManager do
   alias SurveyEngine.Accounts.User
   use SurveyEngineWeb, :verified_routes
 
-  def authorize_user?(nil, %{path: path}), do: false
+  def authorize_user?(nil, %{path: _path}), do: false
 
   def authorize_user?(%User{} = current_user, %{path: path}) do
     get_user_permissions(current_user)

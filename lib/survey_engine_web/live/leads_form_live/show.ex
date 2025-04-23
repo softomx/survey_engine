@@ -2,7 +2,6 @@ defmodule SurveyEngineWeb.LeadsFormLive.Show do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.LeadsForms
-  alias SurveyEngine.LeadsForms.LeadsForm
 
   @impl true
   def mount(_params, _session, socket) do

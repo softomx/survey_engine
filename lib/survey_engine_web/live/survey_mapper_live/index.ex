@@ -1,5 +1,4 @@
 defmodule SurveyEngineWeb.SurveyMapperLive.Index do
-  alias SurveyEngine.Notifications.Notification
   alias SurveyEngine.LeadsForms
   alias SurveyEngine.AffiliateEngine.Affiliate
   use SurveyEngineWeb, :live_view

@@ -40,9 +40,6 @@ defmodule SurveyEngine.LeadsForms do
       {:lang, lang}, query ->
         from q in query, where: q.language == ^lang
 
-      {:form_group_id, form_group_id}, query ->
-        from q in query, where: q.form_group_id == ^form_group_id
-
       {:ids, ids}, query ->
         from q in query, where: q.id in ^ids
     end)

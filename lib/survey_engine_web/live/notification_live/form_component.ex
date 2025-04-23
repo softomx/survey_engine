@@ -1,5 +1,4 @@
 defmodule SurveyEngineWeb.NotificationLive.FormComponent do
-  alias SurveyEngine.Notifications.NotificationTo
   use SurveyEngineWeb, :live_component
 
   alias SurveyEngine.Notifications

@@ -42,7 +42,7 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
           socket
         }
 
-      eerr ->
+      _eerr ->
         {:noreply, socket}
     end
   end
@@ -90,6 +90,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.FormComponent do
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
-    assign(socket, :form, to_form(changeset) )
+    assign(socket, :form, to_form(changeset))
   end
 end

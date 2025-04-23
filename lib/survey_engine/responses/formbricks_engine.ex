@@ -1,5 +1,4 @@
 defmodule SurveyEngine.Responses.FormbricksEngine do
-  alias SurveyEngine.SiteConfigurations.SiteConfiguration
   alias SurveyEngine.SiteConfigurations
   alias SurveyEngine.Companies
   alias SurveyEngine.Accounts

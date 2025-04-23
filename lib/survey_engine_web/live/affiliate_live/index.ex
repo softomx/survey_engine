@@ -1,6 +1,4 @@
 defmodule SurveyEngineWeb.AffiliateLive.Index do
-  alias SurveyEngine.Catalogs
-  alias SurveyEngine.Companies
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.AffiliateEngine

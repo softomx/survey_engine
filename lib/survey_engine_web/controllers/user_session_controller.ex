@@ -4,7 +4,7 @@ defmodule SurveyEngineWeb.UserSessionController do
   alias SurveyEngine.Accounts
   alias SurveyEngineWeb.UserAuth
 
-  def create(conn, %{"_action" => "registered"} = params) do
+  def create(conn, %{"_action" => "registered"} = _params) do
     conn
     |> put_flash(:info, "Revisa tu bandeja de entrada")
     |> redirect(to: ~p"/users/log_in")

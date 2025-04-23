@@ -32,7 +32,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
           label={gettext("leads_form.provider")}
           options={[{"Formbricks", "formbricks"}]}
         />
-        <.field field={@form[:external_id]} type="text" label={gettext("leads_form.external_id")}/>
+        <.field field={@form[:external_id]} type="text" label={gettext("leads_form.external_id")} />
         <.field field={@form[:active]} type="switch" label={gettext("leads_form.active")} />
 
         <.button phx-disable-with="Saving...">{gettext("save")}</.button>
@@ -63,9 +63,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
 
   defp save_leads_form(socket, :edit, leads_form_params) do
     case LeadsForms.update_leads_form(socket.assigns.leads_form, leads_form_params) do
-      {:ok, leads_form} ->
-        # notify_parent({:saved, leads_form})
-
+      {:ok, _leads_form} ->
         {:noreply,
          socket
          |> put_flash(:info, "Leads form updated successfully")
@@ -78,9 +76,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
 
   defp save_leads_form(socket, :new, leads_form_params) do
     case LeadsForms.create_leads_form(leads_form_params) do
-      {:ok, leads_form} ->
-        # notify_parent({:saved, leads_form})
-
+      {:ok, _leads_form} ->
         {:noreply,
          socket
          |> put_flash(:info, "Leads form created successfully")
@@ -90,6 +86,4 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 end

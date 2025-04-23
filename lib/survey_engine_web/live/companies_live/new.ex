@@ -1,7 +1,6 @@
 defmodule SurveyEngineWeb.CompanyLive.New do
   use SurveyEngineWeb, :live_view
 
-  alias SurveyEngine.Companies
   alias SurveyEngine.Companies.Company
 
   @impl true
@@ -15,9 +14,7 @@ defmodule SurveyEngineWeb.CompanyLive.New do
   end
 
   defp apply_action(socket, :new, _params) do
-    if company_id = socket.assigns.current_user.company_id do
-      company = Companies.get_company(company_id)
-
+    if socket.assigns.current_user.company_id do
       socket
       |> push_patch(to: ~p"/company")
     else

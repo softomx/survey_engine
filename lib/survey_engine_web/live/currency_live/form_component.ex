@@ -50,9 +50,7 @@ defmodule SurveyEngineWeb.CurrencyLive.FormComponent do
 
   defp save_currency(socket, :edit, currency_params) do
     case Catalogs.update_currency(socket.assigns.currency, currency_params) do
-      {:ok, currency} ->
-        # notify_parent({:saved, currency})
-
+      {:ok, _currency} ->
         {:noreply,
          socket
          |> put_flash(:info, "Currency updated successfully")
@@ -65,9 +63,7 @@ defmodule SurveyEngineWeb.CurrencyLive.FormComponent do
 
   defp save_currency(socket, :new, currency_params) do
     case Catalogs.create_currency(currency_params) do
-      {:ok, currency} ->
-        # notify_parent({:saved, currency})
-
+      {:ok, _currency} ->
         {:noreply,
          socket
          |> put_flash(:info, "Currency created successfully")
@@ -77,6 +73,4 @@ defmodule SurveyEngineWeb.CurrencyLive.FormComponent do
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 end

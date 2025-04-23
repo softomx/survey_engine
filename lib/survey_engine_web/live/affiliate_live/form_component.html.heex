@@ -1,137 +1,135 @@
-<div>
-  <.form
-    for={@form}
-    id="affiliate-form"
-    phx-target={@myself}
-    phx-change="validate"
-    phx-submit="save"
-  >
-    <div class="gap-3 grid grid-cols-12">
-      <.field
-        wrapper_class="col-span-12 md:col-span-6"
-        type="text"
-        field={@form[:name]}
-        label={gettext("affiliate.name")}
-      />
+<.form
+  for={@form}
+  id="affiliate-form"
+  phx-target={@myself}
+  phx-change="validate"
+  phx-submit="save"
+>
+  <div class="gap-3 grid grid-cols-12">
+    <.field
+      wrapper_class="col-span-12 md:col-span-6"
+      type="text"
+      field={@form[:name]}
+      label={gettext("affiliate.name")}
+    />
 
-      <.field
-        wrapper_class="col-span-12 md:col-span-6"
-        type="text"
-        field={@form[:affiliate_slug]}
-        label={gettext("affiliate.slug")}
-      />
+    <.field
+      wrapper_class="col-span-12 md:col-span-6"
+      type="text"
+      field={@form[:affiliate_slug]}
+      label={gettext("affiliate.slug")}
+    />
 
-      <.field
-        wrapper_class="col-span-12 md:col-span-6"
-        type="text"
-        field={@form[:rfc]}
-        label={gettext("affiliate.rfc")}
-      />
+    <.field
+      wrapper_class="col-span-12 md:col-span-6"
+      type="text"
+      field={@form[:rfc]}
+      label={gettext("affiliate.rfc")}
+    />
 
-      <.field
-        wrapper_class="col-span-12 md:col-span-6"
-        type="text"
-        field={@form[:trading_name]}
-        label={gettext("affiliate.trading_name")}
-      />
+    <.field
+      wrapper_class="col-span-12 md:col-span-6"
+      type="text"
+      field={@form[:trading_name]}
+      label={gettext("affiliate.trading_name")}
+    />
 
-      <.field
-        type="text"
-        wrapper_class="col-span-12 md:col-span-6"
-        field={@form[:business_name]}
-        label={gettext("affiliate.business_name")}
-      />
+    <.field
+      type="text"
+      wrapper_class="col-span-12 md:col-span-6"
+      field={@form[:business_name]}
+      label={gettext("affiliate.business_name")}
+    />
 
-      <.field
-        type="select"
-        wrapper_class="col-span-12 md:col-span-6"
-        field={@form[:base_currency]}
-        options={@currencies}
-        label={gettext("affiliate.base_currency")}
-      />
+    <.field
+      type="select"
+      wrapper_class="col-span-12 md:col-span-6"
+      field={@form[:base_currency]}
+      options={@currencies}
+      label={gettext("affiliate.base_currency")}
+    />
 
-      <.field
-        type="select"
-        wrapper_class="col-span-12 md:col-span-6"
-        options={@agency_models}
-        field={@form[:agency_model]}
-        prompt={gettext("affiliate.select_agency_model")}
-        label={gettext("affiliate.agency_model")}
-      />
-      <.field
-        type="select"
-        wrapper_class="col-span-12 md:col-span-6"
-        options={@company_types}
-        field={@form[:agency_type]}
-        prompt={gettext("affiliate.select_agency_type")}
-        label={gettext("affiliate.agency_type")}
-      />
-      <.field type="hidden" field={@form[:company_id]} />
+    <.field
+      type="select"
+      wrapper_class="col-span-12 md:col-span-6"
+      options={@agency_models}
+      field={@form[:agency_model]}
+      prompt={gettext("affiliate.select_agency_model")}
+      label={gettext("affiliate.agency_model")}
+    />
+    <.field
+      type="select"
+      wrapper_class="col-span-12 md:col-span-6"
+      options={@company_types}
+      field={@form[:agency_type]}
+      prompt={gettext("affiliate.select_agency_type")}
+      label={gettext("affiliate.agency_type")}
+    />
+    <.field type="hidden" field={@form[:company_id]} />
 
-      <div class="col-span-12 px-5">
-        <.label>{gettext("affiliate.address")}</.label>
-        <.inputs_for :let={address} field={@form[:address]}>
-          <div class=" grid grid-cols-6 gap-3 mt-2">
-            <.combo_box
-              type="select"
-              wrapper_class="col-span-1 md:col-span-2"
-              field={address[:country]}
-              label={gettext("affiliate.address.country")}
-              options={@countries}
-            />
-            <.combo_box
-              type="select"
-              wrapper_class="col-span-1 md:col-span-2 sm:col-span-2"
-              field={address[:state]}
-              label={gettext("affiliate.address.state")}
-              options={@states}
-            />
-            <.field
-              type="text"
-              wrapper_class="col-span-12 md:col-span-6"
-              wrapper_class="col-span-1 md:col-span-2"
-              field={address[:city]}
-              label={gettext("affiliate.address.city")}
-            />
+    <div class="col-span-12 px-5">
+      <.label>{gettext("affiliate.address")}</.label>
+      <.inputs_for :let={address} field={@form[:address]}>
+        <div class=" grid grid-cols-6 gap-3 mt-2">
+          <.combo_box
+            type="select"
+            wrapper_class="col-span-1 md:col-span-2"
+            field={address[:country]}
+            label={gettext("affiliate.address.country")}
+            options={@countries}
+          />
+          <.combo_box
+            type="select"
+            wrapper_class="col-span-1 md:col-span-2 sm:col-span-2"
+            field={address[:state]}
+            label={gettext("affiliate.address.state")}
+            options={@states}
+          />
+          <.field
+            type="text"
+            wrapper_class="col-span-12 md:col-span-6"
+            wrapper_class="col-span-1 md:col-span-2"
+            field={address[:city]}
+            label={gettext("affiliate.address.city")}
+          />
 
-            <.field
-              wrapper_class="col-span-1 md:col-span-2"
-              type="text"
-              field={address[:neighborhood]}
-              label={gettext("affiliate.address.neighborhood")}
-            />
-            <.field
-              wrapper_class="col-span-1 md:col-span-2"
-              type="text"
-              field={address[:street]}
-              label={gettext("affiliate.address.street")}
-            />
-            <.field
-              wrapper_class="col-span-1 md:col-span-2"
-              type="text"
-              field={address[:internal_number]}
-              label={gettext("affiliate.address.internal_number")}
-            />
-            <.field
-              wrapper_class="col-span-1 md:col-span-2"
-              type="text"
-              field={address[:external_number]}
-              label={gettext("affiliate.address.external_number")}
-            />
+          <.field
+            wrapper_class="col-span-1 md:col-span-2"
+            type="text"
+            field={address[:neighborhood]}
+            label={gettext("affiliate.address.neighborhood")}
+          />
+          <.field
+            wrapper_class="col-span-1 md:col-span-2"
+            type="text"
+            field={address[:street]}
+            label={gettext("affiliate.address.street")}
+          />
+          <.field
+            wrapper_class="col-span-1 md:col-span-2"
+            type="text"
+            field={address[:internal_number]}
+            label={gettext("affiliate.address.internal_number")}
+          />
+          <.field
+            wrapper_class="col-span-1 md:col-span-2"
+            type="text"
+            field={address[:external_number]}
+            label={gettext("affiliate.address.external_number")}
+          />
 
-            <.field
-              wrapper_class="col-span-1 md:col-span-2"
-              type="text"
-              field={address[:postal_code]}
-              label={gettext("affiliate.address.postal_code")}
-            />
-          </div>
-        </.inputs_for>
-      </div>
-
-      <div class="flex justify-end col-span-12">
-        <.button type="submit" phx-disable-with="Saving..." label="Save" />
-      </div>
+          <.field
+            wrapper_class="col-span-1 md:col-span-2"
+            type="text"
+            field={address[:postal_code]}
+            label={gettext("affiliate.address.postal_code")}
+          />
+        </div>
+      </.inputs_for>
     </div>
-  </.form>
-</div>
+
+    <div class="flex justify-end col-span-12">
+      <.button type="submit" phx-disable-with="Saving..." label="Save" />
+    </div>
+  </div>
+</.form>
