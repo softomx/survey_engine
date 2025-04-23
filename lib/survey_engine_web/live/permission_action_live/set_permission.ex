@@ -136,7 +136,10 @@ defmodule SurveyEngineWeb.PermissionActionLive.SetPermission do
           </tr>
           <%= for permission <- permissions do %>
             <tr class="border">
-              <th class="p-2 bg-gray-50" >
+              <th class="p-2 bg-gray-50"
+                id={"#{permission.id}"}
+                data-tippy-content={"#{permission.path}"}
+                phx-hook="TippyHook">
               <p class="text-left text-xs">{TransaleteHelper.permission_action(permission.action)}</p></th>
               <%= for role <- @roles do %>
                 <td class="p-2 text-center">

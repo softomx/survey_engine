@@ -400,18 +400,21 @@ msgstr "User"
 msgid "Actions"
 msgstr "Actions"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:535
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:99
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "affiliate.business_name"
 msgstr "Business name"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:451
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:72
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:14
 #, elixir-autogen, elixir-format
 msgid "affiliate.name"
 msgstr "Name"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:556
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:105
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:28
 #, elixir-autogen, elixir-format
@@ -423,12 +426,14 @@ msgstr "RFC"
 msgid "affiliate.select_response"
 msgstr "select response"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:493
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:87
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:21
 #, elixir-autogen, elixir-format
 msgid "affiliate.slug"
 msgstr "Slug"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:514
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:93
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:35
 #, elixir-autogen, elixir-format
@@ -645,6 +650,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:303
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:395
@@ -778,6 +784,7 @@ msgstr ""
 msgid "affiliate.address.street"
 msgstr ""
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:577
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:111
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:59
 #, elixir-autogen, elixir-format, fuzzy
@@ -799,6 +806,7 @@ msgstr "Name"
 msgid "affiliate.external_affiliate_created"
 msgstr ""
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:472
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:79
 #, elixir-autogen, elixir-format
 msgid "affiliate.external_affiliate_id"
@@ -1091,6 +1099,7 @@ msgstr ""
 #: lib/survey_engine_web/live/personal_title_live/index.html.heex:25
 #: lib/survey_engine_web/live/role_live/index.html.heex:9
 #: lib/survey_engine_web/live/site_configuration_live/index.html.heex:17
+#: lib/survey_engine_web/live/user_live/index.html.heex:8
 #, elixir-autogen, elixir-format, fuzzy
 msgid "actions"
 msgstr "Actions"
@@ -1319,6 +1328,7 @@ msgstr ""
 msgid "Affiliate"
 msgstr "RFC"
 
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:429
 #: lib/survey_engine_web/live/admin_company_live/show_affiliate.ex:66
 #, elixir-autogen, elixir-format
 msgid "Affiliate Information"
@@ -1399,4 +1409,24 @@ msgstr ""
 #: lib/survey_engine_web/live/user_live/index.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "user.inserted_at"
+msgstr ""
+
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:303
+#, elixir-autogen, elixir-format, fuzzy
+msgid "This is a confirmation of your affiliate registration"
+msgstr ""
+
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:411
+#, elixir-autogen, elixir-format
+msgid "successfully created affiliate"
+msgstr ""
+
+#: lib/survey_engine_web/states_helper.ex:87
+#, elixir-autogen, elixir-format, fuzzy
+msgid "permissions.edit_response_item"
+msgstr ""
+
+#: lib/survey_engine_web/states_helper.ex:86
+#, elixir-autogen, elixir-format, fuzzy
+msgid "permissions.edit_roles"
 msgstr ""

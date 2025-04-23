@@ -83,6 +83,8 @@ defmodule SurveyEngine.TransaleteHelper do
       "set_permission" -> gettext("permissions.set_permission")
       "pre_registration" -> gettext("permissions.report_pre_registration")
       "survey_response" -> gettext("permissions.report_survey_response")
+      "edit_roles" -> gettext("permissions.edit_roles")
+      "edit_response_item" -> gettext("permissions.edit_response_item")
       _ -> action
     end
   end
