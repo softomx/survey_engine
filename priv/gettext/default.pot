@@ -229,7 +229,7 @@ msgstr ""
 msgid "to your account now"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/index.html.heex:28
+#: lib/survey_engine_web/live/companies_live/index.html.heex:33
 #, elixir-autogen, elixir-format
 msgid "view_response"
 msgstr ""
@@ -256,8 +256,8 @@ msgstr ""
 msgid "survey_response.state"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/index.html.heex:37
-#: lib/survey_engine_web/live/companies_live/index.html.heex:57
+#: lib/survey_engine_web/live/companies_live/index.html.heex:42
+#: lib/survey_engine_web/live/companies_live/index.html.heex:62
 #, elixir-autogen, elixir-format
 msgid "link_survey"
 msgstr ""
@@ -1429,4 +1429,9 @@ msgstr ""
 #: lib/survey_engine_web/states_helper.ex:86
 #, elixir-autogen, elixir-format
 msgid "permissions.edit_roles"
+msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/index.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "company.empty_forms"
 msgstr ""

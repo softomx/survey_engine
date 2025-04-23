@@ -229,7 +229,7 @@ msgstr ""
 msgid "to your account now"
 msgstr ""
 
-#: lib/survey_engine_web/live/companies_live/index.html.heex:28
+#: lib/survey_engine_web/live/companies_live/index.html.heex:33
 #, elixir-autogen, elixir-format
 msgid "view_response"
 msgstr "Answer"
@@ -256,8 +256,8 @@ msgstr "Date"
 msgid "survey_response.state"
 msgstr "State"
 
-#: lib/survey_engine_web/live/companies_live/index.html.heex:37
-#: lib/survey_engine_web/live/companies_live/index.html.heex:57
+#: lib/survey_engine_web/live/companies_live/index.html.heex:42
+#: lib/survey_engine_web/live/companies_live/index.html.heex:62
 #, elixir-autogen, elixir-format
 msgid "link_survey"
 msgstr "Questions"
@@ -1430,3 +1430,8 @@ msgstr ""
 #, elixir-autogen, elixir-format, fuzzy
 msgid "permissions.edit_roles"
 msgstr ""
+
+#: lib/survey_engine_web/live/companies_live/index.html.heex:5
+#, elixir-autogen, elixir-format, fuzzy
+msgid "company.empty_forms"
+msgstr "We are validating your registration information. A notification will be sent to your email shortly."

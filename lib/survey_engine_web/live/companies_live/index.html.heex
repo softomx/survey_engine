@@ -1,5 +1,10 @@
 <div class="mt-12">
   <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+    <.card :if={length(@business_configs) == 0} class="max-w-sm" variant="outline">
+      <.card_content>
+        <p class="my-4 text-center text-gray-500">{gettext("company.empty_forms")}</p>
+      </.card_content>
+    </.card>
     <.card :for={busines_config <- @business_configs} class="max-w-sm" variant="outline">
       <.card_content category={"#{busines_config.order}"}>
         <%= if !is_nil(busines_config.response) do %>
