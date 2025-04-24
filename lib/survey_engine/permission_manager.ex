@@ -4,6 +4,16 @@ defmodule SurveyEngine.PermissionManager do
 
   def authorize_user?(nil, %{path: _path}), do: false
 
+  def authorize_user?(%User{} = current_user, %{path: path, generic_path: nil}) do
+    get_user_permissions(current_user)
+    |> validate_result(fn permission -> permission.path == path end)
+  end
+
+  def authorize_user?(%User{} = current_user, %{path: _path, generic_path: generic_path}) do
+    get_user_permissions(current_user)
+    |> validate_result(fn permission -> permission.path == generic_path end)
+  end
+
   def authorize_user?(%User{} = current_user, %{path: path}) do
     get_user_permissions(current_user)
     |> validate_result(fn permission -> permission.path == path end)
@@ -20,6 +30,7 @@ defmodule SurveyEngine.PermissionManager do
   defp validate_result(permissions, find_fn) do
     permissions
     |> Enum.find(fn permission ->
+      if String.contains?(permission.path, "admin/content/:behaviour"), do: IO.inspect(permission)
       find_fn.(permission)
     end)
     |> case do
@@ -164,18 +175,21 @@ defmodule SurveyEngine.PermissionManager do
         name: ~p"/admin/content/scopes",
         label: "Alcances",
         path: ~p"/admin/content/scopes",
+        generic_path: ~p"/admin/content/:behaviour",
         icon: "hero-document-arrow-up"
       },
       %{
         name: ~p"/admin/content/policies",
         label: "Politicas",
         path: ~p"/admin/content/policies",
+        generic_path: ~p"/admin/content/:behaviour",
         icon: "hero-document-text"
       },
       %{
         name: ~p"/admin/content/goals",
         label: "Objetivos",
         path: ~p"/admin/content/goals",
+        generic_path: ~p"/admin/content/:behaviour",
         icon: "hero-document-check"
       },
       %{
@@ -198,7 +212,7 @@ defmodule SurveyEngine.PermissionManager do
     menu_items =
       menu_items
       |> Enum.filter(fn item ->
-        authorize_user?(current_user, %{path: item.path})
+        authorize_user?(current_user, %{path: item.path, generic_path: item[:generic_path]})
       end)
 
     if length(menu_items) > 0 do
