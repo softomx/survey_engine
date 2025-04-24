@@ -1,22 +1,17 @@
-<.container class="">
-  <.page_header title={@lead_form.id}></.page_header>
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      {@lead_form.form_group.name}
-    </div>
+<.container class="mt-10">
+  <div class="flex items-end text-right mb-2">
+    <.button phx-click={JS.push("add")} color="success" label={gettext("survey_mapper.add")} />
   </div>
-  <div :for={{item, index} <- @survey_mapper |> Enum.with_index()} class="">
+  <div :for={{item, index} <- @survey_mapper |> Enum.with_index()} class="mt-2">
     <.live_component
       module={SurveyEngineWeb.SurveyMapperLive.FormComponent}
       id={"form-#{index}"}
       action={if item.id, do: :edit, else: :new}
       survey_mapper={item}
-      questions={@external_survey.questions}
+      questions={@questions}
       fields={@fields}
       survey_id={@lead_form.id}
       index={index}
-      return_to={current_index_path(@index_params)}
     />
   </div>
-  <.button phx-click={JS.push("add")} color="success" label={gettext("survey_mapper.add")} />
 </.container>

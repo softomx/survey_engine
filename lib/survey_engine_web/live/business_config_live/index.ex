@@ -64,7 +64,8 @@ defmodule SurveyEngineWeb.BusinessConfigLive.Index do
 
     {:noreply,
      push_patch(socket,
-       to: ~p"/catalogs/business_models/#{business_model_id}/business_configs?#{query_params}"
+       to:
+         ~p"/admin/catalogs/business_models/#{business_model_id}/business_configs?#{query_params}"
      )}
   end
 

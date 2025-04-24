@@ -48,10 +48,11 @@ defmodule SurveyEngineWeb.ContextSession do
   def on_mount(:validate_route, _params, _session, socket) do
     {:cont,
      socket
-     |> Phoenix.LiveView.attach_hook(:current_uri, :handle_params, &validate_user_route/3)
-     |> Phoenix.Component.assign_new(:main_menu, fn -> PermissionManager.map_menu(socket.assigns.current_user) end)}
+     #  |> Phoenix.LiveView.attach_hook(:current_uri, :handle_params, &validate_user_route/3)
+     |> Phoenix.Component.assign_new(:main_menu, fn ->
+       PermissionManager.map_menu(socket.assigns.current_user)
+     end)}
   end
-
 
   defp get_current_page(_params, url, socket) do
     {:cont,
@@ -72,6 +73,7 @@ defmodule SurveyEngineWeb.ContextSession do
 
   defp validate_user_route(_params, url, socket) do
     uri = URI.parse(url)
+
     Phoenix.Router.route_info(SurveyEngineWeb.Router, "GET", uri.path, uri.host)
     |> case do
       :error ->

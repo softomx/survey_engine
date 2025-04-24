@@ -1,85 +1,87 @@
 <.page_header title="Reporte Pre-registro" />
 
-<.form
-    for={@form}
-    id="currency-form"
-    phx-submit="filter"
->
-        <div class="grid grid-cols-3 gap-4">
-        <.combo_box
-            type="select"
-            field={@form[:languages]}
-            wrapper_class="mb-1" 
-            options={@list_languages}
-            label={gettext("report.languages")}
-            multiple/>
-            <.inputs_for :let={register_dates} field={@form[:register_dates]}>
-                <.field 
-                    field={register_dates[:start_date]}
-                    wrapper_class="mb-1"
-                    type="date"
-                    label={gettext("report.register_date")}
-                    help_text={gettext("report.register_start_date")}/>
-                <.field 
-                    field={register_dates[:end_date]}
-                    wrapper_class="mb-1"
-                    type="date"
-                    label={gettext("report.register_date")}
-                    help_text={gettext("report.register_end_date")}/>
-            </.inputs_for>
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-            <.field
-                field={@form[:legal_name]}
-                wrapper_class="mb-1"
-                label={gettext("report.agency_name")} 
-                type="text" />
-            <.combo_box
-                type="select"
-                wrapper_class="mb-1"
-                field={@form[:agency_type]}
-                label={gettext("report.agency_types")}
-                options={@agency_types}
-                multiple/>
-            <.combo_box
-                type="select"
-                wrapper_class="mb-1"
-                field={@form[:business_models]}
-                label={gettext("report.business_models")}
-                options={@business_models}
-                multiple/>
-        </div>
+<.form for={@form} id="currency-form" phx-submit="filter">
+  <div class="grid grid-cols-3 gap-4">
+    <.combo_box
+      type="select"
+      field={@form[:languages]}
+      wrapper_class="mb-1"
+      options={@list_languages}
+      label={gettext("report.languages")}
+      multiple
+    />
+    <.inputs_for :let={register_dates} field={@form[:register_dates]}>
+      <.field
+        field={register_dates[:start_date]}
+        wrapper_class="mb-1"
+        type="date"
+        label={gettext("report.register_date")}
+      />
+      <.field
+        field={register_dates[:end_date]}
+        wrapper_class="mb-1"
+        type="date"
+        label={gettext("report.register_date")}
+      />
+    </.inputs_for>
+  </div>
+  <div class="grid grid-cols-3 gap-4">
+    <.field
+      field={@form[:legal_name]}
+      wrapper_class="mb-1"
+      label={gettext("report.agency_name")}
+      type="text"
+    />
+    <.combo_box
+      type="select"
+      wrapper_class="mb-1"
+      field={@form[:agency_type]}
+      label={gettext("report.agency_types")}
+      options={@agency_types}
+      multiple
+    />
+    <.combo_box
+      type="select"
+      wrapper_class="mb-1"
+      field={@form[:business_models]}
+      label={gettext("report.business_models")}
+      options={@business_models}
+      multiple
+    />
+  </div>
 
-        <div class="grid grid-cols-3 gap-4">
-            <.combo_box
-                type="select"
-                field={@form[:status]}
-                label={gettext("report.status")}
-                options={@response_states}
-                multiple />
-            <.combo_box
-                type="select"
-                field={@form[:countries]}
-                label={gettext("report.countries")}
-                options={@countries}
-                multiple/>
-            <.combo_box
-                type="select"
-                field={@form[:towns]}
-                label={gettext("report.towns")}
-                options={@towns}
-                multiple/>
-        </div>
-    <div class="flex justify-end mb-5">
-        <.button phx-disable-with="...">{gettext("report.search")}</.button>
-    </div>
+  <div class="grid grid-cols-3 gap-4">
+    <.combo_box
+      type="select"
+      field={@form[:status]}
+      label={gettext("report.status")}
+      options={@response_states}
+      multiple
+    />
+    <.combo_box
+      type="select"
+      field={@form[:countries]}
+      label={gettext("report.countries")}
+      options={@countries}
+      multiple
+    />
+    <.combo_box
+      type="select"
+      field={@form[:towns]}
+      label={gettext("report.towns")}
+      options={@towns}
+      multiple
+    />
+  </div>
+  <div class="flex justify-end mb-5">
+    <.button phx-disable-with="...">{gettext("report.search")}</.button>
+  </div>
 </.form>
 
 <div class="flex justify-end mt-5">
-    <.button color="primary"  variant="outline" phx-click={JS.push("export")}>
-        <.icon name="hero-arrow-down-tray" class="mr-2"/>{gettext("report.export")}
-    </.button>
+  <.button color="primary" variant="outline" phx-click={JS.push("export")}>
+    <.icon name="hero-arrow-down-tray" class="mr-2" />{gettext("report.export")}
+  </.button>
 </div>
-  
+
 <div id="pre-registration" class="my-2" phx-hook="Handsontable"></div>
-  

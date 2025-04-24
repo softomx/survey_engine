@@ -119,7 +119,7 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
 
   defp save_site_configuration(socket, :new, site_configuration_params) do
     case SiteConfigurations.create_site_configuration(site_configuration_params) do
-      {:ok, site_configuration} ->
+      {:ok, _site_configuration} ->
         {:noreply,
          socket
          |> put_flash(:info, "Site configuration created successfully")
@@ -129,6 +129,4 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 end

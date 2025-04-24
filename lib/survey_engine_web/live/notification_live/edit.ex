@@ -2,7 +2,6 @@ defmodule SurveyEngineWeb.NotificationLive.Edit do
   use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.Notifications
-  alias SurveyEngine.Notifications.Notification
   alias PetalFramework.Components.DataTable
 
   @impl true

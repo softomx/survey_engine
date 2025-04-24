@@ -1,84 +1,85 @@
 <.page_header title="Reporte General" />
 
-<.form
-    for={@form}
-    id="currency-form"
-    phx-submit="filter"
->
-        <div class="grid grid-cols-3 gap-4">
-            <.inputs_for :let={company_filter} field={@form[:company_filter]}>
-                <.inputs_for :let={register_dates} field={company_filter[:register_dates]}>
-                    <.field
-                        field={register_dates[:start_date]}
-                        wrapper_class="mb-1"
-                        type="date" label={gettext("report.register_date")}
-                        help_text={gettext("report.register_start_date")}/>
-                    <.field
-                        field={register_dates[:end_date]}
-                        wrapper_class="mb-1"
-                        type="date"
-                        label={gettext("report.register_date")}
-                        help_text={gettext("report.register_end_date")}/>
-                </.inputs_for>
-            </.inputs_for>
-        </div>
+<.form for={@form} id="currency-form" phx-submit="filter">
+  <div class="grid grid-cols-3 gap-4">
+    <.inputs_for :let={company_filter} field={@form[:company_filter]}>
+      <.inputs_for :let={register_dates} field={company_filter[:register_dates]}>
+        <.field
+          field={register_dates[:start_date]}
+          wrapper_class="mb-1"
+          type="date"
+          label={gettext("report.register_date")}
+        />
+        <.field
+          field={register_dates[:end_date]}
+          wrapper_class="mb-1"
+          type="date"
+          label={gettext("report.register_date")}
+        />
+      </.inputs_for>
+    </.inputs_for>
+  </div>
 
-        <div class="grid grid-cols-3 gap-4">
-            <.inputs_for :let={company_filter} field={@form[:company_filter]}>
-            <.field
-                field={company_filter[:legal_name]}
-                wrapper_class="mb-1"
-                label={gettext("report.agency_name")}
-                type="text" />
-            <.combo_box
-                type="select"
-                field={company_filter[:agency_types]}
-                wrapper_class="mb-1"
-                label={gettext("report.agency_types")}
-                options={@agency_types}
-                multiple/>
-            <.combo_box
-                type="select"
-                field={company_filter[:business_models]}
-                wrapper_class="mb-1"
-                label={gettext("report.business_models")}
-                options={@business_models}
-                multiple/>
-            </.inputs_for>
-        </div>
+  <div class="grid grid-cols-3 gap-4">
+    <.inputs_for :let={company_filter} field={@form[:company_filter]}>
+      <.field
+        field={company_filter[:legal_name]}
+        wrapper_class="mb-1"
+        label={gettext("report.agency_name")}
+        type="text"
+      />
+      <.combo_box
+        type="select"
+        field={company_filter[:agency_types]}
+        wrapper_class="mb-1"
+        label={gettext("report.agency_types")}
+        options={@agency_types}
+        multiple
+      />
+      <.combo_box
+        type="select"
+        field={company_filter[:business_models]}
+        wrapper_class="mb-1"
+        label={gettext("report.business_models")}
+        options={@business_models}
+        multiple
+      />
+    </.inputs_for>
+  </div>
 
-        <div class="grid grid-cols-3 gap-4">
-            <.combo_box 
-                type="select"
-                field={@form[:states]}
-                label={gettext("report.status")}
-                options={@response_states}
-                multiple />
-            <.inputs_for :let={company_filter} field={@form[:company_filter]}>
-                <.combo_box
-                    type="select"
-                    field={company_filter[:countries]}
-                    label={gettext("report.countries")}
-                    options={@countries}
-                    multiple/>
-            </.inputs_for>
-            <.combo_box
-                type="select"
-                field={@form[:form_group_id]}
-                label={gettext("report.form_groups")}
-                options={@form_groups}/>
-
-        </div>
-        <div class="flex justify-end mb-5">
-            <.button phx-disable-with="...">{gettext("report.search")}</.button>
-        </div>
+  <div class="grid grid-cols-3 gap-4">
+    <.combo_box
+      type="select"
+      field={@form[:states]}
+      label={gettext("report.status")}
+      options={@response_states}
+      multiple
+    />
+    <.inputs_for :let={company_filter} field={@form[:company_filter]}>
+      <.combo_box
+        type="select"
+        field={company_filter[:countries]}
+        label={gettext("report.countries")}
+        options={@countries}
+        multiple
+      />
+    </.inputs_for>
+    <.combo_box
+      type="select"
+      field={@form[:form_group_id]}
+      label={gettext("report.form_groups")}
+      options={@form_groups}
+    />
+  </div>
+  <div class="flex justify-end mb-5">
+    <.button phx-disable-with="...">{gettext("report.search")}</.button>
+  </div>
 </.form>
 
 <div class="flex justify-end mt-5">
-    <.button color="primary"  variant="outline" phx-click={JS.push("export")}>
-        <.icon name="hero-arrow-down-tray" class="mr-2"/>{gettext("report.export")}
-    </.button>
+  <.button color="primary" variant="outline" phx-click={JS.push("export")}>
+    <.icon name="hero-arrow-down-tray" class="mr-2" />{gettext("report.export")}
+  </.button>
 </div>
-  
+
 <div id="pre-registration" class="my-2" phx-hook="Handsontable"></div>
-  

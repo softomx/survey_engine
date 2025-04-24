@@ -3,20 +3,6 @@
     <.button link_type="live_patch" label="New Affiliate" to={~p"/affiliates/new"} />
   </.page_header>
 
-  <%= if @live_action in [:new, :edit] do %>
-    <.modal title={@page_title}>
-      <.live_component
-        module={SurveyEngineWeb.AffiliateLive.FormComponent}
-        id={@affiliate.id || :new}
-        action={@live_action}
-        affiliate={@affiliate}
-        company_types={@company_types}
-        site_config={@site_config}
-        return_to={current_index_path(@index_params)}
-      />
-    </.modal>
-  <% end %>
-
   <.data_table :if={@index_params} meta={@meta} items={@affiliates}>
     <:if_empty>No affiliates found</:if_empty>
     <:col field={:name} sortable />

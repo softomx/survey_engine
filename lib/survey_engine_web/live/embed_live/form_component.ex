@@ -41,7 +41,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
         method="post"
       >
         <.error :if={@check_errors}>
-          Oops, something went wrong! Please check the errors below.
+          {gettext("Oops, something went wrong! Please check the errors below.")}
         </.error>
         <div class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5">
           <div class="col-span-12 lg:col-span-6 md:col-span-4">
@@ -97,13 +97,23 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               />
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
-              <.combo_box
-                field={f2[:agency_type]}
-                placeholder={gettext_with_locale(@locale, gettext("Select an agency"))}
-                type="select"
-                options={@agency_types}
-                label={gettext_with_locale(@locale, gettext("Agency Type"))}
-              />
+              <div>
+                <.combo_box
+                  field={f2[:agency_type]}
+                  placeholder={gettext_with_locale(@locale, gettext("Select an agency"))}
+                  type="select"
+                  options={@agency_types}
+                  label={gettext_with_locale(@locale, gettext("Agency Type"))}
+                />
+                <div class="justify-start flex px-3 -mt-6 text-blue-500">
+                  <span
+                    class=" hover:underline py-1  text-left text-xs cursor-pointer z-10"
+                    phx-click={JS.push("show_glossary", target: @myself)}
+                  >
+                  </span>
+                  {gettext_with_locale(@locale, gettext("agencytype.glossary"))}
+                </div>
+              </div>
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.combo_box
@@ -114,14 +124,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 label={gettext_with_locale(@locale, gettext("Agency model"))}
               />
             </div>
-            <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center">
-              <span
-                class="pc-button pc-button--primary pc-button--md pc-button--radius-md w-full"
-                phx-click={JS.push("show_glossary", target: @myself)}
-              >
-                {gettext_with_locale(@locale, gettext("Glossary"))}
-              </span>
-            </div>
+            <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center"></div>
             <div class="col-span-12">
               <label>Redes Sociales</label>
               <input type="hidden" name="user[company][link_drop][]" />
@@ -162,7 +165,10 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 value="new"
                 phx-click={JS.dispatch("change")}
               >
-                <.icon name="hero-plus" class="w-4 h-4" /> red social
+                <.icon name="hero-plus" class="w-4 h-4" /> {gettext_with_locale(
+                  @locale,
+                  gettext("register.button.add.socialnetwork")
+                )}
               </.button>
             </div>
           </.inputs_for>

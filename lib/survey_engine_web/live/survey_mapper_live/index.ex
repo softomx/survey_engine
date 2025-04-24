@@ -5,17 +5,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
 
   alias SurveyEngine.SurveyMappers
   alias SurveyEngine.SurveyMappers.SurveyMapper
-  alias PetalFramework.Components.DataTable
-
-  @data_table_opts [
-    default_limit: 10,
-    default_order: %{
-      order_by: [:id, :inserted_at],
-      order_directions: [:asc, :asc]
-    },
-    sortable: [:id, :inserted_at, :field, :question_id, :type],
-    filterable: [:id, :inserted_at, :field, :question_id, :type]
-  ]
 
   @impl true
   def mount(_params, _session, socket) do
@@ -42,23 +31,23 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
   defp apply_action(socket, :index, params) do
     lead_form = LeadsForms.get_leads_form!(params["lead_form_id"])
 
-    {:ok, external_survey} = get_external_form(lead_form, socket.assigns.site_config.id)
-
-    socket
-    |> assign(:page_title, "Listing Survey mapper")
-    |> assign_survey_mapper(params)
-    |> assign(index_params: params)
-    |> assign(:external_survey, external_survey)
-    |> assign(
-      :fields,
-      SurveyEngine.SurveyMappers.get_fields_of_schema(Affiliate)
-      |> format_data()
-    )
-    |> assign(:lead_form, lead_form)
-  end
-
-  defp current_index_path(index_params) do
-    ~p"/survey_mapper?#{index_params || %{}}"
+    with {:ok, external_survey} <- get_external_form(lead_form, socket.assigns.site_config.id),
+         {:ok, questions} <- {:ok, external_survey |> remove_invalid_questions()} do
+      socket
+      |> assign(
+        :page_title,
+        "Listado de mapeos para el formulario #{lead_form.form_group.name} #{lead_form.language |> String.upcase()}"
+      )
+      |> assign(index_params: params)
+      |> assign(:questions, questions)
+      |> assign(
+        :fields,
+        SurveyEngine.SurveyMappers.get_fields_of_schema(Affiliate)
+        |> format_data()
+      )
+      |> assign(:lead_form, lead_form)
+      |> assign_survey_mapper(params)
+    end
   end
 
   def handle_info({:delete_mapper, index}, socket) do
@@ -72,7 +61,6 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
   end
 
   def handle_info({:save_mapper, {index, mapper_updated}}, socket) do
-    # index = String.to_integer(index)
     survey_mapper =
       List.update_at(socket.assigns.survey_mapper, index, fn _ -> mapper_updated end)
 
@@ -105,15 +93,11 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
     {:noreply, socket}
   end
 
-  @impl true
-  def handle_event("close_modal", _, socket) do
-    {:noreply, push_patch(socket, to: current_index_path(socket.assigns.index_params))}
-  end
+  defp assign_survey_mapper(socket, _params) do
+    survey_mapper =
+      SurveyMappers.list_survey_mappers(%{filter: %{survey_id: socket.assigns.lead_form.id}})
 
-  defp assign_survey_mapper(socket, params) do
-    starting_query = SurveyMapper
-    {survey_mapper, meta} = DataTable.search(starting_query, params, @data_table_opts)
-    assign(socket, survey_mapper: survey_mapper, meta: meta)
+    assign(socket, survey_mapper: survey_mapper)
   end
 
   def get_external_form(leads_form, site_config_id) do
@@ -138,6 +122,13 @@ defmodule SurveyEngineWeb.SurveyMapperLive.Index do
         end
 
       [field | acc]
+    end)
+  end
+
+  defp remove_invalid_questions(external_survey) do
+    external_survey.questions
+    |> Enum.filter(fn {_id, question} ->
+      question.type != "fileUpload"
     end)
   end
 end

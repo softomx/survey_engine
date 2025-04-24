@@ -126,7 +126,7 @@ defmodule SurveyEngineWeb.Router do
       ] do
       live "/dashboard", CompanyLive.Index, :index
       live "/company", CompanyLive.Show, :show
-      live "/company/:id/edit", CompaniesLive.Edit, :edit
+      live "/company/edit", CompaniesLive.Edit, :edit
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
@@ -171,8 +171,9 @@ defmodule SurveyEngineWeb.Router do
       live "/companies/:id", AdminCompanyLive.Show, :show
       live "/companies/:id/assign", AdminCompanyLive.Edit, :assign
       live "/companies/:id/edit", AdminCompanyLive.Edit, :edit
-      live "/companies/:id/new_affiliate", AdminCompanyLive.NewAffiliate, :new_affiliate
-      live "/companies/:id/affiliate", AdminCompanyLive.ShowAffiliate, :show_affiliate
+      live "/companies/:company_id/new_affiliate", AffiliateLive.New, :new
+      live "/companies/:company_id/affiliate", AffiliateLive.Show, :show
+      live "/companies/:company_id/affiliate/:id/edit", AffiliateLive.Edit, :edit
       live "/catalogs/currencies", CurrencyLive.Index, :index
       live "/catalogs/currencies/new", CurrencyLive.Index, :new
       live "/catalogs/currencies/:id/edit", CurrencyLive.Index, :edit
@@ -229,10 +230,6 @@ defmodule SurveyEngineWeb.Router do
            BusinessConfigLive.Show,
            :edit
 
-      # live "/catalogs/personal_titles", PersonalTitleLive.Index, :index
-      # live "/catalogs/personal_titles/new", PersonalTitleLive.Index, :new
-      # live "/catalogs/personal_titles/:id/edit", PersonalTitleLive.Index, :edit
-
       live "/site_configurations", SiteConfigurationLive.Index, :index
       live "/site_configurations/new", SiteConfigurationLive.New, :new
       live "/site_configurations/:id/edit", SiteConfigurationLive.Edit, :edit
@@ -287,13 +284,6 @@ defmodule SurveyEngineWeb.Router do
       live "/notifications/:id", NotificationLive.Show, :show
 
       live "/reports/pre_registration", ReportLive.PreRegistration, :pre_registration
-
-      # live "/affiliates", AffiliateLive.Index, :index
-      # live "/affiliates/new", AffiliateLive.Index, :new
-      # live "/affiliates/:id/edit", AffiliateLive.Index, :edit
-
-      # live "/affiliates/:id", AffiliateLive.Show, :show
-      # live "/affiliates/:id/show/edit", AffiliateLive.Show, :edit
 
       live "/:lead_form_id/survey_mapper", SurveyMapperLive.Index, :index
       live "/:lead_form_id/survey_mapper/new", SurveyMapperLive.Index, :new

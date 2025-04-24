@@ -1,4 +1,4 @@
-defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
+defmodule SurveyEngineWeb.AffiliateLive.New do
   alias SurveyEngine.Catalogs
   alias SurveyEngine.AffiliateEngine.Address
   use SurveyEngineWeb, :live_view
@@ -16,7 +16,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :new_affiliate, %{"id" => id}) do
+  defp apply_action(socket, :new, %{"company_id" => id}) do
     company = Companies.get_company!(id)
 
     responses =
@@ -35,7 +35,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.NewAffiliate do
       |> push_navigate(to: ~p"/admin/companies")
     else
       socket
-      |> assign(:page_title, "#{String.upcase(company.legal_name)}: Nuevo Afiliado")
+      |> assign(:page_title, "#{String.upcase(company.legal_name)}")
       |> assign(:company, company)
       |> assign(:responses, responses)
       |> assign(

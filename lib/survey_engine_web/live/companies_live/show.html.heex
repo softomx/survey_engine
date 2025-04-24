@@ -1,7 +1,7 @@
 <div>
   <.header>
     <:actions>
-      <.link patch={~p"/company/#{@company}/edit"}>
+      <.link :if={@company.status != "finished"} patch={~p"/company/edit"}>
         <.button>{gettext("edit")}</.button>
       </.link>
     </:actions>

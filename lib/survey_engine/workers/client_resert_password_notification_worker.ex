@@ -16,8 +16,7 @@ defmodule SurveyEngine.Workers.ClientResertPasswordNotificationWorker do
 
   defp notify_client(user, company, client_url, site_config, notification_config) do
     with {:ok, content} <-
-           get_content_by_language(notification_config.contents, company.language),
-         {:ok, subject} <- get_content_by_language(notification_config.subjects, company.language) do
+           get_content_by_language(notification_config.contents, company.language) do
       UserNotifier.deliver_reset_password_instructions(
         user,
         "Restablecer contraseña",

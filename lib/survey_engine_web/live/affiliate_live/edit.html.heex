@@ -1,0 +1,11 @@
+<.live_component
+  module={SurveyEngineWeb.AffiliateLive.FormComponent}
+  id={@affiliate.id || :new}
+  action={@live_action}
+  affiliate={@affiliate}
+  currencies={@currencies}
+  current_user={@current_user}
+  site_config={@site_config}
+  return_to={~p"/admin/companies/#{@company_id}/affiliate"}
+  }
+/>
