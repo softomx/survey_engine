@@ -160,7 +160,7 @@ msgstr "Descripcion de agencias disponibles"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:62
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Legal name"
-msgstr ""
+msgstr "Nombre legal"
 
 #: lib/survey_engine_web/live/embed_live/agency_description_component.html.heex:23
 #, elixir-autogen, elixir-format
@@ -409,7 +409,7 @@ msgstr "RFC"
 #: lib/survey_engine_web/live/affiliate_live/show.ex:93
 #, elixir-autogen, elixir-format
 msgid "affiliate.slug"
-msgstr ""
+msgstr "slug"
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:514
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:35
@@ -523,7 +523,7 @@ msgstr "Respuestas del cuenstionario"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "The business model was correctly assigned"
-msgstr "Elmodelo de negocio fue correctamente asignado"
+msgstr "El modelo de negocio fue correctamente asignado"
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:303
 #, elixir-autogen, elixir-format
@@ -787,7 +787,7 @@ msgstr "ID externo(GXS)"
 #: lib/survey_engine_web/live/affiliate_live/show.ex:85
 #, elixir-autogen, elixir-format
 msgid "affiliate.external_affiliate_id"
-msgstr ""
+msgstr "Id externo"
 
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:58
 #, elixir-autogen, elixir-format, fuzzy
@@ -1183,12 +1183,12 @@ msgstr "Requerido"
 #: lib/survey_engine_web/live/agency_model_live/index.html.heex:24
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agency_model.name"
-msgstr ""
+msgstr "Modelo de agencia"
 
 #: lib/survey_engine_web/live/agency_model_live/index.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "agency_model.new_agency_model"
-msgstr ""
+msgstr "Nuevo modelo de agencia"
 
 #: lib/survey_engine_web/live/business_config_live/show.html.heex:65
 #, elixir-autogen, elixir-format, fuzzy
@@ -1284,12 +1284,12 @@ msgstr "Nueva configuracion"
 #: lib/survey_engine_web/live/site_configuration_live/index.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "site_configuration.status"
-msgstr ""
+msgstr "estatus"
 
 #: lib/survey_engine_web/live/site_configuration_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "site_configuration.url"
-msgstr ""
+msgstr "url"
 
 #: lib/survey_engine_web/live/companies_live/show.html.heex:51
 #, elixir-autogen, elixir-format, fuzzy
@@ -1330,7 +1330,7 @@ msgstr ""
 #: lib/survey_engine_web/live/admin_company_live/index.html.heex:14
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Legal Name"
-msgstr ""
+msgstr "Nombre legal"
 
 #: lib/survey_engine_web/components/core_components.ex:435
 #, elixir-autogen, elixir-format
@@ -1396,27 +1396,27 @@ msgstr "Estamos validado la información de registro, en breve se te enviara una
 #: lib/survey_engine_web/live/embed_live/form_component.ex:44
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
-msgstr ""
+msgstr "Ocurrio un error! Porfavor revisa la informacion"
 
 #: lib/survey_engine_web/live/affiliate_live/show.ex:62
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.button.create"
-msgstr "nombre"
+msgstr "crear afiliado"
 
 #: lib/survey_engine_web/live/affiliate_live/show.ex:68
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.button.edit"
-msgstr "nombre"
+msgstr "editar"
 
 #: lib/survey_engine_web/live/affiliate_live/form_component.html.heex:136
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.button.save"
-msgstr "nombre"
+msgstr "guardar afiliado"
 
 #: lib/survey_engine_web/live/affiliate_live/show.ex:73
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.show.title"
-msgstr ""
+msgstr "Detalles del afiliado"
 
 #: lib/survey_engine_web/live/embed_live/form_component.ex:114
 #, elixir-autogen, elixir-format, fuzzy
@@ -1426,14 +1426,14 @@ msgstr "Tipo de agencia"
 #: lib/survey_engine_web/live/companies_live/edit.ex:24
 #, elixir-autogen, elixir-format
 msgid "preregister.error.edit"
-msgstr ""
+msgstr "editar"
 
 #: lib/survey_engine_web/live/companies_live/edit.ex:20
 #, elixir-autogen, elixir-format
 msgid "preregister.title"
-msgstr ""
+msgstr "Pre-registro"
 
 #: lib/survey_engine_web/live/embed_live/form_component.ex:170
 #, elixir-autogen, elixir-format
 msgid "register.button.add.socialnetwork"
-msgstr ""
+msgstr "Redes sociales"
