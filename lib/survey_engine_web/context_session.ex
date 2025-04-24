@@ -48,7 +48,7 @@ defmodule SurveyEngineWeb.ContextSession do
   def on_mount(:validate_route, _params, _session, socket) do
     {:cont,
      socket
-     #  |> Phoenix.LiveView.attach_hook(:current_uri, :handle_params, &validate_user_route/3)
+     |> Phoenix.LiveView.attach_hook(:current_uri, :handle_params, &validate_user_route/3)
      |> Phoenix.Component.assign_new(:main_menu, fn ->
        PermissionManager.map_menu(socket.assigns.current_user)
      end)}
