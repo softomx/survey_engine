@@ -26,7 +26,7 @@ import PetalFrameworkHooks from "../../deps/petal_framework/assets/js/hooks"
 import "./vendor/alpine/persist"
 import "./vendor/alpine/collapse"
 import "./vendor/alpine/alpinejs"
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+let csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},

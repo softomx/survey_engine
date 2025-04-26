@@ -67,7 +67,12 @@ defmodule SurveyEngineWeb do
   def live_iframe_view do
     quote do
       use Phoenix.LiveView,
-        layout: {SurveyEngineWeb.Layouts, :iframe}
+        layout: {SurveyEngineWeb.Layouts, :app_iframe}
+
+      @impl true
+      def handle_info({:put_flash, type, message}, socket) do
+        {:noreply, put_flash(socket, type, message)}
+      end
 
       unquote(html_helpers())
     end

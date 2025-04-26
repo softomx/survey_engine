@@ -1,27 +1,28 @@
 <div class="py-10 px-10">
-  <div class="mx-auto max-w-3xl">
-    <.live_component
-      id="form"
-      module={SurveyEngineWeb.EmbedLive.FormComponent}
-      locale={@locale}
-      currencies={@currencies}
-      user={@user}
-      list_languages={@list_languages}
-      agency_types={@agency_types}
-      agency_models={@agency_models}
-      countries={@countries}
-      site_config={@site_config}
-    />
-    <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800"></div>
-  </div>
-  <.modal :if={@show_modal}>
-    <.live_component
-      module={SurveyEngineWeb.EmbedLive.AgencyDescriptionComponent}
-      id={:modal_show}
-      title={gettext("Description of Agencies")}
-      action={@live_action}
-      agencies={@list_agency_desciptions}
-      language={@locale}
-    />
-  </.modal>
+  <%= if @status in [:authorized] do %>
+    <div class="mx-auto max-w-3xl">
+      <.live_component
+        id="form"
+        module={SurveyEngineWeb.EmbedLive.FormComponent}
+        locale={@locale}
+        currencies={@currencies}
+        user={@user}
+        list_languages={@list_languages}
+        agency_types={@agency_types}
+        agency_models={@agency_models}
+        countries={@countries}
+        site_config={@site_config}
+      />
+    </div>
+    <.modal :if={@show_modal}>
+      <.live_component
+        module={SurveyEngineWeb.EmbedLive.AgencyDescriptionComponent}
+        id={:modal_show}
+        title={gettext("Description of Agencies")}
+        action={@live_action}
+        agencies={@list_agency_desciptions}
+        language={@locale}
+      />
+    </.modal>
+  <% end %>
 </div>

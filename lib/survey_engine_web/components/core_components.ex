@@ -248,21 +248,21 @@ defmodule SurveyEngineWeb.CoreComponents do
 
   def response_review_state_badge(assigns) do
     ~H"""
-     <.badge
-        :if={@value == "pending"}
-        color="warning"
-        label={TransaleteHelper.survey_response_review_state("pending")}
-      />
-      <.badge
-        :if={@value == "approved"}
-        color="success"
-        label={TransaleteHelper.survey_response_review_state("approved")}
-      />
-      <.badge
-        :if={@value == "rejected"}
-        color="danger"
-        label={TransaleteHelper.survey_response_review_state("rejected")}
-      />
+    <.badge
+      :if={@value == "pending"}
+      color="warning"
+      label={TransaleteHelper.survey_response_review_state("pending")}
+    />
+    <.badge
+      :if={@value == "approved"}
+      color="success"
+      label={TransaleteHelper.survey_response_review_state("approved")}
+    />
+    <.badge
+      :if={@value == "rejected"}
+      color="danger"
+      label={TransaleteHelper.survey_response_review_state("rejected")}
+    />
     """
   end
 
@@ -465,23 +465,23 @@ defmodule SurveyEngineWeb.CoreComponents do
 
   def card_survey_response(assigns) do
     ~H"""
-      <.card
-        :for={response <- @survey_response.response_items |> Enum.sort_by(fn i -> i.index end)}
-        class="my-2"
-        variant="outline"
-      >
-        <.card_content>
-          <div class="flex gap-2">
-            <div>
-              <.badge color="primary" label={response.index} />
-            </div>
-            <div class="flex-1">
-              <p class="text-1xl font-bold text-gray-500">{response.question}</p>
-              <%= case response.type do %>
-                <% "fileUpload" -> %>
-                  <div class="flex gap-2">
-                    <.card variant="outline" :for={file <- response.answer["data"]}>
-                      <.card_content category={""} class="p-3">
+    <.card
+      :for={response <- @survey_response.response_items |> Enum.sort_by(fn i -> i.index end)}
+      class="my-2"
+      variant="outline"
+    >
+      <.card_content>
+        <div class="flex gap-2">
+          <div>
+            <.badge color="primary" label={response.index} />
+          </div>
+          <div class="flex-1">
+            <p class="text-1xl font-bold text-gray-500">{response.question}</p>
+            <%= case response.type do %>
+              <% "fileUpload" -> %>
+                <div class="flex gap-2">
+                  <.card :for={file <- response.answer["data"]} variant="outline">
+                    <.card_content category="" class="p-3">
                       <div>
                         <.icon
                           name="hero-document"
@@ -496,29 +496,28 @@ defmodule SurveyEngineWeb.CoreComponents do
                       >
                         Ver Documento
                       </a>
-                      </.card_content>
-                    </.card>
-                  </div>
-                <% "multipleChoiceMulti" -> %>
-                  <ul>
-                    <%= for answer <- response.answer["data"] do %>
-                      <li>{answer}</li>
-                    <% end %>
-                  </ul>
-                <% _ -> %>
-                  <p>{response.answer["data"]}</p>
-              <% end %>
-
-            </div>
-            <div :if={@actions != []}>
+                    </.card_content>
+                  </.card>
+                </div>
+              <% "multipleChoiceMulti" -> %>
+                <ul>
+                  <%= for answer <- response.answer["data"] do %>
+                    <li>{answer}</li>
+                  <% end %>
+                </ul>
+              <% _ -> %>
+                <p>{response.answer["data"]}</p>
+            <% end %>
+          </div>
+          <div :if={@actions != []}>
             <p class="mt-2 text-sm leading-6 text-zinc-600">
-                {render_slot(@actions, response)}
-              </p>
-            </div>
+              {render_slot(@actions, response)}
+            </p>
+          </div>
         </div>
       </.card_content>
     </.card>
-  """
+    """
   end
 
   def markdown_text(nil), do: ""
@@ -535,5 +534,14 @@ defmodule SurveyEngineWeb.CoreComponents do
     Gettext.with_locale(SurveyEngineWeb.Gettext, locale, fn ->
       gettext
     end)
+  end
+
+  def get_embed_token_valid_env() do
+    token_validity = System.get_env("iframe_token_validity")
+    case token_validity do
+      nil -> 315_360_000
+      "" -> 315_360_000
+      _ -> String.to_integer(token_validity)
+    end
   end
 end

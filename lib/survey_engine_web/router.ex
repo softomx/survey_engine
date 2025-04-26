@@ -26,7 +26,7 @@ defmodule SurveyEngineWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {SurveyEngineWeb.Layouts, :root}
+    plug :put_root_layout, html: {SurveyEngineWeb.Layouts, :iframe}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     # plug :allow_iframe
@@ -330,16 +330,14 @@ defmodule SurveyEngineWeb.Router do
   scope "/embed", SurveyEngineWeb do
     pipe_through [:iframe, :locale]
 
-    live_session :iframe,
+    live_session :embed,
       on_mount: [
-        {SurveyEngineWeb.ContextSession, :load_site_configuration},
+        {ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
         {ContextSession, :set_locale}
-      ],
-      layout: {SurveyEngineWeb.Layouts, :iframe} do
+      ] do
       live "/users/log_in", UserLoginLive, :new
-      live "/users/register/form", EmbedLive.UserRegisterForm, :index
-      live "/users/register/form/agencies_info", EmbedLive.UserRegisterForm, :modal_show
+      live "/users/register/form/:token", EmbedLive.UserRegisterForm, :index
     end
   end
 end

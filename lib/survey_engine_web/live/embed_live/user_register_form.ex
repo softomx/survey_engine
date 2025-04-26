@@ -1,12 +1,36 @@
 defmodule SurveyEngineWeb.EmbedLive.UserRegisterForm do
   alias SurveyEngine.Catalogs
-  use SurveyEngineWeb, :live_view
+  use SurveyEngineWeb, :live_iframe_view
 
   alias SurveyEngine.Accounts.User
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:show_modal, false)}
+  def mount(%{"token" => token} = _params, _session, socket) do
+    case Phoenix.Token.verify(SurveyEngineWeb.Endpoint, "iframe_access", token,
+           max_age: get_embed_token_valid_env()
+         ) do
+      {:ok, user_id} ->
+        csrf_token = Plug.CSRFProtection.get_csrf_token()
+
+        {:ok,
+         socket
+         |> assign(:csrf_token, csrf_token)
+         |> assign(:user_id, user_id)
+         |> assign(:show_modal, false)
+         |> assign(:status, :authorized)}
+
+      {:error, reason} ->
+        csrf_token = Plug.CSRFProtection.get_csrf_token()
+
+        {:ok,
+         socket
+         |> assign(:csrf_token, csrf_token)
+         |> assign(:show_modal, false)
+         |> assign(:status, :unauthorized)
+         |> assign(:reason, reason)}
+    end
+
+    # {:ok, socket |> assign(:show_modal, false)}
   end
 
   @impl true
