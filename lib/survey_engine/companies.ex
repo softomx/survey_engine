@@ -35,6 +35,8 @@ defmodule SurveyEngine.Companies do
   end
 
   def companies_filter(query, filter) do
+    IO.inspect(filter)
+
     filter
     |> Enum.reduce(query, fn
       {_key, nil}, query ->
@@ -45,6 +47,9 @@ defmodule SurveyEngine.Companies do
 
       {:agency_name, agency_name}, query ->
         from q in query, where: ilike(q.agency_name, ^"%#{agency_name}%")
+
+      {:agency_models, agency_models}, query ->
+        from q in query, where: q.agency_model in ^agency_models
 
       {:legal_name, legal_name}, query ->
         from q in query, where: ilike(q.legal_name, ^"%#{legal_name}%")
@@ -67,19 +72,23 @@ defmodule SurveyEngine.Companies do
       {:towns, towns}, query ->
         from q in query, where: q.town in ^towns
 
-      {:register_dates, register_dates}, query ->
-        start_date =
-          register_dates.start_date
-          |> Timex.to_datetime("America/Cancun")
-          |> Timex.to_datetime("Etc/UTC")
+      {:register_dates, %{start_date: start_date, end_date: end_date}}, query ->
+        if !is_nil(start_date) and !is_nil(end_date) do
+          start_date =
+            start_date
+            |> Timex.to_datetime("America/Cancun")
+            |> Timex.to_datetime("Etc/UTC")
 
-        end_date =
-          register_dates.end_date
-          |> Timex.to_datetime("America/Cancun")
-          |> Timex.end_of_day()
-          |> Timex.to_datetime("Etc/UTC")
+          end_date =
+            end_date
+            |> Timex.to_datetime("America/Cancun")
+            |> Timex.end_of_day()
+            |> Timex.to_datetime("Etc/UTC")
 
-        from(q in query, where: q.inserted_at >= ^start_date and q.inserted_at <= ^end_date)
+          from(q in query, where: q.inserted_at >= ^start_date and q.inserted_at <= ^end_date)
+        else
+          query
+        end
 
       _, query ->
         query

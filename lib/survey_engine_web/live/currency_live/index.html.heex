@@ -7,8 +7,8 @@
 </.header>
 <.data_table :if={@index_params} meta={@meta} items={@currencies}>
   <:if_empty>No se encontraron monedas</:if_empty>
-  <:col field={:name} sortable label={gettext("currency.name")} />
-  <:col field={:slug} sortable label={gettext("currency.slug")}/>
+  <:col field={:name} label={gettext("currency.name")} />
+  <:col field={:slug} label={gettext("currency.slug")} />
 
   <:col :let={currency} label={gettext("actions")} align_right>
     <.button

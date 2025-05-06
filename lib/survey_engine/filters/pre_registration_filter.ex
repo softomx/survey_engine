@@ -9,12 +9,15 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
     field :countries, {:array, :string}
     field :towns, {:array, :string}
     field :agency_types, {:array, :string}
+    field :agency_models, {:array, :string}
     field :business_models, {:array, :string}
     field :status, {:array, :string}
-    embeds_one :register_dates, RegisterDates, [primary_key: false] do
+
+    embeds_one :register_dates, RegisterDates, primary_key: false do
       @derive Jason.Encoder
       field :start_date, :date
       field :end_date, :date
+      field :label_dates, :string
     end
   end
 
@@ -29,13 +32,34 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
       :towns,
       :agency_types,
       :business_models,
-      :status
+      :status,
+      :agency_models
     ])
     |> cast_embed(:register_dates, with: &changeset_dates/2)
   end
 
   def changeset_dates(struct, attrs \\ %{}) do
+    IO.inspect(attrs)
+    attrs = attrs |> cast_dates_from_label_dates() |> IO.inspect(label: "skks")
+
     struct
-    |> cast(attrs, [:start_date, :end_date])
+    |> cast(attrs, [:start_date, :end_date, :label_dates])
+    |> IO.inspect()
+  end
+
+  defp cast_dates_from_label_dates(attrs) do
+    if !is_nil(attrs["start_date"]) or !is_nil(attrs["end_date"]) do
+      attrs
+    else
+      if attrs["label_date"] do
+        date_ranges = attrs["label_dates"] |> String.split("a")
+
+        attrs
+        |> Map.put("start_date", date_ranges |> List.first())
+        |> Map.put("end_date", date_ranges |> List.last())
+      else
+        attrs
+      end
+    end
   end
 end

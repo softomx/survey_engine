@@ -10,7 +10,7 @@ defmodule SurveyEngineWeb.UserLoginLive do
 
       <div class="relative  divide-x  py-3 sm:flex sm:flex-row  justify-center bg-transparent ">
         <div>
-          <h3 class="text-3xl py-3 font-bold">{gettext("Programa de afiliados")}</h3>
+          <h3 class="text-3xl py-3 font-bold">{gettext("affiliate.program")}</h3>
           <div class="flex-col flex  self-center lg:px-14 sm:max-w-4xl xl:max-w-md  z-10">
             <div class="self-start hidden lg:flex flex-col  text-gray-600">
               <h3 class="my-3 font-semibold text-xl">{gettext("Goals")}</h3>

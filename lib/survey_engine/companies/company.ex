@@ -21,6 +21,7 @@ defmodule SurveyEngine.Companies.Company do
     belongs_to :business_model, SurveyEngine.BusinessModels.BusinessModel
     # pending,assigned,finished, approved, rejected, created
     field :status, :string, default: "pending"
+    field :phone, :string
 
     embeds_many :links, SurveyEngine.Companies.CompanyLink, on_replace: :delete
     has_one :affiliate, SurveyEngine.AffiliateEngine.Affiliate, on_replace: :delete
@@ -43,7 +44,8 @@ defmodule SurveyEngine.Companies.Company do
       :status,
       :business_model_id,
       :agency_model,
-      :user_id
+      :user_id,
+      :phone
     ])
     |> validate_required([
       :language,
@@ -53,8 +55,18 @@ defmodule SurveyEngine.Companies.Company do
       :city,
       :agency_type,
       :billing_currency,
-      :agency_model
+      :agency_model,
+      :phone
     ])
     |> cast_embed(:links, sort_param: :links_sort, drop_param: :links_drop)
+    |> unmask_phone()
+  end
+
+  defp unmask_phone(changeset) do
+    if value = get_field(changeset, :phone) do
+      changeset |> put_change(:phone, value |> String.replace(~r/[\(\)\-\_]/, ""))
+    else
+      changeset
+    end
   end
 end

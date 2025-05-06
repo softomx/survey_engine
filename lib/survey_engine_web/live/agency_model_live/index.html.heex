@@ -1,5 +1,5 @@
 <.container class="py-16">
-  <.page_header title="Listing Agency models">
+  <.page_header>
     <.button
       link_type="live_patch"
       label={gettext("agency_model.new_agency_model")}
@@ -23,15 +23,6 @@
     <:if_empty>No agency_models found</:if_empty>
     <:col field={:name} sortable label={gettext("agency_model.name")} />
     <:col :let={agency_model} label={gettext("actions")} align_right>
-      <.button
-        color="primary"
-        variant="outline"
-        size="xs"
-        link_type="live_redirect"
-        label={gettext("show")}
-        to={~p"/admin/catalogs/agency_models/#{agency_model}"}
-      />
-
       <.button
         color="white"
         variant="outline"

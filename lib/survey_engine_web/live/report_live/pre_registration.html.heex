@@ -12,17 +12,16 @@
     />
     <.inputs_for :let={register_dates} field={@form[:register_dates]}>
       <.field
-        field={register_dates[:start_date]}
+        field={register_dates[:label_dates]}
         wrapper_class="mb-1"
-        type="date"
+        phx-hook="DateRanges"
+        type="text"
+        data-start-date-target={Phoenix.HTML.Form.input_id(register_dates, :start_date)}
+        data-end-date-target={Phoenix.HTML.Form.input_id(register_dates, :end_date)}
         label={gettext("report.register_date")}
       />
-      <.field
-        field={register_dates[:end_date]}
-        wrapper_class="mb-1"
-        type="date"
-        label={gettext("report.register_date")}
-      />
+      <.input type="hidden" field={register_dates[:start_date]} />
+      <.input type="hidden" field={register_dates[:end_date]} />
     </.inputs_for>
   </div>
   <div class="grid grid-cols-3 gap-4">
@@ -30,14 +29,23 @@
       field={@form[:legal_name]}
       wrapper_class="mb-1"
       label={gettext("report.agency_name")}
-      type="text"
+      type="select"
+      options={@companies}
     />
     <.combo_box
       type="select"
       wrapper_class="mb-1"
-      field={@form[:agency_type]}
+      field={@form[:agency_types]}
       label={gettext("report.agency_types")}
       options={@agency_types}
+      multiple
+    />
+    <.combo_box
+      type="select"
+      wrapper_class="mb-1"
+      field={@form[:agency_models]}
+      label={gettext("report.agency_models")}
+      options={@agency_models}
       multiple
     />
     <.combo_box
@@ -63,13 +71,6 @@
       field={@form[:countries]}
       label={gettext("report.countries")}
       options={@countries}
-      multiple
-    />
-    <.combo_box
-      type="select"
-      field={@form[:towns]}
-      label={gettext("report.towns")}
-      options={@towns}
       multiple
     />
   </div>

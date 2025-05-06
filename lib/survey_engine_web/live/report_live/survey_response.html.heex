@@ -5,17 +5,16 @@
     <.inputs_for :let={company_filter} field={@form[:company_filter]}>
       <.inputs_for :let={register_dates} field={company_filter[:register_dates]}>
         <.field
-          field={register_dates[:start_date]}
+          field={register_dates[:label_dates]}
           wrapper_class="mb-1"
-          type="date"
+          phx-hook="DateRanges"
+          type="text"
+          data-start-date-target={Phoenix.HTML.Form.input_id(register_dates, :start_date)}
+          data-end-date-target={Phoenix.HTML.Form.input_id(register_dates, :end_date)}
           label={gettext("report.register_date")}
         />
-        <.field
-          field={register_dates[:end_date]}
-          wrapper_class="mb-1"
-          type="date"
-          label={gettext("report.register_date")}
-        />
+        <.input type="hidden" field={register_dates[:start_date]} />
+        <.input type="hidden" field={register_dates[:end_date]} />
       </.inputs_for>
     </.inputs_for>
   </div>

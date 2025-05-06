@@ -333,6 +333,11 @@ defmodule SurveyEngine.Catalogs do
     Repo.all(AgencyModel)
   end
 
+  def list_agency_models_with_preload() do
+    Repo.all(AgencyModel)
+    |> Repo.preload([:descriptions])
+  end
+
   @doc """
   Gets a single agency_model.
 

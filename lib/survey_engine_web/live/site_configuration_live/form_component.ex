@@ -7,10 +7,6 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
-        {@title}
-      </.header>
-
       <.form
         for={@form}
         id="site_configuration-form"
@@ -18,14 +14,29 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.field field={@form[:name]} type="text" label="Name" />
-        <.field field={@form[:url]} type="text" label="Url" />
+        <.field field={@form[:name]} type="text" label="Name" help_text="Nombre identificador" />
+        <.field
+          field={@form[:url]}
+          type="text"
+          label="Url"
+          help_text="Url del dominio desde donde se accedera"
+        />
         <.field field={@form[:active]} type="checkbox" label="Active" />
 
         <.label>Webhook</.label>
         <.inputs_for :let={extra_config} field={@form[:extra_config]}>
-          <.field field={extra_config[:url]} type="text" label="url" />
-          <.field field={extra_config[:api_key]} type="text" label="API key" />
+          <.field
+            field={extra_config[:url]}
+            type="text"
+            label="url"
+            help_text="Url ser servicio donde se crear el afiliado"
+          />
+          <.field
+            field={extra_config[:api_key]}
+            type="text"
+            label="API key"
+            help_text="token de authenticacion para endpoint"
+          />
         </.inputs_for>
         <.label>Configuracion de proveedores de formularios</.label>
         <input type="hidden" name="notitication[providers_drop][]" />

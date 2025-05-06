@@ -15,14 +15,7 @@
       placeholder="Seleciona un formulario"
       options={@form_groups}
     />
-    <.combo_box
-      field={@form[:previous_lead_form_finished]}
-      type="select"
-      multiple
-      label={gettext("business_config.previous_lead_form_finished")}
-      placeholder="Selecciona los formularios de los que depende"
-      options={@depend_lead_forms}
-    />
+
     <.field type="checkbox" field={@form[:required]} label={gettext("business_config.required")} />
 
     <div class="flex justify-end">

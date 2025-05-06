@@ -30,8 +30,15 @@ defmodule SurveyEngineWeb.EmbedLive.UserRegisterForm do
   end
 
   @impl true
-  def handle_info({SurveyEngineWeb.EmbedLive.FormComponent, "show_glossary"}, socket) do
-    {:noreply, socket |> assign(:show_modal, true)}
+  def handle_info(
+        {SurveyEngineWeb.EmbedLive.FormComponent, {"show_glossary", glossary_type}},
+        socket
+      ) do
+    {:noreply,
+     socket
+     |> assign(:show_modal, true)
+     |> assign(:glossary_type, glossary_type)
+     |> assign_modal_content(glossary_type)}
   end
 
   @impl true
@@ -40,5 +47,17 @@ defmodule SurveyEngineWeb.EmbedLive.UserRegisterForm do
      assign(socket,
        show_modal: false
      )}
+  end
+
+  defp assign_modal_content(socket, glossary_type) do
+    case glossary_type do
+      "agency_type" ->
+        socket
+        |> assign(:modal_content, socket.assigns.agency_types)
+
+      "agency_model" ->
+        socket
+        |> assign(:modal_content, socket.assigns.agency_models)
+    end
   end
 end

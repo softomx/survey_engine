@@ -32,7 +32,12 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
           label={gettext("leads_form.provider")}
           options={[{"Formbricks", "formbricks"}]}
         />
-        <.field field={@form[:external_id]} type="text" label={gettext("leads_form.external_id")} />
+        <.field
+          field={@form[:external_id]}
+          type="text"
+          label={gettext("leads_form.external_id")}
+          help_text="Id proporcionado por el proveedor del engine de preguntas"
+        />
         <.field field={@form[:active]} type="switch" label={gettext("leads_form.active")} />
 
         <.button phx-disable-with="Saving...">{gettext("save")}</.button>

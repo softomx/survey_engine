@@ -2,19 +2,19 @@
   <.header>
     {@title}
     <:subtitle>
-      {get_text_with_locale(@language, gettext("Description of the agencies availables"))}
+      {@subtitle}
     </:subtitle>
   </.header>
   <div class="pt-2"></div>
   <div class="w-full h-0.5 bg-gray-200"></div>
   <div>
     <.accordion variant="ghost">
-      <:item :for={agency <- @list_agencies} heading={agency.name}>
-        <%= if agency.translation != nil do %>
+      <:item :for={item <- @list_items} heading={item.name}>
+        <%= if item.translation != nil do %>
           <div class="opacity-60 text-sm">
             <.description
-              description={agency.translation.description}
-              type={agency.translation.content_type}
+              description={item.translation.description}
+              type={item.translation.content_type}
               class="prose-sm"
             />
           </div>

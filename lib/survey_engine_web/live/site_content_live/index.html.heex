@@ -1,50 +1,50 @@
 <div class="space-y-5">
-<.header>
-  <:actions>
-    <.link patch={~p"/admin/content/#{@behaviour}/copy/url"}>
-      <.button>{gettext("Policies url")}</.button>
-    </.link>
-    <.link patch={~p"/admin/content/#{@behaviour}/new"}>
-      <.button>{build_new_button_text(@index_params)}</.button>
-    </.link>
-  </:actions>
-</.header>
+  <.header>
+    <:actions>
+      <.link :if={@behaviour == "policies"} patch={~p"/admin/content/#{@behaviour}/copy/url"}>
+        <.button>{gettext("Policies url")}</.button>
+      </.link>
+      <.link patch={~p"/admin/content/#{@behaviour}/new"}>
+        <.button>{build_new_button_text(@index_params)}</.button>
+      </.link>
+    </:actions>
+  </.header>
 
-<.data_table :if={@index_params} meta={@meta} items={@translations}>
-  <:if_empty>No se encontraron traducciones</:if_empty>
-  <:col :let={translation} field={:language} sortable>
-    <.language_badge value={translation.language} />
-  </:col>
-  <:col
-    field={:description}
-    renderer={
-      fn translation ->
-        if translation.description do
-          markdown_text(translation.content_type, translation.description)
+  <.data_table :if={@index_params} meta={@meta} items={@translations}>
+    <:if_empty>No se encontraron traducciones</:if_empty>
+    <:col :let={translation} field={:language} sortable>
+      <.language_badge value={translation.language} />
+    </:col>
+    <:col
+      field={:description}
+      renderer={
+        fn translation ->
+          if translation.description do
+            markdown_text(translation.content_type, translation.description)
+          end
         end
-      end
-    }
-  />
+      }
+    />
 
-  <:col :let={translation} label="Actions" align_right>
-    <.button
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label="Ver"
-      to={~p"/admin/content/#{@behaviour}/#{translation}"}
-    />
-    <.button
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label="Editar"
-      to={~p"/admin/content/#{@behaviour}/#{translation}/edit"}
-    />
-  </:col>
-</.data_table>
+    <:col :let={translation} label="Actions" align_right>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Ver"
+        to={~p"/admin/content/#{@behaviour}/#{translation}"}
+      />
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="Editar"
+        to={~p"/admin/content/#{@behaviour}/#{translation}/edit"}
+      />
+    </:col>
+  </.data_table>
 </div>
 <.modal :if={@live_action == :policie_url_modal}>
   <.live_component

@@ -18,8 +18,10 @@
   <.data_table :if={@index_params} meta={@meta} items={@notifications}>
     <:if_empty>No hay notificaciones configuradas</:if_empty>
     <:col field={:action} sortable filterable={[:ilike]} label="Motivo" />
-    <:col :let={notification} field={:to} sortable>
-      {notification.to |> Enum.map(& &1.email)}
+    <:col :let={notification} field={:to} sortable label="Notificar a ">
+      <div :for={item <- notification.to}>
+        <p>{item.email}</p>
+      </div>
     </:col>
 
     <:col :let={notification} label={gettext("actions")} align_right>
@@ -46,7 +48,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Asunto"
+        label="Configurar asunto"
         to={~p"/admin/catalogs/notifications/#{notification}/translations/subject"}
       />
 
@@ -55,7 +57,7 @@
         variant="outline"
         size="xs"
         link_type="live_patch"
-        label="Contenido"
+        label="Configurar contenido"
         to={~p"/admin/catalogs/notifications/#{notification}/translations/content"}
       />
     </:col>

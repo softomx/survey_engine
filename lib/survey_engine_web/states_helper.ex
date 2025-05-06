@@ -58,7 +58,6 @@ defmodule SurveyEngine.TransaleteHelper do
       "MailerConfigLive" -> gettext("permissions.mailer_config")
       "NotificationLive" -> gettext("permissions.notification")
       "PermissionActionLive" -> gettext("permissions.permission_config")
-      "PersonalTitleLive" -> gettext("permissions.personal_title")
       "ReportLive" -> gettext("permissions.report")
       "RoleLive" -> gettext("permissions.role")
       "TranslationLive" -> gettext("permissions.translations")
@@ -88,5 +87,4 @@ defmodule SurveyEngine.TransaleteHelper do
       _ -> action
     end
   end
-
 end

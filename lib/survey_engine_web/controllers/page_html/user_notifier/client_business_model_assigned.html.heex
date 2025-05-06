@@ -433,7 +433,14 @@
                                 <!-- Detalles de la cuenta registrada -->
 
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
-                                  <br />{"This is the information entered"}:
+                                  <br />
+                                  {Gettext.with_locale(
+                                    SurveyEngineWeb.Gettext,
+                                    @content.language,
+                                    fn ->
+                                      gettext("This is the information entered")
+                                    end
+                                  )}
                                 </h4>
                                 <table style="width: 100%;">
                                   <tr>

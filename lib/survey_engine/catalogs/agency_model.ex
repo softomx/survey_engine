@@ -5,6 +5,10 @@ defmodule SurveyEngine.Catalogs.AgencyModel do
   schema "agency_models" do
     field :name, :string
 
+    has_many :descriptions, SurveyEngine.Translations.Translation,
+      foreign_key: :resource_id,
+      where: [type: "agency_models", behaviour: "description"]
+
     timestamps(type: :utc_datetime)
   end
 

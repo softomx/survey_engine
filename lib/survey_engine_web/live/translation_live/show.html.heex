@@ -11,12 +11,15 @@
     </.link>
   </:actions>
 </.header>
-
-<.list>
-  <:item title="Type">{@translation.type}</:item>
-  <:item title="Description">{markdown_text(@translation.content_type, @translation.description)}</:item>
-</.list>
+<div class="flex">
+  <div>
+    {@translation.type}
+  </div>
+  <div>
+    {markdown_text(@translation.content_type, @translation.description)}
+  </div>
+</div>
 
 <.back navigate={~p"/admin/catalogs/#{@type}/#{@resource_id}/translations/#{@behaviour}"}>
-  Back to translations
+  atras
 </.back>

@@ -30,7 +30,7 @@ defmodule SurveyEngine.PermissionManager do
   defp validate_result(permissions, find_fn) do
     permissions
     |> Enum.find(fn permission ->
-      if String.contains?(permission.path, "admin/content/:behaviour"), do: IO.inspect(permission)
+      # if String.contains?(permission.path, "admin/content/:behaviour"), do: IO.inspect(permission)
       find_fn.(permission)
     end)
     |> case do

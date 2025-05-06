@@ -14,20 +14,27 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
             phx-submit="reset_password"
             phx-change="validate"
           >
-            <.field field={@form[:password]} type="password" label="New password" required />
+            <.field
+              field={@form[:password]}
+              type="password"
+              label={gettext("label.newpassword")}
+              required
+            />
             <.field
               field={@form[:password_confirmation]}
               type="password"
-              label="Confirm new password"
+              label={gettext("label.confirm.newpassword")}
               required
             />
 
-            <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
+            <.button phx-disable-with="Resetting..." class="w-full">
+              {gettext("label.button.resetpassword")}
+            </.button>
           </.form>
 
           <p class="text-center text-sm mt-4">
-            <.link href={~p"/users/register"}>Register</.link>
-            | <.link href={~p"/users/log_in"}>Log in</.link>
+            <.link href={~p"/users/register"}>{gettext("register.button.label")}</.link>
+            | <.link href={~p"/users/log_in"}>{gettext("login.button.label")}</.link>
           </p>
         </div>
       </div>

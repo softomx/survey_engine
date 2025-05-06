@@ -1,4 +1,5 @@
 <div>
+  <span>Configuracion de notificacion</span>
   <.form
     for={@form}
     id="notification-form"
@@ -6,8 +7,10 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <.combo_box
+    <.field
+      help_text="action que disparara la notificacion"
       type="select"
+      prompt="selecciona una accion"
       field={@form[:action]}
       options={[
         {"Registro", "register"},
@@ -18,13 +21,24 @@
         {"Informacion rechazada", "rejected"}
       ]}
     />
-    <.label>Notificar a</.label>
+    <.label class="text-xl">Correo electronicos a los que se les notificara:</.label>
     <input type="hidden" name="notitication[to_drop][]" />
     <.inputs_for :let={f2} field={@form[:to]}>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-6">
         <input type="hidden" name="notification[to_sort][]" value={f2.index} />
-        <.field type="text" field={f2[:name]} label="Nombre" />
-        <.field type="text" field={f2[:email]} label="correo electronico" />
+        <.field
+          type="text"
+          field={f2[:name]}
+          label="Nombre"
+          help_text="Nombre de la persona a la que se le notificara"
+        />
+        <.field
+          wrapper_class="flex-1"
+          type="text"
+          field={f2[:email]}
+          label="correo electronico"
+          help_text="correo electronico donde se notificara"
+        />
 
         <.button
           with_icon

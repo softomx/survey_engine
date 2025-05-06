@@ -18,10 +18,10 @@
     <.live_component
       module={SurveyEngineWeb.EmbedLive.AgencyDescriptionComponent}
       id={:modal_show}
-      title={gettext("Description of Agencies")}
       action={@live_action}
-      agencies={@list_agency_desciptions}
+      items={@modal_content}
       language={@locale}
+      glossary_type={@glossary_type}
     />
   </.modal>
 </div>

@@ -6,11 +6,11 @@
           disabled={response_item.type == "consent"}
           color="primary"
           link_type="live_patch"
-          label={"Editar"}
+          label="Editar"
           to={~p"/admin/survey_answers/#{@survey_response}/edit_item/#{response_item}"}
         />
         <div :if={response_item.editor_user}>
-          <p class="text-xs">{gettext("edit_details")}</p>
+          <p class="text-xs">{gettext("edit")}</p>
           <p class="text-xs">{response_item.editor_user.email}</p>
           <p class="text-xs">{SurveyEngine.to_timezone(response_item.updated_at)}</p>
         </div>
@@ -18,7 +18,6 @@
     </:actions>
     editor_user
   </.card_survey_response>
-
 
   <%= if @live_action in [:edit_response_item] do %>
     <.modal title={@page_title}>
@@ -33,5 +32,4 @@
       />
     </.modal>
   <% end %>
-
 </.container>

@@ -17,7 +17,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
         <.input field={@form[:type]} type="hidden" value={@type} />
         <.input field={@form[:resource_id]} type="hidden" value={@resource_id} />
         <.input field={@form[:behaviour]} type="hidden" value={@behaviour} />
-        <.combo_box
+        <.field
           field={@form[:language]}
           type="select"
           label="Language"
@@ -25,7 +25,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
           options={[{"Español", "es"}, {"Ingles", "en"}]}
         />
         <%= if @behaviour != "policies" do %>
-          <.combo_box
+          <.field
             field={@form[:content_type]}
             type="select"
             label="Tipo de contenido"

@@ -16,8 +16,8 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
           currencies={@currencies}
           user={@user}
           list_languages={@languages}
-          agency_types={@agency_types}
-          agency_models={@agency_models}
+          agency_types={@agency_types |> Enum.map(&{&1.name, &1.name})}
+          agency_models={@agency_models |> Enum.map(&{&1.name, &1.name})}
           countries={@countries}
           site_config={@site_config}
         />
@@ -27,10 +27,10 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
         <.live_component
           module={SurveyEngineWeb.EmbedLive.AgencyDescriptionComponent}
           id={:modal_show}
-          title={gettext("Description of Agencies")}
           action={@live_action}
-          agencies={@list_agency_desciptions}
+          items={@modal_content}
           language={@locale}
+          glossary_type={@glossary_type}
         />
       </.modal>
     </div>
@@ -40,20 +40,21 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
   @impl true
   def mount(_params, _session, socket) do
     list_languages = [%{name: "Español", slug: "es"}, %{name: "Ingles", slug: "en"}]
-    list_agency_desciptions = Catalogs.list_agency_types_with_preload()
+    # list_agency_desciptions = Catalogs.list_agency_types_with_preload()
 
     socket =
       socket
       |> assign(trigger_submit: false, check_errors: false)
       |> assign(:countries, Countries.all() |> Enum.map(&{&1.name, &1.alpha2}))
       |> assign(:currencies, Catalogs.list_currencies() |> Enum.map(&{&1.name, &1.slug}))
-      |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(&{&1.name, &1.name}))
-      |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(&{&1.name, &1.name}))
+      |> assign(:agency_types, Catalogs.list_agency_types_with_preload())
+      |> assign(:agency_models, Catalogs.list_agency_models_with_preload())
       |> assign(:towns, [])
       |> assign(:user, %User{})
       |> assign(:languages, list_languages)
       |> assign(:show_modal, false)
-      |> assign(list_agency_desciptions: list_agency_desciptions)
+
+    # |> assign(list_agency_desciptions: list_agency_desciptions)
 
     {:ok, socket, temporary_assigns: [form: nil]}
   end
@@ -67,7 +68,26 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
   end
 
   @impl true
-  def handle_info({SurveyEngineWeb.EmbedLive.FormComponent, "show_glossary"}, socket) do
-    {:noreply, socket |> assign(:show_modal, true)}
+  def handle_info(
+        {SurveyEngineWeb.EmbedLive.FormComponent, {"show_glossary", glossary_type}},
+        socket
+      ) do
+    {:noreply,
+     socket
+     |> assign(:show_modal, true)
+     |> assign(:glossary_type, glossary_type)
+     |> assign_modal_content(glossary_type)}
+  end
+
+  defp assign_modal_content(socket, glossary_type) do
+    case glossary_type do
+      "agency_type" ->
+        socket
+        |> assign(:modal_content, socket.assigns.agency_types)
+
+      "agency_model" ->
+        socket
+        |> assign(:modal_content, socket.assigns.agency_models)
+    end
   end
 end

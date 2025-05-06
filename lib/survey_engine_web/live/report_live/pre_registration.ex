@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.ReportLive.PreRegistration do
+  alias SurveyEngine.Catalogs
   use SurveyEngineWeb, :live_view
   alias SurveyEngine.{Companies, BusinessModels}
   alias SurveyEngine.Filters.PreRegistrationFilter
@@ -6,16 +7,21 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
-      socket
-      |> assign(:response_states, TransaleteHelper.list_survey_response_states())
-      |> assign(:list_languages, TransaleteHelper.list_languages())
-      |> assign(:agency_types, Companies.get_agency_types())
-      |> assign(:countries, Companies.get_countries())
-      |> assign(:towns, Companies.get_towns())
-      |> assign(:business_models, BusinessModels.list_business_models() |> Enum.map(fn bm -> {bm.name, bm.id} end))
+     socket
+     |> assign(:response_states, TransaleteHelper.list_survey_response_states())
+     |> assign(:list_languages, TransaleteHelper.list_languages())
+     |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(& &1.name))
+     |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(& &1.name))
+     |> assign(:countries, Companies.get_countries())
+     |> assign(:towns, Companies.get_towns())
+     |> assign(:companies, Companies.list_companies() |> Enum.map(& &1.legal_name))
+     |> assign(
+       :business_models,
+       BusinessModels.list_business_models() |> Enum.map(fn bm -> {bm.name, bm.id} end)
+     )
      |> assign_new(:form, fn ->
-      to_form(PreRegistrationFilter.changeset(%PreRegistrationFilter{}, %{}))
-    end)}
+       to_form(PreRegistrationFilter.changeset(%PreRegistrationFilter{}, %{}))
+     end)}
   end
 
   @impl true
@@ -25,7 +31,8 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
 
   defp apply_action(socket, :pre_registration, %{"pre_registration_filter" => params}) do
     changeset = PreRegistrationFilter.changeset(%PreRegistrationFilter{}, params)
-    params =  changeset |> Ecto.Changeset.apply_changes()
+    params = changeset |> Ecto.Changeset.apply_changes()
+
     socket
     |> assign(:form, to_form(changeset))
     |> init_table(Map.from_struct(params))
@@ -35,6 +42,7 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
     default_params = %{register_dates: %{start_date: Timex.today(), end_date: Timex.today()}}
     changeset = PreRegistrationFilter.changeset(%PreRegistrationFilter{}, default_params)
     params = changeset |> Ecto.Changeset.apply_changes()
+
     socket
     |> assign(:form, to_form(changeset))
     |> init_table(Map.from_struct(params))
@@ -50,11 +58,12 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
 
   @impl true
   def handle_event("export", _, socket) do
-      date = Timex.today("America/Cancun")
-      filename = "ReportePreRegistro_#{date}"
-      {:noreply,
-       socket
-       |> push_event("export", %{filename: filename})}
+    date = Timex.today("America/Cancun")
+    filename = "ReportePreRegistro_#{date}"
+
+    {:noreply,
+     socket
+     |> push_event("export", %{filename: filename})}
   end
 
   def handle_event("filter", params, socket) do
@@ -81,6 +90,7 @@ defmodule SurveyEngineWeb.ReportLive.PreRegistration do
     |> SurveyEngine.Companies.list_companies_with_preloads()
     |> Stream.map(fn company ->
       business_model = if company.business_model, do: company.business_model.name, else: "-"
+
       %{
         inserted_at: SurveyEngine.to_timezone(company.inserted_at),
         language: TransaleteHelper.language(company.language),

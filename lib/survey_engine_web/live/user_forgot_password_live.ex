@@ -10,20 +10,20 @@ defmodule SurveyEngineWeb.UserForgotPasswordLive do
       <div class="mx-auto max-w-sm">
         <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800 space-y-5">
           <.header class="text-center">
-            Forgot your password?
-            <:subtitle>We'll send a password reset link to your inbox</:subtitle>
+            {gettext("title.forgotpassword")}
+            <:subtitle>{gettext("subtitle.forgotpassword")}</:subtitle>
           </.header>
 
           <.form for={@form} id="reset_password_form" phx-submit="send_email" class="space-y-5">
             <.input field={@form[:email]} type="email" placeholder="Email" required />
 
             <.button phx-disable-with="Sending..." class="w-full">
-              Send password reset instructions
+              {gettext("button.sendpasswordresetinstructions")}
             </.button>
           </.form>
           <p class="text-center text-sm mt-4">
-            <.link href={~p"/users/register"}>Register</.link>
-            | <.link href={~p"/users/log_in"}>Log in</.link>
+            <.link href={~p"/users/register"}>{gettext("register.button.label")}</.link>
+            | <.link href={~p"/users/log_in"}>{gettext("login.button.label")}</.link>
           </p>
         </div>
       </div>

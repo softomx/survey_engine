@@ -16,12 +16,12 @@ defmodule SurveyEngineWeb.NotificationLive.Edit do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Editar Notification")
+    |> assign(:page_title, "Editar Configuracion de Notification")
     |> assign(:notification, Notifications.get_notification!(id))
   end
 
   defp current_index_path(index_params) do
-    ~p"/admin/notifications?#{index_params || %{}}"
+    ~p"/admin/notifications?#{index_params}"
   end
 
   @impl true
