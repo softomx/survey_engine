@@ -1,5 +1,5 @@
-<.container class="py-16">
-  <.page_header>
+<.container class="">
+  <.page_header title="">
     <.button
       link_type="live_patch"
       label={gettext("agency_model.new_agency_model")}
@@ -30,18 +30,6 @@
         link_type="live_patch"
         label={gettext("edit")}
         to={~p"/admin/catalogs/agency_models/#{agency_model}/edit"}
-      />
-
-      <.button
-        color="danger"
-        variant="outline"
-        link_type="a"
-        to="#"
-        size="xs"
-        label="Delete"
-        phx-click={gettext("delete")}
-        phx-value-id={agency_model.id}
-        data-confirm="Are you sure?"
       />
     </:col>
   </.data_table>

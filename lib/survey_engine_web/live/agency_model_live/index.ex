@@ -27,21 +27,22 @@ defmodule SurveyEngineWeb.AgencyModelLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Agency model")
+    |> assign(:page_title, "Editar modelo de agencia")
     |> assign(:agency_model, Catalogs.get_agency_model!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Agency model")
+    |> assign(:page_title, "Nuevo modelo de agencia")
     |> assign(:agency_model, %AgencyModel{})
   end
 
   defp apply_action(socket, :index, params) do
     socket
-    |> assign(:page_title, "Listing Agency models")
+    |> assign(:page_title, "Listado de modelos de agencia")
     |> assign_agency_models(params)
     |> assign(index_params: params)
+    |> assign(:title, "Listado de modelos de agencia")
   end
 
   defp current_index_path(index_params) do

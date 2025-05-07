@@ -11,19 +11,19 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:72
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:81
 #: lib/survey_engine_web/live/report_live/survey_response.ex:80
 #, elixir-autogen, elixir-format
 msgid "agency type"
 msgstr "Tipo de agencia"
 
 #: lib/survey_engine_web/live/companies_live/show.html.heex:66
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:74
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:83
 #, elixir-autogen, elixir-format
 msgid "billing currency"
 msgstr "Moneda de facturación"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:71
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:80
 #, elixir-autogen, elixir-format
 msgid "city"
 msgstr "Ciudad"
@@ -33,20 +33,20 @@ msgstr "Ciudad"
 msgid "close"
 msgstr "cerrar"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:68
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:77
 #: lib/survey_engine_web/live/report_live/survey_response.ex:79
 #, elixir-autogen, elixir-format
 msgid "company name"
 msgstr "Nombre agencia"
 
 #: lib/survey_engine_web/live/embed_live/form_component.ex:72
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:69
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:78
 #: lib/survey_engine_web/live/report_live/survey_response.ex:82
 #, elixir-autogen, elixir-format
 msgid "country"
 msgstr "Pais"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:70
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:79
 #, elixir-autogen, elixir-format
 msgid "town"
 msgstr "Estado"
@@ -215,32 +215,32 @@ msgstr "Responder"
 msgid "survey_response.init"
 msgstr "Iniciar"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:32
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:28
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:31
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "report.agency_name"
 msgstr "Nombre agencia"
 
 #: lib/survey_engine_web/live/report_live/pre_registration.html.heex:39
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:35
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:34
 #, elixir-autogen, elixir-format
 msgid "report.agency_types"
 msgstr "Tipo de agencia"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:47
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:43
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:55
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "report.business_models"
 msgstr "Modelo de negocio"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:64
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:62
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:72
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:61
 #, elixir-autogen, elixir-format
 msgid "report.countries"
 msgstr "Pais"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:83
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:81
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:84
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:80
 #, elixir-autogen, elixir-format
 msgid "report.export"
 msgstr "Exportar"
@@ -250,29 +250,24 @@ msgstr "Exportar"
 msgid "report.languages"
 msgstr "Idiomas"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:77
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:75
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:78
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:74
 #, elixir-autogen, elixir-format
 msgid "report.search"
 msgstr "Buscar"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:57
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:54
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:65
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:53
 #, elixir-autogen, elixir-format
 msgid "report.status"
 msgstr "Status"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:71
-#, elixir-autogen, elixir-format
-msgid "report.towns"
-msgstr "Estado"
-
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:67
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:76
 #, elixir-autogen, elixir-format
 msgid "language"
 msgstr "Idioma"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:73
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:82
 #: lib/survey_engine_web/live/report_live/survey_response.ex:81
 #, elixir-autogen, elixir-format
 msgid "business model"
@@ -283,12 +278,10 @@ msgstr "Modelo de negocio"
 msgid "survey_response.pending"
 msgstr "Pendiente"
 
-#: lib/survey_engine_web/live/report_live/pre_registration.ex:66
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:18
-#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:24
+#: lib/survey_engine_web/live/report_live/pre_registration.ex:75
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:21
 #: lib/survey_engine_web/live/report_live/survey_response.ex:78
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:11
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:17
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:14
 #, elixir-autogen, elixir-format, fuzzy
 msgid "report.register_date"
 msgstr "Fecha solicitud"
@@ -304,7 +297,7 @@ msgid "question"
 msgstr "Pregunta"
 
 #: lib/survey_engine_web/live/report_live/survey_response.ex:85
-#: lib/survey_engine_web/live/report_live/survey_response.html.heex:70
+#: lib/survey_engine_web/live/report_live/survey_response.html.heex:69
 #, elixir-autogen, elixir-format
 msgid "report.form_groups"
 msgstr "Formulario"
@@ -1536,3 +1529,8 @@ msgstr "Descripcion de tipos de agencia disponibles"
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencymodel.glossary"
 msgstr "glosario modelos de agencia"
+
+#: lib/survey_engine_web/live/report_live/pre_registration.html.heex:47
+#, elixir-autogen, elixir-format, fuzzy
+msgid "report.agency_models"
+msgstr "modelos de agencias"

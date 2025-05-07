@@ -2,14 +2,6 @@
 
 <.form for={@form} id="currency-form" phx-submit="filter">
   <div class="grid grid-cols-3 gap-4">
-    <.combo_box
-      type="select"
-      field={@form[:languages]}
-      wrapper_class="mb-1"
-      options={@list_languages}
-      label={gettext("report.languages")}
-      multiple
-    />
     <.inputs_for :let={register_dates} field={@form[:register_dates]}>
       <.field
         field={register_dates[:label_dates]}
@@ -23,11 +15,9 @@
       <.input type="hidden" field={register_dates[:start_date]} />
       <.input type="hidden" field={register_dates[:end_date]} />
     </.inputs_for>
-  </div>
-  <div class="grid grid-cols-3 gap-4">
     <.field
       field={@form[:legal_name]}
-      wrapper_class="mb-1"
+      wrapper_class="mb-1 col-span-2"
       label={gettext("report.agency_name")}
       type="select"
       options={@companies}
@@ -50,15 +40,21 @@
     />
     <.combo_box
       type="select"
+      field={@form[:languages]}
+      wrapper_class="mb-1"
+      options={@list_languages}
+      label={gettext("report.languages")}
+      multiple
+    />
+
+    <.combo_box
+      type="select"
       wrapper_class="mb-1"
       field={@form[:business_models]}
       label={gettext("report.business_models")}
       options={@business_models}
       multiple
     />
-  </div>
-
-  <div class="grid grid-cols-3 gap-4">
     <.combo_box
       type="select"
       field={@form[:status]}
@@ -74,6 +70,7 @@
       multiple
     />
   </div>
+
   <div class="flex justify-end mb-5">
     <.button phx-disable-with="...">{gettext("report.search")}</.button>
   </div>

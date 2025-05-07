@@ -1,5 +1,7 @@
 <.header>
-  <:subtitle>Solo puede existir una traduccion por idioma</:subtitle>
+  <:subtitle>
+    <span class="text-danger-600">Solo puede existir una traduccion por idioma</span>
+  </:subtitle>
   <:actions>
     <.link patch={~p"/admin/catalogs/#{@type}/#{@resource_id}/translations/#{@behaviour}/new"}>
       <.button>{build_new_button_text(@index_params)}</.button>
@@ -13,6 +15,7 @@
     <.language_badge value={translation.language} />
   </:col>
   <:col
+    class="truncate"
     field={:description}
     renderer={
       fn translation ->
