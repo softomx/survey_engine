@@ -33,3 +33,51 @@
     left: 0;
     z-index: 1;
   }
+
+  /* The message box */
+#password-message {
+
+  background: #ffffff;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+#password-message h3 {
+  font-size: 15px;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+#password-message p {
+  margin: 8px 0;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
+/* Error message style */
+.error-msg {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}

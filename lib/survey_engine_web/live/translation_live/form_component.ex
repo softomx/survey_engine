@@ -26,6 +26,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
         />
         <%= if @behaviour != "policies" do %>
           <.field
+            help_text="Indica si la descipcion es en formato HTML o texto plano"
             field={@form[:content_type]}
             type="select"
             label="Tipo de contenido"

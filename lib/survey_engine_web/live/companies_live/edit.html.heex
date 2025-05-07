@@ -1,6 +1,6 @@
 <.container>
   <.live_component
-    module={SurveyEngineWeb.AdminCompanyLive.FormComponent}
+    module={SurveyEngineWeb.CompanyLive.FormComponent}
     id={:form}
     title={@page_title}
     action={@live_action}
@@ -8,5 +8,6 @@
     site_config={@site_config}
     user_id={@current_user.id}
     return_to={~p"/company"}
+    locale={@locale}
   />
 </.container>

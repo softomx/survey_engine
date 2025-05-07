@@ -18,7 +18,6 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
         phx-submit="save"
       >
         <div :if={@action == :edit}>
-          <.field field={@form[:date]} type="hidden" value={Timex.today()} />
           <.combo_box
             field={@form[:language]}
             type="select"

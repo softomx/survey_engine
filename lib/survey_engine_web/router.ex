@@ -110,6 +110,7 @@ defmodule SurveyEngineWeb.Router do
       ],
       layout: {SurveyEngineWeb.Layouts, :register} do
       live "/users/register", UserRegistrationLive, :new
+      live "users/sucess_register", UserRegistrationSucessLive, :show
     end
   end
 

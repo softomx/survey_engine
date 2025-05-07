@@ -19,7 +19,7 @@ defmodule SurveyEngineWeb.SiteContentLive.New do
          %{"behaviour" => behaviour} = _params
        ) do
     socket
-    |> assign(:page_title, "New Translation")
+    |> assign(:page_title, "Nueva traduccion")
     |> assign(:translation, %Translation{})
     |> assign(:resource_id, socket.assigns.site_config.id)
     |> assign(:type, "site_configurations")

@@ -265,13 +265,14 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
         Accounts.set_user_cllient_role(user)
 
         changeset = Accounts.change_user_registration_with_company(user)
+        send(self(), {:put_flash, :info, gettext("register.complete.message")})
 
         {:noreply,
          socket
-         |> assign(trigger_submit: true)
+         #  |> assign(trigger_submit: true)
          |> assign_form(changeset)
          |> put_flash(:info, gettext("register.complete.message"))
-         |> push_navigate(to: ~p"/embed/users/log_in?_action=registered")}
+         |> push_navigate(to: ~p"/users/sucess_register?locale=#{socket.assigns.locale}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, socket |> assign(check_errors: true) |> assign_form(changeset)}
@@ -287,8 +288,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
      |> assign(locale: value)}
   end
 
-  def handle_event("show_glossary", %{"type" => type} = params, socket) do
-    IO.inspect(params)
+  def handle_event("show_glossary", %{"type" => type} = _params, socket) do
     notify_parent({"show_glossary", type})
     {:noreply, socket}
   end

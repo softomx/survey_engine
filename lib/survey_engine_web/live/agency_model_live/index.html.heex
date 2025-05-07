@@ -31,6 +31,14 @@
         label={gettext("edit")}
         to={~p"/admin/catalogs/agency_models/#{agency_model}/edit"}
       />
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label="description"
+        to={~p"/admin/catalogs/agency_models/#{agency_model}/translations/description"}
+      />
     </:col>
   </.data_table>
 </.container>

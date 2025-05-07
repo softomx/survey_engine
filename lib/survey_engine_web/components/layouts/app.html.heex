@@ -1,7 +1,7 @@
 <.sidebar_layout
   current_page={@current_page}
   collapsible
-  main_menu_items={@main_menu}
+  main_menu_items={assigns[:main_menu] || []}
   user_menu_items={[
     %{
       name: :logout,

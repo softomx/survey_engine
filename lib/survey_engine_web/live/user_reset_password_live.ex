@@ -17,8 +17,12 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
             <.field
               field={@form[:password]}
               type="password"
+              phx-hook="PasswordValidation"
               label={gettext("label.newpassword")}
               required
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}"
+              title="Must contain at least one number,
+               one uppercase and lowercase letter, and at least 12 characters"
             />
             <.field
               field={@form[:password_confirmation]}
@@ -26,6 +30,25 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
               label={gettext("label.confirm.newpassword")}
               required
             />
+
+            <div id="password-message">
+              <h3>{gettext("form.password.validation.title")}</h3>
+              <p class="password-message-item invalid">
+                {gettext("password.validation.atleast")}
+                <b>{gettext("password.validation.one.lowercase.letter")}</b>
+              </p>
+              <p class="password-message-item invalid">
+                {gettext("password.validation.atleast")}
+                <b>{gettext("password.validation.one.uppercase.letter")}</b>
+              </p>
+              <p class="password-message-item invalid">
+                {gettext("password.validation.atleast")}
+                <b>{gettext("password.validation.one.number")}</b>
+              </p>
+              <p class="password-message-item invalid">
+                {gettext("password.validation.minimum")} <b>12 {gettext("characters")}</b>
+              </p>
+            </div>
 
             <.button phx-disable-with="Resetting..." class="w-full">
               {gettext("label.button.resetpassword")}

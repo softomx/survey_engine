@@ -40,7 +40,6 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
   @impl true
   def mount(_params, _session, socket) do
     list_languages = [%{name: "Español", slug: "es"}, %{name: "Ingles", slug: "en"}]
-    # list_agency_desciptions = Catalogs.list_agency_types_with_preload()
 
     socket =
       socket
@@ -53,8 +52,6 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
       |> assign(:user, %User{})
       |> assign(:languages, list_languages)
       |> assign(:show_modal, false)
-
-    # |> assign(list_agency_desciptions: list_agency_desciptions)
 
     {:ok, socket, temporary_assigns: [form: nil]}
   end
