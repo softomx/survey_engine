@@ -297,7 +297,7 @@ defmodule SurveyEngineWeb.Router do
       live "/roles/:id/edit", RoleLive.Index, :edit
 
       live "/users", UserLive.Index, :index
-      live "/users/new", UserLive.Index, :new
+      live "/users/new", UserLive.New, :new
       live "/users/:id/edit_roles", UserLive.Index, :edit_roles
 
       # live "/permissions_actions", PermissionActionLive.Index, :index

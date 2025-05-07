@@ -85,7 +85,9 @@ defmodule SurveyEngine.Accounts do
     |> case do
       {:ok, user} ->
         {:ok, user |> Repo.preload(preloads)}
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -103,9 +105,9 @@ defmodule SurveyEngine.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def register_user(attrs) do
+  def register_user(attrs, roles) do
     %User{}
-    |> User.registration_changeset(attrs)
+    |> User.registration_changeset(attrs, roles)
     |> Repo.insert()
   end
 
@@ -125,7 +127,7 @@ defmodule SurveyEngine.Accounts do
 
   """
   def change_user_registration(%User{} = user, attrs \\ %{}) do
-    User.registration_changeset(user, attrs, hash_password: false, validate_email: false)
+    User.registration_changeset(user, attrs, [], hash_password: false, validate_email: false)
   end
 
   def change_user_registration_with_company(%User{} = user, attrs \\ %{}) do
@@ -188,17 +190,17 @@ defmodule SurveyEngine.Accounts do
     end
   end
 
-  def update_user_with_roles(%User{} = user, roles) do
+  def update_user_with_roles(%User{} = user, attrs, roles) do
     user
     |> Repo.preload(:roles)
-    |> User.roles_changeset(roles)
+    |> User.roles_changeset(attrs, roles)
     |> Repo.update()
   end
 
   def set_user_cllient_role(%User{} = user) do
     get_role_by_slug("client")
     |> case do
-      {:ok, role} -> update_user_with_roles(user, [role])
+      {:ok, role} -> update_user_with_roles(user, %{}, [role])
       _error -> {:ok, user}
     end
   end
@@ -288,8 +290,9 @@ defmodule SurveyEngine.Accounts do
   """
   def get_user_by_session_token(token) do
     {:ok, query} = UserToken.verify_session_token_query(token)
+
     Repo.one(query)
-    |> Repo.preload([roles: :permission_actions])
+    |> Repo.preload(roles: :permission_actions)
   end
 
   @doc """
@@ -438,6 +441,7 @@ defmodule SurveyEngine.Accounts do
     |> Enum.reduce(query, fn
       {:ids, ids}, query ->
         from q in query, where: q.id in ^ids
+
       _, query ->
         query
     end)
@@ -465,7 +469,7 @@ defmodule SurveyEngine.Accounts do
   def get_role!(id), do: Repo.get!(Role, id)
 
   def get_role_by_slug(slug) do
-    Repo.get_by(Role, [slug: slug])
+    Repo.get_by(Role, slug: slug)
     |> case do
       nil -> {:error, "Role not found"}
       role -> {:ok, role}
@@ -507,7 +511,6 @@ defmodule SurveyEngine.Accounts do
     |> Role.changeset(attrs)
     |> Repo.update()
   end
-
 
   def update_role_with_actions(%Role{} = role, actions) do
     role

@@ -1,33 +1,40 @@
 <div>
+  <.header>
+    <:actions>
+      <.link patch={~p"/admin/users/new"}>
+        <.button>{"Nuevo usuario"}</.button>
+      </.link>
+    </:actions>
+  </.header>
   <.page_header title={gettext("Listing Users")} />
   <.data_table :if={@index_params} meta={@meta} items={@users}>
-    <:col field={:email} sortable filterable={[:ilike]} label={gettext("user.email")}/>
-    <:col :let={user}  field={:inserted_at} label={gettext("user.inserted_at")}>
-        <p>{SurveyEngine.to_timezone(user.inserted_at)}</p>
+    <:col field={:name} sortable filterable={[:ilike]} label="nombre" />
+    <:col field={:email} sortable filterable={[:ilike]} label={gettext("user.email")} />
+    <:col :let={user} field={:inserted_at} label={gettext("user.inserted_at")}>
+      <p>{SurveyEngine.to_timezone(user.inserted_at)}</p>
     </:col>
-    <:col label={gettext("actions")} :let={user} align_right>
-        <.button
-          color="white"
-          variant="outline"
-          size="xs"
-          link_type="live_patch"
-          label={gettext("user.edit")}
-          to={~p"/admin/users/#{user}/edit_roles"}
-        />
-      </:col>
+    <:col :let={user} label={gettext("actions")} align_right>
+      <.button
+        color="white"
+        variant="outline"
+        size="xs"
+        link_type="live_patch"
+        label={gettext("user.edit")}
+        to={~p"/admin/users/#{user}/edit_roles"}
+      />
+    </:col>
   </.data_table>
 
   <%= if @live_action in [:edit_roles] do %>
-  <.modal title={@page_title}>
-    <.live_component
-      module={SurveyEngineWeb.UserLive.FormRoleComponent}
-      id={@user.id || :new}
-      title={@page_title}
-      action={@live_action}
-      user={@user}
-      patch={~p"/admin/users"}
-    />
-  </.modal>
-<% end %>
-
+    <.modal title={@page_title}>
+      <.live_component
+        module={SurveyEngineWeb.UserLive.FormRoleComponent}
+        id={@user.id || :new}
+        title={@page_title}
+        action={@live_action}
+        user={@user}
+        patch={~p"/admin/users"}
+      />
+    </.modal>
+  <% end %>
 </div>

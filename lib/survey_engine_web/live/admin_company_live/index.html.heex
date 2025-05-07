@@ -34,8 +34,8 @@
 </div>
 <.data_table :if={@index_params} meta={@meta} items={@companies}>
   <:if_empty>No se encontraron compañias con elcriterio de busqueda</:if_empty>
-  <:col field={:agency_name} sortable label={gettext("company.agency_name")}/>
-  <:col field={:legal_name} sortable label={gettext("company.legal_name")}/>
+  <:col field={:agency_name} sortable label={gettext("company.agency_name")} />
+  <:col field={:legal_name} sortable label={gettext("company.legal_name")} />
   <:col :let={company} field={:status} sortable label={gettext("company.status")}>
     <.company_state_badge value={company.status} />
   </:col>

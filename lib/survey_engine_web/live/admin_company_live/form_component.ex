@@ -144,7 +144,11 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
            company_params |> Map.put("status", "assigned")
          ) do
       {:ok, company} ->
-        NotificationManager.notify_business_model_assigned(company, socket.assigns.site_config)
+        NotificationManager.notify_business_model_assigned(
+          company,
+          url(~p"/"),
+          socket.assigns.site_config
+        )
 
         {:noreply,
          socket

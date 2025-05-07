@@ -29,7 +29,7 @@ defmodule SurveyEngineWeb.UserLive.Index do
   defp apply_action(socket, :edit_roles, %{"id" => id}) do
     with {:ok, user} <- Accounts.get_user_with_preloads(id, :roles) do
       socket
-      |> assign(:page_title, "Editar Roles Usuario")
+      |> assign(:page_title, "Editar  Usuario")
       |> assign(:user, user)
     else
       _error -> socket
@@ -48,7 +48,7 @@ defmodule SurveyEngineWeb.UserLive.Index do
   end
 
   @impl true
-  def handle_event("update_filters",  %{"filters" => filter_params}, socket) do
+  def handle_event("update_filters", %{"filters" => filter_params}, socket) do
     {:noreply, push_patch(socket, to: ~p"/admin/users?#{filter_params}")}
   end
 

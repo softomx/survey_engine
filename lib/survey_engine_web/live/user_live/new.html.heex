@@ -1,0 +1,8 @@
+<.live_component
+  module={SurveyEngineWeb.UserLive.FormRoleComponent}
+  id={@user.id || :new}
+  title={@page_title}
+  action={@live_action}
+  user={@user}
+  patch={~p"/admin/users"}
+/>

@@ -5,24 +5,24 @@ defmodule SurveyEngine.Workers.ClientBusinessModelAssignedNotificationWorker do
   alias SurveyEngine.Companies
   alias SurveyEngine.Accounts
 
-  def perform(company_id, site_config_id) do
+  def perform(company_id, url, site_config_id) do
     with {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, company} <- Companies.get_company(company_id),
          {:ok, user} <- Accounts.get_user_by_company(company_id),
          {:ok, notification_config} <-
            Notifications.get_notification_by_action("assign_busines_model") do
-      notify_client(user, company, site_config, notification_config)
+      notify_client(user, company, site_config, notification_config, url)
     end
   end
 
-  defp notify_client(user, company, site_config, notification_config) do
+  defp notify_client(user, company, site_config, notification_config, url) do
     with {:ok, content} <-
            get_content_by_language(notification_config.contents, company.language),
          {:ok, subject} <- get_content_by_language(notification_config.subjects, company.language) do
       UserNotifier.deliver_business_model_assigned(
         user,
         subject.description,
-        %{content: content, company: company},
+        %{content: content, company: company, url: url},
         site_config.id
       )
     end

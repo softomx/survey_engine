@@ -12,7 +12,13 @@ defmodule SurveyEngine.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
     belongs_to :company, SurveyEngine.Companies.Company
-    many_to_many(:roles, Role, join_through: UserRole, join_keys: [ user_id: :id, role_id: :id],  on_replace: :delete)
+
+    many_to_many(:roles, Role,
+      join_through: UserRole,
+      join_keys: [user_id: :id, role_id: :id],
+      on_replace: :delete
+    )
+
     timestamps(type: :utc_datetime)
   end
 
@@ -39,11 +45,12 @@ defmodule SurveyEngine.Accounts.User do
       submitting the form), this option can be set to `false`.
       Defaults to `true`.
   """
-  def registration_changeset(user, attrs, opts \\ []) do
+  def registration_changeset(user, attrs, roles, opts \\ []) do
     user
     |> cast(attrs, [:email, :password, :name])
     |> validate_email(opts)
     |> validate_password(opts)
+    |> put_assoc(:roles, roles)
   end
 
   def registration_changeset_with_company(user, attrs, opts \\ []) do
@@ -54,9 +61,9 @@ defmodule SurveyEngine.Accounts.User do
     |> cast_assoc(:company)
   end
 
-  def roles_changeset(user, roles) do
+  def roles_changeset(user, attrs, roles) do
     user
-    |> change()
+    |> cast(attrs, [:email, :name])
     |> put_assoc(:roles, roles)
   end
 

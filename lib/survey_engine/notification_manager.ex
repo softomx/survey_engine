@@ -66,12 +66,14 @@ defmodule SurveyEngine.NotificationManager do
 
   def notify_business_model_assigned(
         %Company{} = company,
+        url,
         %SiteConfiguration{} = site_config
       ) do
     enqueue_worker(
       SurveyEngine.Workers.ClientBusinessModelAssignedNotificationWorker,
       [
         company.id,
+        url,
         site_config.id
       ]
     )

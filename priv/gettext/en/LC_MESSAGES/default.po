@@ -1130,7 +1130,7 @@ msgstr "show affiliate"
 #: lib/survey_engine_web/live/admin_company_live/index.html.heex:73
 #, elixir-autogen, elixir-format, fuzzy
 msgid "company.sort"
-msgstr "sort"
+msgstr "assign"
 
 #: lib/survey_engine_web/live/admin_company_live/index.html.heex:39
 #, elixir-autogen, elixir-format, fuzzy

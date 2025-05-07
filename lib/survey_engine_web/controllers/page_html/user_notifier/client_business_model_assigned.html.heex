@@ -425,6 +425,54 @@
                                 </p>
                               </td>
                             </tr>
+                            <tr>
+                              <table
+                                cellspacing="0"
+                                cellpadding="0"
+                                style="flex-direction: row; justify-content: center;  width:  100%;"
+                              >
+                                <tr>
+                                  <td align="center" style="padding-top: 10px;">
+                                    <table
+                                      cellpadding="0"
+                                      cellspacing="0"
+                                      border="0"
+                                      class="bg-green rounded w-auto"
+                                    >
+                                      <tr>
+                                        <td align="center" valign="top" class="lh-1" style="">
+                                          <a
+                                            href={@url}
+                                            class="btn bg-green border-green"
+                                            style=" text-decoration: none;
+                                                    white-space: nowrap;
+                                                    font-weight: 600;
+                                                    font-size: 16px;
+                                                    padding: 12px 32px;
+                                                    border-radius: 3px;
+                                                    color: #ffffff;
+                                                    line-height: 100%;
+                                                    display: block;
+                                                    border: 1px solid transparent;
+                                                     background-color: #467fcf;"
+                                          >
+                                            <span class="btn-span">
+                                              {Gettext.with_locale(
+                                                SurveyEngineWeb.Gettext,
+                                                @content.language,
+                                                fn ->
+                                                  gettext("continue process")
+                                                end
+                                              )}
+                                            </span>
+                                          </a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </tr>
                             <tr class="">
                               <td
                                 class="content border-top "

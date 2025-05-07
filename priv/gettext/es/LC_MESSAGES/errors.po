@@ -33,7 +33,7 @@ msgid "is reserved"
 msgstr "está reservado"
 
 msgid "does not match confirmation"
-msgstr "no coincide conlaconfirmacion"
+msgstr "no coincide con la confirmacion"
 
 msgid "is still associated with this entry"
 msgstr "todavía está asociado con esta entrada"
