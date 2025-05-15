@@ -1397,7 +1397,7 @@ msgstr "city"
 #: lib/survey_engine_web/live/user_reset_password_live.ex:30
 #, elixir-autogen, elixir-format
 msgid "label.confirm.newpassword"
-msgstr "new password"
+msgstr "new password confirm"
 
 #: lib/survey_engine_web/live/embed_live/form_component.ex:62
 #, elixir-autogen, elixir-format

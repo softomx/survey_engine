@@ -17,6 +17,7 @@ defmodule SurveyEngineWeb.UserLive.FormRoleComponent do
       >
         <.field type="text" label="Nombre" field={f[:name]} required />
         <.field type="text" label="Correo electronico" field={f[:email]} required />
+        <.field type="switch" label="activo" field={f[:active]} />
         <.field
           type="checkbox-group"
           label="Roles"

@@ -1386,7 +1386,7 @@ msgstr "Moneda de facturación"
 #: lib/survey_engine_web/live/user_reset_password_live.ex:54
 #, elixir-autogen, elixir-format
 msgid "label.button.resetpassword"
-msgstr "restablecer cntraseña"
+msgstr "restablecer contraseña"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:61
 #: lib/survey_engine_web/live/embed_live/form_component.ex:91

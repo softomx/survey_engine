@@ -11,6 +11,7 @@ defmodule SurveyEngine.Accounts.User do
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
+    field :active, :boolean, default: true
     belongs_to :company, SurveyEngine.Companies.Company
 
     many_to_many(:roles, Role,
@@ -47,7 +48,7 @@ defmodule SurveyEngine.Accounts.User do
   """
   def registration_changeset(user, attrs, roles, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :name])
+    |> cast(attrs, [:email, :password, :name, :active])
     |> validate_email(opts)
     |> validate_password(opts)
     |> put_assoc(:roles, roles)
@@ -55,7 +56,7 @@ defmodule SurveyEngine.Accounts.User do
 
   def registration_changeset_with_company(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :name, :company_id])
+    |> cast(attrs, [:email, :name, :company_id, :active])
     |> validate_email(opts)
     # |> validate_password(opts)
     |> cast_assoc(:company)
@@ -63,7 +64,7 @@ defmodule SurveyEngine.Accounts.User do
 
   def roles_changeset(user, attrs, roles) do
     user
-    |> cast(attrs, [:email, :name])
+    |> cast(attrs, [:email, :name, :active])
     |> put_assoc(:roles, roles)
   end
 

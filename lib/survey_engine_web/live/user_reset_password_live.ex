@@ -50,12 +50,12 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
               </p>
             </div>
 
-            <.button phx-disable-with="Resetting..." class="w-full">
+            <.button phx-disable-with="Resetting..." class="w-full capitalize">
               {gettext("label.button.resetpassword")}
             </.button>
           </.form>
 
-          <p class="text-center text-sm mt-4">
+          <p class="text-center text-sm mt-4 capitalize">
             <.link href={~p"/users/register"}>{gettext("register.button.label")}</.link>
             | <.link href={~p"/users/log_in"}>{gettext("login.button.label")}</.link>
           </p>
