@@ -23,6 +23,7 @@ defmodule SurveyEngine.Notifications.Notification do
     notification
     |> cast(attrs, [:action])
     |> validate_required([:action])
+    |> unique_constraint([:action])
     |> cast_embed(:to, sort_param: :to_sort, drop_param: :to_drop)
   end
 end

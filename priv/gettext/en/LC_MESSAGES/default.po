@@ -40,7 +40,7 @@ msgid "company name"
 msgstr "name"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:42
-#: lib/survey_engine_web/live/embed_live/form_component.ex:72
+#: lib/survey_engine_web/live/embed_live/form_component.ex:80
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:78
 #: lib/survey_engine_web/live/report_live/survey_response.ex:82
 #, elixir-autogen, elixir-format
@@ -90,7 +90,7 @@ msgstr "Sign up"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:472
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:474
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:466
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:484
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:532
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:470
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:470
 #, elixir-autogen, elixir-format, fuzzy
@@ -105,7 +105,7 @@ msgstr "Already registered?"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:493
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:495
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:487
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:505
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:553
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:491
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:491
 #, elixir-autogen, elixir-format
@@ -115,7 +115,7 @@ msgstr "billing currency"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:577
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:579
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:571
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:589
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:637
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:575
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:575
 #, elixir-autogen, elixir-format, fuzzy
@@ -125,14 +125,14 @@ msgstr "City"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:535
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:537
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:529
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:547
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:595
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:533
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:533
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Country"
 msgstr "Country"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:212
+#: lib/survey_engine_web/live/embed_live/form_component.ex:229
 #, elixir-autogen, elixir-format
 msgid "Create an account"
 msgstr "Create an account"
@@ -140,7 +140,7 @@ msgstr "Create an account"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:451
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:453
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:445
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:463
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:511
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:449
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:449
 #, elixir-autogen, elixir-format, fuzzy
@@ -171,7 +171,7 @@ msgstr "sign in"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:556
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:558
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:550
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:568
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:616
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:554
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:554
 #, elixir-autogen, elixir-format, fuzzy
@@ -423,7 +423,7 @@ msgstr "Having trouble with the button above? Please copy this URL"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:514
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:516
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:508
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:526
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:574
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:512
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:512
 #, elixir-autogen, elixir-format, fuzzy
@@ -478,7 +478,7 @@ msgstr "This is a notification of a password reset"
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:429
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:423
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:441
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:489
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:427
 #, elixir-autogen, elixir-format
 msgid "This is the information entered"
@@ -519,6 +519,7 @@ msgstr "company"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:397
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:464
 #, elixir-autogen, elixir-format
 msgid "continue process"
 msgstr "continue process"
@@ -564,7 +565,7 @@ msgstr "state"
 #: lib/survey_engine_web/live/survey_mapper_live/form_component.html.heex:60
 #: lib/survey_engine_web/live/survey_response_live/edit_component.html.heex:72
 #: lib/survey_engine_web/live/survey_response_live/validate.html.heex:15
-#: lib/survey_engine_web/live/user_live/form_role_component.ex:18
+#: lib/survey_engine_web/live/user_live/form_role_component.ex:36
 #, elixir-autogen, elixir-format
 msgid "save"
 msgstr "save"
@@ -633,7 +634,7 @@ msgstr "Listing permissions"
 msgid "Listing Roles"
 msgstr "Listing roles"
 
-#: lib/survey_engine_web/live/user_live/index.html.heex:2
+#: lib/survey_engine_web/live/user_live/index.html.heex:9
 #, elixir-autogen, elixir-format
 msgid "Listing Users"
 msgstr "Listing Users"
@@ -992,7 +993,7 @@ msgstr "state/division"
 #: lib/survey_engine_web/live/notification_live/index.html.heex:27
 #: lib/survey_engine_web/live/role_live/index.html.heex:9
 #: lib/survey_engine_web/live/site_configuration_live/index.html.heex:17
-#: lib/survey_engine_web/live/user_live/index.html.heex:8
+#: lib/survey_engine_web/live/user_live/index.html.heex:16
 #, elixir-autogen, elixir-format, fuzzy
 msgid "actions"
 msgstr "Actions"
@@ -1269,17 +1270,17 @@ msgstr "status"
 msgid "status"
 msgstr "State"
 
-#: lib/survey_engine_web/live/user_live/index.html.heex:14
+#: lib/survey_engine_web/live/user_live/index.html.heex:22
 #, elixir-autogen, elixir-format, fuzzy
 msgid "user.edit"
 msgstr "User"
 
-#: lib/survey_engine_web/live/user_live/index.html.heex:4
+#: lib/survey_engine_web/live/user_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "user.email"
 msgstr "email"
 
-#: lib/survey_engine_web/live/user_live/index.html.heex:5
+#: lib/survey_engine_web/live/user_live/index.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "user.inserted_at"
 msgstr "inserted at"
@@ -1334,7 +1335,7 @@ msgstr "save"
 msgid "affiliate.show.title"
 msgstr "affiliate information"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:135
+#: lib/survey_engine_web/live/embed_live/form_component.ex:149
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencytype.glossary"
 msgstr "Agency types glossary"
@@ -1350,7 +1351,7 @@ msgid "preregister.title"
 msgstr "pre register"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:159
-#: lib/survey_engine_web/live/embed_live/form_component.ex:204
+#: lib/survey_engine_web/live/embed_live/form_component.ex:221
 #, elixir-autogen, elixir-format
 msgid "register.button.add.socialnetwork"
 msgstr "add social network"
@@ -1361,13 +1362,13 @@ msgid "You recently requested to reset a password for your account. Use the butt
 msgstr "You recently requested to reset a password for your account. Use the button below to reset it"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:107
-#: lib/survey_engine_web/live/embed_live/form_component.ex:144
+#: lib/survey_engine_web/live/embed_live/form_component.ex:159
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agency.model"
 msgstr "agency model"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:96
-#: lib/survey_engine_web/live/embed_live/form_component.ex:126
+#: lib/survey_engine_web/live/embed_live/form_component.ex:140
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agency.type"
 msgstr "agency type"
@@ -1378,7 +1379,7 @@ msgid "button.sendpasswordresetinstructions"
 msgstr "reset password"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:85
-#: lib/survey_engine_web/live/embed_live/form_component.ex:115
+#: lib/survey_engine_web/live/embed_live/form_component.ex:128
 #, elixir-autogen, elixir-format, fuzzy
 msgid "label.billing.currency"
 msgstr "billing currency"
@@ -1389,7 +1390,7 @@ msgid "label.button.resetpassword"
 msgstr "reset password"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:61
-#: lib/survey_engine_web/live/embed_live/form_component.ex:91
+#: lib/survey_engine_web/live/embed_live/form_component.ex:101
 #, elixir-autogen, elixir-format
 msgid "label.city"
 msgstr "city"
@@ -1399,13 +1400,13 @@ msgstr "city"
 msgid "label.confirm.newpassword"
 msgstr "new password confirm"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:62
+#: lib/survey_engine_web/live/embed_live/form_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "label.email"
 msgstr "email"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:32
-#: lib/survey_engine_web/live/embed_live/form_component.ex:53
+#: lib/survey_engine_web/live/embed_live/form_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "label.fullname"
 msgstr "name"
@@ -1416,13 +1417,13 @@ msgid "label.newpassword"
 msgstr "new password"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:68
-#: lib/survey_engine_web/live/embed_live/form_component.ex:98
+#: lib/survey_engine_web/live/embed_live/form_component.ex:109
 #, elixir-autogen, elixir-format
 msgid "label.phone_number"
 msgstr "phone"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:51
-#: lib/survey_engine_web/live/embed_live/form_component.ex:81
+#: lib/survey_engine_web/live/embed_live/form_component.ex:90
 #, elixir-autogen, elixir-format
 msgid "label.state"
 msgstr "state/division"
@@ -1434,42 +1435,42 @@ msgid "login.button.label"
 msgstr "login"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:63
-#: lib/survey_engine_web/live/embed_live/form_component.ex:93
+#: lib/survey_engine_web/live/embed_live/form_component.ex:103
 #, elixir-autogen, elixir-format
 msgid "placeholder.city"
 msgstr "ciudad"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:61
+#: lib/survey_engine_web/live/embed_live/form_component.ex:68
 #, elixir-autogen, elixir-format
 msgid "placeholder.email"
 msgstr "email"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:104
-#: lib/survey_engine_web/live/embed_live/form_component.ex:141
+#: lib/survey_engine_web/live/embed_live/form_component.ex:156
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.model"
 msgstr "agency model"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:93
-#: lib/survey_engine_web/live/embed_live/form_component.ex:123
+#: lib/survey_engine_web/live/embed_live/form_component.ex:137
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.type"
 msgstr "agency_type"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:83
-#: lib/survey_engine_web/live/embed_live/form_component.ex:113
+#: lib/survey_engine_web/live/embed_live/form_component.ex:126
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.billing.currency"
 msgstr "billing currency"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:41
-#: lib/survey_engine_web/live/embed_live/form_component.ex:71
+#: lib/survey_engine_web/live/embed_live/form_component.ex:79
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.country"
 msgstr "select a country"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:52
-#: lib/survey_engine_web/live/embed_live/form_component.ex:82
+#: lib/survey_engine_web/live/embed_live/form_component.ex:91
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.state"
 msgstr "select a state"
@@ -1480,8 +1481,8 @@ msgstr "select a state"
 msgid "register.button.label"
 msgstr "register"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:268
-#: lib/survey_engine_web/live/embed_live/form_component.ex:274
+#: lib/survey_engine_web/live/embed_live/form_component.ex:285
+#: lib/survey_engine_web/live/embed_live/form_component.ex:291
 #, elixir-autogen, elixir-format
 msgid "register.complete.message"
 msgstr "We have received your information, you will receive a confirmation email and instructions to follow."
@@ -1502,7 +1503,7 @@ msgid "title.forgotpassword"
 msgstr "forgot password"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:114
-#: lib/survey_engine_web/live/embed_live/form_component.ex:158
+#: lib/survey_engine_web/live/embed_live/form_component.ex:173
 #, elixir-autogen, elixir-format
 msgid "socialnetwork.title"
 msgstr "social networks"
@@ -1542,7 +1543,9 @@ msgstr "Description of the agency models availables"
 msgid "Description of the agency types availables"
 msgstr "Description of the agency types availables"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:153
+#: lib/survey_engine_web/live/embed_live/form_component.ex:13
+#: lib/survey_engine_web/live/embed_live/form_component.ex:168
+#: lib/survey_engine_web/live/embed_live/form_component.ex:303
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencymodel.glossary"
 msgstr "Agency model glossary"
@@ -1613,3 +1616,13 @@ msgstr "agency name"
 #, elixir-autogen, elixir-format, fuzzy
 msgid "prereister.updated"
 msgstr "sucessfully updated"
+
+#: lib/survey_engine_web/controllers/user_session_controller.ex:40
+#, elixir-autogen, elixir-format
+msgid "unser.error.login"
+msgstr "Invalid email or password"
+
+#: lib/survey_engine_web/controllers/user_session_controller.ex:33
+#, elixir-autogen, elixir-format
+msgid "user.inactive.login.message"
+msgstr "Log In error,user is inactive"

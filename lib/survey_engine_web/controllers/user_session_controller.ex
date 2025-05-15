@@ -30,14 +30,14 @@ defmodule SurveyEngineWeb.UserSessionController do
         |> UserAuth.log_in_user(user, user_params)
       else
         conn
-        |> put_flash(:error, "user inactive")
+        |> put_flash(:error, gettext("user.inactive.login.message"))
         |> put_flash(:email, String.slice(email, 0, 160))
         |> redirect(to: ~p"/users/log_in")
       end
     else
       # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
       conn
-      |> put_flash(:error, "Invalid email or password")
+      |> put_flash(:error, gettext("unser.error.login"))
       |> put_flash(:email, String.slice(email, 0, 160))
       |> redirect(to: ~p"/users/log_in")
     end
