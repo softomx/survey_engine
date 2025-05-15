@@ -46,9 +46,8 @@
 }
 
 #password-message h3 {
-  font-size: 15px;
+  font-size: 12px;
   margin-top: 0;
-  text-transform: uppercase;
 }
 
 #password-message p {
@@ -61,7 +60,7 @@
 
 .valid:before {
   position: relative;
-  left: -35px;
+  left: -20px;
   content: "✔";
 }
 
@@ -71,7 +70,7 @@
 
 .invalid:before {
   position: relative;
-  left: -35px;
+  left: -20px;
   content: "✖";
 }
 
