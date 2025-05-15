@@ -196,7 +196,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
       |> assign_phone_number(company.country)
       |> assign_form(changeset)
       |> assign(:url_types, [
-        {"Sitio web", "website"},
+        {"Web", "website"},
         {"Facebook", "facebook"},
         {"Instagram", "instagram"},
         {"Tiktok", "tiktok"}

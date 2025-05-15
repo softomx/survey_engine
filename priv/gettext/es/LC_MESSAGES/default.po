@@ -1545,7 +1545,7 @@ msgstr "Descripcion de tipos de agencia disponibles"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:153
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencymodel.glossary"
-msgstr "glosario modelos de agencia"
+msgstr "Glosario modelos de agencia"
 
 #: lib/survey_engine_web/live/report_live/pre_registration.html.heex:37
 #, elixir-autogen, elixir-format, fuzzy

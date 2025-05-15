@@ -1337,7 +1337,7 @@ msgstr "affiliate information"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:135
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencytype.glossary"
-msgstr "agency types glossary"
+msgstr "Agency types glossary"
 
 #: lib/survey_engine_web/live/companies_live/edit.ex:24
 #, elixir-autogen, elixir-format
@@ -1392,7 +1392,7 @@ msgstr "reset password"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:91
 #, elixir-autogen, elixir-format
 msgid "label.city"
-msgstr "ciudad"
+msgstr "city"
 
 #: lib/survey_engine_web/live/user_reset_password_live.ex:30
 #, elixir-autogen, elixir-format
@@ -1489,7 +1489,7 @@ msgstr "We have received your information, you will receive a confirmation email
 #: lib/survey_engine_web/live/embed_live/form_component.ex:12
 #, elixir-autogen, elixir-format, fuzzy
 msgid "register.form.title"
-msgstr "register for the program"
+msgstr "Pre-register"
 
 #: lib/survey_engine_web/live/user_forgot_password_live.ex:14
 #, elixir-autogen, elixir-format
@@ -1545,7 +1545,7 @@ msgstr "Description of the agency types availables"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:153
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencymodel.glossary"
-msgstr "agency model glossary"
+msgstr "Agency model glossary"
 
 #: lib/survey_engine_web/live/report_live/pre_registration.html.heex:37
 #, elixir-autogen, elixir-format, fuzzy

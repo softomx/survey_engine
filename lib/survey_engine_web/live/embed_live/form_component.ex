@@ -10,7 +10,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
     <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800">
       <.header class="text-center">
         {gettext_with_locale(@locale, gettext("register.form.title"))}
-
+        {gettext("agencymodel.glossary")}
         <:subtitle>
           {gettext_with_locale(@locale, gettext("Already registered?"))}
 
@@ -48,6 +48,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             <.field field={f2[:language]} type="hidden" value={@locale} />
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
+                label_class="capitalize"
                 field={f2[:legal_name]}
                 type="text"
                 label={gettext_with_locale(@locale, gettext("label.fullname"))}
@@ -56,6 +57,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
+                label_class="capitalize"
                 field={@form[:email]}
                 type="email"
                 placeholder={gettext_with_locale(@locale, gettext("placeholder.email"))}
@@ -66,6 +68,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
 
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
+                label_class="capitalize"
                 field={f2[:country]}
                 type="select"
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.country"))}
@@ -76,6 +79,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-6">
               <.field
+                label_class="capitalize"
                 field={f2[:town]}
                 type="select"
                 label={gettext_with_locale(@locale, gettext("label.state"))}
@@ -86,6 +90,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-6">
               <.field
+                label_class="capitalize"
                 field={f2[:city]}
                 type="text"
                 label={gettext_with_locale(@locale, gettext("label.city"))}
@@ -94,9 +99,11 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               />
             </div>
             <div class="col-span-12 lg:col-span-12 md:col-span-12" id="phone-input">
-              <.label>
-                {gettext_with_locale(@locale, gettext("label.phone_number"))}
-              </.label>
+              <div class="capitalize">
+                <.label>
+                  {gettext_with_locale(@locale, gettext("label.phone_number"))}
+                </.label>
+              </div>
               <.input
                 field={f2[:phone]}
                 phx-update="ignore"
@@ -109,6 +116,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
+                label_class="capitalize"
                 field={f2[:billing_currency]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.billing.currency"))}
                 type="select"
@@ -119,6 +127,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-9 lg:col-span-8 md:col-span-8">
               <.field
+                label_class="capitalize"
                 field={f2[:agency_type]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
                 type="select"
@@ -137,6 +146,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
+                label_class="capitalize"
                 field={f2[:agency_model]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
                 type="select"
@@ -155,12 +165,13 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center"></div>
             <div class="col-span-12">
-              <label>{gettext("socialnetwork.title")}</label>
+              <label class="capitalize">{gettext("socialnetwork.title")}</label>
               <input type="hidden" name="user[company][link_drop][]" />
               <.inputs_for :let={links_form} field={f2[:links]}>
                 <div class="flex items-center gap-2">
                   <input type="hidden" name="user[company][links_sort][]" value={links_form.index} />
                   <.field
+                    label_class="capitalize"
                     wrapper_class="col-span-2"
                     type="select"
                     field={links_form[:type]}
@@ -169,6 +180,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                     required
                   />
                   <.field
+                    label_class="capitalize"
                     wrapper_class="flex-1"
                     type="url"
                     pattern="https://.*"
@@ -230,7 +242,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
       |> assign(:towns, [])
       |> assign(:phone_start_number, 52)
       |> assign(:url_types, [
-        {"Sitio web", "website"},
+        {"Web", "website"},
         {"Facebook", "facebook"},
         {"Instagram", "instagram"},
         {"Tiktok", "tiktok"}
@@ -272,7 +284,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
          #  |> assign(trigger_submit: true)
          |> assign_form(changeset)
          |> put_flash(:info, gettext("register.complete.message"))
-         |> push_navigate(to: ~p"/users/sucess_register?locale=#{socket.assigns.locale}")}
+         |> redirect(to: ~p"/users/sucess_register?locale=#{socket.assigns.locale}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, socket |> assign(check_errors: true) |> assign_form(changeset)}
@@ -282,6 +294,8 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   @impl true
   def handle_event("change-language", %{"value" => value}, socket) do
     Gettext.put_locale(SurveyEngineWeb.Gettext, value)
+    Gettext.get_locale(SurveyEngineWeb.Gettext) |> IO.inspect()
+    gettext("agencymodel.glossary") |> IO.inspect()
 
     {:noreply,
      socket

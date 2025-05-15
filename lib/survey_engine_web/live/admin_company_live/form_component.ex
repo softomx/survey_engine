@@ -70,7 +70,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
           field={@form[:business_model_id]}
           placeholder="Selecciona una moneda de facturacion"
           type="select"
-          label="Modelo denegocio"
+          label="Modelo de negocio"
           options={@business_models}
         />
         <.input field={@form[:user_id]} type="hidden" value={@user_id} />
