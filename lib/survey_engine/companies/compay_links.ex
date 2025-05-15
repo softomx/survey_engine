@@ -18,15 +18,18 @@ defmodule SurveyEngine.Companies.CompanyLink do
     validate_change(changeset, field, fn _, value ->
       case URI.parse(value) do
         %URI{scheme: nil} ->
-          "is missing a scheme (e.g. https)"
+          SurveyEngine.TransaleteHelper.changeset_error(:invalid_url_scheme)
 
         %URI{host: nil} ->
-          "is missing a host"
+          SurveyEngine.TransaleteHelper.changeset_error(:invalid_url_host)
 
         %URI{host: host} ->
           case :inet.gethostbyname(Kernel.to_charlist(host)) do
-            {:ok, _} -> nil
-            {:error, _} -> "invalid host"
+            {:ok, _} ->
+              nil
+
+            {:error, _} ->
+              SurveyEngine.TransaleteHelper.changeset_error(:invalid_url_host)
           end
       end
       |> case do

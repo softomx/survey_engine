@@ -21,7 +21,7 @@ defmodule SurveyEngine.Mailer.MailerConfiguration do
     |> validate_required([:adapter, :email_from, :email_name, :name, :site_configuration_id])
     |> cast_embed(:configuration, with: &SurveyEngine.Mailer.Extras.changeset/2)
     |> validate_format(:email_from, ~r/^[^\s]+@[^\s]+$/,
-      message: "must have the @ sign and no spaces"
+      message: SurveyEngine.TransaleteHelper.changeset_error(:invalid_email)
     )
   end
 end

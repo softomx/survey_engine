@@ -1,4 +1,5 @@
 defmodule SurveyEngineWeb.EmbedLive.FormComponent do
+  alias SurveyEngineWeb.CoreComponents
   alias SurveyEngine.Accounts.User
   alias SurveyEngine.NotificationManager
   alias SurveyEngine.Accounts

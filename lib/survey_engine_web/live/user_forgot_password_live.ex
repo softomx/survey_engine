@@ -43,11 +43,6 @@ defmodule SurveyEngineWeb.UserForgotPasswordLive do
         socket.assigns.locale,
         &url(~p"/users/reset_password/#{&1}")
       )
-
-      # Accounts.deliver_user_reset_password_instructions(
-      #   user,
-      #   &url(~p"/users/reset_password/#{&1}")
-      # )
     end
 
     info =

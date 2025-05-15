@@ -11,7 +11,9 @@ defmodule SurveyEngine.Notifications.NotificationTo do
     to
     |> cast(attrs, [:name, :email])
     |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/,
+      message: SurveyEngine.TransaleteHelper.changeset_error(:invalid_email)
+    )
     |> validate_length(:email, max: 160)
   end
 end

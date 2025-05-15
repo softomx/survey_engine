@@ -87,4 +87,12 @@ defmodule SurveyEngine.TransaleteHelper do
       _ -> action
     end
   end
+
+  def changeset_error(field) do
+    case field do
+      :invalid_email -> gettext("email.pattern.error")
+      :invalid_url_scheme -> gettext("url.invalid.scheme")
+      :invalid_url_host -> gettext("url.invalid.host")
+    end
+  end
 end

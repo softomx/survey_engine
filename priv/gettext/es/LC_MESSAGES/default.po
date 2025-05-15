@@ -40,7 +40,7 @@ msgid "company name"
 msgstr "Nombre agencia"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:42
-#: lib/survey_engine_web/live/embed_live/form_component.ex:80
+#: lib/survey_engine_web/live/embed_live/form_component.ex:81
 #: lib/survey_engine_web/live/report_live/pre_registration.ex:78
 #: lib/survey_engine_web/live/report_live/survey_response.ex:82
 #, elixir-autogen, elixir-format
@@ -72,7 +72,7 @@ msgstr "Correo electronico"
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:18
+#: lib/survey_engine_web/live/embed_live/form_component.ex:19
 #, elixir-autogen, elixir-format
 msgid "Log in"
 msgstr "Iniciar sesión"
@@ -97,7 +97,7 @@ msgstr "Registrate"
 msgid "Agency Type"
 msgstr "Tipo de agencia"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:15
+#: lib/survey_engine_web/live/embed_live/form_component.ex:16
 #, elixir-autogen, elixir-format
 msgid "Already registered?"
 msgstr "¿Ya estas registrado?"
@@ -132,7 +132,7 @@ msgstr "Ciudad"
 msgid "Country"
 msgstr "Pais"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:229
+#: lib/survey_engine_web/live/embed_live/form_component.ex:230
 #, elixir-autogen, elixir-format
 msgid "Create an account"
 msgstr "Crear una cuenta"
@@ -1310,7 +1310,7 @@ msgstr "Editar"
 msgid "company.empty_forms"
 msgstr "Estamos validado la información de registro, en breve se te enviara una notificacion al correo"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:43
+#: lib/survey_engine_web/live/embed_live/form_component.ex:44
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr "Ocurrio un error! Porfavor revisa la informacion"
@@ -1335,7 +1335,7 @@ msgstr "guardar afiliado"
 msgid "affiliate.show.title"
 msgstr "Detalles del afiliado"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:149
+#: lib/survey_engine_web/live/embed_live/form_component.ex:150
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencytype.glossary"
 msgstr "Glosario de tipos de agencia"
@@ -1351,7 +1351,7 @@ msgid "preregister.title"
 msgstr "Pre-registro"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:159
-#: lib/survey_engine_web/live/embed_live/form_component.ex:221
+#: lib/survey_engine_web/live/embed_live/form_component.ex:222
 #, elixir-autogen, elixir-format
 msgid "register.button.add.socialnetwork"
 msgstr "Redes sociales"
@@ -1362,13 +1362,13 @@ msgid "You recently requested to reset a password for your account. Use the butt
 msgstr "Recientemente solicitaste restablecer la contraseña de tu cuenta. Usa el boton de abajo para restablecerla"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:107
-#: lib/survey_engine_web/live/embed_live/form_component.ex:159
+#: lib/survey_engine_web/live/embed_live/form_component.ex:160
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agency.model"
 msgstr "Modelo de agencia"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:96
-#: lib/survey_engine_web/live/embed_live/form_component.ex:140
+#: lib/survey_engine_web/live/embed_live/form_component.ex:141
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agency.type"
 msgstr "Tipo de agencia"
@@ -1379,7 +1379,7 @@ msgid "button.sendpasswordresetinstructions"
 msgstr "restablecer contraseña"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:85
-#: lib/survey_engine_web/live/embed_live/form_component.ex:128
+#: lib/survey_engine_web/live/embed_live/form_component.ex:129
 #, elixir-autogen, elixir-format, fuzzy
 msgid "label.billing.currency"
 msgstr "Moneda de facturación"
@@ -1390,7 +1390,7 @@ msgid "label.button.resetpassword"
 msgstr "restablecer contraseña"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:61
-#: lib/survey_engine_web/live/embed_live/form_component.ex:101
+#: lib/survey_engine_web/live/embed_live/form_component.ex:102
 #, elixir-autogen, elixir-format
 msgid "label.city"
 msgstr "ciudad"
@@ -1400,13 +1400,13 @@ msgstr "ciudad"
 msgid "label.confirm.newpassword"
 msgstr "nueva contraseña"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:69
+#: lib/survey_engine_web/live/embed_live/form_component.ex:70
 #, elixir-autogen, elixir-format
 msgid "label.email"
 msgstr "correo electronico"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:32
-#: lib/survey_engine_web/live/embed_live/form_component.ex:54
+#: lib/survey_engine_web/live/embed_live/form_component.ex:55
 #, elixir-autogen, elixir-format
 msgid "label.fullname"
 msgstr "Nombre"
@@ -1417,13 +1417,13 @@ msgid "label.newpassword"
 msgstr "nueva contraseña"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:68
-#: lib/survey_engine_web/live/embed_live/form_component.ex:109
+#: lib/survey_engine_web/live/embed_live/form_component.ex:110
 #, elixir-autogen, elixir-format
 msgid "label.phone_number"
 msgstr "numero de telefono"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:51
-#: lib/survey_engine_web/live/embed_live/form_component.ex:90
+#: lib/survey_engine_web/live/embed_live/form_component.ex:91
 #, elixir-autogen, elixir-format
 msgid "label.state"
 msgstr "estado/provincia"
@@ -1435,42 +1435,42 @@ msgid "login.button.label"
 msgstr "iniciar sesion"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:63
-#: lib/survey_engine_web/live/embed_live/form_component.ex:103
+#: lib/survey_engine_web/live/embed_live/form_component.ex:104
 #, elixir-autogen, elixir-format
 msgid "placeholder.city"
 msgstr "ciudad"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:68
+#: lib/survey_engine_web/live/embed_live/form_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "placeholder.email"
 msgstr "correo electronico"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:104
-#: lib/survey_engine_web/live/embed_live/form_component.ex:156
+#: lib/survey_engine_web/live/embed_live/form_component.ex:157
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.model"
 msgstr "selecciona un modelo"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:93
-#: lib/survey_engine_web/live/embed_live/form_component.ex:137
+#: lib/survey_engine_web/live/embed_live/form_component.ex:138
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.type"
 msgstr "selecciona un tipo"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:83
-#: lib/survey_engine_web/live/embed_live/form_component.ex:126
+#: lib/survey_engine_web/live/embed_live/form_component.ex:127
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.billing.currency"
 msgstr "selecciona una moneda"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:41
-#: lib/survey_engine_web/live/embed_live/form_component.ex:79
+#: lib/survey_engine_web/live/embed_live/form_component.ex:80
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.country"
 msgstr "seleciona un pais"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:52
-#: lib/survey_engine_web/live/embed_live/form_component.ex:91
+#: lib/survey_engine_web/live/embed_live/form_component.ex:92
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.state"
 msgstr "selecciona un estado"
@@ -1481,13 +1481,13 @@ msgstr "selecciona un estado"
 msgid "register.button.label"
 msgstr "Registrarse"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:285
-#: lib/survey_engine_web/live/embed_live/form_component.ex:291
+#: lib/survey_engine_web/live/embed_live/form_component.ex:286
+#: lib/survey_engine_web/live/embed_live/form_component.ex:292
 #, elixir-autogen, elixir-format
 msgid "register.complete.message"
 msgstr "Hemos recibido tu informacion, recibiras un correo de confirmacion y las instrucciones a seguir"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:12
+#: lib/survey_engine_web/live/embed_live/form_component.ex:13
 #, elixir-autogen, elixir-format, fuzzy
 msgid "register.form.title"
 msgstr "Pre-registro"
@@ -1503,7 +1503,7 @@ msgid "title.forgotpassword"
 msgstr "restablecer contraseña"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:114
-#: lib/survey_engine_web/live/embed_live/form_component.ex:173
+#: lib/survey_engine_web/live/embed_live/form_component.ex:174
 #, elixir-autogen, elixir-format
 msgid "socialnetwork.title"
 msgstr "Redes sociales"
@@ -1543,9 +1543,9 @@ msgstr "Descripcion de modelos de agencias disponibles"
 msgid "Description of the agency types availables"
 msgstr "Descripcion de tipos de agencia disponibles"
 
-#: lib/survey_engine_web/live/embed_live/form_component.ex:13
-#: lib/survey_engine_web/live/embed_live/form_component.ex:168
-#: lib/survey_engine_web/live/embed_live/form_component.ex:303
+#: lib/survey_engine_web/live/embed_live/form_component.ex:14
+#: lib/survey_engine_web/live/embed_live/form_component.ex:169
+#: lib/survey_engine_web/live/embed_live/form_component.ex:304
 #, elixir-autogen, elixir-format, fuzzy
 msgid "agencymodel.glossary"
 msgstr "Glosario modelos de agencia"
@@ -1627,7 +1627,22 @@ msgstr "El correo electronico y/o contraseña es invalido"
 msgid "user.inactive.login.message"
 msgstr "Usuario inactivo"
 
-#: lib/survey_engine_web/live/user_forgot_password_live.ex:53
+#: lib/survey_engine_web/live/user_forgot_password_live.ex:49
 #, elixir-autogen, elixir-format
 msgid "If your email is in our system, you will receive instructions to reset your password shortly."
 msgstr "Si tu correo se encuentra en nuestro sistema, recibiras las instrucciones para restablecer tu contraseña "
+
+#: lib/survey_engine_web/states_helper.ex:93
+#, elixir-autogen, elixir-format
+msgid "email.pattern.error"
+msgstr "Debe tener el signo @ y no tener espacios"
+
+#: lib/survey_engine_web/states_helper.ex:95
+#, elixir-autogen, elixir-format
+msgid "url.invalid.host"
+msgstr "el host de la url es invalido"
+
+#: lib/survey_engine_web/states_helper.ex:94
+#, elixir-autogen, elixir-format
+msgid "url.invalid.scheme"
+msgstr "url invalida"
