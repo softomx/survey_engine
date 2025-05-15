@@ -55,6 +55,11 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 required
               />
             </div>
+            <.field
+              type="hidden"
+              field={@form[:name]}
+              value={Phoenix.HTML.Form.input_value(f2, :legal_name)}
+            />
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
                 label_class="capitalize"
