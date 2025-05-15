@@ -40,6 +40,7 @@ defmodule SurveyEngineWeb.UserForgotPasswordLive do
       NotificationManager.resert_password_notification(
         user,
         socket.assigns.site_config,
+        socket.assigns.locale,
         &url(~p"/users/reset_password/#{&1}")
       )
 

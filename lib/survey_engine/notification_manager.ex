@@ -33,6 +33,7 @@ defmodule SurveyEngine.NotificationManager do
   def resert_password_notification(
         %User{} = user,
         %SiteConfiguration{} = site_config,
+        locale,
         resert_url_fun
       ) do
     with {:ok, {encoded_token, user_token}} <-
@@ -42,6 +43,7 @@ defmodule SurveyEngine.NotificationManager do
       enqueue_worker(SurveyEngine.Workers.ClientResertPasswordNotificationWorker, [
         user.id,
         site_config.id,
+        locale,
         url
       ])
 
