@@ -5,22 +5,22 @@ defmodule SurveyEngine.Workers.ClientResertPasswordNotificationWorker do
   alias SurveyEngine.Companies
   alias SurveyEngine.Accounts
 
-  def perform(user_id, site_config_id, client_url) do
+  def perform(user_id, site_config_id, locale, client_url) do
     with {:ok, user} <- Accounts.get_user(user_id),
          {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, company} <- Companies.get_company(user.company_id),
          {:ok, notification_config} <- Notifications.get_notification_by_action("register") do
-      notify_client(user, company, client_url, site_config, notification_config)
+      notify_client(user, company, client_url, site_config, locale, notification_config)
     end
   end
 
-  defp notify_client(user, company, client_url, site_config, notification_config) do
+  defp notify_client(user, company, client_url, site_config, locale, notification_config) do
     with {:ok, content} <-
            get_content_by_language(notification_config.contents, company.language) do
       UserNotifier.deliver_reset_password_instructions(
         user,
         "Restablecer contraseña",
-        %{content: content, url: client_url, company: company},
+        %{content: content, url: client_url, company: company, locale: locale},
         site_config.id
       )
     end

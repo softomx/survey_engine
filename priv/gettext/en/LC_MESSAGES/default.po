@@ -415,7 +415,7 @@ msgstr "Confirm your account"
 msgid "Document"
 msgstr "Document"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:472
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:478
 #, elixir-autogen, elixir-format
 msgid "Having trouble with the button above? Please copy this URL"
 msgstr "Having trouble with the button above? Please copy this URL"
@@ -445,7 +445,7 @@ msgstr "Recently a request was made to reset the password of an account"
 msgid "Reset Password Instruction"
 msgstr "Reset Password Instruction"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:449
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:455
 #, elixir-autogen, elixir-format
 msgid "Reset password"
 msgstr "Reset password"
@@ -489,7 +489,7 @@ msgstr "This is the information entered"
 msgid "Your registered account information"
 msgstr "Your registered account information"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:486
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:492
 #, elixir-autogen, elixir-format
 msgid "and paste it into your browser. If you didn't request a password reset, please ignore this message or contact us if you have any questions"
 msgstr "and paste it into your browser. If you didn't request a password reset, please ignore this message or contact us if you have any questions"
@@ -1356,7 +1356,7 @@ msgstr "pre register"
 msgid "register.button.add.socialnetwork"
 msgstr "add social network"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:407
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "You recently requested to reset a password for your account. Use the button below to reset it"
 msgstr "You recently requested to reset a password for your account. Use the button below to reset it"
@@ -1495,7 +1495,7 @@ msgstr "Pre-register"
 #: lib/survey_engine_web/live/user_forgot_password_live.ex:14
 #, elixir-autogen, elixir-format
 msgid "subtitle.forgotpassword"
-msgstr "forgot password"
+msgstr "Enter your email address to receive instructions on how to reset your password."
 
 #: lib/survey_engine_web/live/user_forgot_password_live.ex:13
 #, elixir-autogen, elixir-format
@@ -1626,3 +1626,8 @@ msgstr "Invalid email or password"
 #, elixir-autogen, elixir-format
 msgid "user.inactive.login.message"
 msgstr "Log In error,user is inactive"
+
+#: lib/survey_engine_web/live/user_forgot_password_live.ex:53
+#, elixir-autogen, elixir-format
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
+msgstr ""

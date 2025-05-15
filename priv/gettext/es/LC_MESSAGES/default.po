@@ -415,13 +415,13 @@ msgstr "Confirma tu cuenta"
 msgid "Document"
 msgstr "Documento"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:472
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:478
 #, elixir-autogen, elixir-format
 msgid "Having trouble with the button above? Please copy this URL"
 msgstr "¿Tienes algun problema con el boton? Por favor copia esta URL"
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:514
-#: lib/survey_engine_web/controllers/papage_html/user_notifier/admin_register.html.heex:516
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:516
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:508
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:574
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_register.html.heex:512
@@ -445,7 +445,7 @@ msgstr "Recientemente se realizo una solicitud para restablecer la contraseña d
 msgid "Reset Password Instruction"
 msgstr "Instrucciones para restablecer tu contraseña"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:449
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:455
 #, elixir-autogen, elixir-format
 msgid "Reset password"
 msgstr "Restablecer contraseña"
@@ -489,10 +489,10 @@ msgstr "Esta es la informacion ingresada"
 msgid "Your registered account information"
 msgstr "Informacion de su cuenta registrada"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:486
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:492
 #, elixir-autogen, elixir-format
 msgid "and paste it into your browser. If you didn't request a password reset, please ignore this message or contact us if you have any questions"
-msgstr "y peguelo en su navegador. Si no solicito un restablecimiento de contraseña, ignore estemensaje o contactenos si tiene alguna duda."
+msgstr "y peguelo en su navegador. Si no solicito un restablecimiento de contraseña, ignore este mensaje o contactenos si tiene alguna duda."
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_approved.html.heex:427
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_rejected.html.heex:427
@@ -1356,7 +1356,7 @@ msgstr "Pre-registro"
 msgid "register.button.add.socialnetwork"
 msgstr "Redes sociales"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:407
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "You recently requested to reset a password for your account. Use the button below to reset it"
 msgstr "Recientemente solicitaste restablecer la contraseña de tu cuenta. Usa el boton de abajo para restablecerla"
@@ -1495,7 +1495,7 @@ msgstr "Pre-registro"
 #: lib/survey_engine_web/live/user_forgot_password_live.ex:14
 #, elixir-autogen, elixir-format
 msgid "subtitle.forgotpassword"
-msgstr "ingresa tu correo electronico, para enviarte las instrucciones para restablecer tu contraseña"
+msgstr "Ingresa tu correo electronico, para enviarte las instrucciones para restablecer tu contraseña"
 
 #: lib/survey_engine_web/live/user_forgot_password_live.ex:13
 #, elixir-autogen, elixir-format
@@ -1626,3 +1626,8 @@ msgstr "El correo electronico y/o contraseña es invalido"
 #, elixir-autogen, elixir-format
 msgid "user.inactive.login.message"
 msgstr "Usuario inactivo"
+
+#: lib/survey_engine_web/live/user_forgot_password_live.ex:53
+#, elixir-autogen, elixir-format
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
+msgstr "Si tu correo se encuentra en nuestro sistema, recibiras las instrucciones para restablecer tu contraseña "

@@ -415,7 +415,7 @@ msgstr ""
 msgid "Document"
 msgstr ""
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:472
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:478
 #, elixir-autogen, elixir-format
 msgid "Having trouble with the button above? Please copy this URL"
 msgstr ""
@@ -445,7 +445,7 @@ msgstr ""
 msgid "Reset Password Instruction"
 msgstr ""
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:449
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:455
 #, elixir-autogen, elixir-format
 msgid "Reset password"
 msgstr ""
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Your registered account information"
 msgstr ""
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:486
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:492
 #, elixir-autogen, elixir-format
 msgid "and paste it into your browser. If you didn't request a password reset, please ignore this message or contact us if you have any questions"
 msgstr ""
@@ -1356,7 +1356,7 @@ msgstr ""
 msgid "register.button.add.socialnetwork"
 msgstr ""
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:407
+#: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "You recently requested to reset a password for your account. Use the button below to reset it"
 msgstr ""
@@ -1625,4 +1625,9 @@ msgstr ""
 #: lib/survey_engine_web/controllers/user_session_controller.ex:33
 #, elixir-autogen, elixir-format
 msgid "user.inactive.login.message"
+msgstr ""
+
+#: lib/survey_engine_web/live/user_forgot_password_live.ex:53
+#, elixir-autogen, elixir-format
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
 msgstr ""
