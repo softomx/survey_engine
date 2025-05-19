@@ -22,7 +22,7 @@ defmodule SurveyEngine.Companies.Company do
     # pending,assigned,finished, approved, rejected, created
     field :status, :string, default: "pending"
     field :phone, :string
-
+    has_one :ejecutive, SurveyEngine.Accounts.User
     embeds_many :links, SurveyEngine.Companies.CompanyLink, on_replace: :delete
     has_one :affiliate, SurveyEngine.AffiliateEngine.Affiliate, on_replace: :delete
 
@@ -45,7 +45,8 @@ defmodule SurveyEngine.Companies.Company do
       :business_model_id,
       :agency_model,
       :user_id,
-      :phone
+      :phone,
+      :ejecutive_id
     ])
     |> validate_required([
       :language,

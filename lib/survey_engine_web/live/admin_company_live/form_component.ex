@@ -18,7 +18,7 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
         phx-submit="save"
       >
         <div :if={@action == :edit}>
-          <.combo_box
+          <.field
             field={@form[:language]}
             type="select"
             label="Language"
@@ -27,48 +27,48 @@ defmodule SurveyEngineWeb.AdminCompanyLive.FormComponent do
           />
           <.field field={@form[:agency_name]} type="text" label="Nombre de la agencia" />
 
-          <.field field={@form[:legal_name]} type="text" label="Legal name" />
-          <.combo_box
+          <.field field={@form[:legal_name]} type="text" label="Nombre legal" />
+          <.field
             field={@form[:country]}
             type="select"
             placeholder="Selecciona el pais"
-            label="Country"
+            label="Pais"
             options={@countries}
           />
-          <.combo_box
+          <.field
             field={@form[:town]}
             type="select"
-            label="Town"
+            label="Estado/Division"
             placeholder="Selecciona el estado"
             options={@towns}
           />
           <.field field={@form[:city]} type="text" label="City" />
-          <.combo_box
+          <.field
             field={@form[:agency_model]}
             placeholder="Selecciona el modelo de agencia"
             type="select"
             options={@agency_models}
-            label="Agency model"
+            label="Modelo de agencia"
           />
-          <.combo_box
+          <.field
             field={@form[:agency_type]}
             placeholder="Selecciona el tipo de agencia"
             type="select"
             options={@agency_types}
-            label="Agency type"
+            label="Tipo de agencia"
           />
-          <.combo_box
+          <.field
             field={@form[:billing_currency]}
             placeholder="Selecciona una moneda de facturacion"
             type="select"
-            label="Billing currency"
+            label="Moneda de facturacion"
             options={@currencies}
           />
         </div>
-        <.combo_box
+        <.field
           :if={@action == :assign}
           field={@form[:business_model_id]}
-          placeholder="Selecciona una moneda de facturacion"
+          placeholder="Selecciona una modelo de negocio"
           type="select"
           label="Modelo de negocio"
           options={@business_models}
