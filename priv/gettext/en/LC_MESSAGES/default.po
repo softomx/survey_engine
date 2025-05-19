@@ -1449,19 +1449,19 @@ msgstr "email"
 #: lib/survey_engine_web/live/embed_live/form_component.ex:157
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.model"
-msgstr "agency model"
+msgstr "select agency model"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:93
 #: lib/survey_engine_web/live/embed_live/form_component.ex:138
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.agency.type"
-msgstr "agency_type"
+msgstr "select agency type"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:83
 #: lib/survey_engine_web/live/embed_live/form_component.ex:127
 #, elixir-autogen, elixir-format
 msgid "placeholder.select.billing.currency"
-msgstr "billing currency"
+msgstr "select billing currency"
 
 #: lib/survey_engine_web/live/companies_live/form_component.ex:41
 #: lib/survey_engine_web/live/embed_live/form_component.ex:80

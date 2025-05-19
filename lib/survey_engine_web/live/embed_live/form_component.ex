@@ -1,5 +1,4 @@
 defmodule SurveyEngineWeb.EmbedLive.FormComponent do
-  alias SurveyEngineWeb.CoreComponents
   alias SurveyEngine.Accounts.User
   alias SurveyEngine.NotificationManager
   alias SurveyEngine.Accounts
@@ -11,7 +10,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
     <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800">
       <.header class="text-center">
         {gettext_with_locale(@locale, gettext("register.form.title"))}
-        {gettext("agencymodel.glossary")}
+
         <:subtitle>
           {gettext_with_locale(@locale, gettext("Already registered?"))}
 
@@ -137,7 +136,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 field={f2[:agency_type]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
                 type="select"
-                options={@agency_types}
+                options={@agency_types |> translate_options(@locale)}
                 label={gettext_with_locale(@locale, gettext("agency.type"))}
                 required
               />
@@ -156,7 +155,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 field={f2[:agency_model]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
                 type="select"
-                options={@agency_models}
+                options={@agency_models |> translate_options(@locale)}
                 label={gettext_with_locale(@locale, gettext("agency.model"))}
                 required
               />
@@ -357,4 +356,28 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp translate_options(options, locale) do
+    options
+    |> Enum.map(fn option ->
+      translate =
+        option.translates
+        |> Enum.find(&(&1.language == locale))
+
+      cond do
+        Enum.empty?(option.translates) ->
+          {option.name, option.name}
+
+        !is_nil(translate) ->
+          translate =
+            option.translates
+            |> List.first()
+
+          {translate.description, option.name}
+
+        true ->
+          {option.name, option.name}
+      end
+    end)
+  end
 end

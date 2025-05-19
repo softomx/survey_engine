@@ -10,6 +10,10 @@ defmodule SurveyEngine.Catalogs.AgencyType do
       foreign_key: :resource_id,
       where: [type: "agency_types", behaviour: "description"]
 
+    has_many :translates, SurveyEngine.Translations.Translation,
+      foreign_key: :resource_id,
+      where: [type: "agency_types", behaviour: "name"]
+
     timestamps(type: :utc_datetime)
   end
 

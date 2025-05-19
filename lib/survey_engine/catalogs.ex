@@ -118,7 +118,7 @@ defmodule SurveyEngine.Catalogs do
   end
 
   def list_agency_types_with_preload do
-    Repo.all(AgencyType) |> Repo.preload([:descriptions])
+    Repo.all(AgencyType) |> Repo.preload([:descriptions, :translates])
   end
 
   def list_agency_types(args) do
@@ -335,7 +335,7 @@ defmodule SurveyEngine.Catalogs do
 
   def list_agency_models_with_preload() do
     Repo.all(AgencyModel)
-    |> Repo.preload([:descriptions])
+    |> Repo.preload([:descriptions, :translates])
   end
 
   @doc """

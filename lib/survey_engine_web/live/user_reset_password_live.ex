@@ -31,7 +31,7 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
               required
             />
 
-            <div id="password-message">
+            <div id="password-message" phx-update="ignore">
               <h3>{gettext("form.password.validation.title")}</h3>
               <p class="password-message-item invalid">
                 {gettext("password.validation.atleast")}

@@ -16,8 +16,8 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
           currencies={@currencies}
           user={@user}
           list_languages={@languages}
-          agency_types={@agency_types |> Enum.map(&{&1.name, &1.name})}
-          agency_models={@agency_models |> Enum.map(&{&1.name, &1.name})}
+          agency_types={@agency_types}
+          agency_models={@agency_models}
           countries={@countries}
           site_config={@site_config}
         />
