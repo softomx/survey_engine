@@ -24,11 +24,9 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
 
           <div class="flex flex-row justify-end py-5">
             <.dropdown label={"Language (#{@locale})"}>
-              <%= for language <- @list_languages |> Enum.reject(&(&1.slug == @locale)) do %>
+              <%= for language <- @languages |> Enum.reject(&(&1.slug == @locale)) do %>
                 <.dropdown_menu_item
-                  phx-click={
-                    JS.push("change-language", target: @myself, value: %{value: language.slug})
-                  }
+                  phx-click={JS.push("change-language", value: %{value: language.slug})}
                   label={language.name}
                 />
               <% end %>
@@ -88,6 +86,22 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
      assign(socket,
        show_modal: false
      )}
+  end
+
+  @impl true
+  def handle_event("change-language", %{"value" => value}, socket) do
+    Gettext.put_locale(SurveyEngineWeb.Gettext, value)
+    Gettext.get_locale(SurveyEngineWeb.Gettext)
+
+    send_update(SurveyEngineWeb.EmbedLive.FormComponent,
+      id: "form",
+      action: :update_locale,
+      locale: value
+    )
+
+    {:noreply,
+     socket
+     |> assign(locale: value)}
   end
 
   @impl true

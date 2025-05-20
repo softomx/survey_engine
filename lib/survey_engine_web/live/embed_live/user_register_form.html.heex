@@ -17,9 +17,7 @@
         <.dropdown label={"Language (#{@locale})"}>
           <%= for language <- @list_languages |> Enum.reject(&(&1.slug == @locale)) do %>
             <.dropdown_menu_item
-              phx-click={
-                JS.push("change-language", target: @myself, value: %{value: language.slug})
-              }
+              phx-click={JS.push("change-language", value: %{value: language.slug})}
               label={language.name}
             />
           <% end %>

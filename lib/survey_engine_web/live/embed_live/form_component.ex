@@ -211,6 +211,10 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
     """
   end
 
+  def update(%{action: :update_locale, locale: locale} = _assigns, socket) do
+    {:ok, socket |> assign(:locale, locale)}
+  end
+
   @impl true
   def update(%{user: user} = assigns, socket) do
     changeset =

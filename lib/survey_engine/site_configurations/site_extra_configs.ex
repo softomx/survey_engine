@@ -6,10 +6,11 @@ defmodule SurveyEngine.SiteConfigurations.ExtraConfig do
   embedded_schema do
     field(:api_key, :string)
     field(:url, :string)
+    field(:logo, :string)
   end
 
   def changeset(config, attrs) do
     config
-    |> cast(attrs, [:api_key, :url])
+    |> cast(attrs, [:api_key, :url, :logo])
   end
 end
