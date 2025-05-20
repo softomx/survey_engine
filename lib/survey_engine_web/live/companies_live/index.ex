@@ -8,7 +8,7 @@ defmodule SurveyEngineWeb.CompanyLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:company, nil)}
+    {:ok, socket |> assign(:company, nil) |> assign(:business_configs, [])}
   end
 
   @impl true

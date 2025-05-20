@@ -13,7 +13,6 @@ defmodule SurveyEngine.Workers.ClientExecutiveAccountAssignedNotificationWorker 
            Notifications.get_notification_by_action("assign_executive_account") do
       notify_client(user, company, site_config, notification_config, url)
     end
-    |> IO.inspect()
   end
 
   defp notify_client(user, company, site_config, notification_config, url) do
