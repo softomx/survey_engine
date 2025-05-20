@@ -1,7 +1,6 @@
 defmodule SurveyEngineWeb.CompaniesLive.New do
   alias SurveyEngine.Companies.Company
   use SurveyEngineWeb, :live_view
-  alias SurveyEngine.Companies
 
   @impl true
   def mount(_params, _session, socket) do

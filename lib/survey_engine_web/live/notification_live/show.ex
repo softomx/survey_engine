@@ -16,11 +16,6 @@ defmodule SurveyEngineWeb.NotificationLive.Show do
      |> assign(:notification, Notifications.get_notification!(id))}
   end
 
-  @impl true
-  def handle_event("close_modal", _, socket) do
-    {:noreply, push_patch(socket, to: ~p"/notifications/#{socket.assigns.notification}")}
-  end
-
   defp page_title(:show), do: "Detalles de notificacion"
   defp page_title(:edit), do: "Edit Notification"
 end

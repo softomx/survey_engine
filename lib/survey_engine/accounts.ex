@@ -194,24 +194,6 @@ defmodule SurveyEngine.Accounts do
     |> Ecto.Changeset.apply_action(:update)
   end
 
-  @doc """
-  Updates the user email using the given token.
-
-  If the token matches, the user email is updated and the token is deleted.
-  The confirmed_at date is also updated to the current time.
-  """
-  def update_user_email(user, token) do
-    context = "change:#{user.email}"
-
-    with {:ok, query} <- UserToken.verify_change_email_token_query(token, context),
-         %UserToken{sent_to: email} <- Repo.one(query),
-         {:ok, _} <- Repo.transaction(user_email_multi(user, email, context)) do
-      :ok
-    else
-      _ -> :error
-    end
-  end
-
   def update_user_with_roles(%User{} = user, attrs, roles) do
     user
     |> Repo.preload(:roles)
@@ -225,34 +207,6 @@ defmodule SurveyEngine.Accounts do
       {:ok, role} -> update_user_with_roles(user, %{}, [role])
       _error -> {:ok, user}
     end
-  end
-
-  defp user_email_multi(user, email, context) do
-    changeset =
-      user
-      |> User.email_changeset(%{email: email})
-      |> User.confirm_changeset()
-
-    Ecto.Multi.new()
-    |> Ecto.Multi.update(:user, changeset)
-    |> Ecto.Multi.delete_all(:tokens, UserToken.by_user_and_contexts_query(user, [context]))
-  end
-
-  @doc ~S"""
-  Delivers the update email instructions to the given user.
-
-  ## Examples
-
-      iex> deliver_user_update_email_instructions(user, current_email, &url(~p"/users/settings/confirm_email/#{&1}"))
-      {:ok, %{to: ..., body: ...}}
-
-  """
-  def deliver_user_update_email_instructions(%User{} = user, current_email, update_email_url_fun)
-      when is_function(update_email_url_fun, 1) do
-    {encoded_token, user_token} = UserToken.build_email_token(user, "change:#{current_email}")
-
-    Repo.insert!(user_token)
-    UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
   end
 
   @doc """
@@ -373,22 +327,6 @@ defmodule SurveyEngine.Accounts do
   end
 
   ## Reset password
-
-  @doc ~S"""
-  Delivers the reset password email to the given user.
-
-  ## Examples
-
-      iex> deliver_user_reset_password_instructions(user, &url(~p"/users/reset_password/#{&1}"))
-      {:ok, %{to: ..., body: ...}}
-
-  """
-  def deliver_user_reset_password_instructions(%User{} = user, reset_password_url_fun)
-      when is_function(reset_password_url_fun, 1) do
-    {encoded_token, user_token} = UserToken.build_email_token(user, "reset_password")
-    Repo.insert!(user_token)
-    UserNotifier.deliver_reset_password_instructions(user, reset_password_url_fun.(encoded_token))
-  end
 
   @doc """
   Gets the user by reset password token.
