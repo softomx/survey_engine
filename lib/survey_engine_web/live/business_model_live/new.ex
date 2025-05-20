@@ -40,7 +40,6 @@ defmodule SurveyEngineWeb.BusinessModelForm.New do
   defp assign_preious_response(socket, lead_form, user, company) do
     previous_response =
       Responses.get_last_response(lead_form.form_group_id, user.id)
-      |> IO.inspect()
 
     if !is_nil(previous_response) && previous_response.state == "finished" do
       socket

@@ -36,7 +36,7 @@ defmodule SurveyEngineWeb.CompanyLive.Show do
         end
 
       socket
-      |> assign(:page_title, "Empresa")
+      |> assign(:page_title, "Pre-registro")
       |> assign(:company, company)
     else
       socket

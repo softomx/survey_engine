@@ -19,9 +19,9 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
-      assign(socket, :index_params, nil)
-      |> assign(:meta, %Flop.Meta{})
-      |> assign(:response_states, SurveyEngine.TransaleteHelper.list_survey_response_states())}
+     assign(socket, :index_params, nil)
+     |> assign(:meta, %Flop.Meta{})
+     |> assign(:response_states, SurveyEngine.TransaleteHelper.list_survey_response_states())}
   end
 
   @impl true
@@ -51,9 +51,25 @@ defmodule SurveyEngineWeb.AdminCompanyLive.Index do
   end
 
   defp assign_companies(socket, params) do
-    starting_query = Company
+    starting_query = build_start_query(socket.assigns.current_user)
+
     {companies, meta} = DataTable.search(starting_query, params, @data_table_opts)
     companies = companies |> Companies.list_companies_with_preloads()
     assign(socket, companies: companies, meta: meta)
+  end
+
+  defp build_start_query(current_user) do
+    roles = current_user.roles |> Enum.map(& &1.slug)
+
+    cond do
+      "root" in roles ->
+        Company
+
+      true ->
+        Companies.companies_filter(
+          Company,
+          %{ejecutive_id: current_user.id}
+        )
+    end
   end
 end

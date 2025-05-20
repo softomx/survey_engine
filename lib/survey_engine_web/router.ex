@@ -110,7 +110,7 @@ defmodule SurveyEngineWeb.Router do
       ],
       layout: {SurveyEngineWeb.Layouts, :register} do
       live "/users/register", UserRegistrationLive, :new
-      live "users/sucess_register", UserRegistrationSucessLive, :show
+      live "/users/sucess_register", UserRegistrationSucessLive, :show
     end
   end
 
@@ -128,6 +128,7 @@ defmodule SurveyEngineWeb.Router do
       live "/dashboard", CompanyLive.Index, :index
       live "/company", CompanyLive.Show, :show
       live "/company/edit", CompaniesLive.Edit, :edit
+      live "/company/new", CompaniesLive.New, :new
 
       live "/business_model_form/:id/new", BusinessModelForm.New, :new
 
@@ -170,7 +171,8 @@ defmodule SurveyEngineWeb.Router do
       ] do
       live "/companies", AdminCompanyLive.Index, :index
       live "/companies/:id", AdminCompanyLive.Show, :show
-      live "/companies/:id/assign", AdminCompanyLive.Edit, :assign
+      live "/companies/:id/assign_form", AdminCompanyLive.Edit, :assign_form
+      live "/companies/:id/assign_manager", AdminCompanyLive.Edit, :assign_manager
       live "/companies/:id/edit", AdminCompanyLive.Edit, :edit
       live "/companies/:company_id/new_affiliate", AffiliateLive.New, :new
       live "/companies/:company_id/affiliate", AffiliateLive.Show, :show

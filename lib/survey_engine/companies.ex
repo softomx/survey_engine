@@ -30,13 +30,14 @@ defmodule SurveyEngine.Companies do
     |> Enum.reduce(Company, fn
       {:filter, filter}, query ->
         query |> companies_filter(filter)
+
+      _, query ->
+        query
     end)
     |> Repo.all()
   end
 
   def companies_filter(query, filter) do
-    IO.inspect(filter)
-
     filter
     |> Enum.reduce(query, fn
       {_key, nil}, query ->
@@ -89,6 +90,9 @@ defmodule SurveyEngine.Companies do
         else
           query
         end
+
+      {:ejecutive_id, ejecutive_id}, query ->
+        from q in query, where: q.ejecutive_id == ^ejecutive_id
 
       _, query ->
         query

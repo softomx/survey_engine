@@ -392,7 +392,7 @@
                                     SurveyEngineWeb.Gettext,
                                     @locale,
                                     fn ->
-                                      gettext("New Registration")
+                                      gettext("New Registration Updated")
                                     end
                                   )}
                                 </h1>
@@ -404,7 +404,15 @@
                                 style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 48px 48px 40px;"
                               >
                                 <p style="margin: 0 0 1em;">
-                                  Se ha actualizado la informacion del preregistro, verifica la informacion
+                                  {Gettext.with_locale(
+                                    SurveyEngineWeb.Gettext,
+                                    @locale,
+                                    fn ->
+                                      gettext(
+                                        "A record was updated with the following information"
+                                      )
+                                    end
+                                  )}
                                 </p>
                               </td>
                             </tr>

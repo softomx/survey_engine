@@ -7,29 +7,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800">
-      <.header class="text-center">
-        {gettext_with_locale(@locale, gettext("register.form.title"))}
-
-        <:subtitle>
-          {gettext_with_locale(@locale, gettext("Already registered?"))}
-
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
-            {gettext_with_locale(@locale, gettext("Log in"))}
-          </.link>
-        </:subtitle>
-      </.header>
-
-      <div class="flex flex-row justify-end py-5">
-        <.dropdown label={"Language (#{@locale})"}>
-          <%= for language <- @list_languages |> Enum.reject(&(&1.slug == @locale)) do %>
-            <.dropdown_menu_item
-              phx-click={JS.push("change-language", target: @myself, value: %{value: language.slug})}
-              label={language.name}
-            />
-          <% end %>
-        </.dropdown>
-      </div>
+    <div>
       <.form
         for={@form}
         id="registration_form"
@@ -136,7 +114,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 field={f2[:agency_type]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
                 type="select"
-                options={@agency_types |> translate_options(@locale)}
+                options={@agency_types |> SurveyEngineWeb.FormHelper.translate_options(@locale)}
                 label={gettext_with_locale(@locale, gettext("agency.type"))}
                 required
               />
@@ -155,7 +133,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                 field={f2[:agency_model]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
                 type="select"
-                options={@agency_models |> translate_options(@locale)}
+                options={@agency_models |> SurveyEngineWeb.FormHelper.translate_options(@locale)}
                 label={gettext_with_locale(@locale, gettext("agency.model"))}
                 required
               />
@@ -246,12 +224,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
       |> assign_form(changeset)
       |> assign(:towns, [])
       |> assign(:phone_start_number, 52)
-      |> assign(:url_types, [
-        {"Web", "website"},
-        {"Facebook", "facebook"},
-        {"Instagram", "instagram"},
-        {"Tiktok", "tiktok"}
-      ])
+      |> assign(:url_types, SurveyEngineWeb.FormHelper.list_social_network_options())
     }
   end
 
@@ -270,7 +243,26 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Accounts.register_user_with_company(user_params |> IO.inspect()) do
+    {:noreply, save_user(socket, socket.assigns.action, user_params)}
+  end
+
+  @impl true
+  def handle_event("change-language", %{"value" => value}, socket) do
+    Gettext.put_locale(SurveyEngineWeb.Gettext, value)
+    Gettext.get_locale(SurveyEngineWeb.Gettext)
+
+    {:noreply,
+     socket
+     |> assign(locale: value)}
+  end
+
+  def handle_event("show_glossary", %{"type" => type} = _params, socket) do
+    notify_parent({"show_glossary", type})
+    {:noreply, socket}
+  end
+
+  defp save_user(socket, :new, user_params) do
+    case Accounts.register_user_with_company(user_params) do
       {:ok, user} ->
         {:ok, _} =
           NotificationManager.register_lead_notification(
@@ -284,32 +276,39 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
         changeset = Accounts.change_user_registration_with_company(user)
         send(self(), {:put_flash, :info, gettext("register.complete.message")})
 
-        {:noreply,
-         socket
-         #  |> assign(trigger_submit: true)
-         |> assign_form(changeset)
-         |> put_flash(:info, gettext("register.complete.message"))
-         |> redirect(to: ~p"/users/sucess_register?locale=#{socket.assigns.locale}")}
+        socket
+        |> assign_form(changeset)
+        |> put_flash(:info, gettext("register.complete.message"))
+        |> redirect(to: ~p"/users/sucess_register?locale=#{socket.assigns.locale}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, socket |> assign(check_errors: true) |> assign_form(changeset)}
+        socket |> assign(check_errors: true) |> assign_form(changeset)
     end
   end
 
-  @impl true
-  def handle_event("change-language", %{"value" => value}, socket) do
-    Gettext.put_locale(SurveyEngineWeb.Gettext, value)
-    Gettext.get_locale(SurveyEngineWeb.Gettext) |> IO.inspect()
-    gettext("agencymodel.glossary") |> IO.inspect()
+  defp save_user(socket, :edit, user_params) do
+    case Accounts.register_user_with_company(user_params) do
+      {:ok, user} ->
+        {:ok, _} =
+          NotificationManager.register_lead_notification(
+            user,
+            socket.assigns.site_config,
+            &url(~p"/users/confirm/#{&1}")
+          )
 
-    {:noreply,
-     socket
-     |> assign(locale: value)}
-  end
+        # Accounts.set_user_cllient_role(user)
 
-  def handle_event("show_glossary", %{"type" => type} = _params, socket) do
-    notify_parent({"show_glossary", type})
-    {:noreply, socket}
+        changeset = Accounts.change_user_registration_with_company(user)
+        send(self(), {:put_flash, :info, gettext("register.complete.message")})
+
+        socket
+        |> assign_form(changeset)
+        |> put_flash(:info, gettext("register.complete.message"))
+        |> redirect(to: socket.assigns.return_to)
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket |> assign(check_errors: true) |> assign_form(changeset)
+    end
   end
 
   defp get_towns_by_country(nil), do: []
@@ -356,28 +355,4 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
-
-  defp translate_options(options, locale) do
-    options
-    |> Enum.map(fn option ->
-      translate =
-        option.translates
-        |> Enum.find(&(&1.language == locale))
-
-      cond do
-        Enum.empty?(option.translates) ->
-          {option.name, option.name}
-
-        !is_nil(translate) ->
-          translate =
-            option.translates
-            |> List.first()
-
-          {translate.description, option.name}
-
-        true ->
-          {option.name, option.name}
-      end
-    end)
-  end
 end

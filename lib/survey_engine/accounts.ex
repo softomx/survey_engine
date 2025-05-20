@@ -26,6 +26,28 @@ defmodule SurveyEngine.Accounts do
     Repo.all(User)
   end
 
+  def list_users(args) do
+    args
+    |> Enum.reduce(User, fn
+      {:filter, filter}, query ->
+        query |> filter_users_with(filter)
+
+      _, query ->
+        query
+    end)
+    |> Repo.all()
+  end
+
+  def filter_users_with(query, filter) do
+    filter
+    |> Enum.reduce(query, fn
+      {:roles, roles}, query ->
+        from q in query,
+          join: r in assoc(q, :roles),
+          where: r.slug in ^roles
+    end)
+  end
+
   def get_user_by_email(email) when is_binary(email) do
     Repo.get_by(User, email: email)
   end
@@ -34,7 +56,7 @@ defmodule SurveyEngine.Accounts do
     Repo.get_by(User, company_id: company_id)
     |> case do
       nil -> {:error, "user not found"}
-      user -> {:ok, user}
+      user -> {:ok, user |> Repo.preload(:roles)}
     end
   end
 

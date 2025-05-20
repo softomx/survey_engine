@@ -1,4 +1,7 @@
 defmodule SurveyEngineWeb.CompanyLive.FormComponent do
+  alias SurveyEngine.NotificationManager
+  alias SurveyEngine.Accounts
+  alias SurveyEngine.BusinessModels
   alias SurveyEngine.Catalogs
   use SurveyEngineWeb, :live_component
 
@@ -15,10 +18,14 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <div class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5">
+        <div
+          :if={@action in [:new, :edit]}
+          class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5"
+        >
           <.field field={@form[:language]} type="hidden" value={@locale} />
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
+              label_class="capitalize"
               field={@form[:agency_name]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.agencyname"))}
@@ -27,6 +34,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
+              label_class="capitalize"
               field={@form[:legal_name]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.fullname"))}
@@ -36,6 +44,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
 
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
+              label_class="capitalize"
               field={@form[:country]}
               type="select"
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.country"))}
@@ -46,6 +55,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-6">
             <.field
+              label_class="capitalize"
               field={@form[:town]}
               type="select"
               label={gettext_with_locale(@locale, gettext("label.state"))}
@@ -56,6 +66,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-6">
             <.field
+              label_class="capitalize"
               field={@form[:city]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.city"))}
@@ -63,7 +74,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
               placeholder={gettext_with_locale(@locale, gettext("placeholder.city"))}
             />
           </div>
-          <div class="col-span-12 lg:col-span-12 md:col-span-12" id="phone-input">
+          <div class="col-span-12 lg:col-span-12 md:col-span-12 capitalize" id="phone-input">
             <.label>
               {gettext_with_locale(@locale, gettext("label.phone_number"))}
             </.label>
@@ -79,6 +90,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-4">
             <.field
+              label_class="capitalize"
               field={@form[:billing_currency]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.billing.currency"))}
               type="select"
@@ -89,10 +101,11 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-9 lg:col-span-8 md:col-span-8">
             <.field
+              label_class="capitalize"
               field={@form[:agency_type]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
               type="select"
-              options={@agency_types}
+              options={@agency_types |> SurveyEngineWeb.FormHelper.translate_options(@locale)}
               label={gettext_with_locale(@locale, gettext("agency.type"))}
               required
             />
@@ -100,10 +113,11 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
 
           <div class="col-span-12 lg:col-span-6 md:col-span-4">
             <.field
+              label_class="capitalize"
               field={@form[:agency_model]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
               type="select"
-              options={@agency_models}
+              options={@agency_models |> SurveyEngineWeb.FormHelper.translate_options(@locale)}
               label={gettext_with_locale(@locale, gettext("agency.model"))}
               required
             />
@@ -161,8 +175,39 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
             </.button>
             <input type="hidden" name="user[company][link_drop][]" />
           </div>
-          <.button phx-disable-with="Saving...">Guardar</.button>
         </div>
+        <div
+          :if={@action == :assign_form}
+          class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5"
+        >
+          <div class="col-span-12">
+            <.field
+              label_class="capitalize"
+              field={@form[:business_model_id]}
+              prompt="Selecciona un formulario"
+              type="select"
+              label="Modelo de negocio"
+              options={@business_models}
+            />
+          </div>
+        </div>
+        <div
+          :if={@action == :assign_manager}
+          class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5"
+        >
+          <div class="col-span-12">
+            <.field
+              label_class="capitalize"
+              field={@form[:ejecutive_id]}
+              prompt="Selecciona un ejecutivo"
+              type="select"
+              label="Ejecutivo de cuenta"
+              options={@ejecute_users}
+            />
+          </div>
+        </div>
+
+        <.button phx-disable-with="Saving...">Guardar</.button>
       </.form>
     </div>
     """
@@ -181,26 +226,20 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
     changeset =
       Companies.change_company(company)
 
-    IO.inspect(company)
-
     {
       :ok,
       socket
       |> assign(assigns)
       |> assign(:countries, Countries.all() |> Enum.map(&{&1.name, &1.alpha2}))
       |> assign(:currencies, Catalogs.list_currencies() |> Enum.map(&{&1.name, &1.slug}))
-      |> assign(:agency_types, Catalogs.list_agency_types() |> Enum.map(&{&1.name, &1.name}))
-      |> assign(:agency_models, Catalogs.list_agency_models() |> Enum.map(&{&1.name, &1.name}))
+      |> assign(:agency_types, Catalogs.list_agency_types_with_preload())
+      |> assign(:agency_models, Catalogs.list_agency_models_with_preload())
       |> assign(:towns, get_towns_by_country(company.country))
       |> assign(:phone_start_number, nil)
       |> assign_phone_number(company.country)
       |> assign_form(changeset)
-      |> assign(:url_types, [
-        {"Web", "website"},
-        {"Facebook", "facebook"},
-        {"Instagram", "instagram"},
-        {"Tiktok", "tiktok"}
-      ])
+      |> assign(:url_types, SurveyEngineWeb.FormHelper.list_social_network_options())
+      |> assign_properties(assigns.action)
     }
   end
 
@@ -219,15 +258,20 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
     case Companies.update_company(
            socket.assigns.company,
            company_params
-         )
-         |> IO.inspect() do
+         ) do
       {:ok, company} ->
+        NotificationManager.notify_register_updated(
+          company.user_id,
+          url(~p"/"),
+          socket.assigns.site_config
+        )
+
         notify_parent({:saved, company})
 
         {:noreply,
          socket
          |> put_flash(:info, gettext("prereister.updated"))
-         |> push_navigate(to: ~p"/company")}
+         |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
@@ -246,6 +290,50 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
          socket
          |> put_flash(:info, "Form registration created successfully")
          |> push_patch(to: socket.assigns.patch)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, form: to_form(changeset))}
+    end
+  end
+
+  defp save_company(socket, :assign_form, company_params) do
+    case Companies.update_company(
+           socket.assigns.company,
+           company_params |> Map.put("status", "assigned")
+         ) do
+      {:ok, company} ->
+        NotificationManager.notify_business_model_assigned(
+          company,
+          url(~p"/"),
+          socket.assigns.site_config
+        )
+
+        {:noreply,
+         socket
+         |> put_flash(:info, "Formulario asignado correctamente")
+         |> push_navigate(to: socket.assigns.return_to)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, form: to_form(changeset))}
+    end
+  end
+
+  defp save_company(socket, :assign_manager, company_params) do
+    case Companies.update_company(
+           socket.assigns.company,
+           company_params
+         ) do
+      {:ok, company} ->
+        NotificationManager.notify_executive_account_assigned(
+          company,
+          url(~p"/"),
+          socket.assigns.site_config
+        )
+
+        {:noreply,
+         socket
+         |> put_flash(:info, "Ejecutivo asignado correctamente")
+         |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
@@ -286,5 +374,25 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
       socket
     end
     |> assign(:phone_start_number, country.country_code)
+  end
+
+  defp assign_properties(socket, :assign_form) do
+    socket
+    |> assign(
+      :business_models,
+      BusinessModels.list_business_models()
+      |> Enum.map(&{&1.name, &1.id})
+    )
+  end
+
+  defp assign_properties(socket, :assign_manager) do
+    users = Accounts.list_users(%{filter: %{roles: ["executive"]}})
+
+    socket
+    |> assign(:ejecute_users, users |> Enum.map(&{&1.name, &1.id}))
+  end
+
+  defp assign_properties(socket, _) do
+    socket
   end
 end

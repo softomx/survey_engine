@@ -17,7 +17,7 @@ defmodule SurveyEngineWeb.LeadsFormLive.Show do
     lead_form = LeadsForms.get_leads_form!(id)
 
     {:ok, external_form} =
-      get_external_form(lead_form, socket.assigns.site_config.id) |> IO.inspect()
+      get_external_form(lead_form, socket.assigns.site_config.id)
 
     questions = external_form.questions |> order_questions()
 

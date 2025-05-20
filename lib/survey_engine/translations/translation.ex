@@ -17,6 +17,6 @@ defmodule SurveyEngine.Translations.Translation do
     translation
     |> cast(attrs, [:type, :description, :resource_id, :language, :behaviour, :content_type])
     |> validate_required([:type, :description, :language, :behaviour, :content_type])
-    |> unique_constraint([:resource_id, :behaviour, :type, :language])
+    |> unique_constraint(:language, name: :translations_resource_id_behaviour_type_language_index)
   end
 end

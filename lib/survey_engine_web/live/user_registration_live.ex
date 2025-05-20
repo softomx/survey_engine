@@ -9,18 +9,44 @@ defmodule SurveyEngineWeb.UserRegistrationLive do
     ~H"""
     <div class="py-10 px-10">
       <div class="mx-auto max-w-3xl">
-        <.live_component
-          id="form"
-          module={SurveyEngineWeb.EmbedLive.FormComponent}
-          locale={@locale}
-          currencies={@currencies}
-          user={@user}
-          list_languages={@languages}
-          agency_types={@agency_types}
-          agency_models={@agency_models}
-          countries={@countries}
-          site_config={@site_config}
-        />
+        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800">
+          <.header class="text-center">
+            {gettext_with_locale(@locale, gettext("register.form.title"))}
+
+            <:subtitle>
+              {gettext_with_locale(@locale, gettext("Already registered?"))}
+
+              <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
+                {gettext_with_locale(@locale, gettext("Log in"))}
+              </.link>
+            </:subtitle>
+          </.header>
+
+          <div class="flex flex-row justify-end py-5">
+            <.dropdown label={"Language (#{@locale})"}>
+              <%= for language <- @list_languages |> Enum.reject(&(&1.slug == @locale)) do %>
+                <.dropdown_menu_item
+                  phx-click={
+                    JS.push("change-language", target: @myself, value: %{value: language.slug})
+                  }
+                  label={language.name}
+                />
+              <% end %>
+            </.dropdown>
+          </div>
+          <.live_component
+            id="form"
+            module={SurveyEngineWeb.EmbedLive.FormComponent}
+            locale={@locale}
+            currencies={@currencies}
+            user={@user}
+            list_languages={@languages}
+            agency_types={@agency_types}
+            agency_models={@agency_models}
+            countries={@countries}
+            site_config={@site_config}
+          />
+        </div>
         <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10 dark:bg-gray-800"></div>
       </div>
       <.modal :if={@show_modal}>

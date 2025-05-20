@@ -1,7 +1,7 @@
-defmodule SurveyEngineWeb.CompanyLive.New do
-  use SurveyEngineWeb, :live_view
-
+defmodule SurveyEngineWeb.CompaniesLive.New do
   alias SurveyEngine.Companies.Company
+  use SurveyEngineWeb, :live_view
+  alias SurveyEngine.Companies
 
   @impl true
   def mount(_params, _session, socket) do
@@ -16,11 +16,11 @@ defmodule SurveyEngineWeb.CompanyLive.New do
   defp apply_action(socket, :new, _params) do
     if socket.assigns.current_user.company_id do
       socket
-      |> push_patch(to: ~p"/company")
+      |> push_navigate(to: ~p"/company")
     else
       socket
-      |> assign(:page_title, "New Form registration")
-      |> assign(:company, %Company{})
+      |> assign(:page_title, gettext("preregister.title"))
+      |> assign(:company, %Company{country: "MX"})
     end
   end
 end

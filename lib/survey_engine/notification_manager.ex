@@ -30,6 +30,23 @@ defmodule SurveyEngine.NotificationManager do
     end
   end
 
+  def notify_register_updated(
+        user_id,
+        url,
+        %SiteConfiguration{} = site_config
+      ) do
+    enqueue_worker(SurveyEngine.Workers.ClientRegisterUpdatedNotificationWorker, [
+      user_id,
+      site_config.id,
+      url
+    ])
+
+    enqueue_worker(SurveyEngine.Workers.AdminRegisterUpdatedNotificationWorker, [
+      user_id,
+      site_config.id
+    ])
+  end
+
   def resert_password_notification(
         %User{} = user,
         %SiteConfiguration{} = site_config,
@@ -82,6 +99,29 @@ defmodule SurveyEngine.NotificationManager do
 
     enqueue_worker(
       SurveyEngine.Workers.AdminBusinessModelAssignedNotificationWorker,
+      [
+        company.id,
+        site_config.id
+      ]
+    )
+  end
+
+  def notify_executive_account_assigned(
+        %Company{} = company,
+        url,
+        %SiteConfiguration{} = site_config
+      ) do
+    enqueue_worker(
+      SurveyEngine.Workers.ClientExecutiveAccountAssignedNotificationWorker,
+      [
+        company.id,
+        url,
+        site_config.id
+      ]
+    )
+
+    enqueue_worker(
+      SurveyEngine.Workers.AdminExecutiveAccountAssignedNotificationWorker,
       [
         company.id,
         site_config.id

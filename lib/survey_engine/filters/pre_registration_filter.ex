@@ -39,12 +39,10 @@ defmodule SurveyEngine.Filters.PreRegistrationFilter do
   end
 
   def changeset_dates(struct, attrs \\ %{}) do
-    IO.inspect(attrs)
-    attrs = attrs |> cast_dates_from_label_dates() |> IO.inspect(label: "skks")
+    attrs = attrs |> cast_dates_from_label_dates()
 
     struct
     |> cast(attrs, [:start_date, :end_date, :label_dates])
-    |> IO.inspect()
   end
 
   defp cast_dates_from_label_dates(attrs) do

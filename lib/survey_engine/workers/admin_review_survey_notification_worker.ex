@@ -1,4 +1,5 @@
 defmodule SurveyEngine.Workers.AdminReviewSurveyNotificationWorker do
+  alias SurveyEngine.Accounts
   alias SurveyEngine.Responses
   alias SurveyEngine.Accounts.{AdminNotifier}
   alias SurveyEngine.SiteConfigurations
@@ -14,14 +15,22 @@ defmodule SurveyEngine.Workers.AdminReviewSurveyNotificationWorker do
              notification_config.contents,
              survey_response.user.company.language
            ),
-         {:ok, emails} <- {:ok, get_emails(notification_config)} do
+         {:ok, emails} <- {:ok, get_emails(notification_config, survey_response)} do
       deliver_by_review_state(emails, content, survey_response, site_config)
     end
   end
 
-  defp get_emails(notification_config) do
-    notification_config.to
-    |> Enum.map(fn e -> e.email end)
+  defp get_emails(notification_config, survey_response) do
+    ccp =
+      notification_config.to
+      |> Enum.map(fn e -> e.email end)
+
+    if survey_response.user.company.ejecutive_id do
+      user = Accounts.get_user!(survey_response.user.company.ejecutive_id)
+      [user.email | ccp]
+    else
+      ccp
+    end
   end
 
   defp deliver_by_review_state(

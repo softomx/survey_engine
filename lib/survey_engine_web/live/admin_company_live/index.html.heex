@@ -56,42 +56,37 @@
     {SurveyEngine.to_timezone(company.inserted_at)}
   </:col>
   <:col :let={company} label={gettext("actions")} align_right>
-    <.button
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label={gettext("edit")}
-      to={~p"/admin/companies/#{company}/edit"}
-    />
-    <.button
-      :if={is_nil(company.business_model_id)}
-      color="white"
-      variant="outline"
-      size="xs"
-      link_type="live_patch"
-      label={gettext("company.sort")}
-      to={~p"/admin/companies/#{company}/assign"}
-    />
-    <%= if is_nil(company.affiliate) do %>
-      <.button
-        color="white"
-        variant="outline"
-        size="xs"
+    <.dropdown label="opciones">
+      <.dropdown_menu_item
         link_type="live_patch"
-        label={gettext("company.new_affiliate")}
+        to={~p"/admin/companies/#{company}/edit"}
+        label={gettext("edit")}
+      />
+      <.dropdown_menu_item
+        :if={is_nil(company.business_model_id)}
+        link_type="live_patch"
+        to={~p"/admin/companies/#{company}/assign_form"}
+        label="Asignar formulario"
+      />
+      <.dropdown_menu_item
+        :if={is_nil(company.ejecutive_id)}
+        link_type="live_patch"
+        to={~p"/admin/companies/#{company}/assign_manager"}
+        label="Asignar ejecutivo"
+      />
+      <.dropdown_menu_item
+        :if={is_nil(company.affiliate) and !is_nil(company.business_model_id)}
+        link_type="live_patch"
         to={~p"/admin/companies/#{company}/new_affiliate"}
+        label={gettext("company.new_affiliate")}
       />
-    <% else %>
-      <.button
-        color="white"
-        variant="outline"
-        size="xs"
+      <.dropdown_menu_item
+        :if={!is_nil(company.affiliate)}
         link_type="live_patch"
-        label={gettext("company.show_affiliate")}
         to={~p"/admin/companies/#{company}/affiliate"}
+        label={gettext("company.show_affiliate")}
       />
-    <% end %>
+    </.dropdown>
   </:col>
 </.data_table>
 

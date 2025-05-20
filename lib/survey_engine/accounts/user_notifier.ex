@@ -31,6 +31,21 @@ defmodule SurveyEngine.Accounts.UserNotifier do
     )
   end
 
+  def deliver_register_updated(
+        user,
+        subject,
+        content,
+        site_config_id
+      ) do
+    deliver(
+      "client_register_updated.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
   def deliver_business_model_assigned(
         user,
         subject,
@@ -39,6 +54,16 @@ defmodule SurveyEngine.Accounts.UserNotifier do
       ) do
     deliver(
       "client_business_model_assigned.html",
+      user.email,
+      subject,
+      content,
+      site_config_id
+    )
+  end
+
+  def deliver_executive_account_assigned(user, subject, content, site_config_id) do
+    deliver(
+      "client_executive_account_assigned.html",
       user.email,
       subject,
       content,

@@ -298,11 +298,11 @@
             >
               {Gettext.with_locale(
                 SurveyEngineWeb.Gettext,
-                @locale,
+                @content.language,
                 fn ->
-                  gettext(" This is a notification of an account registration.")
+                  gettext("This is a confirmation of your account registration")
                 end
-              )}
+              )}.
             </span>
             <table
               class="wrap"
@@ -373,7 +373,7 @@
                                       style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
                                     >
                                       <img
-                                        src="https://res.cloudinary.com/dop4ujvqo/image/upload/v1743472110/icons-white-message-square_lsdtuv.png"
+                                        src="https://reservatour.nyc3.digitaloceanspaces.com/prod/mailer/icons-white-check.png"
                                         class=" va-middle"
                                         width="40"
                                         height="40"
@@ -390,9 +390,9 @@
                                 >
                                   {Gettext.with_locale(
                                     SurveyEngineWeb.Gettext,
-                                    @locale,
+                                    @content.language,
                                     fn ->
-                                      gettext("New Registration")
+                                      gettext("registration updated")
                                     end
                                   )}
                                 </h1>
@@ -404,10 +404,15 @@
                                 style="font-family: Open Sans, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; padding: 48px 48px 40px;"
                               >
                                 <p style="margin: 0 0 1em;">
-                                  Se ha actualizado la informacion del preregistro, verifica la informacion
+                                  <.description
+                                    description={@content.description}
+                                    type={@content.content_type}
+                                    class="prose-sm"
+                                  />
                                 </p>
                               </td>
                             </tr>
+
                             <tr class="">
                               <td
                                 class="content border-top "
@@ -416,11 +421,11 @@
                                 <!-- Detalles de la cuenta registrada -->
 
                                 <h4 style="font-weight: 600; font-size: 16px; margin: 0 0 .5em;">
-                                  <br />{Gettext.with_locale(
+                                  <br /> {Gettext.with_locale(
                                     SurveyEngineWeb.Gettext,
-                                    @locale,
+                                    @content.language,
                                     fn ->
-                                      gettext("information registered")
+                                      gettext("Your registered account information updated")
                                     end
                                   )}:
                                 </h4>
@@ -440,7 +445,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Legal name")
                                               end
@@ -461,7 +466,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Agency Type")
                                               end
@@ -482,7 +487,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Billy Currency")
                                               end
@@ -503,7 +508,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Language")
                                               end
@@ -524,7 +529,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Country")
                                               end
@@ -545,7 +550,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("Town")
                                               end
@@ -566,7 +571,7 @@
                                           >
                                             {Gettext.with_locale(
                                               SurveyEngineWeb.Gettext,
-                                              @locale,
+                                              @content.language,
                                               fn ->
                                                 gettext("City")
                                               end
@@ -587,7 +592,57 @@
                                 </table>
                               </td>
                             </tr>
-                            <tr></tr>
+                            <tr>
+                              <table
+                                cellspacing="0"
+                                cellpadding="0"
+                                style="flex-direction: row; justify-content: center;  width:  100%;"
+                              >
+                                <tr>
+                                  <td
+                                    align="center"
+                                    style="padding-top: 10px; padding-bottom: 20px;"
+                                  >
+                                    <table
+                                      cellpadding="0"
+                                      cellspacing="0"
+                                      border="0"
+                                      class="bg-green rounded w-auto"
+                                    >
+                                      <tr>
+                                        <td align="center" valign="top" class="lh-1" style="">
+                                          <a
+                                            href={@url}
+                                            class="btn bg-green border-green"
+                                            style=" text-decoration: none;
+                                                    white-space: nowrap;
+                                                    font-weight: 600;
+                                                    font-size: 16px;
+                                                    padding: 12px 32px;
+                                                    border-radius: 3px;
+                                                    color: #ffffff;
+                                                    line-height: 100%;
+                                                    display: block;
+                                                    border: 1px solid transparent;
+                                                     background-color: #467fcf;"
+                                          >
+                                            <span class="btn-span">
+                                              {Gettext.with_locale(
+                                                SurveyEngineWeb.Gettext,
+                                                @content.language,
+                                                fn ->
+                                                  gettext("show updated")
+                                                end
+                                              )}
+                                            </span>
+                                          </a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </tr>
                           </table>
                         </td>
                       </tr>
@@ -623,3 +678,25 @@
     </center>
   </body>
 </html>
+
+<%!-- <div>
+  <h1>Cleinte formulario Actualizado</h1>
+  {@content.description}
+  <p>{@url}</p>
+
+  <div>
+    <h3>Esta es la informacion ingresada</h3>
+
+    <p>{@company.language}</p>
+    <p>{@company.legal_name}</p>
+    <p>{@company.country}</p>
+    <p>{@company.town}</p>
+    <p>{@company.city}</p>
+    <p>{@company.agency_type}</p>
+    <p>{@company.billing_currency}</p>
+  </div>
+
+  <div>
+    <h3>Esta es la informacion ingresada delformulario</h3>
+  </div>
+</div> --%>
