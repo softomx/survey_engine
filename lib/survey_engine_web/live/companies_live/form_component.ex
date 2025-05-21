@@ -261,7 +261,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
          ) do
       {:ok, company} ->
         NotificationManager.notify_register_updated(
-          company.user_id,
+          company,
           url(~p"/"),
           socket.assigns.site_config
         )

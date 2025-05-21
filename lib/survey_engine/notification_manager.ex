@@ -31,18 +31,18 @@ defmodule SurveyEngine.NotificationManager do
   end
 
   def notify_register_updated(
-        user_id,
+        company,
         url,
         %SiteConfiguration{} = site_config
       ) do
     enqueue_worker(SurveyEngine.Workers.ClientRegisterUpdatedNotificationWorker, [
-      user_id,
+      company.id,
       site_config.id,
       url
     ])
 
     enqueue_worker(SurveyEngine.Workers.AdminRegisterUpdatedNotificationWorker, [
-      user_id,
+      company.id,
       site_config.id
     ])
   end
