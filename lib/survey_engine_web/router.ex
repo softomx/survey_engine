@@ -311,13 +311,14 @@ defmodule SurveyEngineWeb.Router do
   end
 
   scope "/", SurveyEngineWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :locale]
 
     delete "/users/log_out", UserSessionController, :delete
 
     live_session :current_user,
       on_mount: [
         {SurveyEngineWeb.UserAuth, :mount_current_user},
+        {SurveyEngineWeb.ContextSession, :load_site_configuration},
         {ContextSession, :current_page},
         {ContextSession, :set_locale}
       ],

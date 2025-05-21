@@ -23,7 +23,7 @@ defmodule SurveyEngineWeb.UserForgotPasswordLive do
           </.form>
           <p class="text-center text-sm mt-4">
             <.link href={~p"/users/register"}>{gettext("register.button.label")}</.link>
-            | <.link href={~p"/users/log_in"}>{gettext("login.button.label")}</.link>
+            |<.link href={~p"/users/log_in"}>{gettext("login.button.label")}</.link>
           </p>
         </div>
       </div>
