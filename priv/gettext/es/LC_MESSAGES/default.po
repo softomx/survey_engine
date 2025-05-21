@@ -1315,7 +1315,7 @@ msgstr "Esta es una confirmacion de tu registro"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_affiliate_created.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "successfully created affiliate"
-msgstr "afiliado creado correctamente"
+msgstr "Afiliado creado correctamente"
 
 #: lib/survey_engine_web/states_helper.ex:86
 #, elixir-autogen, elixir-format, fuzzy
@@ -1340,7 +1340,7 @@ msgstr "Ocurrio un error! Porfavor revisa la informacion"
 #: lib/survey_engine_web/live/affiliate_live/show.ex:62
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.button.create"
-msgstr "crear afiliado"
+msgstr "Crear afiliadoen GXS"
 
 #: lib/survey_engine_web/live/affiliate_live/show.ex:68
 #, elixir-autogen, elixir-format, fuzzy

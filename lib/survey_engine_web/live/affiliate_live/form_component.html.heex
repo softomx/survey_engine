@@ -72,14 +72,14 @@
         <.label>{gettext("affiliate.address")}</.label>
         <.inputs_for :let={address} field={@form[:address]}>
           <div class=" grid grid-cols-6 gap-3 mt-2">
-            <.combo_box
+            <.field
               type="select"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               field={address[:country]}
               label={gettext("affiliate.address.country")}
               options={@countries}
             />
-            <.combo_box
+            <.field
               type="select"
               wrapper_class="col-span-1 md:col-span-2 capitalize sm:col-span-2"
               field={address[:state]}

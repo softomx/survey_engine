@@ -1,7 +1,7 @@
 defmodule SurveyEngineWeb.AffiliateLive.New do
+  use SurveyEngineWeb, :live_view
   alias SurveyEngine.Catalogs
   alias SurveyEngine.AffiliateEngine.Address
-  use SurveyEngineWeb, :live_view
 
   alias SurveyEngine.SurveyMappers
   alias SurveyEngine.{Companies, Responses}
@@ -24,7 +24,7 @@ defmodule SurveyEngineWeb.AffiliateLive.New do
         filter: %{
           state: "finished",
           review_state: "approved",
-          company_filter: %{id: company.id}
+          company_id: company.id
         }
       })
       |> Responses.survey_resposes_with_preloads([:response_items, :user, :form_group])

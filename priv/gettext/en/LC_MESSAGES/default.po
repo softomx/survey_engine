@@ -1340,7 +1340,7 @@ msgstr "Oops, something went wrong! Please check the errors below."
 #: lib/survey_engine_web/live/affiliate_live/show.ex:62
 #, elixir-autogen, elixir-format, fuzzy
 msgid "affiliate.button.create"
-msgstr "create affiliate"
+msgstr "Create affiliate on GXS"
 
 #: lib/survey_engine_web/live/affiliate_live/show.ex:68
 #, elixir-autogen, elixir-format, fuzzy

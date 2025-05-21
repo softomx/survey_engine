@@ -5,8 +5,8 @@ defmodule SurveyEngine.Workers.ClientCreatedAffiliateWorker do
   alias SurveyEngine.Companies
   alias SurveyEngine.Accounts
 
-  def perform(user_id, site_config_id, company_id) do
-    with {:ok, user} <- Accounts.get_user(user_id),
+  def perform(_user_id, site_config_id, company_id) do
+    with {:ok, user} <- Accounts.get_user_by_company(company_id),
          {:ok, site_config} <- SiteConfigurations.get_site_configuration(site_config_id),
          {:ok, company} <-
            Companies.get_company_with_preloads(company_id, [:affiliate]),
