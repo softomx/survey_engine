@@ -88,7 +88,7 @@ msgstr "Contraseña"
 msgid "Sign up"
 msgstr "Registrate"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:472
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:472
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:449
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:466
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:474
@@ -107,7 +107,7 @@ msgstr "Tipo de agencia"
 msgid "Already registered?"
 msgstr "¿Ya estas registrado?"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:493
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:493
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:470
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:487
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:495
@@ -120,7 +120,7 @@ msgstr "¿Ya estas registrado?"
 msgid "Billy Currency"
 msgstr "Moneda de facturación"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:577
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:577
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:554
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:571
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:579
@@ -133,7 +133,7 @@ msgstr "Moneda de facturación"
 msgid "City"
 msgstr "Ciudad"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:535
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:535
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:512
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:529
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:537
@@ -151,7 +151,7 @@ msgstr "Pais"
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:451
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:451
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:428
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:445
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:453
@@ -185,7 +185,7 @@ msgstr "Iniciar sesion"
 msgid "Sign in"
 msgstr "Iniciar sesion"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:556
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:556
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:533
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:550
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:558
@@ -440,7 +440,7 @@ msgstr "Documento"
 msgid "Having trouble with the button above? Please copy this URL"
 msgstr "¿Tienes algun problema con el boton? Por favor copia esta URL"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:514
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:514
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_executive_account_assigned.html.heex:491
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register.html.heex:508
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_register_updated.html.heex:516
@@ -483,8 +483,8 @@ msgstr "Restablece tucontraseña"
 msgid "Survey Answers"
 msgstr "Respuestas del cuenstionario"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:303
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:411
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:303
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:411
 #, elixir-autogen, elixir-format
 msgid "The business model was correctly assigned"
 msgstr "El modelo de negocio fue correctamente asignado"
@@ -500,7 +500,7 @@ msgstr "Esta es una confirmacion de registro de su cuenta"
 msgid "This is a notification of a password reset"
 msgstr "Esta es una notificacion para restablecer su contraseña"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:429
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:429
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:423
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:489
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:427
@@ -540,7 +540,7 @@ msgstr "Detalles de los comentarios"
 msgid "company"
 msgstr "Nombre agencia"
 
-#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html copy.heex:395
+#: lib/survey_engine_web/controllers/page_html/user_notifier/admin_business_model_assigned.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/admin_survey_updated.html.heex:395
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:397
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_business_model_assigned.html.heex:464
@@ -1729,3 +1729,13 @@ msgstr "Confirma tu cuenta"
 #, elixir-autogen, elixir-format
 msgid "User confirmation link is invalid or it has expired."
 msgstr "El link de confirmacion es invalido o ha expirado."
+
+#: lib/survey_engine_web/components/layouts/root.html.heex:7
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Affiliate Program"
+msgstr "Programa de afiliados"
+
+#: lib/survey_engine_web/live/user_confirmation_live.ex:76
+#, elixir-autogen, elixir-format
+msgid "User confirmed successfully."
+msgstr "Usuario confirmado correctamente"
