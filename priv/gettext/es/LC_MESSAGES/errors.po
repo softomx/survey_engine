@@ -48,8 +48,8 @@ msgstr[1] "debe tener %{count} elemento(s)"
 
 msgid "should be %{count} character(s)"
 msgid_plural "should be %{count} character(s)"
-msgstr[0] "debe tener %{count} caractere(s)"
-msgstr[1] "debe tener %{count} caractere(s)"
+msgstr[0] "debe tener %{count} caracter(es)"
+msgstr[1] "debe tener %{count} caracter(es)"
 
 msgid "should be %{count} byte(s)"
 msgid_plural "should be %{count} byte(s)"
@@ -63,8 +63,8 @@ msgstr[1] "debe tener al menos %{count} elemento(s)"
 
 msgid "should be at least %{count} character(s)"
 msgid_plural "should be at least %{count} character(s)"
-msgstr[0] "debe tener al menos %{count} caractere(s)"
-msgstr[1] "debe tener al menos %{count} caractere(s)"
+msgstr[0] "debe tener al menos %{count} caracter(es)"
+msgstr[1] "debe tener al menos %{count} caracter(es)"
 
 msgid "should be at least %{count} byte(s)"
 msgid_plural "should be at least %{count} byte(s)"

@@ -26,7 +26,16 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             <.field field={f2[:language]} type="hidden" value={@locale} />
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
+                field={f2[:agency_name]}
+                type="text"
+                label={gettext_with_locale(@locale, gettext("label.agency.name"))}
+                required
+              />
+            </div>
+            <div class="col-span-12 lg:col-span-12 md:col-span-12">
+              <.field
+                label_class="capitalize-first-letter"
                 field={f2[:legal_name]}
                 type="text"
                 label={gettext_with_locale(@locale, gettext("label.fullname"))}
@@ -40,7 +49,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             />
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={@form[:email]}
                 type="email"
                 placeholder={gettext_with_locale(@locale, gettext("placeholder.email"))}
@@ -51,7 +60,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
 
             <div class="col-span-12 lg:col-span-12 md:col-span-12">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:country]}
                 type="select"
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.country"))}
@@ -62,7 +71,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-6">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:town]}
                 type="select"
                 label={gettext_with_locale(@locale, gettext("label.state"))}
@@ -73,7 +82,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-6">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:city]}
                 type="text"
                 label={gettext_with_locale(@locale, gettext("label.city"))}
@@ -82,11 +91,9 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
               />
             </div>
             <div class="col-span-12 lg:col-span-12 md:col-span-12" id="phone-input">
-              <div class="capitalize">
-                <.label>
-                  {gettext_with_locale(@locale, gettext("label.phone_number"))}
-                </.label>
-              </div>
+              <.label class="pc-label capitalize-first-letter pc-label--required">
+                {gettext_with_locale(@locale, gettext("label.phone_number"))}
+              </.label>
               <.input
                 field={f2[:phone]}
                 phx-update="ignore"
@@ -99,7 +106,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:billing_currency]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.billing.currency"))}
                 type="select"
@@ -110,7 +117,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-9 lg:col-span-8 md:col-span-8">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:agency_type]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
                 type="select"
@@ -129,7 +136,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-12 lg:col-span-6 md:col-span-4">
               <.field
-                label_class="capitalize"
+                label_class="capitalize-first-letter"
                 field={f2[:agency_model]}
                 prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
                 type="select"
@@ -148,13 +155,13 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
             </div>
             <div class="col-span-3 lg:col-span-3 md:col-span-3 self-center"></div>
             <div class="col-span-12">
-              <label class="capitalize">{gettext("socialnetwork.title")}</label>
+              <label class="capitalize-first-letter">{gettext("socialnetwork.title")}</label>
               <input type="hidden" name="user[company][link_drop][]" />
               <.inputs_for :let={links_form} field={f2[:links]}>
                 <div class="flex items-center gap-2">
                   <input type="hidden" name="user[company][links_sort][]" value={links_form.index} />
                   <.field
-                    label_class="capitalize"
+                    label_class="capitalize-first-letter"
                     wrapper_class="col-span-2"
                     type="select"
                     field={links_form[:type]}
@@ -163,7 +170,7 @@ defmodule SurveyEngineWeb.EmbedLive.FormComponent do
                     required
                   />
                   <.field
-                    label_class="capitalize"
+                    label_class="capitalize-first-letter"
                     wrapper_class="flex-1"
                     type="url"
                     pattern="https://.*"

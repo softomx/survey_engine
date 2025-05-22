@@ -7,7 +7,9 @@
 @import "./vendor/daterangepicker.css";
 
 
-
+.capitalize-first-letter::first-letter {
+  text-transform: uppercase
+}
 /* This file is for your main application CSS */
 .lock-header{
     overflow-y: auto;

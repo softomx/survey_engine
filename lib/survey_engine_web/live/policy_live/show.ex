@@ -31,6 +31,6 @@ defmodule SurveyEngineWeb.PolicyLive.Show do
     end
   end
 
-  defp page_title(:show), do: "Show Translation"
-  defp page_title(:edit), do: "Edit Translation"
+  defp page_title(:show), do: gettext("Politicas")
+  defp page_title(:edit), do: gettext("Edit Translation")
 end

@@ -6,16 +6,23 @@
   <div class="flex-1">
     <p>VALIDAR RESPUESTAS</p>
     <.form for={@form} id="validate-response-form" phx-change="validate" phx-submit="save">
-
-      <.field type="radio-group" field={@form[:review_state]} group_layout="row" options={[{"Rechazado", "rejected" },
-        {"Aprovado", "approved" }]} label={gettext("response.review_state")} />
-      <.field type="textarea" cols="5" field={@form[:review_comments]} label={gettext("response.comments")} />
+      <.field
+        type="radio-group"
+        field={@form[:review_state]}
+        group_layout="row"
+        options={[{"Rechazado", "rejected"}, {"Aprobado", "approved"}]}
+        label={gettext("response.review_state")}
+      />
+      <.field
+        type="textarea"
+        cols="5"
+        field={@form[:review_comments]}
+        label={gettext("response.comments")}
+      />
 
       <div class="flex justify-end">
         <.button type="submit" phx-disable-with="Guardando..." label={gettext("save")} />
       </div>
     </.form>
   </div>
-
-
 </div>

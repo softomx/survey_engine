@@ -3,6 +3,20 @@ defmodule SurveyEngine.Accounts.AdminNotifier do
   import Swoosh.Email
 
   # Delivers the email using the application mailer.
+
+  defp deliver(template, recipients, subject, content, config_id) when is_list(recipients) do
+    recipients
+    |> Enum.map(fn recipient ->
+      email =
+        new()
+        |> to(recipient)
+        |> subject(subject)
+        |> render_body(template, content)
+
+      SurveyEngine.Mailer.MailerHelper.deliver_email(email, config_id)
+    end)
+  end
+
   defp deliver(template, recipient, subject, content, config_id) do
     email =
       new()

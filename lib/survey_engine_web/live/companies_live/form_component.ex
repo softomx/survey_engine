@@ -25,7 +25,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           <.field field={@form[:language]} type="hidden" value={@locale} />
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:agency_name]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.agencyname"))}
@@ -34,7 +34,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:legal_name]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.fullname"))}
@@ -44,7 +44,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
 
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:country]}
               type="select"
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.country"))}
@@ -55,7 +55,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-6">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:town]}
               type="select"
               label={gettext_with_locale(@locale, gettext("label.state"))}
@@ -66,7 +66,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-6">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:city]}
               type="text"
               label={gettext_with_locale(@locale, gettext("label.city"))}
@@ -90,7 +90,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-12 lg:col-span-6 md:col-span-4">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:billing_currency]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.billing.currency"))}
               type="select"
@@ -101,7 +101,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           </div>
           <div class="col-span-9 lg:col-span-8 md:col-span-8">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:agency_type]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.type"))}
               type="select"
@@ -113,7 +113,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
 
           <div class="col-span-12 lg:col-span-6 md:col-span-4">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:agency_model]}
               prompt={gettext_with_locale(@locale, gettext("placeholder.select.agency.model"))}
               type="select"
@@ -182,7 +182,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
         >
           <div class="col-span-12">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:business_model_id]}
               prompt="Selecciona un formulario"
               type="select"
@@ -197,7 +197,7 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
         >
           <div class="col-span-12">
             <.field
-              label_class="capitalize"
+              label_class="capitalize-first-letter"
               field={@form[:ejecutive_id]}
               prompt="Selecciona un ejecutivo"
               type="select"

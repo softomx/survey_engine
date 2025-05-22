@@ -158,7 +158,7 @@ var passwordMessage = document.getElementById("password-message");
       }
   
       // Checking length of the password
-      if (passwordInput.value.length >= 8) {
+      if (passwordInput.value.length >= 12) {
           passwordMessageItems[3].classList.remove("invalid");
           passwordMessageItems[3].classList.add("valid");
       } else {
