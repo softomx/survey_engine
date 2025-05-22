@@ -12,7 +12,13 @@ defmodule SurveyEngineWeb.SiteContentLive.PoliciesUrlModal do
         {gettext("Policie Url")}
       </.header>
       <.form for={@form} id="form_group-form" phx-target={@myself} phx-change="validate">
-        <.field type="text" field={@form[:url]} readonly label={gettext("url")}/>
+        <.field
+          label_class="capitalize-first-letter"
+          type="text"
+          field={@form[:url]}
+          readonly
+          label={gettext("url")}
+        />
       </.form>
 
       <div class="flex justify-end">

@@ -8,6 +8,7 @@
     phx-submit="save"
   >
     <.field
+      label_class="capitalize-first-letter"
       help_text="action que disparara la notificacion"
       type="select"
       prompt="selecciona una accion"
@@ -29,12 +30,14 @@
       <div class="flex items-center gap-6">
         <input type="hidden" name="notification[to_sort][]" value={f2.index} />
         <.field
+          label_class="capitalize-first-letter"
           type="text"
           field={f2[:name]}
           label="Nombre"
           help_text="Nombre de la persona a la que se le notificara"
         />
         <.field
+          label_class="capitalize-first-letter"
           wrapper_class="flex-1"
           type="text"
           field={f2[:email]}

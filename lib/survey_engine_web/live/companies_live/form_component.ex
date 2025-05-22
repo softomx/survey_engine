@@ -22,7 +22,12 @@ defmodule SurveyEngineWeb.CompanyLive.FormComponent do
           :if={@action in [:new, :edit]}
           class="grid grid-cols-12 sm:grid-cols-6 lg:grid-cols-6 gap-6 pb-5"
         >
-          <.field field={@form[:language]} type="hidden" value={@locale} />
+          <.field
+            label_class="capitalize-first-letter"
+            field={@form[:language]}
+            type="hidden"
+            value={@locale}
+          />
           <div class="col-span-12 lg:col-span-12 md:col-span-12">
             <.field
               label_class="capitalize-first-letter"

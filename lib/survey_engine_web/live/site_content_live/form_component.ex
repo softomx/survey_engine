@@ -35,7 +35,12 @@ defmodule SurveyEngineWeb.GoalLive.FormComponent do
           placeholder="Selecciona un tipo de contenido"
           options={[{"Texto plano", "text_plain"}, {"HTML", "html"}]}
         />
-        <.field field={@form[:description]} type="textarea" label="Description" />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:description]}
+          type="textarea"
+          label="Description"
+        />
 
         <.button phx-disable-with="Saving...">Save Translation</.button>
       </.form>

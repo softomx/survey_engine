@@ -63,6 +63,7 @@ defmodule SurveyEngineWeb.UserLoginLive do
               <div class="space-y-6">
                 <div class="">
                   <.field
+                    label_class="capitalize-first-letter"
                     field={@form[:email]}
                     type="email"
                     label={gettext("Email")}
@@ -74,6 +75,7 @@ defmodule SurveyEngineWeb.UserLoginLive do
                 <div class="relative" x-data="{ show: true }">
                   <.field
                     field={@form[:password]}
+                    label_class="capitalize-first-letter"
                     type="password"
                     label={gettext("Password")}
                     required

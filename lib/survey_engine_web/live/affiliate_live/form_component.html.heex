@@ -8,6 +8,7 @@
   >
     <div class="gap-3 grid grid-cols-12">
       <.field
+        label_class="capitalize-first-letter"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         type="text"
         field={@form[:name]}
@@ -15,6 +16,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         type="text"
         field={@form[:affiliate_slug]}
@@ -22,6 +24,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         type="text"
         field={@form[:rfc]}
@@ -29,6 +32,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         type="text"
         field={@form[:trading_name]}
@@ -36,6 +40,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         type="text"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         field={@form[:business_name]}
@@ -43,6 +48,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         type="select"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         field={@form[:base_currency]}
@@ -51,6 +57,7 @@
       />
 
       <.field
+        label_class="capitalize-first-letter"
         type="select"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         options={@agency_models}
@@ -59,6 +66,7 @@
         label={gettext("affiliate.agency_model")}
       />
       <.field
+        label_class="capitalize-first-letter"
         type="select"
         wrapper_class="col-span-12 md:col-span-6 capitalize"
         options={@company_types}
@@ -73,6 +81,7 @@
         <.inputs_for :let={address} field={@form[:address]}>
           <div class=" grid grid-cols-6 gap-3 mt-2">
             <.field
+              label_class="capitalize-first-letter"
               type="select"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               field={address[:country]}
@@ -80,6 +89,7 @@
               options={@countries}
             />
             <.field
+              label_class="capitalize-first-letter"
               type="select"
               wrapper_class="col-span-1 md:col-span-2 capitalize sm:col-span-2"
               field={address[:state]}
@@ -87,32 +97,36 @@
               options={@states}
             />
             <.field
+              label_class="capitalize-first-letter"
               type="text"
               wrapper_class="col-span-12 md:col-span-6 capitalize"
-              wrapper_class="col-span-1 md:col-span-2 capitalize"
               field={address[:city]}
               label={gettext("affiliate.address.city")}
             />
 
             <.field
+              label_class="capitalize-first-letter"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               type="text"
               field={address[:neighborhood]}
               label={gettext("affiliate.address.neighborhood")}
             />
             <.field
+              label_class="capitalize-first-letter"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               type="text"
               field={address[:street]}
               label={gettext("affiliate.address.street")}
             />
             <.field
+              label_class="capitalize-first-letter"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               type="text"
               field={address[:internal_number]}
               label={gettext("affiliate.address.internal_number")}
             />
             <.field
+              label_class="capitalize-first-letter"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               type="text"
               field={address[:external_number]}
@@ -120,6 +134,7 @@
             />
 
             <.field
+              label_class="capitalize-first-letter"
               wrapper_class="col-span-1 md:col-span-2 capitalize"
               type="text"
               field={address[:postal_code]}

@@ -19,9 +19,24 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
         phx-submit="save"
       >
         <.input type="hidden" field={@form[:site_configuration_id]} value={@site_config_id} />
-        <.field field={@form[:name]} type="text" label={gettext("mailer_config.name")} />
-        <.field field={@form[:email_from]} type="text" label={gettext("mailer_config.email_from")} />
-        <.field field={@form[:email_name]} type="text" label={gettext("mailer_config.email_name")} />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:name]}
+          type="text"
+          label={gettext("mailer_config.name")}
+        />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:email_from]}
+          type="text"
+          label={gettext("mailer_config.email_from")}
+        />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:email_name]}
+          type="text"
+          label={gettext("mailer_config.email_name")}
+        />
         <.combo_box
           field={@form[:adapter]}
           type="select"
@@ -42,30 +57,35 @@ defmodule SurveyEngineWeb.MailerConfigLive.FormComponent do
           />
           <.field
             :if={show_input(Phoenix.HTML.Form.input_value(@form, :adapter), :api_key)}
+            label_class="capitalize-first-letter"
             field={f2[:api_key]}
             type="text"
             label="Apikey"
           />
           <.field
             :if={show_input(Phoenix.HTML.Form.input_value(@form, :adapter), :secret)}
+            label_class="capitalize-first-letter"
             field={f2[:secret]}
             type="text"
             label="secret"
           />
           <.field
             :if={show_input(Phoenix.HTML.Form.input_value(@form, :adapter), :access_key)}
+            label_class="capitalize-first-letter"
             field={f2[:access_key]}
             type="text"
             label="access key"
           />
           <.field
             :if={show_input(Phoenix.HTML.Form.input_value(@form, :adapter), :region)}
+            label_class="capitalize-first-letter"
             field={f2[:region]}
             type="text"
             label="Region"
           />
           <.field
             :if={show_input(Phoenix.HTML.Form.input_value(@form, :adapter), :domain)}
+            label_class="capitalize-first-letter"
             field={f2[:domain]}
             type="text"
             label="Region"

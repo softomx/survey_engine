@@ -13,6 +13,7 @@ defmodule SurveyEngineWeb.UserConfirmationLive do
           <.form for={@form} id="confirmation_form" phx-submit="confirm_account">
             <input type="hidden" name={@form[:token].name} value={@form[:token].value} viewable />
             <.field
+              label_class="capitalize-first-letter"
               type="password"
               field={@form["password"]}
               phx-hook="PasswordValidation"
@@ -23,6 +24,7 @@ defmodule SurveyEngineWeb.UserConfirmationLive do
                one uppercase and lowercase letter, and at least 12 characters"
             />
             <.field
+              label_class="capitalize-first-letter"
               type="password"
               field={@form["comfirm_password"]}
               label={gettext("label.confirm.newpassword")}

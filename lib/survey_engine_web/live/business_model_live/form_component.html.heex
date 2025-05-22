@@ -6,8 +6,18 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <.field type="text" field={@form[:name]} label={gettext("business_model.name")} />
-    <.field type="textarea" field={@form[:description]} label={gettext("business_model.description")} />
+    <.field
+      label_class="capitalize-first-letter"
+      type="text"
+      field={@form[:name]}
+      label={gettext("business_model.name")}
+    />
+    <.field
+      label_class="capitalize-first-letter"
+      type="textarea"
+      field={@form[:description]}
+      label={gettext("business_model.description")}
+    />
 
     <div class="flex justify-end">
       <.button type="submit" phx-disable-with="Saving..." label={gettext("save")} />

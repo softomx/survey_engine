@@ -16,6 +16,7 @@
         <div class="flex items-center gap-3">
           <div class="flex flex-col">
             <.field
+              label_class="capitalize-first-letter"
               type="select"
               label={gettext("survey_mapper.field")}
               options={@fields}
@@ -29,6 +30,7 @@
       <div class="  border-slate-200">
         <div class="flex flex-col">
           <.field
+            label_class="capitalize-first-letter"
             type="select"
             label={gettext("survey_mapper.question")}
             options={
@@ -57,7 +59,12 @@
               >
                 X
               </span>
-              <.button size="xs" type="submit" phx-disable-with="Guardando..." label={gettext("save")} />
+              <.button
+                size="xs"
+                type="submit"
+                phx-disable-with="Guardando..."
+                label={gettext("save")}
+              />
             </div>
           </div>
         </div>

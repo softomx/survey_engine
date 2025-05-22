@@ -414,6 +414,7 @@ defmodule SurveyEngineWeb.CoreComponents do
               <div class={"#{@css} mb-2"}>
                 <Flop.Phoenix.filter_fields :let={i} form={f} fields={@fields}>
                   <.field
+                    label_class="capitalize-first-letter"
                     field={i.field}
                     label={i.label}
                     type={i.type}

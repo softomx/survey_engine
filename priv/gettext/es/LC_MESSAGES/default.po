@@ -476,7 +476,7 @@ msgstr "Restablecer contraseña"
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_reset_password_notification.html.heex:303
 #, elixir-autogen, elixir-format
 msgid "Reset your password."
-msgstr "Restablece tucontraseña"
+msgstr "Restablece tu contraseña"
 
 #: lib/survey_engine_web/controllers/page_html/user_notifier/client_survey_updated.html.heex:606
 #, elixir-autogen, elixir-format

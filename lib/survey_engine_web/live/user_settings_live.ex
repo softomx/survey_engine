@@ -13,8 +13,15 @@ defmodule SurveyEngineWeb.UserSettingsLive do
     <div class="space-y-12 divide-y">
       <div>
         <.form for={@email_form} id="email_form" phx-submit="update_email" phx-change="validate_email">
-          <.field field={@email_form[:email]} type="email" label="Email" required />
           <.field
+            label_class="capitalize-first-letter"
+            field={@email_form[:email]}
+            type="email"
+            label="Email"
+            required
+          />
+          <.field
+            label_class="capitalize-first-letter"
             field={@email_form[:current_password]}
             name="current_password"
             id="current_password_for_email"
@@ -43,13 +50,21 @@ defmodule SurveyEngineWeb.UserSettingsLive do
             id="hidden_user_email"
             value={@current_email}
           />
-          <.field field={@password_form[:password]} type="password" label="New password" required />
           <.field
+            label_class="capitalize-first-letter"
+            field={@password_form[:password]}
+            type="password"
+            label="New password"
+            required
+          />
+          <.field
+            label_class="capitalize-first-letter"
             field={@password_form[:password_confirmation]}
             type="password"
             label="Confirm new password"
           />
           <.field
+            label_class="capitalize-first-letter"
             field={@password_form[:current_password]}
             name="current_password"
             type="password"

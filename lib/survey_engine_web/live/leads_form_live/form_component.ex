@@ -21,24 +21,32 @@ defmodule SurveyEngineWeb.LeadsFormLive.FormComponent do
         <.input field={@form[:form_group_id]} type="hidden" value={@form_group_id} />
 
         <.field
+          label_class="capitalize-first-letter"
           field={@form[:language]}
           type="select"
           label={gettext("leads_form.language")}
           options={[{"Español", "es"}, {"Ingles", "en"}]}
         />
         <.field
+          label_class="capitalize-first-letter"
           field={@form[:provider]}
           type="select"
           label={gettext("leads_form.provider")}
           options={[{"Formbricks", "formbricks"}]}
         />
         <.field
+          label_class="capitalize-first-letter"
           field={@form[:external_id]}
           type="text"
           label={gettext("leads_form.external_id")}
           help_text="Id proporcionado por el proveedor del engine de preguntas"
         />
-        <.field field={@form[:active]} type="switch" label={gettext("leads_form.active")} />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:active]}
+          type="switch"
+          label={gettext("leads_form.active")}
+        />
 
         <.button phx-disable-with="Saving...">{gettext("save")}</.button>
       </.form>

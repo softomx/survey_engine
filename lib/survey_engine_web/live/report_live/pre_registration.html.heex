@@ -4,6 +4,7 @@
   <div class="grid grid-cols-3 gap-4">
     <.inputs_for :let={register_dates} field={@form[:register_dates]}>
       <.field
+        label_class="capitalize-first-letter"
         field={register_dates[:label_dates]}
         wrapper_class="mb-1"
         phx-hook="DateRanges"
@@ -16,6 +17,7 @@
       <.input type="hidden" field={register_dates[:end_date]} />
     </.inputs_for>
     <.field
+      label_class="capitalize-first-letter"
       field={@form[:legal_name]}
       wrapper_class="mb-1 col-span-2"
       label={gettext("report.agency_name")}

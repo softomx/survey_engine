@@ -1,76 +1,104 @@
 <div>
-    <%= if  @survey_response_item.type == "fileUpload" do %>
-        <.label>{@survey_response_item.question}</.label>
-        <div class="flex gap-2 mb-2">
-            <.card variant="outline" :for={file <- @survey_response_item.answer["data"]}>
-                <.card_content category={""} class="p-3">
-                    <div>
-                        <.icon
-                        name="hero-document"
-                        class="text-primary-700 dark:text-primary-300 w-16 h-16"
-                        />
-                        <.badge color="primary" label=".PDF" />
-                    </div>
-                    <a
-                    href={"data:application/octet-stream;base64,#{file["file"]}"}
-                    download={"#{@survey_response_item.question}.pdf"}
-                    class="pc-button pc-button--primary-inverted pc-button--xs pc-button--radius-md mb-2"
-                >
-                 Ver Documento
-                </a>
-                <.button
-                    size="xs"
-                    color="danger"
-                    phx-click="remove_file"
-                    phx-value-url={file["url"]} 
-                    phx-target={@myself}
-                    label={gettext("remove")} />
+  <%= if  @survey_response_item.type == "fileUpload" do %>
+    <.label>{@survey_response_item.question}</.label>
+    <div class="flex gap-2 mb-2">
+      <.card :for={file <- @survey_response_item.answer["data"]} variant="outline">
+        <.card_content category="" class="p-3">
+          <div>
+            <.icon name="hero-document" class="text-primary-700 dark:text-primary-300 w-16 h-16" />
+            <.badge color="primary" label=".PDF" />
+          </div>
+          <a
+            href={"data:application/octet-stream;base64,#{file["file"]}"}
+            download={"#{@survey_response_item.question}.pdf"}
+            class="pc-button pc-button--primary-inverted pc-button--xs pc-button--radius-md mb-2"
+          >
+            Ver Documento
+          </a>
+          <.button
+            size="xs"
+            color="danger"
+            phx-click="remove_file"
+            phx-value-url={file["url"]}
+            phx-target={@myself}
+            label={gettext("remove")}
+          />
+        </.card_content>
+      </.card>
+    </div>
 
-                </.card_content>
-            </.card>
-        </div>
-
-        <hr class="m-2">
-        <.label>{gettext("upload file")}</.label>
-        <.live_component
-            id="upload_survey_response_item_file"
-            resource={@survey_response_item}
-            module={SurveyEngineWeb.UploaderComponent}
-            current_user={@current_user}
-            return_to={@return_to}
-            accept_file={~w(.pdf)}
-            helper_text=".pdf" />
-    <% else %>
-        <.form for={@form} id="validate-response-form" phx-submit="save" phx-change="validate" phx-target={@myself}>
-            <%= case @survey_response_item.type do %>
-                <% "date" ->%>
-                    <.field type="date" field={@form[:date]} label={@survey_response_item.question}/>
-                <% "openText" -> %>
-                    <.field required type="textarea" cols="5" field={@form[:open_text]} label={@survey_response_item.question} />
-                <% "multipleChoiceMulti" -> %>
-                    <.field
-                        required
-                        field={@form[:choice_multiple]}
-                        type="checkbox-group"
-                        label={@survey_response_item.question}
-                        options={@response_item_info.options |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)}
-                        group_layout="col"
-                    />
-                <% "multipleChoiceSingle" -> %>
-
-                <.field
-                    type="radio-group"
-                    field={@form[:choice_single]}
-                    group_layout="col"
-                    label={@survey_response_item.question}
-                    options={@response_item_info.options |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)}
-                />
-                <% _ -> %>
-                not implemented
-            <% end %>
-            <div class="flex justify-end">
-                <.button type="submit" phx-disable-with="Guardando..." label={gettext("save")} disabled={!@form.source.valid?} />
-            </div>
-        </.form>
-    <% end %>
+    <hr class="m-2" />
+    <.label>{gettext("upload file")}</.label>
+    <.live_component
+      id="upload_survey_response_item_file"
+      resource={@survey_response_item}
+      module={SurveyEngineWeb.UploaderComponent}
+      current_user={@current_user}
+      return_to={@return_to}
+      accept_file={~w(.pdf)}
+      helper_text=".pdf"
+    />
+  <% else %>
+    <.form
+      for={@form}
+      id="validate-response-form"
+      phx-submit="save"
+      phx-change="validate"
+      phx-target={@myself}
+    >
+      <%= case @survey_response_item.type do %>
+        <% "date" -> %>
+          <.field
+            label_class="capitalize-first-letter"
+            type="date"
+            field={@form[:date]}
+            label={@survey_response_item.question}
+          />
+        <% "openText" -> %>
+          <.field
+            label_class="capitalize-first-letter"
+            required
+            type="textarea"
+            cols="5"
+            field={@form[:open_text]}
+            label={@survey_response_item.question}
+          />
+        <% "multipleChoiceMulti" -> %>
+          <.field
+            label_class="capitalize-first-letter"
+            required
+            field={@form[:choice_multiple]}
+            type="checkbox-group"
+            label={@survey_response_item.question}
+            options={
+              @response_item_info.options
+              |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)
+            }
+            group_layout="col"
+          />
+        <% "multipleChoiceSingle" -> %>
+          <.field
+            label_class="capitalize-first-letter"
+            type="radio-group"
+            field={@form[:choice_single]}
+            group_layout="col"
+            label={@survey_response_item.question}
+            options={
+              @response_item_info.options
+              |> Enum.map(fn op -> {op["label"]["default"], op["label"]["default"]} end)
+            }
+          />
+        <% _ -> %>
+          not implemented
+      <% end %>
+      <div class="flex justify-end">
+        <.button
+          type="submit"
+          phx-disable-with="Guardando..."
+          label={gettext("save")}
+          disabled={!@form.source.valid?}
+        />
+      </div>
+    </.form>
+  <% end %>
 </div>

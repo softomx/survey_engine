@@ -18,8 +18,13 @@ defmodule SurveyEngineWeb.AgencyTypeLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.field field={@form[:name]} type="text" label="Name" />
-        <.field field={@form[:active]} type="checkbox" label="Active" />
+        <.field label_class="capitalize-first-letter" field={@form[:name]} type="text" label="Name" />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:active]}
+          type="checkbox"
+          label="Active"
+        />
 
         <.button phx-disable-with="Saving...">Save Agency type</.button>
       </.form>

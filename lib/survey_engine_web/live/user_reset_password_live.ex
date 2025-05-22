@@ -15,6 +15,7 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
             phx-change="validate"
           >
             <.field
+              label_class="capitalize-first-letter"
               field={@form[:password]}
               type="password"
               phx-hook="PasswordValidation"
@@ -25,6 +26,7 @@ defmodule SurveyEngineWeb.UserResetPasswordLive do
                one uppercase and lowercase letter, and at least 12 characters"
             />
             <.field
+              label_class="capitalize-first-letter"
               field={@form[:password_confirmation]}
               type="password"
               label={gettext("label.confirm.newpassword")}

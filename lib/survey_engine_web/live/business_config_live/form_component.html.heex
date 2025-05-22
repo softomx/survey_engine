@@ -7,7 +7,12 @@
     phx-submit="save"
   >
     <.input type="hidden" field={@form[:business_model_id]} value={@business_model_id} />
-    <.field type="number" field={@form[:order]} label="Orden" />
+    <.field
+      label_class="capitalize-first-letter"
+      type="number"
+      field={@form[:order]}
+      label="Orden"
+    />
     <.combo_box
       field={@form[:form_group_id]}
       type="select"
@@ -16,7 +21,12 @@
       options={@form_groups}
     />
 
-    <.field type="checkbox" field={@form[:required]} label={gettext("business_config.required")} />
+    <.field
+      label_class="capitalize-first-letter"
+      type="checkbox"
+      field={@form[:required]}
+      label={gettext("business_config.required")}
+    />
 
     <div class="flex justify-end">
       <.button type="submit" phx-disable-with="Saving..." label={gettext("save")} />

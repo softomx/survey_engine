@@ -14,10 +14,26 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:type]} type="hidden" value={@type} />
-        <.input field={@form[:resource_id]} type="hidden" value={@resource_id} />
-        <.input field={@form[:behaviour]} type="hidden" value={@behaviour} />
+        <.input
+          label_class="capitalize-first-letter"
+          field={@form[:type]}
+          type="hidden"
+          value={@type}
+        />
+        <.input
+          label_class="capitalize-first-letter"
+          field={@form[:resource_id]}
+          type="hidden"
+          value={@resource_id}
+        />
+        <.input
+          label_class="capitalize-first-letter"
+          field={@form[:behaviour]}
+          type="hidden"
+          value={@behaviour}
+        />
         <.field
+          label_class="capitalize-first-letter"
           field={@form[:language]}
           type="select"
           label="Language"
@@ -26,6 +42,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
         />
         <%= if @behaviour != "policies" do %>
           <.field
+            label_class="capitalize-first-letter"
             help_text="Indica si la descipcion es en formato HTML o texto plano"
             field={@form[:content_type]}
             type="select"
@@ -34,10 +51,16 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
             options={[{"Texto plano", "text_plain"}, {"HTML", "html"}]}
           />
         <% else %>
-          <.input field={@form[:content_type]} type="hidden" value={@type_input_text} />
+          <.input
+            label_class="capitalize-first-letter"
+            field={@form[:content_type]}
+            type="hidden"
+            value={@type_input_text}
+          />
         <% end %>
         <%= if @type_input_text == "html" do %>
           <.field
+            label_class="capitalize-first-letter"
             field={@form[:description]}
             type="textarea"
             label="Description"
@@ -46,6 +69,7 @@ defmodule SurveyEngineWeb.TranslationLive.FormComponent do
           />
         <% else %>
           <.field
+            label_class="capitalize-first-letter"
             field={@form[:description]}
             type="textarea"
             label="Description"

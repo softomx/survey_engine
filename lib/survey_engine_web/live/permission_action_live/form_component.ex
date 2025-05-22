@@ -14,7 +14,12 @@ defmodule SurveyEngineWeb.PermissionActionLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.field field={@form[:name]} type="text" label={gettext("permission.name")} />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:name]}
+          type="text"
+          label={gettext("permission.name")}
+        />
         <.button phx-disable-with="Saving...">{gettext("save")}</.button>
       </.form>
     </div>
@@ -33,7 +38,12 @@ defmodule SurveyEngineWeb.PermissionActionLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"permission_action" => permission_action_params}, socket) do
-    changeset = Permissions.change_permission_action(socket.assigns.permission_action, permission_action_params)
+    changeset =
+      Permissions.change_permission_action(
+        socket.assigns.permission_action,
+        permission_action_params
+      )
+
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
@@ -42,9 +52,11 @@ defmodule SurveyEngineWeb.PermissionActionLive.FormComponent do
   end
 
   defp save_permission_action(socket, :edit, permission_action_params) do
-    case Permissions.update_permission_action(socket.assigns.permission_action, permission_action_params) do
+    case Permissions.update_permission_action(
+           socket.assigns.permission_action,
+           permission_action_params
+         ) do
       {:ok, _permission_action} ->
-
         {:noreply,
          socket
          |> put_flash(:info, "Permission action updated successfully")
@@ -58,7 +70,6 @@ defmodule SurveyEngineWeb.PermissionActionLive.FormComponent do
   defp save_permission_action(socket, :new, permission_action_params) do
     case Permissions.create_permission_action(permission_action_params) do
       {:ok, _permission_action} ->
-
         {:noreply,
          socket
          |> put_flash(:info, "Permission action created successfully")
@@ -68,5 +79,4 @@ defmodule SurveyEngineWeb.PermissionActionLive.FormComponent do
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
-
 end

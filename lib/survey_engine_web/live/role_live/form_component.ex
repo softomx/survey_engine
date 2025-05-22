@@ -7,15 +7,19 @@ defmodule SurveyEngineWeb.RoleLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.form
-        for={@form}
-        id="role-form"
-        phx-target={@myself}
-        phx-change="validate"
-        phx-submit="save"
-      >
-        <.field field={@form[:name]} type="text" label={gettext("role.name")} />
-        <.field field={@form[:slug]} type="text" label={gettext("role.slug")} />
+      <.form for={@form} id="role-form" phx-target={@myself} phx-change="validate" phx-submit="save">
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:name]}
+          type="text"
+          label={gettext("role.name")}
+        />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:slug]}
+          type="text"
+          label={gettext("role.slug")}
+        />
 
         <.button phx-disable-with="Saving...">{gettext("save")}</.button>
       </.form>
@@ -46,7 +50,6 @@ defmodule SurveyEngineWeb.RoleLive.FormComponent do
   defp save_role(socket, :edit, role_params) do
     case Accounts.update_role(socket.assigns.role, role_params) do
       {:ok, _role} ->
-
         {:noreply,
          socket
          |> put_flash(:info, "Role updated successfully")
@@ -60,7 +63,6 @@ defmodule SurveyEngineWeb.RoleLive.FormComponent do
   defp save_role(socket, :new, role_params) do
     case Accounts.create_role(role_params) do
       {:ok, _role} ->
-
         {:noreply,
          socket
          |> put_flash(:info, "Role created successfully")

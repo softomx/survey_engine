@@ -14,24 +14,38 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.field field={@form[:name]} type="text" label="Name" help_text="Nombre identificador" />
         <.field
+          label_class="capitalize-first-letter"
+          field={@form[:name]}
+          type="text"
+          label="Name"
+          help_text="Nombre identificador"
+        />
+        <.field
+          label_class="capitalize-first-letter"
           field={@form[:url]}
           type="text"
           label="Url"
           help_text="Url del dominio desde donde se accedera"
         />
-        <.field field={@form[:active]} type="checkbox" label="Active" />
+        <.field
+          label_class="capitalize-first-letter"
+          field={@form[:active]}
+          type="checkbox"
+          label="Active"
+        />
 
         <.label>Webhook</.label>
         <.inputs_for :let={extra_config} field={@form[:extra_config]}>
           <.field
+            label_class="capitalize-first-letter"
             field={extra_config[:url]}
             type="text"
             label="url"
             help_text="Url ser servicio donde se crear el afiliado"
           />
           <.field
+            label_class="capitalize-first-letter"
             field={extra_config[:api_key]}
             type="text"
             label="API key"
@@ -53,8 +67,19 @@ defmodule SurveyEngineWeb.SiteConfigurationLive.FormComponent do
               field={survey_provider_form[:provider]}
               label="Proveedor"
             />
-            <.field type="text" wrapper_class="flex-1" field={survey_provider_form[:url]} label="Url" />
-            <.field type="text" field={survey_provider_form[:api_key]} label="apiKey" />
+            <.field
+              label_class="capitalize-first-letter"
+              type="text"
+              wrapper_class="flex-1"
+              field={survey_provider_form[:url]}
+              label="Url"
+            />
+            <.field
+              label_class="capitalize-first-letter"
+              type="text"
+              field={survey_provider_form[:api_key]}
+              label="apiKey"
+            />
 
             <.button
               with_icon
