@@ -27,10 +27,19 @@
     <:col :let={business_config} field={:required} label={gettext("business_config.required")}>
       <.required_badge required={business_config.required} />
     </:col>
-    <:col :let={business_config} field={:form_group} sortable label={gettext("business_config.form")}>
+    <:col
+      :let={business_config}
+      field={:form_group}
+      sortable
+      label={gettext("business_config.form")}
+    >
       {business_config.form_group.name}
     </:col>
-    <:col :let={business_config} field={:previous_lead_form_finished} label={gettext("business_config.previous_lead_form_finished")}>
+    <:col
+      :let={business_config}
+      field={:previous_lead_form_finished}
+      label={gettext("business_config.previous_lead_form_finished")}
+    >
       <p :for={{form, index} <- business_config.depend_forms |> Enum.with_index(1)}>
         {index}. {form.name}
       </p>
@@ -65,7 +74,7 @@
         to="#"
         size="xs"
         label="Eliminar"
-        phx-click={gettext("delete")}
+        phx-click="delete"
         phx-value-id={business_config.id}
         data-confirm="Are you sure?"
       />
