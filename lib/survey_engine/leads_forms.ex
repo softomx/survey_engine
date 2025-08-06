@@ -39,6 +39,20 @@ defmodule SurveyEngine.LeadsForms do
 
       {:lang, lang}, query ->
         from q in query, where: q.language == ^lang
+      {:provider,provider} , query ->
+        from q in query, where: q.provider == ^provider
+
+      {:behaviour, behaviour}, query ->
+        from q in query, where: q.behaviour == ^behaviour
+
+      {:active, active}, query ->
+        from q in query, where: q.active == ^active
+
+      {:slug, slug}, query ->
+        from q in query, where: q.slug == ^slug
+
+      {:external_id, external_id}, query ->
+        from q in query, where: q.external_id == ^external_id
 
       {:ids, ids}, query ->
         from q in query, where: q.id in ^ids

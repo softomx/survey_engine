@@ -11,6 +11,7 @@ defmodule SurveyEngine.FormbricksClient do
     |> make_request(survey_provider_config, :get)
   end
 
+
   def get_responses_by_survey(survey_provider_config, survey_id) do
     get_base_url(survey_provider_config)
     |> build_url("/api/v1/management/responses?surveyId=#{survey_id}")
@@ -35,7 +36,7 @@ defmodule SurveyEngine.FormbricksClient do
     HTTPoison.start()
     headers = ["x-api-key": survey_provider_config.api_key]
 
-    case HTTPoison.request(method, url, body, headers) do
+    case HTTPoison.request(method, url, body, headers)  do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         response = Jason.decode!(body)
 

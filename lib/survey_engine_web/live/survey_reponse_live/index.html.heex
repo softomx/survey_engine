@@ -34,6 +34,19 @@
     id="companies-filter-form"
   />
 </div>
+<div class="text-right">
+<.button
+  class="mb-4"
+  color="primary"
+  variant="outline"
+  size="sm"
+  phx-click="sync_external_responses"
+  data-confirm={gettext("Are you sure you want to sync all responses? This will take a while.")}
+>
+
+¿No aparece la respuesta? Sincronizar
+</.button>
+</div>
 <.data_table :if={@index_params} meta={@meta} items={@survey_reponse}>
   <:if_empty>No se encontraron respuestas con el criterio de busqueda</:if_empty>
   <:col

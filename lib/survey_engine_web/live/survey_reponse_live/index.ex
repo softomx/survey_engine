@@ -50,6 +50,20 @@ defmodule SurveyEngineWeb.SurveyReponseLive.Index do
     {:noreply, push_patch(socket, to: ~p"/admin/survey_answers")}
   end
 
+  @impl true
+  def handle_event("sync_external_responses", _, socket) do
+
+    LeadsForms.list_leads_forms(%{filter: %{active: true}})
+    |> Enum.each(fn survey ->
+      case survey.provider do
+        "formbricks" ->
+          %SurveyEngine.Responses.FormBricks{data: %{survey: survey}, event: "sync", site_config_id: socket.assigns.site_config.id}
+          |> SurveyEngine.Responses.ExternalSurveyEngine.reprocess_all_responses()
+        end
+      end)
+    {:noreply, socket |> assign_survey_answers(socket.assigns.index_params)}
+  end
+
   defp assign_survey_answers(socket, params) do
     starting_query = SurveyResponse
     {responses, meta} = DataTable.search(starting_query, params, @data_table_opts)

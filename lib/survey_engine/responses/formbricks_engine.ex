@@ -10,14 +10,14 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
   def process_response(response) do
     case response.event do
       "responseCreated" ->
-        do_process_response(response.site_config_id, response.data, &create_new_response/3)
+        do_process_response(response.site_config_id, response.data, &find_or_create_response/4)
 
       "responseUpdated" ->
-        do_process_response(response.site_config_id, response.data, &update_response/3)
+        do_process_response(response.site_config_id, response.data, &find_or_create_response/4)
 
       "responseFinished" ->
         with {:ok, response_created} <-
-               do_process_response(response.site_config_id, response.data, &response_finished/3),
+               do_process_response(response.site_config_id, response.data, &find_or_create_response/4),
              {:ok, user} <- Accounts.get_user(response_created.user_id),
              {:ok, company} <- Companies.get_company(user.company_id),
              {:ok, _company} <- Companies.update_company(company, %{state: "finished"}) do
@@ -37,6 +37,40 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
            FormbricksClient.get_survey(survey_provider, params.data.id),
          {:ok, survey} <- format_survey(survey_response) do
       {:ok, survey}
+    end
+  end
+
+  def reprocess_all_responses(request) do
+    with {:ok, site_config} <- SiteConfigurations.get_site_configuration(request.site_config_id),
+         {:ok, survey_provider} <- get_surver_provider_config(site_config) do
+      FormbricksClient.get_responses_by_survey(survey_provider, request.data.survey.external_id)
+      |> case do
+        {:ok, response} ->
+          response["data"]
+          |> Enum.filter(&((&1["finished"] || false) ))
+          |> Enum.group_by(& &1["person"]["userId"])
+          |> Enum.each(fn {_user_id,responses} ->
+            responses
+            |> Enum.sort_by(& &1["createdAt"])
+            |> List.first()
+            |> case do
+              nil ->
+                :ok
+              response ->
+                 process_response(%{
+              data: response,
+              site_config_id: site_config.id,
+              event: "responseFinished"
+            })
+            end
+
+          end)
+
+
+        {:error, reason} ->
+          {:error, reason}
+      end
+
     end
   end
 
@@ -79,7 +113,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
          {:ok, survey} <- format_survey(survey_response),
          {:ok, response} <-
            {:ok, format_client_response(survey, data["data"], survey_provider_config)} do
-      fun.(response, lead_form, data)
+      fun.(response, lead_form, data, buils_state_from_external_status(data["finished"]) )
     end
   end
 
@@ -105,32 +139,72 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     {:ok, %{questions: questions, name: data["name"], status: data["status"]}}
   end
 
-  defp create_new_response(response, lead_form, data) do
+  defp find_or_create_response(response, lead_form, data, state) do
     previour_response =
       Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
 
-    case previour_response do
-      nil ->
+    cond  do
+      is_nil(previour_response) ->
         do_create_new_response(
           response,
           lead_form,
           data,
-          "created"
+          state
         )
-
-      survey_response ->
-        update_response_multi(survey_response, response, "created")
+      previour_response.state == "finished" ->
+        {:error, "response is already finished previously"}
+      true ->
+        update_response_multi(previour_response, response, state)
     end
   end
 
+  # defp update_response(response, lead_form, data) do
+  #   previour_response =
+  #     Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
+
+  #   case previour_response do
+  #     nil ->
+  #       do_create_new_response(
+  #         response,
+  #         lead_form,
+  #         data,
+  #         "updated"
+  #       )
+
+  #     survey_response ->
+  #       update_response_multi(survey_response, response, "updated")
+  #   end
+  # end
+
+  # defp response_finished(response, lead_form, data) do
+  #   previour_response =
+  #     Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
+
+  #   case previour_response do
+  #     nil ->
+  #       do_create_new_response(
+  #         response,
+  #         lead_form,
+  #         data,
+  #         "finished"
+  #       )
+
+  #     survey_response ->
+  #       update_response_multi(survey_response, response, "finished")
+  #   end
+  # end
+
   defp do_create_new_response(response, lead_form, data, state) do
     Ecto.Multi.new()
-    |> Ecto.Multi.run(:survey_response, fn _, _ ->
+    |> Ecto.Multi.run(:user, fn _, _ ->
+      Accounts.get_user(data["person"]["userId"])
+    end)
+    |> Ecto.Multi.run(:survey_response, fn _, %{user: user} ->
       %{
         state: state,
         date: Timex.today(),
         external_id: data["id"],
-        user_id: data["person"]["userId"],
+        user_id: user.id,
         lead_form_id: lead_form.id,
         form_group_id: lead_form.form_group_id
       }
@@ -157,41 +231,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
     end
   end
 
-  defp update_response(response, lead_form, data) do
-    previour_response =
-      Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
 
-    case previour_response do
-      nil ->
-        do_create_new_response(
-          response,
-          lead_form,
-          data,
-          "updated"
-        )
-
-      survey_response ->
-        update_response_multi(survey_response, response, "updated")
-    end
-  end
-
-  defp response_finished(response, lead_form, data) do
-    previour_response =
-      Responses.get_survey_response_by_external_id(data["person"]["userId"], lead_form.id)
-
-    case previour_response do
-      nil ->
-        do_create_new_response(
-          response,
-          lead_form,
-          data,
-          "finished"
-        )
-
-      survey_response ->
-        update_response_multi(survey_response, response, "finished")
-    end
-  end
 
   defp update_response_multi(survey_response, current_response, new_state) do
     Ecto.Multi.new()
@@ -313,4 +353,7 @@ defmodule SurveyEngine.Responses.FormbricksEngine do
         {:error, reason}
     end
   end
+
+  defp buils_state_from_external_status(true), do: "finished"
+  defp buils_state_from_external_status(_), do: "created"
 end

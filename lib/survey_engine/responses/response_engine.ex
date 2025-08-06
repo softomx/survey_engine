@@ -4,6 +4,8 @@ defprotocol SurveyEngine.Responses.ExternalSurveyEngine do
   def build_url_embed_survey(response)
 
   def get_survey(data)
+
+  def reprocess_all_responses(data)
 end
 
 defmodule SurveyEngine.Responses.FormBricks do
@@ -17,4 +19,6 @@ defimpl SurveyEngine.Responses.ExternalSurveyEngine,
   defdelegate build_url_embed_survey(response), to: FormbricksEngine
 
   defdelegate get_survey(data), to: FormbricksEngine
+
+  defdelegate reprocess_all_responses(data), to: FormbricksEngine
 end
